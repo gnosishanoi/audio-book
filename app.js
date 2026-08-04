@@ -7,13 +7,17 @@ const resumeStorageKey = "stillword.resumeByBook.v2";
 const hiddenBooksStorageKey = "stillword.hiddenBooks.v1";
 const listenStatsStorageKey = "stillword.listenStats.v1";
 const excludedBookIds = new Set(["binh-minh-tuoi-tre"]);
+const canonicalBookSlugs = {
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de"
+};
 const knownCoverPaths = {
-  "dayspring-of-youth": "./assets/covers/dayspring-of-youth.jpg?v=1",
+  "dayspring-of-youth": "./assets/covers/dayspring-of-youth-gnosis-v2.png?v=2",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v2.jpg?v=2",
-  "xu-xo-cua-cac-vi-than": "./assets/covers/xu-xo-cua-cac-vi-than.jpg?v=2"
+  "xu-xo-cua-cac-vi-than": "./assets/covers/xu-xo-cua-cac-vi-than-gnosis-v3.png?v=3"
 };
 const featuredImagePaths = {
-  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-flatlay-gnosis-v4.jpg"
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-flatlay-gnosis-v4.jpg",
+  "xu-xo-cua-cac-vi-than": "./assets/hero/xu-xo-cua-cac-vi-than-reading-v1.jpg"
 };
 const featuredDescriptionFallbacks = {
   "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
@@ -121,7 +125,7 @@ function normalizeCatalog(books, assetBase) {
     cover: resolveAsset(book.cover, assetBase) || knownCover(book.id) || placeholderCover(book),
     description: book.description || book.subtitle || "",
     language: normalizeLanguage(book.language, book.title),
-    featureDate: book.publishedAt || book.publishedDate || "",
+    featureDate: book.publishedAt || book.publishedDate || book.updatedAt || "",
     publishedAt: book.publishedAt || book.publishedDate || book.updatedAt || "",
     chapters: [...(book.chapters || [])]
       .sort((a, b) => (a.order || 0) - (b.order || 0))
@@ -176,16 +180,22 @@ function copy(book, key) {
       more: "Thông tin",
       share: "Chia sẻ",
       copied: "Đã sao chép",
-      language: "Tiếng Việt"
+      language: "Tiếng Việt",
+      selectChapter: "Chọn một chương",
+      play: "Phát",
+      pause: "Tạm dừng",
+      audioChapter: "Chương audio",
+      tapToPlay: "chạm Phát để bắt đầu",
+      audioMissing: "Không tìm thấy file audio. Hãy kiểm tra đường dẫn của chương."
     }
   };
-  return strings[book.language || "en"]?.[key] || strings.en[key];
+  if (key === "language") return book.language === "vi" ? "Tiếng Việt" : "Tiếng Anh";
+  return strings.vi[key] || strings.en[key];
 }
 
 function chapterCountLabel(book) {
   const count = book.chapters.length;
-  if (book.language === "vi") return `${count} chương`;
-  return `${count} chapter${count === 1 ? "" : "s"}`;
+  return `${count} chương`;
 }
 
 function languageLabel(book) {
@@ -196,9 +206,9 @@ function publishedLabel(book) {
   const date = new Date(book.publishedAt);
   const value = Number.isNaN(date.getTime())
     ? book.publishedAt
-    : date.toLocaleDateString(book.language === "vi" ? "vi-VN" : "en-US", {
+    : date.toLocaleDateString("vi-VN", {
       year: "numeric",
-      month: book.language === "vi" ? "2-digit" : "short",
+      month: "2-digit",
       day: "numeric"
     });
   return `${copy(book, "published")} ${value}`;
@@ -440,7 +450,8 @@ function renderLibrary() {
   els.bookGrid.querySelectorAll("[data-action='open-book']").forEach((button) => {
     button.addEventListener("click", () => {
       const card = button.closest("[data-book-id]");
-      location.hash = `book/${card.dataset.bookId}`;
+      const book = findBook(card.dataset.bookId);
+      if (book) location.hash = `book/${bookRouteSlug(book)}`;
     });
   });
 
@@ -479,15 +490,14 @@ function renderFeatured() {
   if (!book || !els.featuredTitle) return;
 
   const featuredImage = featuredImagePaths[book.id];
-  const isVietnamese = book.language === "vi";
-  els.featuredEyebrow.textContent = isVietnamese ? "Sách nói nổi bật" : "Featured audiobook";
+  els.featuredEyebrow.textContent = "Sách nói nổi bật";
   els.featuredTitle.textContent = book.title;
   els.featuredAuthor.textContent = book.author || book.narrator || "Gnosis Hà Nội";
   els.featuredDescription.textContent = book.description
     || featuredDescriptionFallbacks[book.id]
-    || (isVietnamese ? "Một tác phẩm dành cho học hỏi và chiêm nghiệm nội tâm." : "A work for study and inner reflection.");
-  els.featuredLink.href = `#book/${encodeURIComponent(book.id)}`;
-  els.featuredLink.textContent = isVietnamese ? "Nghe ngay" : "Listen now";
+    || "Một tác phẩm dành cho học hỏi và chiêm nghiệm nội tâm.";
+  els.featuredLink.href = `#book/${encodeURIComponent(bookRouteSlug(book))}`;
+  els.featuredLink.textContent = "Nghe ngay";
   els.featuredImage.src = featuredImage || book.cover;
   els.featuredImage.alt = featuredImage
     ? `${book.title} trong không gian đọc của Gnosis Hà Nội`
@@ -521,7 +531,7 @@ function renderBook(book) {
           <span class="chapter-number">${index + 1}</span>
           <div>
             <h3>${escapeHtml(chapter.title)}</h3>
-            <span class="chapter-meta">${escapeHtml(chapter.duration || "Audio chapter")}${chapterListenCount(book, index) ? ` · ${escapeHtml(listenCountLabel(book, chapterListenCount(book, index)))}` : ""}</span>
+            <span class="chapter-meta">${escapeHtml(chapter.duration || copy(book, "audioChapter"))}${chapterListenCount(book, index) ? ` · ${escapeHtml(listenCountLabel(book, chapterListenCount(book, index)))}` : ""}</span>
           </div>
         </button>
       `).join("")}
@@ -570,9 +580,9 @@ function showPlayerForBook(book) {
   state.restoreTime = 0;
   els.playerCover.src = book.cover;
   els.playerTitle.textContent = book.title;
-  els.playerChapter.textContent = "Select a chapter";
-  els.playPauseBtn.textContent = "Play";
-  els.playPauseBtn.setAttribute("aria-label", "Play");
+  els.playerChapter.textContent = copy(book, "selectChapter");
+  els.playPauseBtn.textContent = copy(book, "play");
+  els.playPauseBtn.setAttribute("aria-label", copy(book, "play"));
   els.seekBar.value = 0;
   els.currentTime.textContent = "0:00";
   els.durationTime.textContent = "0:00";
@@ -601,8 +611,8 @@ function loadChapter(book, chapterIndex, options = {}) {
   els.playerCover.src = book.cover;
   els.playerTitle.textContent = book.title;
   els.playerChapter.textContent = chapter.title;
-  els.playPauseBtn.textContent = "Play";
-  els.playPauseBtn.setAttribute("aria-label", "Play");
+  els.playPauseBtn.textContent = copy(book, "play");
+  els.playPauseBtn.setAttribute("aria-label", copy(book, "play"));
   els.audio.src = chapter.src;
   updateMediaSession(book, chapter);
   setMediaPlaybackState("paused");
@@ -622,7 +632,7 @@ function startPendingAutoplay() {
   }).catch(() => {
     if (els.audio.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
     state.pendingAutoplay = false;
-    els.playerChapter.textContent = `${chapter.title} - tap Play to start`;
+    els.playerChapter.textContent = `${chapter.title} – ${copy(state.currentBook, "tapToPlay")}`;
   });
 }
 
@@ -631,7 +641,8 @@ function continueListening(autoplay = false) {
   if (!resume) return;
   const book = findBook(resume.bookId);
   if (!book) return;
-  if (location.hash !== `#book/${book.id}`) location.hash = `book/${book.id}`;
+  const routeHash = `#book/${bookRouteSlug(book)}`;
+  if (location.hash !== routeHash) location.hash = routeHash.slice(1);
   loadChapter(book, resume.chapterIndex || 0, {
     playMode: "book",
     autoplay,
@@ -651,7 +662,7 @@ function siteBaseUrl() {
 }
 
 function bookShareUrl(book) {
-  return new URL(`books/${book.id}/`, siteBaseUrl()).href;
+  return new URL(`books/${bookRouteSlug(book)}/`, siteBaseUrl()).href;
 }
 
 async function shareBook(book, button) {
@@ -761,7 +772,13 @@ function getLegacyResume() {
 }
 
 function findBook(bookId) {
-  return state.catalog.find((book) => book.id === bookId);
+  const legacyId = Object.entries(canonicalBookSlugs)
+    .find(([, slug]) => slug === bookId)?.[0] || bookId;
+  return state.catalog.find((book) => book.id === legacyId);
+}
+
+function bookRouteSlug(book) {
+  return canonicalBookSlugs[book.id] || book.id;
 }
 
 function getHiddenBookIds() {
@@ -804,7 +821,7 @@ function formatTime(seconds) {
 
 function formatDurationLabel(duration) {
   if (typeof duration === "number") return formatTime(duration);
-  return duration || "Audio chapter";
+  return duration || "Chương audio";
 }
 
 function placeholderCover(book) {
@@ -942,14 +959,16 @@ els.audio.addEventListener("canplay", startPendingAutoplay);
 
 els.audio.addEventListener("play", () => {
   state.pendingAutoplay = false;
-  els.playPauseBtn.textContent = "Pause";
-  els.playPauseBtn.setAttribute("aria-label", "Pause");
+  els.playPauseBtn.textContent = copy(state.currentBook, "pause");
+  els.playPauseBtn.setAttribute("aria-label", copy(state.currentBook, "pause"));
   setMediaPlaybackState("playing");
 });
 
 els.audio.addEventListener("pause", () => {
-  els.playPauseBtn.textContent = "Play";
-  els.playPauseBtn.setAttribute("aria-label", "Play");
+  if (state.currentBook) {
+    els.playPauseBtn.textContent = copy(state.currentBook, "play");
+    els.playPauseBtn.setAttribute("aria-label", copy(state.currentBook, "play"));
+  }
   setMediaPlaybackState("paused");
   saveResume();
 });
@@ -976,7 +995,7 @@ els.audio.addEventListener("ended", () => {
 });
 
 els.audio.addEventListener("error", () => {
-  els.playerChapter.textContent = "Audio file not found. Check the chapter src path.";
+  els.playerChapter.textContent = copy(state.currentBook || { language: "vi" }, "audioMissing");
 });
 
 els.heroContinueBtn.addEventListener("click", () => continueListening(true));

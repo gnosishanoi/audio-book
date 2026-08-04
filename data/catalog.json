@@ -70,7 +70,7 @@
         }
       ],
       "title": "Dayspring of Youth",
-      "author": "M",
+      "author": "M.",
       "narrator": "Brian M",
       "description": "",
       "cover": "",
@@ -170,7 +170,7 @@
       "chapters": [
         {
           "id": "ch-002",
-          "title": "Chương 1 --- Cảnh đẹp núi non",
+          "title": "Chương 1 – Cảnh đẹp núi non",
           "src": "audio/xu-xo-cua-cac-vi-than/002-ch-ng-1-c-nh-p-n-i-non.mp3",
           "duration": 1880.867125,
           "words": 5574,
@@ -178,7 +178,7 @@
         },
         {
           "id": "ch-003",
-          "title": "Chương 2. --- Diện kiến Chúa tể Shambhala",
+          "title": "Chương 2 – Diện kiến Chúa tể Shambhala",
           "src": "audio/xu-xo-cua-cac-vi-than/003-ch-ng-2-di-n-ki-n-ch-a-t-shambhala.mp3",
           "duration": 2769.532042,
           "words": 8279,
@@ -186,7 +186,7 @@
         },
         {
           "id": "ch-004",
-          "title": "Chương 3 --- Những Mặc khải Bất ngờ",
+          "title": "Chương 3 – Những mặc khải bất ngờ",
           "src": "audio/xu-xo-cua-cac-vi-than/004-ch-ng-3-nh-ng-m-c-kh-i-b-t-ng.mp3",
           "duration": 2624.493,
           "words": 8081,
@@ -194,7 +194,7 @@
         },
         {
           "id": "ch-005",
-          "title": "Chương 4 --- Sức mạnh của trí tưởng tượng",
+          "title": "Chương 4 – Sức mạnh của trí tưởng tượng",
           "src": "audio/xu-xo-cua-cac-vi-than/005-ch-ng-4-s-c-m-nh-c-a-tr-t-ng-t-ng.mp3",
           "duration": 1582.58225,
           "words": 4724,
@@ -208,7 +208,8 @@
       "description": "",
       "cover": "",
       "updatedAt": "2026-07-30T17:20:05",
-      "language": "vi"
+      "language": "vi",
+      "publishedAt": "2026-07-30"
     }
   ]
 }

@@ -6,18 +6,22 @@ const catalogPath = path.join(siteRoot, "data", "catalog.json");
 const booksRoot = path.join(siteRoot, "books");
 const siteUrl = "https://audio.gnosishanoi.org/";
 const siteName = "Sách nói Gnosis Hà Nội";
-const appVersion = "gnosis-editorial-34";
+const appVersion = "gnosis-editorial-37";
+
+const canonicalBookSlugs = {
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de"
+};
 
 const knownCoverPaths = {
-  "dayspring-of-youth": "assets/covers/dayspring-of-youth.jpg?v=1",
+  "dayspring-of-youth": "assets/covers/dayspring-of-youth-gnosis-v2.png?v=2",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v2.jpg?v=2",
-  "xu-xo-cua-cac-vi-than": "assets/covers/xu-xo-cua-cac-vi-than.jpg?v=2"
+  "xu-xo-cua-cac-vi-than": "assets/covers/xu-xo-cua-cac-vi-than-gnosis-v3.png?v=3"
 };
 
 const knownSocialImagePaths = {
-  "dayspring-of-youth": "assets/social/dayspring-of-youth-v2.jpg",
+  "dayspring-of-youth": "assets/social/dayspring-of-youth-gnosis-v3.jpg",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/social/gnosis-hanoi-library-v3.jpg",
-  "xu-xo-cua-cac-vi-than": "assets/social/xu-xo-cua-cac-vi-than-v2.jpg"
+  "xu-xo-cua-cac-vi-than": "assets/social/xu-xo-cua-cac-vi-than-gnosis-v3.jpg"
 };
 
 const descriptionFallbacks = {
@@ -64,8 +68,9 @@ function htmlForBook(book) {
   const coverPath = normalizeAsset(book.cover, book.id);
   const socialImagePath = knownSocialImagePaths[book.id] || cleanAssetUrl(coverPath);
   const socialImage = absoluteSiteUrl(socialImagePath);
-  const pageUrl = absoluteSiteUrl(`books/${book.id}/`);
-  const appUrl = absoluteSiteUrl(`#book/${book.id}`);
+  const pageSlug = canonicalBookSlugs[book.id] || book.id;
+  const pageUrl = absoluteSiteUrl(`books/${pageSlug}/`);
+  const appUrl = absoluteSiteUrl(`#book/${pageSlug}`);
 
   return `<!doctype html>
 <html lang="${book.language || "en"}">
@@ -101,7 +106,7 @@ function htmlForBook(book) {
       <img src="../../${escapeHtml(coverPath)}" alt="">
       <h1>${escapeHtml(book.title)}</h1>
       ${book.author ? `<p>${escapeHtml(book.author)}</p>` : ""}
-      <a class="primary-button" href="${escapeHtml(appUrl)}">${book.language === "vi" ? "Nghe trên Sách nói Gnosis Hà Nội" : "Listen at Gnosis Hanoi Audiobooks"}</a>
+      <a class="primary-button" href="${escapeHtml(appUrl)}">Nghe trên Sách nói Gnosis Hà Nội</a>
     </main>
   </body>
 </html>
@@ -112,7 +117,28 @@ const catalog = JSON.parse(fs.readFileSync(catalogPath, "utf8"));
 fs.mkdirSync(booksRoot, { recursive: true });
 
 for (const book of catalog.books || []) {
-  const folder = path.join(booksRoot, book.id);
+  const pageSlug = canonicalBookSlugs[book.id] || book.id;
+  const folder = path.join(booksRoot, pageSlug);
   fs.mkdirSync(folder, { recursive: true });
   fs.writeFileSync(path.join(folder, "index.html"), htmlForBook(book));
+
+  if (pageSlug !== book.id) {
+    const legacyFolder = path.join(booksRoot, book.id);
+    const canonicalUrl = absoluteSiteUrl(`books/${pageSlug}/`);
+    fs.mkdirSync(legacyFolder, { recursive: true });
+    fs.writeFileSync(path.join(legacyFolder, "index.html"), `<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>${escapeHtml(book.title)} | ${siteName}</title>
+    <link rel="canonical" href="${escapeHtml(canonicalUrl)}">
+    <meta http-equiv="refresh" content="0; url=${escapeHtml(canonicalUrl)}">
+  </head>
+  <body>
+    <p><a href="${escapeHtml(canonicalUrl)}">Mở trang sách ${escapeHtml(book.title)}</a></p>
+  </body>
+</html>
+`);
+  }
 }
