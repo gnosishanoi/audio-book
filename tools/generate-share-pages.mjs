@@ -10,14 +10,12 @@ const appVersion = "share-pages-21";
 const knownCoverPaths = {
   "dayspring-of-youth": "assets/covers/dayspring-of-youth.jpg?v=1",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de.jpg?v=1",
-  "bong-hong-cai-ao": "assets/covers/bong-hong-cai-ao.jpg?v=3",
   "xu-xo-cua-cac-vi-than": "assets/covers/xu-xo-cua-cac-vi-than.jpg?v=2"
 };
 
 const knownSocialImagePaths = {
   "dayspring-of-youth": "assets/social/dayspring-of-youth-v2.jpg",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/social/tam-ly-hoc-cho-su-thay-oi-triet-e-v2.jpg",
-  "bong-hong-cai-ao": "assets/social/bong-hong-cai-ao-v2.jpg",
   "xu-xo-cua-cac-vi-than": "assets/social/xu-xo-cua-cac-vi-than-v2.jpg"
 };
 
