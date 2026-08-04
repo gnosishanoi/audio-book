@@ -12,6 +12,14 @@ const knownCoverPaths = {
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de.jpg?v=1",
   "xu-xo-cua-cac-vi-than": "./assets/covers/xu-xo-cua-cac-vi-than.jpg?v=2"
 };
+const featuredImagePaths = {
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-reading-room-v1.jpg"
+};
+const featuredDescriptionFallbacks = {
+  "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "Những bài giảng về quan sát bản thân, chuyển hóa tâm lý và đánh thức ý thức.",
+  "xu-xo-cua-cac-vi-than": "Cuộc diện kiến các Chân sư Minh triết ở Shambhala."
+};
 
 const state = {
   catalog: [],
@@ -50,7 +58,14 @@ const els = {
   resumeTitle: document.querySelector("#resumeTitle"),
   resumeMeta: document.querySelector("#resumeMeta"),
   heroContinueBtn: document.querySelector("#heroContinueBtn"),
-  headerContinueBtn: document.querySelector("#headerContinueBtn")
+  headerContinueBtn: document.querySelector("#headerContinueBtn"),
+  featuredVisual: document.querySelector("#featuredVisual"),
+  featuredImage: document.querySelector("#featuredImage"),
+  featuredEyebrow: document.querySelector("#featuredEyebrow"),
+  featuredTitle: document.querySelector("#featuredTitle"),
+  featuredAuthor: document.querySelector("#featuredAuthor"),
+  featuredDescription: document.querySelector("#featuredDescription"),
+  featuredLink: document.querySelector("#featuredLink")
 };
 
 async function init() {
@@ -91,6 +106,7 @@ async function refreshCatalog() {
     const { books } = await loadCatalog();
     state.catalog = books;
     renderLibrary();
+    renderFeatured();
     updateResumeUi();
   } finally {
     state.isRefreshing = false;
@@ -105,6 +121,7 @@ function normalizeCatalog(books, assetBase) {
     cover: resolveAsset(book.cover, assetBase) || knownCover(book.id) || placeholderCover(book),
     description: book.description || book.subtitle || "",
     language: normalizeLanguage(book.language, book.title),
+    featureDate: book.publishedAt || book.publishedDate || "",
     publishedAt: book.publishedAt || book.publishedDate || book.updatedAt || "",
     chapters: [...(book.chapters || [])]
       .sort((a, b) => (a.order || 0) - (b.order || 0))
@@ -156,7 +173,7 @@ function copy(book, key) {
       narrator: "Đọc bởi",
       listenCount: "lượt nghe trên máy này",
       listenCountPlural: "lượt nghe trên máy này",
-      more: "More",
+      more: "Thông tin",
       share: "Chia sẻ",
       copied: "Đã sao chép",
       language: "Tiếng Việt"
@@ -301,7 +318,7 @@ function updateMediaSession(book, chapter) {
   const artworkType = mediaArtworkType(book.cover);
   navigator.mediaSession.metadata = new MediaMetadata({
     title: chapter?.title || book.title,
-    artist: book.author || book.narrator || "Stillword",
+    artist: book.author || book.narrator || "Gnosis Hà Nội",
     album: book.title,
     artwork: [
       { src: artworkSrc, sizes: "96x96", type: artworkType },
@@ -380,10 +397,10 @@ function renderLibrary() {
   const hiddenBooks = state.catalog.filter((book) => state.hiddenBookIds.has(book.id));
 
   els.bookCount.textContent = hiddenBooks.length
-    ? `${visibleBooks.length} shown, ${hiddenBooks.length} hidden`
-    : `${visibleBooks.length} audiobook${visibleBooks.length === 1 ? "" : "s"}`;
+    ? `${visibleBooks.length} hiển thị, ${hiddenBooks.length} đã ẩn`
+    : `${visibleBooks.length} sách nói`;
   els.hiddenToggleBtn.hidden = hiddenBooks.length === 0;
-  els.hiddenToggleBtn.textContent = state.showHiddenBooks ? "Hide hidden" : `Hidden (${hiddenBooks.length})`;
+  els.hiddenToggleBtn.textContent = state.showHiddenBooks ? "Đóng danh sách ẩn" : `Đã ẩn (${hiddenBooks.length})`;
   els.bookGrid.innerHTML = visibleBooks.length ? visibleBooks.map((book) => `
     <article class="book-card" data-book-id="${escapeHtml(book.id)}">
       <button class="book-open" type="button" data-action="open-book" aria-label="${escapeHtml(copy(book, "open"))} ${escapeHtml(book.title)}">
@@ -411,12 +428,12 @@ function renderLibrary() {
         </svg>
       </button>
     </article>
-  `).join("") : `<p class="empty-state">No books in your library right now.</p>`;
+  `).join("") : `<p class="empty-state">Thư viện hiện chưa có sách.</p>`;
   els.hiddenBooksPanel.hidden = !state.showHiddenBooks || hiddenBooks.length === 0;
   els.hiddenBooksPanel.innerHTML = hiddenBooks.map((book) => `
     <div class="hidden-book-row" data-book-id="${escapeHtml(book.id)}">
       <span>${escapeHtml(book.title)}</span>
-      <button class="text-button small-text-button" type="button" data-action="restore-book">Restore</button>
+      <button class="text-button small-text-button" type="button" data-action="restore-book">Khôi phục</button>
     </div>
   `).join("");
 
@@ -440,6 +457,42 @@ function renderLibrary() {
       restoreBook(row.dataset.bookId);
     });
   });
+}
+
+function featuredBook() {
+  const visibleBooks = state.catalog.filter((book) => (
+    !state.hiddenBookIds.has(book.id) && book.chapters.length
+  ));
+  const candidates = visibleBooks.length ? visibleBooks : state.catalog.filter((book) => book.chapters.length);
+
+  return [...candidates].sort((a, b) => {
+    const aDate = Date.parse(a.featureDate) || 0;
+    const bDate = Date.parse(b.featureDate) || 0;
+    if (aDate !== bDate) return bDate - aDate;
+    if (a.language !== b.language) return a.language === "vi" ? -1 : 1;
+    return state.catalog.indexOf(b) - state.catalog.indexOf(a);
+  })[0] || null;
+}
+
+function renderFeatured() {
+  const book = featuredBook();
+  if (!book || !els.featuredTitle) return;
+
+  const featuredImage = featuredImagePaths[book.id];
+  const isVietnamese = book.language === "vi";
+  els.featuredEyebrow.textContent = isVietnamese ? "Sách nói nổi bật" : "Featured audiobook";
+  els.featuredTitle.textContent = book.title;
+  els.featuredAuthor.textContent = book.author || book.narrator || "Gnosis Hà Nội";
+  els.featuredDescription.textContent = book.description
+    || featuredDescriptionFallbacks[book.id]
+    || (isVietnamese ? "Một tác phẩm dành cho học hỏi và chiêm nghiệm nội tâm." : "A work for study and inner reflection.");
+  els.featuredLink.href = `#book/${encodeURIComponent(book.id)}`;
+  els.featuredLink.textContent = isVietnamese ? "Nghe ngay" : "Listen now";
+  els.featuredImage.src = featuredImage || book.cover;
+  els.featuredImage.alt = featuredImage
+    ? `${book.title} trong không gian đọc của Gnosis Hà Nội`
+    : `Bìa sách ${book.title}`;
+  els.featuredVisual.classList.toggle("cover-only", !featuredImage);
 }
 
 function renderBook(book) {
@@ -603,7 +656,7 @@ function bookShareUrl(book) {
 
 async function shareBook(book, button) {
   const url = bookShareUrl(book);
-  const text = book.description || book.subtitle || book.author || "Listen on Stillword";
+  const text = book.description || book.subtitle || book.author || "Nghe trên Sách nói Gnosis Hà Nội";
 
   if (navigator.share) {
     try {
@@ -727,12 +780,14 @@ function hideBook(bookId) {
   state.hiddenBookIds.add(bookId);
   saveHiddenBookIds();
   renderLibrary();
+  renderFeatured();
 }
 
 function restoreBook(bookId) {
   state.hiddenBookIds.delete(bookId);
   saveHiddenBookIds();
   renderLibrary();
+  renderFeatured();
 }
 
 function withCacheBust(url) {

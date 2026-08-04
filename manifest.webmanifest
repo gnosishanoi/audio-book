@@ -1,12 +1,12 @@
 {
-  "name": "Stillword",
-  "short_name": "Stillword",
-  "description": "A calm audiobook listening library.",
+  "name": "Sách nói Gnosis Hà Nội",
+  "short_name": "Gnosis Audio",
+  "description": "Tri thức cho hành trình nội tâm.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f8f5ee",
-  "theme_color": "#415d50",
+  "background_color": "#f5f0e5",
+  "theme_color": "#233027",
   "icons": [
     {
       "src": "./assets/icons/icon-192.png",

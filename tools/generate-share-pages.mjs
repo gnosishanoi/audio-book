@@ -5,7 +5,8 @@ const siteRoot = path.resolve(import.meta.dirname, "..");
 const catalogPath = path.join(siteRoot, "data", "catalog.json");
 const booksRoot = path.join(siteRoot, "books");
 const siteUrl = "https://audio.gnosishanoi.org/";
-const appVersion = "share-pages-21";
+const siteName = "Sách nói Gnosis Hà Nội";
+const appVersion = "gnosis-editorial-34";
 
 const knownCoverPaths = {
   "dayspring-of-youth": "assets/covers/dayspring-of-youth.jpg?v=1",
@@ -17,6 +18,12 @@ const knownSocialImagePaths = {
   "dayspring-of-youth": "assets/social/dayspring-of-youth-v2.jpg",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/social/tam-ly-hoc-cho-su-thay-oi-triet-e-v2.jpg",
   "xu-xo-cua-cac-vi-than": "assets/social/xu-xo-cua-cac-vi-than-v2.jpg"
+};
+
+const descriptionFallbacks = {
+  "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "Những bài giảng về quan sát bản thân, chuyển hóa tâm lý và đánh thức ý thức.",
+  "xu-xo-cua-cac-vi-than": "Cuộc diện kiến các Chân sư Minh triết ở Shambhala."
 };
 
 function escapeHtml(value) {
@@ -44,7 +51,7 @@ function absoluteSiteUrl(relativePath) {
 }
 
 function bookDescription(book) {
-  return book.description || book.subtitle || [
+  return book.description || book.subtitle || descriptionFallbacks[book.id] || [
     book.author ? `Author: ${book.author}` : "",
     book.narrator ? `Narrator: ${book.narrator}` : "",
     `${book.chapters?.length || 0} chapter${book.chapters?.length === 1 ? "" : "s"}`
@@ -52,7 +59,7 @@ function bookDescription(book) {
 }
 
 function htmlForBook(book) {
-  const title = `${book.title} | Stillword`;
+  const title = `${book.title} | ${siteName}`;
   const description = bookDescription(book);
   const coverPath = normalizeAsset(book.cover, book.id);
   const socialImagePath = knownSocialImagePaths[book.id] || cleanAssetUrl(coverPath);
@@ -69,7 +76,8 @@ function htmlForBook(book) {
     <meta name="description" content="${escapeHtml(description)}">
     <link rel="canonical" href="${escapeHtml(pageUrl)}">
     <meta property="og:type" content="music.album">
-    <meta property="og:site_name" content="Stillword">
+    <meta property="og:locale" content="${book.language === "vi" ? "vi_VN" : "en_US"}">
+    <meta property="og:site_name" content="${siteName}">
     <meta property="og:title" content="${escapeHtml(book.title)}">
     <meta property="og:description" content="${escapeHtml(description)}">
     <meta property="og:url" content="${escapeHtml(pageUrl)}">
@@ -84,6 +92,8 @@ function htmlForBook(book) {
     <meta name="twitter:description" content="${escapeHtml(description)}">
     <meta name="twitter:image" content="${escapeHtml(socialImage)}">
     <meta name="twitter:image:alt" content="${escapeHtml(`${book.title} cover`)}">
+    <meta name="theme-color" content="#233027">
+    <link rel="icon" href="../../assets/icons/gnosis-favicon.svg?v=1" type="image/svg+xml">
     <link rel="stylesheet" href="../../styles.css?v=${appVersion}">
   </head>
   <body>
@@ -91,7 +101,7 @@ function htmlForBook(book) {
       <img src="../../${escapeHtml(coverPath)}" alt="">
       <h1>${escapeHtml(book.title)}</h1>
       ${book.author ? `<p>${escapeHtml(book.author)}</p>` : ""}
-      <a class="primary-button" href="${escapeHtml(appUrl)}">Listen on Stillword</a>
+      <a class="primary-button" href="${escapeHtml(appUrl)}">${book.language === "vi" ? "Nghe trên Sách nói Gnosis Hà Nội" : "Listen at Gnosis Hanoi Audiobooks"}</a>
     </main>
   </body>
 </html>

@@ -1,37 +1,44 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Stillword</title>
-    <meta name="description" content="A calm static audiobook listening library for GitHub Pages.">
+    <title>Sách nói Gnosis Hà Nội</title>
+    <meta name="description" content="Thư viện sách nói Gnosis Hà Nội dành cho học hỏi, chiêm nghiệm và chuyển hóa nội tâm.">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Stillword">
-    <meta property="og:title" content="Stillword">
-    <meta property="og:description" content="A calm audiobook listening library.">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:site_name" content="Sách nói Gnosis Hà Nội">
+    <meta property="og:title" content="Sách nói Gnosis Hà Nội">
+    <meta property="og:description" content="Tri thức cho hành trình nội tâm.">
     <meta property="og:url" content="https://audio.gnosishanoi.org/">
-    <meta property="og:image" content="https://audio.gnosishanoi.org/assets/icons/icon-512.png">
+    <meta property="og:image" content="https://audio.gnosishanoi.org/assets/social/gnosis-hanoi-library-v1.jpg">
+    <meta property="og:image:secure_url" content="https://audio.gnosishanoi.org/assets/social/gnosis-hanoi-library-v1.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Sách nói Gnosis Hà Nội trong một không gian đọc tĩnh lặng">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Stillword">
-    <meta name="twitter:description" content="A calm audiobook listening library.">
-    <meta name="twitter:image" content="https://audio.gnosishanoi.org/assets/icons/icon-512.png">
-    <meta name="theme-color" content="#415d50">
-    <meta name="apple-mobile-web-app-title" content="Stillword">
+    <meta name="twitter:title" content="Sách nói Gnosis Hà Nội">
+    <meta name="twitter:description" content="Tri thức cho hành trình nội tâm.">
+    <meta name="twitter:image" content="https://audio.gnosishanoi.org/assets/social/gnosis-hanoi-library-v1.jpg">
+    <meta name="twitter:image:alt" content="Sách nói Gnosis Hà Nội trong một không gian đọc tĩnh lặng">
+    <meta name="theme-color" content="#233027">
+    <meta name="apple-mobile-web-app-title" content="Gnosis Hà Nội">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="./assets/icons/gnosis-favicon.svg?v=1" type="image/svg+xml">
     <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
     <link rel="manifest" href="./manifest.webmanifest">
-    <link rel="stylesheet" href="./styles.css?v=cover-balance-26">
+    <link rel="stylesheet" href="./styles.css?v=gnosis-editorial-34">
   </head>
   <body>
     <div class="app-shell">
       <header class="site-header">
-        <a class="brand" href="./" aria-label="Stillword home">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span>
-            <span class="brand-name">Stillword</span>
-            <span class="brand-subtitle">Quiet audiobook library</span>
+        <a class="brand" href="./" aria-label="Trang chủ Sách nói Gnosis Hà Nội">
+          <img class="brand-logo" src="./assets/branding/gnosis-hanoi-logo-transparent.png" alt="Gnosis Hà Nội" width="650" height="216">
+          <span class="brand-copy">
+            <span class="brand-name">Thư viện Sách nói</span>
+            <span class="brand-subtitle">Tri thức cho hành trình nội tâm</span>
           </span>
         </a>
         <button class="ghost-button" id="headerContinueBtn" type="button" hidden>Continue</button>
@@ -39,22 +46,31 @@
 
       <main>
         <section class="library-hero" id="libraryHero">
-          <div class="hero-copy">
-            <p class="eyebrow">Audiobook listener</p>
-            <h1>Stillword Library</h1>
-            <p>"Be still, and let the words find their way inward."</p>
+          <div class="featured-visual" id="featuredVisual">
+            <img class="featured-scene" id="featuredImage" src="./assets/hero/tam-ly-hoc-reading-room-v1.jpg" alt="">
           </div>
-          <div class="resume-panel" id="resumePanel" hidden>
-            <span class="panel-label">Last session</span>
-            <strong id="resumeTitle">Continue listening</strong>
-            <span id="resumeMeta">Chapter 1</span>
-            <button class="primary-button" id="heroContinueBtn" type="button">Continue Listening</button>
+          <div class="featured-panel">
+            <div class="hero-copy">
+              <p class="eyebrow" id="featuredEyebrow">Sách nói nổi bật</p>
+              <h1 id="featuredTitle">Tâm lý học cho sự thay đổi triệt để</h1>
+              <p class="featured-author" id="featuredAuthor">Samael Aun Weor</p>
+              <p class="hero-description" id="featuredDescription">Những bài giảng về quan sát bản thân, chuyển hóa tâm lý và đánh thức ý thức.</p>
+              <a class="primary-button featured-button" id="featuredLink" href="#book/tam-ly-hoc-cho-su-thay-oi-triet-e">Nghe ngay</a>
+            </div>
+            <div class="resume-panel" id="resumePanel" hidden>
+              <span class="panel-label">Lần nghe gần nhất</span>
+              <strong id="resumeTitle">Tiếp tục nghe</strong>
+              <span id="resumeMeta">Chương 1</span>
+              <button class="primary-button" id="heroContinueBtn" type="button">Tiếp tục nghe</button>
+            </div>
           </div>
         </section>
 
         <section id="libraryView" class="view">
           <div class="section-heading">
-            <h2>Library</h2>
+            <span class="section-rule" aria-hidden="true"></span>
+            <h2>Thư viện</h2>
+            <span class="section-rule" aria-hidden="true"></span>
             <div class="library-tools">
               <p id="bookCount"></p>
               <button class="text-button small-text-button" id="hiddenToggleBtn" type="button" hidden>Hidden</button>
@@ -92,6 +108,6 @@
       <audio id="audioPlayer" preload="metadata"></audio>
     </aside>
 
-    <script src="./app.js?v=autoplay-27" defer></script>
+    <script src="./app.js?v=gnosis-editorial-32" defer></script>
   </body>
 </html>
