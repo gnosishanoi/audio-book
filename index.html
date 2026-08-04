@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stillword</title>
+    <meta name="description" content="A calm static audiobook listening library for GitHub Pages.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Stillword">
+    <meta property="og:title" content="Stillword">
+    <meta property="og:description" content="A calm audiobook listening library.">
+    <meta property="og:url" content="https://audio.gnosishanoi.org/">
+    <meta property="og:image" content="https://audio.gnosishanoi.org/assets/icons/icon-512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stillword">
+    <meta name="twitter:description" content="A calm audiobook listening library.">
+    <meta name="twitter:image" content="https://audio.gnosishanoi.org/assets/icons/icon-512.png">
+    <meta name="theme-color" content="#415d50">
+    <meta name="apple-mobile-web-app-title" content="Stillword">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="stylesheet" href="./styles.css?v=cover-balance-26">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="Stillword home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>
+            <span class="brand-name">Stillword</span>
+            <span class="brand-subtitle">Quiet audiobook library</span>
+          </span>
+        </a>
+        <button class="ghost-button" id="headerContinueBtn" type="button" hidden>Continue</button>
+      </header>
+
+      <main>
+        <section class="library-hero" id="libraryHero">
+          <div class="hero-copy">
+            <p class="eyebrow">Audiobook listener</p>
+            <h1>Stillword Library</h1>
+            <p>"Be still, and let the words find their way inward."</p>
+          </div>
+          <div class="resume-panel" id="resumePanel" hidden>
+            <span class="panel-label">Last session</span>
+            <strong id="resumeTitle">Continue listening</strong>
+            <span id="resumeMeta">Chapter 1</span>
+            <button class="primary-button" id="heroContinueBtn" type="button">Continue Listening</button>
+          </div>
+        </section>
+
+        <section id="libraryView" class="view">
+          <div class="section-heading">
+            <h2>Library</h2>
+            <div class="library-tools">
+              <p id="bookCount"></p>
+              <button class="text-button small-text-button" id="hiddenToggleBtn" type="button" hidden>Hidden</button>
+            </div>
+          </div>
+          <div class="book-grid" id="bookGrid"></div>
+          <div class="hidden-books" id="hiddenBooksPanel" hidden></div>
+        </section>
+
+        <section id="bookView" class="view book-view" hidden>
+          <button class="text-button" id="backBtn" type="button">Back to library</button>
+          <div class="book-detail" id="bookDetail"></div>
+        </section>
+      </main>
+    </div>
+
+    <aside class="player-bar" id="playerBar" hidden aria-label="Audiobook player">
+      <div class="player-info">
+        <img id="playerCover" alt="" width="54" height="54">
+        <div>
+          <strong id="playerTitle">Select a chapter</strong>
+          <span id="playerChapter">Ready</span>
+        </div>
+      </div>
+      <div class="player-controls">
+        <button class="round-button" id="playPauseBtn" type="button" aria-label="Play">Play</button>
+        <div class="timeline">
+          <input id="seekBar" type="range" min="0" max="1000" value="0" aria-label="Seek">
+          <div class="time-row">
+            <span id="currentTime">0:00</span>
+            <span id="durationTime">0:00</span>
+          </div>
+        </div>
+      </div>
+      <audio id="audioPlayer" preload="metadata"></audio>
+    </aside>
+
+    <script src="./app.js?v=autoplay-27" defer></script>
+  </body>
+</html>

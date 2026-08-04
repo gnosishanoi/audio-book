@@ -1,0 +1,236 @@
+{
+  "version": 1,
+  "books": [
+    {
+      "id": "dayspring-of-youth",
+      "chapters": [
+        {
+          "id": "ch-001",
+          "title": "Introduction",
+          "src": "audio/dayspring-of-youth/001-introduction.mp3",
+          "duration": 377.892208,
+          "words": 620,
+          "order": 1
+        },
+        {
+          "id": "ch-002-ms5iaeoy",
+          "title": "Chapter 1: Atoms",
+          "src": "audio/dayspring-of-youth/002-chapter-1-atoms.mp3",
+          "duration": 1758.786875,
+          "words": 3191,
+          "order": 2
+        },
+        {
+          "id": "ch-003-ms5lcf5x",
+          "title": "Chapter 2: The Nous Atom",
+          "src": "audio/dayspring-of-youth/003-chapter-2-the-nous-atom.mp3",
+          "duration": 1126.828125,
+          "words": 1957,
+          "order": 3
+        },
+        {
+          "id": "ch-004-ms5lqlz6",
+          "title": "Chapter 3: Destructive Atoms",
+          "src": "audio/dayspring-of-youth/004-chapter-3-destructive-atoms.mp3",
+          "duration": 1921.744958,
+          "words": 3402,
+          "order": 4
+        },
+        {
+          "id": "ch-005-ms5m6fer",
+          "title": "Chapter 4: The Astral",
+          "src": "audio/dayspring-of-youth/005-chapter-4-the-astral.mp3",
+          "duration": 1675.507958,
+          "words": 2969,
+          "order": 5
+        },
+        {
+          "id": "ch-006-ms5m7qdi",
+          "title": "Chapter 5: Elemental Nature",
+          "src": "audio/dayspring-of-youth/006-chapter-5-elemental-nature.mp3",
+          "duration": 3242.679583,
+          "words": 5832,
+          "order": 6
+        },
+        {
+          "id": "ch-007-ms8c2vj3",
+          "title": "Chapter 6: The Eternal Lover",
+          "src": "audio/dayspring-of-youth/007-chapter-6-the-eternal-lover.mp3",
+          "duration": 1280.866,
+          "words": 2545,
+          "order": 7
+        },
+        {
+          "id": "ch-008-ms8wb2ig",
+          "title": "Chapter 7: Nature",
+          "src": "audio/dayspring-of-youth/008-chapter-7-nature.mp3",
+          "duration": 840.963167,
+          "words": 1501,
+          "order": 8
+        }
+      ],
+      "title": "Dayspring of Youth",
+      "author": "M",
+      "narrator": "Brian M",
+      "description": "",
+      "cover": "",
+      "updatedAt": "2026-07-31T07:19:37",
+      "subtitle": "",
+      "language": "en",
+      "publishedAt": "2026-07-29"
+    },
+    {
+      "id": "tam-ly-hoc-cho-su-thay-oi-triet-e",
+      "chapters": [
+        {
+          "id": "ch-001",
+          "title": "Chương 1 – Cấp độ Tâm linh",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/001-ch-ng-1-c-p-t-m-linh.mp3",
+          "duration": 462.158958,
+          "words": 1496,
+          "order": 1
+        },
+        {
+          "id": "ch-002-ms6ca3fl",
+          "title": "Chương 2 – Chiếc Thang Kỳ Diệu",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/002-ch-ng-2-chi-c-thang-k-di-u.mp3",
+          "duration": 223.871667,
+          "words": 705,
+          "order": 2
+        },
+        {
+          "id": "ch-003-ms6chpc5",
+          "title": "Chương 3 – Cuộc Nổi Dậy Tâm Lý",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/003-ch-ng-3-cu-c-n-i-d-y-t-m-l.mp3",
+          "duration": 254.113958,
+          "words": 819,
+          "order": 3
+        },
+        {
+          "id": "ch-004-ms6ktc5q",
+          "title": "Chương 4 – Phật tính",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/004-ch-ng-4-ph-t-t-nh.mp3",
+          "duration": 215.943667,
+          "words": 704,
+          "order": 4
+        },
+        {
+          "id": "ch-005-ms6kyedy",
+          "title": "Chương 5 – Buộc tội bản thân",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/005-ch-ng-5-bu-c-t-i-b-n-th-n.mp3",
+          "duration": 253.261583,
+          "words": 805,
+          "order": 5
+        },
+        {
+          "id": "ch-006-ms6lnnyc",
+          "title": "Chương 6 - Cuộc sống",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/006-ch-ng-6-cu-c-s-ng.mp3",
+          "duration": 184.9835,
+          "words": 566,
+          "order": 6
+        },
+        {
+          "id": "ch-007-ms6magvu",
+          "title": "Chương 7 – Trạng thái nội tâm",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/007-ch-ng-7-tr-ng-th-i-n-i-t-m.mp3",
+          "duration": 238.894333,
+          "words": 781,
+          "order": 7
+        },
+        {
+          "id": "ch-008-ms6p2wlp",
+          "title": "Chương 8 – Trạng thái sai lầm",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/008-ch-ng-8-tr-ng-th-i-sai-l-m.mp3",
+          "duration": 283.22075,
+          "words": 888,
+          "order": 8
+        },
+        {
+          "id": "ch-009-ms6vhiw3",
+          "title": "Chương 9 – Sự kiện cá nhân",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/009-ch-ng-9-s-ki-n-c-nh-n.mp3",
+          "duration": 205.935583,
+          "words": 687,
+          "order": 9
+        }
+      ],
+      "title": "Tâm lý học cho sự thay đổi triệt để",
+      "author": "Samael Aun Weor",
+      "subtitle": "",
+      "narrator": "Thảo Nguyên",
+      "description": "",
+      "cover": "",
+      "updatedAt": "2026-07-29T21:12:27",
+      "language": "vi",
+      "publishedAt": "2026-07-29"
+    },
+    {
+      "id": "bong-hong-cai-ao",
+      "chapters": [
+        {
+          "id": "ch-001",
+          "title": "Bông hồng cài áo",
+          "src": "audio/bong-hong-cai-ao/001-b-ng-h-ng-c-i-o.mp3",
+          "duration": 1117.572,
+          "words": 2527,
+          "order": 1
+        }
+      ],
+      "title": "Bông hồng cài áo",
+      "author": "Thích Nhất Hạnh",
+      "subtitle": "",
+      "narrator": "Minh Ngọc",
+      "description": "",
+      "cover": "",
+      "updatedAt": "2026-07-29T18:10:47",
+      "language": "vi",
+      "publishedAt": "2026-07-29"
+    },
+    {
+      "id": "xu-xo-cua-cac-vi-than",
+      "chapters": [
+        {
+          "id": "ch-002",
+          "title": "Chương 1 --- Cảnh đẹp núi non",
+          "src": "audio/xu-xo-cua-cac-vi-than/002-ch-ng-1-c-nh-p-n-i-non.mp3",
+          "duration": 1880.867125,
+          "words": 5574,
+          "order": 2
+        },
+        {
+          "id": "ch-003",
+          "title": "Chương 2. --- Diện kiến Chúa tể Shambhala",
+          "src": "audio/xu-xo-cua-cac-vi-than/003-ch-ng-2-di-n-ki-n-ch-a-t-shambhala.mp3",
+          "duration": 2769.532042,
+          "words": 8279,
+          "order": 3
+        },
+        {
+          "id": "ch-004",
+          "title": "Chương 3 --- Những Mặc khải Bất ngờ",
+          "src": "audio/xu-xo-cua-cac-vi-than/004-ch-ng-3-nh-ng-m-c-kh-i-b-t-ng.mp3",
+          "duration": 2624.493,
+          "words": 8081,
+          "order": 4
+        },
+        {
+          "id": "ch-005",
+          "title": "Chương 4 --- Sức mạnh của trí tưởng tượng",
+          "src": "audio/xu-xo-cua-cac-vi-than/005-ch-ng-4-s-c-m-nh-c-a-tr-t-ng-t-ng.mp3",
+          "duration": 1582.58225,
+          "words": 4724,
+          "order": 5
+        }
+      ],
+      "title": "Xứ xở của các vị thần",
+      "author": "H. P. Blavatsky",
+      "subtitle": "Cuộc diện kiến các Chân sư Minh triết ở Shambhala",
+      "narrator": "Kim Phượng",
+      "description": "",
+      "cover": "",
+      "updatedAt": "2026-07-30T17:20:05",
+      "language": "vi"
+    }
+  ]
+}
