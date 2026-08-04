@@ -9,11 +9,11 @@ const listenStatsStorageKey = "stillword.listenStats.v1";
 const excludedBookIds = new Set(["binh-minh-tuoi-tre"]);
 const knownCoverPaths = {
   "dayspring-of-youth": "./assets/covers/dayspring-of-youth.jpg?v=1",
-  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de.jpg?v=1",
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v2.jpg?v=2",
   "xu-xo-cua-cac-vi-than": "./assets/covers/xu-xo-cua-cac-vi-than.jpg?v=2"
 };
 const featuredImagePaths = {
-  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-reading-room-v1.jpg"
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-flatlay-gnosis-v4.jpg"
 };
 const featuredDescriptionFallbacks = {
   "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
