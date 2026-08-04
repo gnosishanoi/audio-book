@@ -31,6 +31,8 @@ const state = {
   showHiddenBooks: false,
   currentBook: null,
   currentChapterIndex: 0,
+  currentVisualChapterIndex: 0,
+  bookFormat: "audio",
   routeBook: null,
   playMode: "chapter",
   restoreTime: 0,
@@ -133,7 +135,20 @@ function normalizeCatalog(books, assetBase) {
         ...chapter,
         duration: formatDurationLabel(chapter.duration),
         src: resolveAsset(chapter.src, assetBase)
-      }))
+      })),
+    visual: {
+      ...(book.visual || {}),
+      chapters: [...(book.visual?.chapters || [])]
+        .sort((a, b) => (a.order || 0) - (b.order || 0))
+        .map((chapter) => ({
+          ...chapter,
+          duration: formatDurationLabel(chapter.duration),
+          poster: resolveAsset(chapter.poster, assetBase),
+          src: resolveAsset(chapter.src, assetBase),
+          localSrc: chapter.localSrc || "",
+          externalUrl: chapter.externalUrl || ""
+        }))
+    }
   }));
 }
 
@@ -196,6 +211,23 @@ function copy(book, key) {
 function chapterCountLabel(book) {
   const count = book.chapters.length;
   return `${count} chương`;
+}
+
+function hasAudio(book) {
+  return Boolean(book?.chapters?.length);
+}
+
+function hasVisual(book) {
+  return Boolean(book?.visual?.chapters?.length);
+}
+
+function formatBadgesMarkup(book) {
+  return `
+    <div class="format-badges" aria-label="Định dạng có sẵn">
+      ${hasAudio(book) ? `<span class="format-badge"><span aria-hidden="true">🎧</span> Sách nói</span>` : ""}
+      ${hasVisual(book) ? `<span class="format-badge visual"><span aria-hidden="true">▶</span> Sách hình</span>` : ""}
+    </div>
+  `;
 }
 
 function languageLabel(book) {
@@ -408,7 +440,7 @@ function renderLibrary() {
 
   els.bookCount.textContent = hiddenBooks.length
     ? `${visibleBooks.length} hiển thị, ${hiddenBooks.length} đã ẩn`
-    : `${visibleBooks.length} sách nói`;
+    : `${visibleBooks.length} tác phẩm`;
   els.hiddenToggleBtn.hidden = hiddenBooks.length === 0;
   els.hiddenToggleBtn.textContent = state.showHiddenBooks ? "Đóng danh sách ẩn" : `Đã ẩn (${hiddenBooks.length})`;
   els.bookGrid.innerHTML = visibleBooks.length ? visibleBooks.map((book) => `
@@ -419,6 +451,7 @@ function renderLibrary() {
       <div>
         <h3>${escapeHtml(book.title)}</h3>
         ${book.author ? `<p class="book-byline">${escapeHtml(authorLabel(book))}</p>` : ""}
+        ${formatBadgesMarkup(book)}
         <details class="book-more">
           <summary>${escapeHtml(copy(book, "more"))}</summary>
           <div class="book-meta-list">
@@ -426,7 +459,7 @@ function renderLibrary() {
           </div>
         </details>
         <div class="card-actions">
-          <button class="primary-button small-button" type="button" data-action="open-book">${escapeHtml(copy(book, "listen"))}</button>
+          <button class="primary-button small-button" type="button" data-action="open-book">${escapeHtml(hasVisual(book) ? "Mở sách" : copy(book, "listen"))}</button>
         </div>
       </div>
       <button class="hide-book-button" type="button" data-action="hide-book" aria-label="${escapeHtml(copy(book, "hide"))} ${escapeHtml(book.title)}">
@@ -490,14 +523,14 @@ function renderFeatured() {
   if (!book || !els.featuredTitle) return;
 
   const featuredImage = featuredImagePaths[book.id];
-  els.featuredEyebrow.textContent = "Sách nói nổi bật";
+  els.featuredEyebrow.textContent = "Tác phẩm nổi bật";
   els.featuredTitle.textContent = book.title;
   els.featuredAuthor.textContent = book.author || book.narrator || "Gnosis Hà Nội";
   els.featuredDescription.textContent = book.description
     || featuredDescriptionFallbacks[book.id]
     || "Một tác phẩm dành cho học hỏi và chiêm nghiệm nội tâm.";
   els.featuredLink.href = `#book/${encodeURIComponent(bookRouteSlug(book))}`;
-  els.featuredLink.textContent = "Nghe ngay";
+  els.featuredLink.textContent = "Khám phá";
   els.featuredImage.src = featuredImage || book.cover;
   els.featuredImage.alt = featuredImage
     ? `${book.title} trong không gian đọc của Gnosis Hà Nội`
@@ -506,15 +539,23 @@ function renderFeatured() {
 }
 
 function renderBook(book) {
-  const shouldShowDescription = book.description && book.description !== book.subtitle;
+  const introDescription = book.description
+    || featuredDescriptionFallbacks[book.id]
+    || book.subtitle
+    || "Một tác phẩm dành cho học hỏi và chiêm nghiệm nội tâm.";
+  const formats = [hasAudio(book) ? "audio" : "", hasVisual(book) ? "visual" : ""].filter(Boolean);
+  if (!formats.includes(state.bookFormat)) state.bookFormat = formats[0] || "audio";
+  document.body.classList.toggle("visual-mode", state.bookFormat === "visual");
   els.backBtn.textContent = copy(book, "back");
 
   els.bookDetail.innerHTML = `
-    <div class="book-heading">
+    <div class="book-heading${hasVisual(book) ? " multimodal" : ""}">
       <img class="book-cover-small" src="${escapeHtml(book.cover)}" alt="">
-      <div>
+      <div class="book-heading-copy">
         <h1>${escapeHtml(book.title)}</h1>
         ${book.author ? `<p class="book-byline detail-byline">${escapeHtml(authorLabel(book))}</p>` : ""}
+        <span class="detail-accent" aria-hidden="true"></span>
+        <p class="book-description">${escapeHtml(introDescription)}</p>
         <details class="book-more detail-more">
           <summary>${escapeHtml(copy(book, "more"))}</summary>
           <div class="book-meta-list detail-meta">
@@ -522,20 +563,28 @@ function renderBook(book) {
           </div>
           <button class="ghost-button compact-action" type="button" data-action="share-book">${escapeHtml(copy(book, "share"))}</button>
         </details>
-        ${shouldShowDescription ? `<p class="book-description" hidden>${escapeHtml(book.description)}</p>` : ""}
       </div>
     </div>
-    <div class="chapter-list">
-      ${book.chapters.map((chapter, index) => `
-        <button class="chapter-row" type="button" data-chapter-index="${index}">
-          <span class="chapter-number">${index + 1}</span>
-          <div>
-            <h3>${escapeHtml(chapter.title)}</h3>
-            <span class="chapter-meta">${escapeHtml(chapter.duration || copy(book, "audioChapter"))}${chapterListenCount(book, index) ? ` · ${escapeHtml(listenCountLabel(book, chapterListenCount(book, index)))}` : ""}</span>
-          </div>
-        </button>
-      `).join("")}
-    </div>
+    ${formats.length > 1 ? `
+      <div class="format-tabs" role="tablist" aria-label="Chọn định dạng">
+        <button class="format-tab${state.bookFormat === "audio" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "audio"}" data-format="audio"><span aria-hidden="true">🎧</span> Sách nói</button>
+        <button class="format-tab${state.bookFormat === "visual" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "visual"}" data-format="visual"><span aria-hidden="true">▶</span> Sách hình</button>
+      </div>
+    ` : ""}
+    <section class="format-panel" data-format-panel="audio" ${state.bookFormat === "audio" ? "" : "hidden"}>
+      <div class="chapter-list">
+        ${book.chapters.map((chapter, index) => `
+          <button class="chapter-row" type="button" data-chapter-index="${index}">
+            <span class="chapter-number">${index + 1}</span>
+            <div>
+              <h3>${escapeHtml(chapter.title)}</h3>
+              <span class="chapter-meta">${escapeHtml(chapter.duration || copy(book, "audioChapter"))}${chapterListenCount(book, index) ? ` · ${escapeHtml(listenCountLabel(book, chapterListenCount(book, index)))}` : ""}</span>
+            </div>
+          </button>
+        `).join("")}
+      </div>
+    </section>
+    ${hasVisual(book) ? visualBookMarkup(book) : ""}
   `;
 
   els.bookDetail.querySelectorAll("[data-chapter-index]").forEach((button) => {
@@ -547,12 +596,129 @@ function renderBook(book) {
   els.bookDetail.querySelector("[data-action='share-book']")?.addEventListener("click", (event) => {
     shareBook(book, event.currentTarget);
   });
+
+  els.bookDetail.querySelectorAll("[data-format]").forEach((button) => {
+    button.addEventListener("click", () => setBookFormat(book, button.dataset.format));
+  });
+
+  els.bookDetail.querySelectorAll("[data-visual-chapter-index]").forEach((button) => {
+    button.addEventListener("click", () => loadVisualChapter(book, Number(button.dataset.visualChapterIndex), true));
+  });
+
+  if (state.bookFormat === "visual") activateVisualBook(book);
+}
+
+function visualBookMarkup(book) {
+  const chapters = book.visual.chapters;
+  const currentIndex = Math.min(state.currentVisualChapterIndex, chapters.length - 1);
+  const current = chapters[currentIndex];
+  const source = visualSource(current);
+  return `
+    <section class="format-panel" data-format-panel="visual" ${state.bookFormat === "visual" ? "" : "hidden"}>
+      <div class="visual-book-layout">
+        <div class="visual-player-shell${source ? "" : " unavailable"}">
+          <video id="visualPlayer" controls preload="metadata" playsinline poster="${escapeHtml(current.poster || book.cover)}" ${source ? `src="${escapeHtml(source)}"` : ""}></video>
+          ${source ? "" : `
+            <div class="visual-placeholder">
+              <span class="visual-play-mark" aria-hidden="true">▶</span>
+              <strong>Video đang được chuẩn bị xuất bản</strong>
+              <span>Bản xem trước local đã sẵn sàng. Studio sẽ bổ sung URL phát hành cho trang live.</span>
+            </div>
+          `}
+        </div>
+        <div class="visual-chapter-column">
+          <div class="visual-now">
+            <span>Sách hình</span>
+            <strong>${escapeHtml(current.title)}</strong>
+          </div>
+          <div class="visual-chapter-list">
+            ${chapters.map((chapter, index) => `
+              <button class="visual-chapter-row${index === currentIndex ? " active" : ""}" type="button" data-visual-chapter-index="${index}" ${visualSource(chapter) ? "" : "aria-disabled=\"true\""}>
+                <img src="${escapeHtml(chapter.poster || book.cover)}" alt="">
+                <span class="visual-chapter-number">${index + 1}</span>
+                <span class="visual-chapter-copy"><strong>${escapeHtml(chapter.title)}</strong><small>${escapeHtml(chapter.duration || "Video")}</small></span>
+                <span class="visual-row-play" aria-hidden="true">▶</span>
+              </button>
+            `).join("")}
+          </div>
+          ${current.externalUrl ? `<a class="visual-external-link" href="${escapeHtml(current.externalUrl)}" target="_blank" rel="noopener">Xem trên YouTube ↗</a>` : ""}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function isLocalPreview() {
+  return window.location.protocol === "file:" || /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
+}
+
+function visualSource(chapter) {
+  if (!chapter) return "";
+  return chapter.src || (isLocalPreview() ? chapter.localSrc : "");
+}
+
+function setBookFormat(book, format) {
+  if (format !== "audio" && format !== "visual") return;
+  state.bookFormat = format;
+  document.body.classList.toggle("visual-mode", format === "visual");
+  els.bookDetail.querySelectorAll("[data-format]").forEach((button) => {
+    const active = button.dataset.format === format;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-selected", String(active));
+  });
+  els.bookDetail.querySelectorAll("[data-format-panel]").forEach((panel) => {
+    panel.hidden = panel.dataset.formatPanel !== format;
+  });
+  if (format === "visual") {
+    activateVisualBook(book);
+  } else {
+    stopVisualPlayback();
+    showPlayerForBook(book);
+  }
+}
+
+function activateVisualBook(book) {
+  els.audio.pause();
+  document.body.classList.add("visual-mode");
+  loadVisualChapter(book, state.currentVisualChapterIndex, false);
+}
+
+function loadVisualChapter(book, chapterIndex, autoplay = false) {
+  const chapter = book.visual?.chapters?.[chapterIndex];
+  const player = els.bookDetail.querySelector("#visualPlayer");
+  if (!chapter || !player) return;
+  state.currentVisualChapterIndex = chapterIndex;
+  const source = visualSource(chapter);
+  if (!source) return;
+  if (player.getAttribute("src") !== source) {
+    player.src = source;
+    player.poster = chapter.poster || book.cover;
+    player.load();
+  }
+  els.bookDetail.querySelectorAll("[data-visual-chapter-index]").forEach((button) => {
+    button.classList.toggle("active", Number(button.dataset.visualChapterIndex) === chapterIndex);
+  });
+  const title = els.bookDetail.querySelector(".visual-now strong");
+  if (title) title.textContent = chapter.title;
+  if (autoplay) player.play().catch(() => {});
+}
+
+function stopVisualPlayback() {
+  const player = els.bookDetail.querySelector("#visualPlayer");
+  if (player) player.pause();
+  document.body.classList.remove("visual-mode");
 }
 
 async function route() {
   const match = location.hash.match(/^#book\/([^/]+)$/);
   const book = match ? findBook(decodeURIComponent(match[1])) : null;
   state.routeBook = book || null;
+  document.body.classList.toggle("book-route", Boolean(book));
+  if (!book) {
+    stopVisualPlayback();
+    state.bookFormat = "audio";
+    state.currentVisualChapterIndex = 0;
+  }
   els.libraryHero.hidden = Boolean(book);
   els.libraryView.hidden = Boolean(book);
   els.bookView.hidden = !book;

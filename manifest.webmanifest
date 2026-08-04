@@ -1,7 +1,7 @@
 {
-  "name": "Sách nói Gnosis Hà Nội",
-  "short_name": "Gnosis Audio",
-  "description": "Tri thức cho hành trình nội tâm.",
+  "name": "Thư viện Gnosis Hà Nội",
+  "short_name": "Gnosis Hà Nội",
+  "description": "Thư viện sách nói và sách hình cho hành trình nội tâm.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

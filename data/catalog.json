@@ -155,6 +155,20 @@
           "order": 9
         }
       ],
+      "visual": {
+        "chapters": [
+          {
+            "id": "ch-001",
+            "title": "Chương 1 – Cấp độ Tâm linh",
+            "duration": 455.37,
+            "poster": "assets/visual/tam-ly-hoc/ch-001.jpg",
+            "src": "",
+            "localSrc": "../outputs/videos/t-m-l-h-c-cho-s-thay-i-tri-t-20260803-141644-16d1a113.mp4",
+            "externalUrl": "",
+            "order": 1
+          }
+        ]
+      },
       "title": "Tâm lý học cho sự thay đổi triệt để",
       "author": "Samael Aun Weor",
       "subtitle": "",
