@@ -72,13 +72,40 @@ button {
 }
 
 body.book-route .site-header {
-  min-height: 190px;
-  padding-top: 30px;
-  padding-bottom: 34px;
+  min-height: 88px;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(52, 72, 59, 0.24);
+  text-align: left;
 }
 
 body.book-route .brand-logo {
-  width: min(250px, 68vw);
+  width: 218px;
+}
+
+body.book-route .brand {
+  flex-direction: row;
+  gap: 0;
+}
+
+body.book-route .brand-copy,
+body.book-route #backBtn {
+  display: none;
+}
+
+.header-library-link {
+  display: none;
+  color: var(--sage-dark);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+body.book-route .header-library-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
 }
 
 .brand {
@@ -588,7 +615,7 @@ h2 {
 }
 
 .book-view {
-  padding-top: 22px;
+  padding-top: 28px;
 }
 
 .text-button,
@@ -717,37 +744,35 @@ h2 {
 }
 
 .format-tabs {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  max-width: 860px;
+  display: flex;
+  gap: 34px;
+  width: max-content;
+  max-width: 100%;
   border-bottom: 1px solid rgba(52, 72, 59, 0.3);
 }
 
-.book-heading.multimodal + .format-tabs {
-  width: min(860px, calc(100% - 208px));
-  max-width: none;
-  margin-left: 208px;
+.book-heading-copy .format-tabs {
+  margin-top: 14px;
 }
 
 .format-tab {
-  min-height: 58px;
-  padding: 0 24px;
-  border: 1px solid var(--line);
-  border-bottom: 0;
-  background: rgba(251, 248, 240, 0.58);
-  color: var(--sage-dark);
-  font-weight: 720;
-  letter-spacing: 0.025em;
-}
-
-.format-tab + .format-tab {
-  border-left: 0;
+  min-height: 42px;
+  margin-bottom: -1px;
+  padding: 0 2px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
 }
 
 .format-tab.active {
-  border-color: var(--sage-dark);
-  background: var(--sage-dark);
-  color: #fffdf8;
+  border-bottom-color: var(--sage-dark);
+  background: transparent;
+  color: var(--sage-dark);
 }
 
 .format-tab:focus-visible,
@@ -1100,8 +1125,17 @@ body.mini-player .round-button {
   }
 
   body.book-route .site-header {
-    min-height: 158px;
-    padding: 24px 0 26px;
+    min-height: 74px;
+    padding: 10px 0;
+  }
+
+  body.book-route .brand-logo {
+    width: min(168px, 54vw);
+  }
+
+  .header-library-link {
+    min-height: 38px;
+    font-size: 0.8rem;
   }
 
   .brand-logo {
@@ -1287,13 +1321,16 @@ body.mini-player .round-button {
   }
 
   .format-tabs {
+    display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    width: 100%;
   }
 
   .format-tab {
-    min-height: 50px;
-    padding: 0 12px;
-    font-size: 0.88rem;
+    min-height: 44px;
+    padding: 0 8px;
+    font-size: 0.74rem;
   }
 
   .visual-book-layout {
@@ -1376,8 +1413,9 @@ body.mini-player .round-button {
     -webkit-line-clamp: 3;
   }
 
-  .book-heading.multimodal + .format-tabs {
+  .book-heading-copy .format-tabs {
     width: 100%;
+    margin-top: 12px;
     margin-left: 0;
   }
 

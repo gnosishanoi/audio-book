@@ -120,36 +120,67 @@ async function refreshCatalog() {
 }
 
 function normalizeCatalog(books, assetBase) {
-  return books.filter((book) => !excludedBookIds.has(book.id)).map((book) => ({
-    ...book,
-    author: book.author || "",
-    narrator: book.narrator || "",
-    cover: resolveAsset(book.cover, assetBase) || knownCover(book.id) || placeholderCover(book),
-    description: book.description || book.subtitle || "",
-    language: normalizeLanguage(book.language, book.title),
-    featureDate: book.publishedAt || book.publishedDate || book.updatedAt || "",
-    publishedAt: book.publishedAt || book.publishedDate || book.updatedAt || "",
-    chapters: [...(book.chapters || [])]
+  return books.filter((book) => !excludedBookIds.has(book.id)).map((book) => {
+    const chapters = [...(book.chapters || [])]
       .sort((a, b) => (a.order || 0) - (b.order || 0))
       .map((chapter) => ({
         ...chapter,
         duration: formatDurationLabel(chapter.duration),
-        src: resolveAsset(chapter.src, assetBase)
-      })),
-    visual: {
-      ...(book.visual || {}),
-      chapters: [...(book.visual?.chapters || [])]
-        .sort((a, b) => (a.order || 0) - (b.order || 0))
-        .map((chapter) => ({
-          ...chapter,
-          duration: formatDurationLabel(chapter.duration),
-          poster: resolveAsset(chapter.poster, assetBase),
-          src: resolveAsset(chapter.src, assetBase),
-          localSrc: chapter.localSrc || "",
-          externalUrl: chapter.externalUrl || ""
-        }))
-    }
-  }));
+        src: resolveAsset(chapter.src, assetBase),
+        video: chapter.video ? {
+          ...chapter.video,
+          src: resolveAsset(chapter.video.src, assetBase),
+          poster: resolveAsset(chapter.video.poster, assetBase),
+          youtubeUrl: chapter.video.youtubeUrl || ""
+        } : null
+      }));
+    const explicitVisual = [...(book.visual?.chapters || [])]
+      .sort((a, b) => (a.order || 0) - (b.order || 0))
+      .map((chapter) => normalizeVisualChapter(chapter, assetBase));
+    const visualById = new Map(explicitVisual.map((chapter) => [chapter.id, chapter]));
+
+    chapters.filter((chapter) => chapter.video).forEach((chapter) => {
+      const existing = visualById.get(chapter.id) || {};
+      visualById.set(chapter.id, normalizeVisualChapter({
+        ...existing,
+        id: chapter.id,
+        title: chapter.video.title || chapter.title,
+        duration: chapter.video.duration || chapter.duration,
+        poster: chapter.video.poster || existing.poster || "",
+        src: chapter.video.src || existing.src || "",
+        localSrc: existing.localSrc || "",
+        externalUrl: chapter.video.youtubeUrl || existing.externalUrl || "",
+        order: chapter.order
+      }, ""));
+    });
+
+    return {
+      ...book,
+      author: book.author || "",
+      narrator: book.narrator || "",
+      cover: resolveAsset(book.cover, assetBase) || knownCover(book.id) || placeholderCover(book),
+      description: book.description || book.subtitle || "",
+      language: normalizeLanguage(book.language, book.title),
+      featureDate: book.publishedAt || book.publishedDate || book.updatedAt || "",
+      publishedAt: book.publishedAt || book.publishedDate || book.updatedAt || "",
+      chapters,
+      visual: {
+        ...(book.visual || {}),
+        chapters: [...visualById.values()].sort((a, b) => (a.order || 0) - (b.order || 0))
+      }
+    };
+  });
+}
+
+function normalizeVisualChapter(chapter, assetBase) {
+  return {
+    ...chapter,
+    duration: formatDurationLabel(chapter.duration),
+    poster: resolveAsset(chapter.poster, assetBase),
+    src: resolveAsset(chapter.src, assetBase),
+    localSrc: chapter.localSrc || "",
+    externalUrl: chapter.externalUrl || ""
+  };
 }
 
 function knownCover(bookId) {
@@ -563,14 +594,14 @@ function renderBook(book) {
           </div>
           <button class="ghost-button compact-action" type="button" data-action="share-book">${escapeHtml(copy(book, "share"))}</button>
         </details>
+        ${formats.length > 1 ? `
+          <div class="format-tabs" role="tablist" aria-label="Chọn định dạng">
+            <button class="format-tab${state.bookFormat === "audio" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "audio"}" data-format="audio">Sách nói</button>
+            <button class="format-tab${state.bookFormat === "visual" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "visual"}" data-format="visual">Sách hình</button>
+          </div>
+        ` : ""}
       </div>
     </div>
-    ${formats.length > 1 ? `
-      <div class="format-tabs" role="tablist" aria-label="Chọn định dạng">
-        <button class="format-tab${state.bookFormat === "audio" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "audio"}" data-format="audio"><span aria-hidden="true">🎧</span> Sách nói</button>
-        <button class="format-tab${state.bookFormat === "visual" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "visual"}" data-format="visual"><span aria-hidden="true">▶</span> Sách hình</button>
-      </div>
-    ` : ""}
     <section class="format-panel" data-format-panel="audio" ${state.bookFormat === "audio" ? "" : "hidden"}>
       <div class="chapter-list">
         ${book.chapters.map((chapter, index) => `
@@ -621,8 +652,8 @@ function visualBookMarkup(book) {
           ${source ? "" : `
             <div class="visual-placeholder">
               <span class="visual-play-mark" aria-hidden="true">▶</span>
-              <strong>Video đang được chuẩn bị xuất bản</strong>
-              <span>Bản xem trước local đã sẵn sàng. Studio sẽ bổ sung URL phát hành cho trang live.</span>
+              <strong>Sách hình đang được chuẩn bị</strong>
+              <span>Video sẽ xuất hiện tại đây sau khi Studio hoàn tất xuất bản.</span>
             </div>
           `}
         </div>
