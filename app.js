@@ -1,4 +1,5 @@
 const catalogSources = [
+  { url: "../listener-export/data/catalog.json", assetBase: "../listener-export/" },
   { url: "./data/catalog.json", assetBase: "./" }
 ];
 const legacyResumeStorageKey = "audiobookSanctuary.resume.v1";
@@ -6,11 +7,23 @@ const resumeStorageKey = "stillword.resumeByBook.v2";
 const hiddenBooksStorageKey = "stillword.hiddenBooks.v1";
 const listenStatsStorageKey = "stillword.listenStats.v1";
 const excludedBookIds = new Set(["binh-minh-tuoi-tre"]);
+const canonicalBookSlugs = {
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de",
+  "xu-xo-cua-cac-vi-than": "xu-so-cua-cac-vi-than"
+};
 const knownCoverPaths = {
-  "dayspring-of-youth": "./assets/covers/dayspring-of-youth.jpg?v=1",
-  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de.jpg?v=1",
-  "bong-hong-cai-ao": "./assets/covers/bong-hong-cai-ao.jpg?v=3",
-  "xu-xo-cua-cac-vi-than": "./assets/covers/xu-xo-cua-cac-vi-than.jpg?v=2"
+  "dayspring-of-youth": "./assets/covers/dayspring-of-youth-gnosis-v2.png?v=2",
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v2.jpg?v=2",
+  "xu-xo-cua-cac-vi-than": "./assets/covers/xu-xo-cua-cac-vi-than-gnosis-v5.png?v=5"
+};
+const featuredImagePaths = {
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-flatlay-gnosis-v4.jpg",
+  "xu-xo-cua-cac-vi-than": "./assets/hero/xu-xo-cua-cac-vi-than-reading-v3.jpg?v=3"
+};
+const featuredDescriptionFallbacks = {
+  "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "Những bài giảng về quan sát bản thân, chuyển hóa tâm lý và đánh thức ý thức.",
+  "xu-xo-cua-cac-vi-than": "Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala."
 };
 
 const state = {
@@ -19,6 +32,8 @@ const state = {
   showHiddenBooks: false,
   currentBook: null,
   currentChapterIndex: 0,
+  currentVisualChapterIndex: 0,
+  bookFormat: "audio",
   routeBook: null,
   playMode: "chapter",
   restoreTime: 0,
@@ -50,7 +65,14 @@ const els = {
   resumeTitle: document.querySelector("#resumeTitle"),
   resumeMeta: document.querySelector("#resumeMeta"),
   heroContinueBtn: document.querySelector("#heroContinueBtn"),
-  headerContinueBtn: document.querySelector("#headerContinueBtn")
+  headerContinueBtn: document.querySelector("#headerContinueBtn"),
+  featuredVisual: document.querySelector("#featuredVisual"),
+  featuredImage: document.querySelector("#featuredImage"),
+  featuredEyebrow: document.querySelector("#featuredEyebrow"),
+  featuredTitle: document.querySelector("#featuredTitle"),
+  featuredAuthor: document.querySelector("#featuredAuthor"),
+  featuredDescription: document.querySelector("#featuredDescription"),
+  featuredLink: document.querySelector("#featuredLink")
 };
 
 async function init() {
@@ -91,6 +113,7 @@ async function refreshCatalog() {
     const { books } = await loadCatalog();
     state.catalog = books;
     renderLibrary();
+    renderFeatured();
     updateResumeUi();
   } finally {
     state.isRefreshing = false;
@@ -98,35 +121,72 @@ async function refreshCatalog() {
 }
 
 function normalizeCatalog(books, assetBase) {
-  return books.filter((book) => !excludedBookIds.has(book.id)).map((book) => ({
-    ...book,
-    author: book.author || "",
-    narrator: book.narrator || "",
-    cover: resolveAsset(book.cover, assetBase) || knownCover(book.id) || placeholderCover(book),
-    description: book.description || book.subtitle || "",
-    language: normalizeLanguage(book.language, book.title),
-    publishedAt: book.publishedAt || book.publishedDate || book.updatedAt || "",
-    chapters: [...(book.chapters || [])]
+  return books.filter((book) => !excludedBookIds.has(book.id)).map((book) => {
+    const chapters = [...(book.chapters || [])]
       .sort((a, b) => (a.order || 0) - (b.order || 0))
       .map((chapter) => ({
         ...chapter,
         duration: formatDurationLabel(chapter.duration),
         src: resolveAsset(chapter.src, assetBase),
-        video: normalizeChapterVideo(chapter.video)
-      }))
-  }));
+        video: chapter.video ? {
+          ...chapter.video,
+          src: resolveAsset(chapter.video.src, assetBase),
+          poster: resolveAsset(chapter.video.poster, assetBase),
+          videoId: chapter.video.videoId || youtubeIdFromUrl(chapter.video.youtubeUrl || chapter.video.url || ""),
+          youtubeUrl: chapter.video.youtubeUrl || chapter.video.url || ""
+        } : null
+      }));
+    const explicitVisual = [...(book.visual?.chapters || [])]
+      .sort((a, b) => (a.order || 0) - (b.order || 0))
+      .map((chapter) => normalizeVisualChapter(chapter, assetBase));
+    const visualById = new Map(explicitVisual.map((chapter) => [chapter.id, chapter]));
+
+    chapters.filter((chapter) => chapter.video).forEach((chapter) => {
+      const existing = visualById.get(chapter.id) || {};
+      visualById.set(chapter.id, normalizeVisualChapter({
+        ...existing,
+        id: chapter.id,
+        title: chapter.video.title || chapter.title,
+        duration: chapter.video.duration || chapter.duration,
+        poster: chapter.video.poster || existing.poster || "",
+        src: chapter.video.src || existing.src || "",
+        localSrc: existing.localSrc || "",
+        externalUrl: chapter.video.youtubeUrl || existing.externalUrl || "",
+        youtubeId: chapter.video.videoId || existing.youtubeId || "",
+        order: chapter.order
+      }, ""));
+    });
+
+    return {
+      ...book,
+      author: book.author || "",
+      narrator: book.narrator || "",
+      cover: resolveAsset(book.cover, assetBase) || knownCover(book.id) || placeholderCover(book),
+      description: book.description || book.subtitle || "",
+      language: normalizeLanguage(book.language, book.title),
+      featureDate: book.publishedAt || book.publishedDate || book.updatedAt || "",
+      publishedAt: book.publishedAt || book.publishedDate || book.updatedAt || "",
+      chapters,
+      visual: {
+        ...(book.visual || {}),
+        chapters: [...visualById.values()].sort((a, b) => (a.order || 0) - (b.order || 0))
+      }
+    };
+  });
 }
 
-function normalizeChapterVideo(video) {
-  if (!video || typeof video !== "object") return null;
-  const videoId = String(video.videoId || youtubeIdFromUrl(video.url) || "").trim();
-  if (!videoId) return null;
+function normalizeVisualChapter(chapter, assetBase) {
+  const externalUrl = chapter.externalUrl || chapter.youtubeUrl || "";
+  const youtubeId = chapter.youtubeId || chapter.videoId || youtubeIdFromUrl(externalUrl);
   return {
-    ...video,
-    provider: "youtube",
-    videoId,
-    url: video.url || `https://youtu.be/${videoId}`,
-    embedUrl: `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}`
+    ...chapter,
+    duration: formatDurationLabel(chapter.duration),
+    poster: resolveAsset(chapter.poster, assetBase),
+    src: resolveAsset(chapter.src, assetBase),
+    localSrc: chapter.localSrc || "",
+    externalUrl,
+    youtubeId,
+    embedUrl: youtubeId ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(youtubeId)}` : ""
   };
 }
 
@@ -136,7 +196,7 @@ function youtubeIdFromUrl(url) {
     if (parsed.hostname.includes("youtu.be")) return parsed.pathname.replace(/^\//, "").split("/")[0];
     if (parsed.hostname.includes("youtube.com")) return parsed.searchParams.get("v") || parsed.pathname.split("/").pop();
   } catch {
-    // Ignore malformed URLs; catalog videoId is preferred.
+    // Ignore malformed URLs.
   }
   return "";
 }
@@ -181,19 +241,42 @@ function copy(book, key) {
       narrator: "Đọc bởi",
       listenCount: "lượt nghe trên máy này",
       listenCountPlural: "lượt nghe trên máy này",
-      more: "More",
+      more: "Thông tin",
       share: "Chia sẻ",
       copied: "Đã sao chép",
-      language: "Tiếng Việt"
+      language: "Tiếng Việt",
+      selectChapter: "Chọn một chương",
+      play: "Phát",
+      pause: "Tạm dừng",
+      audioChapter: "Chương audio",
+      tapToPlay: "chạm Phát để bắt đầu",
+      audioMissing: "Không tìm thấy file audio. Hãy kiểm tra đường dẫn của chương."
     }
   };
-  return strings[book.language || "en"]?.[key] || strings.en[key];
+  if (key === "language") return book.language === "vi" ? "Tiếng Việt" : "Tiếng Anh";
+  return strings.vi[key] || strings.en[key];
 }
 
 function chapterCountLabel(book) {
   const count = book.chapters.length;
-  if (book.language === "vi") return `${count} chương`;
-  return `${count} chapter${count === 1 ? "" : "s"}`;
+  return `${count} chương`;
+}
+
+function hasAudio(book) {
+  return Boolean(book?.chapters?.length);
+}
+
+function hasVisual(book) {
+  return Boolean(book?.visual?.chapters?.length);
+}
+
+function formatBadgesMarkup(book) {
+  return `
+    <div class="format-badges" aria-label="Định dạng có sẵn">
+      ${hasAudio(book) ? `<span class="format-badge"><span aria-hidden="true">🎧</span> Sách nói</span>` : ""}
+      ${hasVisual(book) ? `<span class="format-badge visual"><span aria-hidden="true">▶</span> Sách hình</span>` : ""}
+    </div>
+  `;
 }
 
 function languageLabel(book) {
@@ -204,9 +287,9 @@ function publishedLabel(book) {
   const date = new Date(book.publishedAt);
   const value = Number.isNaN(date.getTime())
     ? book.publishedAt
-    : date.toLocaleDateString(book.language === "vi" ? "vi-VN" : "en-US", {
+    : date.toLocaleDateString("vi-VN", {
       year: "numeric",
-      month: book.language === "vi" ? "2-digit" : "short",
+      month: "2-digit",
       day: "numeric"
     });
   return `${copy(book, "published")} ${value}`;
@@ -326,7 +409,7 @@ function updateMediaSession(book, chapter) {
   const artworkType = mediaArtworkType(book.cover);
   navigator.mediaSession.metadata = new MediaMetadata({
     title: chapter?.title || book.title,
-    artist: book.author || book.narrator || "Stillword",
+    artist: book.author || book.narrator || "Gnosis Hà Nội",
     album: book.title,
     artwork: [
       { src: artworkSrc, sizes: "96x96", type: artworkType },
@@ -405,10 +488,10 @@ function renderLibrary() {
   const hiddenBooks = state.catalog.filter((book) => state.hiddenBookIds.has(book.id));
 
   els.bookCount.textContent = hiddenBooks.length
-    ? `${visibleBooks.length} shown, ${hiddenBooks.length} hidden`
-    : `${visibleBooks.length} audiobook${visibleBooks.length === 1 ? "" : "s"}`;
+    ? `${visibleBooks.length} hiển thị, ${hiddenBooks.length} đã ẩn`
+    : `${visibleBooks.length} tác phẩm`;
   els.hiddenToggleBtn.hidden = hiddenBooks.length === 0;
-  els.hiddenToggleBtn.textContent = state.showHiddenBooks ? "Hide hidden" : `Hidden (${hiddenBooks.length})`;
+  els.hiddenToggleBtn.textContent = state.showHiddenBooks ? "Đóng danh sách ẩn" : `Đã ẩn (${hiddenBooks.length})`;
   els.bookGrid.innerHTML = visibleBooks.length ? visibleBooks.map((book) => `
     <article class="book-card" data-book-id="${escapeHtml(book.id)}">
       <button class="book-open" type="button" data-action="open-book" aria-label="${escapeHtml(copy(book, "open"))} ${escapeHtml(book.title)}">
@@ -417,6 +500,7 @@ function renderLibrary() {
       <div>
         <h3>${escapeHtml(book.title)}</h3>
         ${book.author ? `<p class="book-byline">${escapeHtml(authorLabel(book))}</p>` : ""}
+        ${formatBadgesMarkup(book)}
         <details class="book-more">
           <summary>${escapeHtml(copy(book, "more"))}</summary>
           <div class="book-meta-list">
@@ -424,7 +508,7 @@ function renderLibrary() {
           </div>
         </details>
         <div class="card-actions">
-          <button class="primary-button small-button" type="button" data-action="open-book">${escapeHtml(copy(book, "listen"))}</button>
+          <button class="primary-button small-button" type="button" data-action="open-book">${escapeHtml(hasVisual(book) ? "Mở sách" : copy(book, "listen"))}</button>
         </div>
       </div>
       <button class="hide-book-button" type="button" data-action="hide-book" aria-label="${escapeHtml(copy(book, "hide"))} ${escapeHtml(book.title)}">
@@ -436,19 +520,20 @@ function renderLibrary() {
         </svg>
       </button>
     </article>
-  `).join("") : `<p class="empty-state">No books in your library right now.</p>`;
+  `).join("") : `<p class="empty-state">Thư viện hiện chưa có sách.</p>`;
   els.hiddenBooksPanel.hidden = !state.showHiddenBooks || hiddenBooks.length === 0;
   els.hiddenBooksPanel.innerHTML = hiddenBooks.map((book) => `
     <div class="hidden-book-row" data-book-id="${escapeHtml(book.id)}">
       <span>${escapeHtml(book.title)}</span>
-      <button class="text-button small-text-button" type="button" data-action="restore-book">Restore</button>
+      <button class="text-button small-text-button" type="button" data-action="restore-book">Khôi phục</button>
     </div>
   `).join("");
 
   els.bookGrid.querySelectorAll("[data-action='open-book']").forEach((button) => {
     button.addEventListener("click", () => {
       const card = button.closest("[data-book-id]");
-      location.hash = `book/${card.dataset.bookId}`;
+      const book = findBook(card.dataset.bookId);
+      if (book) location.hash = `book/${bookRouteSlug(book)}`;
     });
   });
 
@@ -467,83 +552,246 @@ function renderLibrary() {
   });
 }
 
+function featuredBook() {
+  const visibleBooks = state.catalog.filter((book) => (
+    !state.hiddenBookIds.has(book.id) && book.chapters.length
+  ));
+  const candidates = visibleBooks.length ? visibleBooks : state.catalog.filter((book) => book.chapters.length);
+
+  return [...candidates].sort((a, b) => {
+    const aDate = Date.parse(a.featureDate) || 0;
+    const bDate = Date.parse(b.featureDate) || 0;
+    if (aDate !== bDate) return bDate - aDate;
+    if (a.language !== b.language) return a.language === "vi" ? -1 : 1;
+    return state.catalog.indexOf(b) - state.catalog.indexOf(a);
+  })[0] || null;
+}
+
+function renderFeatured() {
+  const book = featuredBook();
+  if (!book || !els.featuredTitle) return;
+
+  const featuredImage = featuredImagePaths[book.id];
+  els.featuredEyebrow.textContent = "Tác phẩm nổi bật";
+  els.featuredTitle.textContent = book.title;
+  els.featuredAuthor.textContent = book.author || book.narrator || "Gnosis Hà Nội";
+  els.featuredDescription.textContent = book.description
+    || featuredDescriptionFallbacks[book.id]
+    || "Một tác phẩm dành cho học hỏi và chiêm nghiệm nội tâm.";
+  els.featuredLink.href = `#book/${encodeURIComponent(bookRouteSlug(book))}`;
+  els.featuredLink.textContent = "Khám phá";
+  els.featuredImage.src = featuredImage || book.cover;
+  els.featuredImage.alt = featuredImage
+    ? `${book.title} trong không gian đọc của Gnosis Hà Nội`
+    : `Bìa sách ${book.title}`;
+  els.featuredVisual.classList.toggle("cover-only", !featuredImage);
+}
+
 function renderBook(book) {
-  const shouldShowDescription = book.description && book.description !== book.subtitle;
+  const introDescription = book.description
+    || featuredDescriptionFallbacks[book.id]
+    || book.subtitle
+    || "Một tác phẩm dành cho học hỏi và chiêm nghiệm nội tâm.";
+  const formats = [hasAudio(book) ? "audio" : "", hasVisual(book) ? "visual" : ""].filter(Boolean);
+  if (!formats.includes(state.bookFormat)) state.bookFormat = formats[0] || "audio";
+  document.body.classList.toggle("visual-mode", state.bookFormat === "visual");
   els.backBtn.textContent = copy(book, "back");
 
   els.bookDetail.innerHTML = `
-    <div class="book-heading">
+    <div class="book-heading${hasVisual(book) ? " multimodal" : ""}">
       <img class="book-cover-small" src="${escapeHtml(book.cover)}" alt="">
-      <div>
+      <div class="book-heading-copy">
         <h1>${escapeHtml(book.title)}</h1>
         ${book.author ? `<p class="book-byline detail-byline">${escapeHtml(authorLabel(book))}</p>` : ""}
-        <details class="book-more detail-more">
-          <summary>${escapeHtml(copy(book, "more"))}</summary>
-          <div class="book-meta-list detail-meta">
-            ${compactBookMeta(book).map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
-          </div>
-          <button class="ghost-button compact-action" type="button" data-action="share-book">${escapeHtml(copy(book, "share"))}</button>
-        </details>
-        ${shouldShowDescription ? `<p class="book-description" hidden>${escapeHtml(book.description)}</p>` : ""}
-      </div>
-    </div>
-    <div class="chapter-list">
-      ${book.chapters.map((chapter, index) => `
-        <article class="chapter-row" data-chapter-index="${index}">
-          <span class="chapter-number">${index + 1}</span>
-          <div>
-            <h3>${escapeHtml(chapter.title)}</h3>
-            <span class="chapter-meta">${escapeHtml(chapter.duration || "Audio chapter")}${chapterListenCount(book, index) ? ` · ${escapeHtml(listenCountLabel(book, chapterListenCount(book, index)))}` : ""}</span>
-          </div>
-          <div class="chapter-actions">
-            <button class="ghost-button compact-action" type="button" data-action="play-chapter">${escapeHtml(copy(book, "listen"))}</button>
-            ${chapter.video ? `<button class="primary-button compact-action" type="button" data-action="show-video">Video</button>` : ""}
-          </div>
-          ${chapter.video ? `
-            <div class="chapter-video" data-video-panel hidden>
-              <div class="video-frame">
-                <iframe
-                  title="${escapeHtml(chapter.video.title || chapter.title)}"
-                  data-video-src="${escapeHtml(chapter.video.embedUrl)}"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe>
-              </div>
+        <span class="detail-accent" aria-hidden="true"></span>
+        <p class="book-description">${escapeHtml(introDescription)}</p>
+        <div class="detail-controls">
+          <details class="book-more detail-more">
+            <summary>${escapeHtml(copy(book, "more"))}</summary>
+            <div class="book-meta-list detail-meta">
+              ${compactBookMeta(book).map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
+            </div>
+            <button class="ghost-button compact-action" type="button" data-action="share-book">${escapeHtml(copy(book, "share"))}</button>
+          </details>
+          ${formats.length > 1 ? `
+            <div class="format-tabs" role="tablist" aria-label="Chọn định dạng">
+              <button class="format-tab${state.bookFormat === "audio" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "audio"}" data-format="audio">Sách nói</button>
+              <button class="format-tab${state.bookFormat === "visual" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "visual"}" data-format="visual">Sách hình</button>
             </div>
           ` : ""}
-        </article>
-      `).join("")}
+        </div>
+      </div>
     </div>
+    <section class="format-panel" data-format-panel="audio" ${state.bookFormat === "audio" ? "" : "hidden"}>
+      <div class="chapter-list">
+        ${book.chapters.map((chapter, index) => `
+          <button class="chapter-row" type="button" data-chapter-index="${index}">
+            <span class="chapter-number">${index + 1}</span>
+            <div>
+              <h3>${escapeHtml(chapter.title)}</h3>
+              <span class="chapter-meta">${escapeHtml(chapter.duration || copy(book, "audioChapter"))}${chapterListenCount(book, index) ? ` · ${escapeHtml(listenCountLabel(book, chapterListenCount(book, index)))}` : ""}</span>
+            </div>
+          </button>
+        `).join("")}
+      </div>
+    </section>
+    ${hasVisual(book) ? visualBookMarkup(book) : ""}
   `;
 
-  els.bookDetail.querySelectorAll("[data-action='play-chapter']").forEach((button) => {
+  els.bookDetail.querySelectorAll("[data-chapter-index]").forEach((button) => {
     button.addEventListener("click", () => {
-      const row = button.closest("[data-chapter-index]");
-      loadChapter(book, Number(row.dataset.chapterIndex), { playMode: "book", autoplay: true, startTime: 0 });
-    });
-  });
-
-  els.bookDetail.querySelectorAll("[data-action='show-video']").forEach((button) => {
-    button.addEventListener("click", () => {
-      const row = button.closest("[data-chapter-index]");
-      const panel = row?.querySelector("[data-video-panel]");
-      const iframe = panel?.querySelector("iframe");
-      if (!panel || !iframe) return;
-      const willOpen = panel.hidden;
-      panel.hidden = !willOpen;
-      button.textContent = willOpen ? "Hide video" : "Video";
-      if (willOpen && !iframe.src) iframe.src = iframe.dataset.videoSrc || "";
+      loadChapter(book, Number(button.dataset.chapterIndex), { playMode: "book", autoplay: true, startTime: 0 });
     });
   });
 
   els.bookDetail.querySelector("[data-action='share-book']")?.addEventListener("click", (event) => {
     shareBook(book, event.currentTarget);
   });
+
+  els.bookDetail.querySelectorAll("[data-format]").forEach((button) => {
+    button.addEventListener("click", () => setBookFormat(book, button.dataset.format));
+  });
+
+  els.bookDetail.querySelectorAll("[data-visual-chapter-index]").forEach((button) => {
+    button.addEventListener("click", () => loadVisualChapter(book, Number(button.dataset.visualChapterIndex), true));
+  });
+
+  if (state.bookFormat === "visual") activateVisualBook(book);
+}
+
+function visualBookMarkup(book) {
+  const chapters = book.visual.chapters;
+  const currentIndex = Math.min(state.currentVisualChapterIndex, chapters.length - 1);
+  const current = chapters[currentIndex];
+  const playable = visualPlayable(current);
+  return `
+    <section class="format-panel" data-format-panel="visual" ${state.bookFormat === "visual" ? "" : "hidden"}>
+      <div class="visual-book-layout">
+        ${visualPlayerMarkup(current, book)}
+        <div class="visual-chapter-column">
+          <div class="visual-now">
+            <span>Sách hình</span>
+            <strong>${escapeHtml(current.title)}</strong>
+          </div>
+          <div class="visual-chapter-list">
+            ${chapters.map((chapter, index) => `
+              <button class="visual-chapter-row${index === currentIndex ? " active" : ""}" type="button" data-visual-chapter-index="${index}" ${visualPlayable(chapter) ? "" : "aria-disabled=\"true\""}>
+                <span class="visual-chapter-number">${index + 1}</span>
+                <span class="visual-chapter-copy"><strong>${escapeHtml(chapter.title)}</strong><small>${escapeHtml(chapter.duration || "Video")}</small></span>
+                <span class="visual-row-play" aria-hidden="true">▶</span>
+              </button>
+            `).join("")}
+          </div>
+          ${current.externalUrl ? `<a class="visual-external-link" href="${escapeHtml(current.externalUrl)}" target="_blank" rel="noopener">Xem trên YouTube ↗</a>` : ""}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function visualPlayerMarkup(chapter, book) {
+  const source = visualSource(chapter);
+  if (chapter?.embedUrl) {
+    return `
+      <div class="visual-player-shell youtube-ready">
+        <iframe
+          id="visualYouTubePlayer"
+          title="${escapeHtml(chapter.title || book.title)}"
+          src="${escapeHtml(chapter.embedUrl)}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    `;
+  }
+  return `
+    <div class="visual-player-shell${source ? "" : " unavailable"}">
+      <video id="visualPlayer" controls preload="metadata" playsinline poster="${escapeHtml(chapter.poster || book.cover)}" ${source ? `src="${escapeHtml(source)}"` : ""}></video>
+      ${source ? "" : `
+        <div class="visual-placeholder">
+          <span class="visual-play-mark" aria-hidden="true">▶</span>
+          <strong>Sách hình đang được chuẩn bị</strong>
+          <span>Video sẽ xuất hiện tại đây sau khi Studio hoàn tất xuất bản.</span>
+        </div>
+      `}
+    </div>
+  `;
+}
+
+function isLocalPreview() {
+  return window.location.protocol === "file:" || /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
+}
+
+function visualSource(chapter) {
+  if (!chapter) return "";
+  return chapter.src || (isLocalPreview() ? chapter.localSrc : "");
+}
+
+function visualPlayable(chapter) {
+  return Boolean(visualSource(chapter) || chapter?.embedUrl);
+}
+
+function setBookFormat(book, format) {
+  if (format !== "audio" && format !== "visual") return;
+  state.bookFormat = format;
+  document.body.classList.toggle("visual-mode", format === "visual");
+  els.bookDetail.querySelectorAll("[data-format]").forEach((button) => {
+    const active = button.dataset.format === format;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-selected", String(active));
+  });
+  els.bookDetail.querySelectorAll("[data-format-panel]").forEach((panel) => {
+    panel.hidden = panel.dataset.formatPanel !== format;
+  });
+  if (format === "visual") {
+    activateVisualBook(book);
+  } else {
+    stopVisualPlayback();
+    showPlayerForBook(book);
+  }
+}
+
+function activateVisualBook(book) {
+  els.audio.pause();
+  document.body.classList.add("visual-mode");
+  loadVisualChapter(book, state.currentVisualChapterIndex, false);
+}
+
+function loadVisualChapter(book, chapterIndex, autoplay = false) {
+  const chapter = book.visual?.chapters?.[chapterIndex];
+  const shell = els.bookDetail.querySelector(".visual-player-shell");
+  if (!chapter || !shell) return;
+  state.currentVisualChapterIndex = chapterIndex;
+  if (!visualPlayable(chapter)) return;
+  shell.outerHTML = visualPlayerMarkup(chapter, book);
+  const player = els.bookDetail.querySelector("#visualPlayer");
+  if (player && autoplay) {
+    player.play().catch(() => {});
+  }
+  els.bookDetail.querySelectorAll("[data-visual-chapter-index]").forEach((button) => {
+    button.classList.toggle("active", Number(button.dataset.visualChapterIndex) === chapterIndex);
+  });
+  const title = els.bookDetail.querySelector(".visual-now strong");
+  if (title) title.textContent = chapter.title;
+}
+
+function stopVisualPlayback() {
+  const player = els.bookDetail.querySelector("#visualPlayer");
+  if (player) player.pause();
+  const iframe = els.bookDetail.querySelector("#visualYouTubePlayer");
+  if (iframe) iframe.src = iframe.src;
+  document.body.classList.remove("visual-mode");
 }
 
 async function route() {
   const match = location.hash.match(/^#book\/([^/]+)$/);
   const book = match ? findBook(decodeURIComponent(match[1])) : null;
   state.routeBook = book || null;
+  document.body.classList.toggle("book-route", Boolean(book));
+  if (!book) {
+    stopVisualPlayback();
+    state.bookFormat = "audio";
+    state.currentVisualChapterIndex = 0;
+  }
   els.libraryHero.hidden = Boolean(book);
   els.libraryView.hidden = Boolean(book);
   els.bookView.hidden = !book;
@@ -571,9 +819,9 @@ function showPlayerForBook(book) {
   state.restoreTime = 0;
   els.playerCover.src = book.cover;
   els.playerTitle.textContent = book.title;
-  els.playerChapter.textContent = "Select a chapter";
-  els.playPauseBtn.textContent = "Play";
-  els.playPauseBtn.setAttribute("aria-label", "Play");
+  els.playerChapter.textContent = copy(book, "selectChapter");
+  els.playPauseBtn.textContent = copy(book, "play");
+  els.playPauseBtn.setAttribute("aria-label", copy(book, "play"));
   els.seekBar.value = 0;
   els.currentTime.textContent = "0:00";
   els.durationTime.textContent = "0:00";
@@ -602,8 +850,8 @@ function loadChapter(book, chapterIndex, options = {}) {
   els.playerCover.src = book.cover;
   els.playerTitle.textContent = book.title;
   els.playerChapter.textContent = chapter.title;
-  els.playPauseBtn.textContent = "Play";
-  els.playPauseBtn.setAttribute("aria-label", "Play");
+  els.playPauseBtn.textContent = copy(book, "play");
+  els.playPauseBtn.setAttribute("aria-label", copy(book, "play"));
   els.audio.src = chapter.src;
   updateMediaSession(book, chapter);
   setMediaPlaybackState("paused");
@@ -623,7 +871,7 @@ function startPendingAutoplay() {
   }).catch(() => {
     if (els.audio.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
     state.pendingAutoplay = false;
-    els.playerChapter.textContent = `${chapter.title} - tap Play to start`;
+    els.playerChapter.textContent = `${chapter.title} – ${copy(state.currentBook, "tapToPlay")}`;
   });
 }
 
@@ -632,7 +880,8 @@ function continueListening(autoplay = false) {
   if (!resume) return;
   const book = findBook(resume.bookId);
   if (!book) return;
-  if (location.hash !== `#book/${book.id}`) location.hash = `book/${book.id}`;
+  const routeHash = `#book/${bookRouteSlug(book)}`;
+  if (location.hash !== routeHash) location.hash = routeHash.slice(1);
   loadChapter(book, resume.chapterIndex || 0, {
     playMode: "book",
     autoplay,
@@ -652,12 +901,12 @@ function siteBaseUrl() {
 }
 
 function bookShareUrl(book) {
-  return new URL(`books/${book.id}/`, siteBaseUrl()).href;
+  return new URL(`books/${bookRouteSlug(book)}/`, siteBaseUrl()).href;
 }
 
 async function shareBook(book, button) {
   const url = bookShareUrl(book);
-  const text = book.description || book.subtitle || book.author || "Listen on Stillword";
+  const text = book.description || book.subtitle || book.author || "Nghe trên Sách nói Gnosis Hà Nội";
 
   if (navigator.share) {
     try {
@@ -762,7 +1011,13 @@ function getLegacyResume() {
 }
 
 function findBook(bookId) {
-  return state.catalog.find((book) => book.id === bookId);
+  const legacyId = Object.entries(canonicalBookSlugs)
+    .find(([, slug]) => slug === bookId)?.[0] || bookId;
+  return state.catalog.find((book) => book.id === legacyId);
+}
+
+function bookRouteSlug(book) {
+  return canonicalBookSlugs[book.id] || book.id;
 }
 
 function getHiddenBookIds() {
@@ -781,12 +1036,14 @@ function hideBook(bookId) {
   state.hiddenBookIds.add(bookId);
   saveHiddenBookIds();
   renderLibrary();
+  renderFeatured();
 }
 
 function restoreBook(bookId) {
   state.hiddenBookIds.delete(bookId);
   saveHiddenBookIds();
   renderLibrary();
+  renderFeatured();
 }
 
 function withCacheBust(url) {
@@ -803,7 +1060,7 @@ function formatTime(seconds) {
 
 function formatDurationLabel(duration) {
   if (typeof duration === "number") return formatTime(duration);
-  return duration || "Audio chapter";
+  return duration || "Chương audio";
 }
 
 function placeholderCover(book) {
@@ -941,14 +1198,16 @@ els.audio.addEventListener("canplay", startPendingAutoplay);
 
 els.audio.addEventListener("play", () => {
   state.pendingAutoplay = false;
-  els.playPauseBtn.textContent = "Pause";
-  els.playPauseBtn.setAttribute("aria-label", "Pause");
+  els.playPauseBtn.textContent = copy(state.currentBook, "pause");
+  els.playPauseBtn.setAttribute("aria-label", copy(state.currentBook, "pause"));
   setMediaPlaybackState("playing");
 });
 
 els.audio.addEventListener("pause", () => {
-  els.playPauseBtn.textContent = "Play";
-  els.playPauseBtn.setAttribute("aria-label", "Play");
+  if (state.currentBook) {
+    els.playPauseBtn.textContent = copy(state.currentBook, "play");
+    els.playPauseBtn.setAttribute("aria-label", copy(state.currentBook, "play"));
+  }
   setMediaPlaybackState("paused");
   saveResume();
 });
@@ -975,7 +1234,7 @@ els.audio.addEventListener("ended", () => {
 });
 
 els.audio.addEventListener("error", () => {
-  els.playerChapter.textContent = "Audio file not found. Check the chapter src path.";
+  els.playerChapter.textContent = copy(state.currentBook || { language: "vi" }, "audioMissing");
 });
 
 els.heroContinueBtn.addEventListener("click", () => continueListening(true));
