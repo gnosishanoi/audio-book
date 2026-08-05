@@ -6,7 +6,7 @@ const catalogPath = path.join(siteRoot, "data", "catalog.json");
 const booksRoot = path.join(siteRoot, "books");
 const siteUrl = "https://audio.gnosishanoi.org/";
 const siteName = "Sách nói Gnosis Hà Nội";
-const appVersion = "gnosis-editorial-37";
+const appVersion = "gnosis-editorial-41";
 
 const canonicalBookSlugs = {
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de"
@@ -15,19 +15,19 @@ const canonicalBookSlugs = {
 const knownCoverPaths = {
   "dayspring-of-youth": "assets/covers/dayspring-of-youth-gnosis-v2.png?v=2",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v2.jpg?v=2",
-  "xu-xo-cua-cac-vi-than": "assets/covers/xu-xo-cua-cac-vi-than-gnosis-v3.png?v=3"
+  "xu-xo-cua-cac-vi-than": "assets/covers/xu-xo-cua-cac-vi-than-gnosis-v4.png?v=4"
 };
 
 const knownSocialImagePaths = {
   "dayspring-of-youth": "assets/social/dayspring-of-youth-gnosis-v3.jpg",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/social/gnosis-hanoi-library-v3.jpg",
-  "xu-xo-cua-cac-vi-than": "assets/social/xu-xo-cua-cac-vi-than-gnosis-v3.jpg"
+  "xu-xo-cua-cac-vi-than": "assets/social/xu-xo-cua-cac-vi-than-gnosis-v4.jpg"
 };
 
 const descriptionFallbacks = {
   "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "Những bài giảng về quan sát bản thân, chuyển hóa tâm lý và đánh thức ý thức.",
-  "xu-xo-cua-cac-vi-than": "Cuộc diện kiến các Chân sư Minh triết ở Shambhala."
+  "xu-xo-cua-cac-vi-than": "Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala."
 };
 
 function escapeHtml(value) {
@@ -98,7 +98,7 @@ function htmlForBook(book) {
     <meta name="twitter:image" content="${escapeHtml(socialImage)}">
     <meta name="twitter:image:alt" content="${escapeHtml(`${book.title} cover`)}">
     <meta name="theme-color" content="#233027">
-    <link rel="icon" href="../../assets/icons/gnosis-favicon.svg?v=1" type="image/svg+xml">
+    <link rel="icon" href="../../assets/icons/gnosis-favicon.svg?v=2" type="image/svg+xml">
     <link rel="stylesheet" href="../../styles.css?v=${appVersion}">
   </head>
   <body>
