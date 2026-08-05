@@ -1,77 +1,60 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Thư viện Gnosis Hà Nội</title>
-    <meta name="description" content="Thư viện sách nói và sách hình Gnosis Hà Nội dành cho học hỏi, chiêm nghiệm và chuyển hóa nội tâm.">
+    <title>Tâm lý học cho sự thay đổi triệt để</title>
+    <meta name="description" content="A calm static audiobook listening library for GitHub Pages.">
     <meta property="og:type" content="website">
-    <meta property="og:locale" content="vi_VN">
-    <meta property="og:site_name" content="Thư viện Gnosis Hà Nội">
-    <meta property="og:title" content="Thư viện Gnosis Hà Nội">
-    <meta property="og:description" content="Tri thức cho hành trình nội tâm.">
+    <meta property="og:site_name" content="Tâm lý học cho sự thay đổi triệt để">
+    <meta property="og:title" content="Tâm lý học cho sự thay đổi triệt để">
+    <meta property="og:description" content="A calm audiobook listening library.">
     <meta property="og:url" content="https://audio.gnosishanoi.org/">
-    <meta property="og:image" content="https://audio.gnosishanoi.org/assets/social/gnosis-hanoi-library-v3.jpg">
-    <meta property="og:image:secure_url" content="https://audio.gnosishanoi.org/assets/social/gnosis-hanoi-library-v3.jpg">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Thư viện Gnosis Hà Nội trong một không gian đọc tĩnh lặng">
+    <meta property="og:image" content="https://audio.gnosishanoi.org/assets/icons/icon-512.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Thư viện Gnosis Hà Nội">
-    <meta name="twitter:description" content="Tri thức cho hành trình nội tâm.">
-    <meta name="twitter:image" content="https://audio.gnosishanoi.org/assets/social/gnosis-hanoi-library-v3.jpg">
-    <meta name="twitter:image:alt" content="Thư viện Gnosis Hà Nội trong một không gian đọc tĩnh lặng">
-    <meta name="theme-color" content="#233027">
-    <meta name="apple-mobile-web-app-title" content="Gnosis Hà Nội">
+    <meta name="twitter:title" content="Tâm lý học cho sự thay đổi triệt để">
+    <meta name="twitter:description" content="A calm audiobook listening library.">
+    <meta name="twitter:image" content="https://audio.gnosishanoi.org/assets/icons/icon-512.png">
+    <meta name="theme-color" content="#415d50">
+    <meta name="apple-mobile-web-app-title" content="Tâm lý học cho sự thay đổi triệt để">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="icon" href="./assets/icons/gnosis-favicon.svg?v=2" type="image/svg+xml">
+    <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
     <link rel="manifest" href="./manifest.webmanifest">
-    <link rel="stylesheet" href="./styles.css?v=gnosis-editorial-44">
+    <link rel="stylesheet" href="./styles.css?v=cover-balance-26">
   </head>
   <body>
     <div class="app-shell">
       <header class="site-header">
-        <a class="brand" href="./" aria-label="Trang chủ Thư viện Gnosis Hà Nội">
-          <img class="brand-logo" src="./assets/branding/gnosis-hanoi-logo-transparent.png" alt="Gnosis Hà Nội" width="650" height="216">
-          <span class="brand-copy">
-            <span class="brand-name">Thư viện</span>
-            <span class="brand-subtitle">Tri thức cho hành trình nội tâm</span>
+        <a class="brand" href="./" aria-label="Tâm lý học cho sự thay đổi triệt để home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>
+            <span class="brand-name">Tâm lý học cho sự thay đổi triệt để</span>
+            <span class="brand-subtitle">Audiobook library</span>
           </span>
         </a>
-        <a class="header-library-link" href="./" aria-label="Quay lại thư viện">← Thư viện</a>
-        <button class="ghost-button" id="headerContinueBtn" type="button" hidden>Tiếp tục</button>
+        <button class="ghost-button" id="headerContinueBtn" type="button" hidden>Continue</button>
       </header>
 
       <main>
         <section class="library-hero" id="libraryHero">
-          <div class="featured-visual" id="featuredVisual">
-            <img class="featured-scene" id="featuredImage" src="./assets/hero/xu-xo-cua-cac-vi-than-reading-v3.jpg?v=3" alt="">
+          <div class="hero-copy">
+            <p class="eyebrow">Audiobook listener</p>
+            <h1>Tâm lý học cho sự thay đổi triệt để Library</h1>
+            <p>"Be still, and let the words find their way inward."</p>
           </div>
-          <div class="featured-panel">
-            <div class="hero-copy">
-              <p class="eyebrow" id="featuredEyebrow">Tác phẩm nổi bật</p>
-              <h1 id="featuredTitle">Xứ sở của các vị thần</h1>
-              <p class="featured-author" id="featuredAuthor">Franz Hartmann</p>
-              <p class="hero-description" id="featuredDescription">Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala.</p>
-              <a class="primary-button featured-button" id="featuredLink" href="#book/xu-so-cua-cac-vi-than">Khám phá</a>
-            </div>
-            <div class="resume-panel" id="resumePanel" hidden>
-              <span class="panel-label">Lần nghe gần nhất</span>
-              <strong id="resumeTitle">Tiếp tục nghe</strong>
-              <span id="resumeMeta">Chương 1</span>
-              <button class="primary-button" id="heroContinueBtn" type="button">Tiếp tục nghe</button>
-            </div>
+          <div class="resume-panel" id="resumePanel" hidden>
+            <span class="panel-label">Last session</span>
+            <strong id="resumeTitle">Continue listening</strong>
+            <span id="resumeMeta">Chapter 1</span>
+            <button class="primary-button" id="heroContinueBtn" type="button">Continue Listening</button>
           </div>
         </section>
 
         <section id="libraryView" class="view">
           <div class="section-heading">
-            <span class="section-rule" aria-hidden="true"></span>
-            <h2>Thư viện</h2>
-            <span class="section-rule" aria-hidden="true"></span>
+            <h2>Library</h2>
             <div class="library-tools">
               <p id="bookCount"></p>
               <button class="text-button small-text-button" id="hiddenToggleBtn" type="button" hidden>Hidden</button>
@@ -82,24 +65,24 @@
         </section>
 
         <section id="bookView" class="view book-view" hidden>
-          <button class="text-button" id="backBtn" type="button">Quay lại thư viện</button>
+          <button class="text-button" id="backBtn" type="button">Back to library</button>
           <div class="book-detail" id="bookDetail"></div>
         </section>
       </main>
     </div>
 
-    <aside class="player-bar" id="playerBar" hidden aria-label="Trình phát sách nói">
+    <aside class="player-bar" id="playerBar" hidden aria-label="Audiobook player">
       <div class="player-info">
         <img id="playerCover" alt="" width="54" height="54">
         <div>
-          <strong id="playerTitle">Chọn một chương</strong>
-          <span id="playerChapter">Sẵn sàng</span>
+          <strong id="playerTitle">Select a chapter</strong>
+          <span id="playerChapter">Ready</span>
         </div>
       </div>
       <div class="player-controls">
-        <button class="round-button" id="playPauseBtn" type="button" aria-label="Phát">Phát</button>
+        <button class="round-button" id="playPauseBtn" type="button" aria-label="Play">Play</button>
         <div class="timeline">
-          <input id="seekBar" type="range" min="0" max="1000" value="0" aria-label="Tua audio">
+          <input id="seekBar" type="range" min="0" max="1000" value="0" aria-label="Seek">
           <div class="time-row">
             <span id="currentTime">0:00</span>
             <span id="durationTime">0:00</span>
@@ -109,6 +92,6 @@
       <audio id="audioPlayer" preload="metadata"></audio>
     </aside>
 
-    <script src="./app.js?v=gnosis-editorial-44" defer></script>
+    <script src="./app.js?v=autoplay-27" defer></script>
   </body>
 </html>
