@@ -62,13 +62,13 @@ button {
 
 .site-header {
   position: relative;
-  min-height: 270px;
+  min-height: 112px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 42px 0 46px;
-  text-align: center;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(52, 72, 59, 0.18);
+  text-align: left;
 }
 
 body.book-route .site-header {
@@ -110,21 +110,23 @@ body.book-route .header-library-link {
 
 .brand {
   display: inline-flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 15px;
+  gap: 24px;
   color: inherit;
   text-decoration: none;
 }
 
 .brand-logo {
-  width: min(300px, 74vw);
+  width: min(244px, 44vw);
   height: auto;
   object-fit: contain;
 }
 
 .brand-copy {
   display: block;
+  padding-left: 24px;
+  border-left: 1px solid rgba(52, 72, 59, 0.28);
 }
 
 .brand-name,
@@ -138,7 +140,7 @@ body.book-route .header-library-link {
 
 .brand-name {
   font-family: "Crimson Pro", Georgia, "Times New Roman", serif;
-  font-size: 1.62rem;
+  font-size: 1.16rem;
   font-weight: 600;
   letter-spacing: -0.015em;
 }
@@ -163,9 +165,9 @@ body.book-route .header-library-link {
 }
 
 .brand-subtitle {
-  margin-top: 7px;
+  margin-top: 2px;
   font-family: "Crimson Pro", Georgia, "Times New Roman", serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0;
   text-transform: none;
 }
@@ -454,7 +456,7 @@ h2 {
 }
 
 .detail-byline {
-  margin-top: 12px;
+  margin-top: 6px;
   font-size: 0.98rem;
 }
 
@@ -524,11 +526,24 @@ h2 {
 }
 
 .detail-more {
-  margin-top: 12px;
+  margin-top: 0;
 }
 
 .detail-more .compact-action {
   margin-top: 10px;
+}
+
+.detail-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 11px;
+}
+
+.detail-controls .detail-more[open] {
+  flex-basis: 100%;
+  order: 2;
 }
 
 .card-actions {
@@ -615,7 +630,7 @@ h2 {
 }
 
 .book-view {
-  padding-top: 28px;
+  padding-top: 18px;
 }
 
 .text-button,
@@ -653,7 +668,7 @@ h2 {
 
 .book-detail {
   display: grid;
-  gap: 24px;
+  gap: 18px;
   max-width: 1160px;
   padding-bottom: 34px;
 }
@@ -666,13 +681,13 @@ h2 {
 }
 
 .book-heading.multimodal {
-  grid-template-columns: 180px minmax(0, 1fr);
-  gap: 28px;
+  grid-template-columns: 138px minmax(0, 1fr);
+  gap: 22px;
   align-items: start;
 }
 
 .book-heading.multimodal .book-cover-small {
-  width: 180px;
+  width: 138px;
 }
 
 .book-heading-copy {
@@ -680,12 +695,14 @@ h2 {
 }
 
 .book-heading.multimodal .book-heading-copy {
-  padding-top: 8px;
+  padding-top: 1px;
 }
 
 .book-detail h1 {
-  margin-bottom: 8px;
-  font-size: clamp(2rem, 3.4vw, 3.4rem);
+  max-width: 940px;
+  margin-bottom: 5px;
+  font-size: clamp(1.85rem, 3vw, 2.7rem);
+  line-height: 1.02;
 }
 
 .book-detail h2 {
@@ -706,17 +723,17 @@ h2 {
 }
 
 .book-description {
-  max-width: 680px;
+  max-width: 780px;
   margin: 0;
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.42;
 }
 
 .detail-accent {
   display: block;
   width: 34px;
   height: 2px;
-  margin: 18px 0 16px;
+  margin: 10px 0 10px;
   background: var(--sage-dark);
 }
 
@@ -745,34 +762,36 @@ h2 {
 
 .format-tabs {
   display: flex;
-  gap: 34px;
+  gap: 2px;
   width: max-content;
   max-width: 100%;
-  border-bottom: 1px solid rgba(52, 72, 59, 0.3);
+  padding: 3px;
+  border: 1px solid rgba(52, 72, 59, 0.26);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.54);
 }
 
 .book-heading-copy .format-tabs {
-  margin-top: 14px;
+  margin-top: 0;
 }
 
 .format-tab {
-  min-height: 42px;
-  margin-bottom: -1px;
-  padding: 0 2px;
+  min-height: 32px;
+  margin-bottom: 0;
+  padding: 0 14px;
   border: 0;
-  border-bottom: 2px solid transparent;
+  border-radius: 999px;
   background: transparent;
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   font-weight: 800;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.055em;
   text-transform: uppercase;
 }
 
 .format-tab.active {
-  border-bottom-color: var(--sage-dark);
-  background: transparent;
-  color: var(--sage-dark);
+  background: var(--sage-dark);
+  color: #fffdf8;
 }
 
 .format-tab:focus-visible,
@@ -1120,8 +1139,8 @@ body.mini-player .round-button {
   }
 
   .site-header {
-    min-height: 210px;
-    padding: 30px 0 34px;
+    min-height: 86px;
+    padding: 14px 0;
   }
 
   body.book-route .site-header {
@@ -1139,16 +1158,26 @@ body.mini-player .round-button {
   }
 
   .brand-logo {
-    width: min(250px, 76vw);
+    width: min(184px, 48vw);
   }
 
   .brand-name {
-    font-size: 1.42rem;
+    font-size: 0.98rem;
   }
 
   .brand-subtitle {
     display: block;
-    font-size: 0.92rem;
+    max-width: 126px;
+    font-size: 0.74rem;
+    line-height: 1.18;
+  }
+
+  .brand {
+    gap: 12px;
+  }
+
+  .brand-copy {
+    padding-left: 12px;
   }
 
   .library-hero,
@@ -1414,9 +1443,22 @@ body.mini-player .round-button {
   }
 
   .book-heading-copy .format-tabs {
-    width: 100%;
-    margin-top: 12px;
+    display: inline-flex;
+    grid-template-columns: none;
+    width: auto;
+    margin-top: 0;
     margin-left: 0;
+  }
+
+  .detail-controls {
+    gap: 7px;
+    margin-top: 9px;
+  }
+
+  .detail-controls .format-tab {
+    min-height: 30px;
+    padding: 0 10px;
+    font-size: 0.66rem;
   }
 
   .book-cover-small {

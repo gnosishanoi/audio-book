@@ -587,19 +587,21 @@ function renderBook(book) {
         ${book.author ? `<p class="book-byline detail-byline">${escapeHtml(authorLabel(book))}</p>` : ""}
         <span class="detail-accent" aria-hidden="true"></span>
         <p class="book-description">${escapeHtml(introDescription)}</p>
-        <details class="book-more detail-more">
-          <summary>${escapeHtml(copy(book, "more"))}</summary>
-          <div class="book-meta-list detail-meta">
-            ${compactBookMeta(book).map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
-          </div>
-          <button class="ghost-button compact-action" type="button" data-action="share-book">${escapeHtml(copy(book, "share"))}</button>
-        </details>
-        ${formats.length > 1 ? `
-          <div class="format-tabs" role="tablist" aria-label="Chọn định dạng">
-            <button class="format-tab${state.bookFormat === "audio" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "audio"}" data-format="audio">Sách nói</button>
-            <button class="format-tab${state.bookFormat === "visual" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "visual"}" data-format="visual">Sách hình</button>
-          </div>
-        ` : ""}
+        <div class="detail-controls">
+          <details class="book-more detail-more">
+            <summary>${escapeHtml(copy(book, "more"))}</summary>
+            <div class="book-meta-list detail-meta">
+              ${compactBookMeta(book).map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
+            </div>
+            <button class="ghost-button compact-action" type="button" data-action="share-book">${escapeHtml(copy(book, "share"))}</button>
+          </details>
+          ${formats.length > 1 ? `
+            <div class="format-tabs" role="tablist" aria-label="Chọn định dạng">
+              <button class="format-tab${state.bookFormat === "audio" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "audio"}" data-format="audio">Sách nói</button>
+              <button class="format-tab${state.bookFormat === "visual" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "visual"}" data-format="visual">Sách hình</button>
+            </div>
+          ` : ""}
+        </div>
       </div>
     </div>
     <section class="format-panel" data-format-panel="audio" ${state.bookFormat === "audio" ? "" : "hidden"}>
