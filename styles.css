@@ -905,12 +905,12 @@ h2 {
 
 .visual-chapter-row {
   display: grid;
-  grid-template-columns: 58px 22px minmax(0, 1fr) 34px;
-  gap: 10px;
+  grid-template-columns: 26px minmax(0, 1fr) 34px;
+  gap: 12px;
   align-items: center;
   width: 100%;
-  min-height: 76px;
-  padding: 10px 12px;
+  min-height: 68px;
+  padding: 11px 14px;
   border: 0;
   border-bottom: 1px solid var(--line);
   background: transparent;
@@ -921,13 +921,6 @@ h2 {
 .visual-chapter-row:hover,
 .visual-chapter-row.active {
   background: rgba(52, 72, 59, 0.065);
-}
-
-.visual-chapter-row img {
-  width: 58px;
-  aspect-ratio: 16 / 9;
-  border-radius: 4px;
-  object-fit: cover;
 }
 
 .visual-chapter-number {
@@ -1395,11 +1388,7 @@ body.mini-player .round-button {
   }
 
   .visual-chapter-row {
-    grid-template-columns: 70px 20px minmax(0, 1fr) 30px;
-  }
-
-  .visual-chapter-row img {
-    width: 70px;
+    grid-template-columns: 24px minmax(0, 1fr) 30px;
   }
 
   .book-detail h1 {

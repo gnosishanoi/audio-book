@@ -676,7 +676,6 @@ function visualBookMarkup(book) {
           <div class="visual-chapter-list">
             ${chapters.map((chapter, index) => `
               <button class="visual-chapter-row${index === currentIndex ? " active" : ""}" type="button" data-visual-chapter-index="${index}" ${visualPlayable(chapter) ? "" : "aria-disabled=\"true\""}>
-                <img src="${escapeHtml(chapter.poster || book.cover)}" alt="">
                 <span class="visual-chapter-number">${index + 1}</span>
                 <span class="visual-chapter-copy"><strong>${escapeHtml(chapter.title)}</strong><small>${escapeHtml(chapter.duration || "Video")}</small></span>
                 <span class="visual-row-play" aria-hidden="true">▶</span>
