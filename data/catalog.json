@@ -151,7 +151,20 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/004-ch-ng-4-ph-t-t-nh.mp3",
           "duration": 215.943667,
           "words": 704,
-          "order": 4
+          "order": 4,
+          "video": {
+            "provider": "youtube",
+            "videoId": "m0T2cSVDPRE",
+            "url": "https://youtu.be/m0T2cSVDPRE",
+            "youtubeUrl": "https://youtu.be/m0T2cSVDPRE",
+            "duration": 215.943667,
+            "title": "Tâm lý học cho sự thay đổi triệt để — Chương 4: Phật tính",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 4 – Phật tính\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1785966267.762142
+          }
         },
         {
           "id": "ch-005-ms6kyedy",
