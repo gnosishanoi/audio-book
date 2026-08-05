@@ -132,7 +132,8 @@ function normalizeCatalog(books, assetBase) {
           ...chapter.video,
           src: resolveAsset(chapter.video.src, assetBase),
           poster: resolveAsset(chapter.video.poster, assetBase),
-          youtubeUrl: chapter.video.youtubeUrl || ""
+          videoId: chapter.video.videoId || youtubeIdFromUrl(chapter.video.youtubeUrl || chapter.video.url || ""),
+          youtubeUrl: chapter.video.youtubeUrl || chapter.video.url || ""
         } : null
       }));
     const explicitVisual = [...(book.visual?.chapters || [])]
@@ -151,6 +152,7 @@ function normalizeCatalog(books, assetBase) {
         src: chapter.video.src || existing.src || "",
         localSrc: existing.localSrc || "",
         externalUrl: chapter.video.youtubeUrl || existing.externalUrl || "",
+        youtubeId: chapter.video.videoId || existing.youtubeId || "",
         order: chapter.order
       }, ""));
     });
@@ -174,14 +176,29 @@ function normalizeCatalog(books, assetBase) {
 }
 
 function normalizeVisualChapter(chapter, assetBase) {
+  const externalUrl = chapter.externalUrl || chapter.youtubeUrl || "";
+  const youtubeId = chapter.youtubeId || chapter.videoId || youtubeIdFromUrl(externalUrl);
   return {
     ...chapter,
     duration: formatDurationLabel(chapter.duration),
     poster: resolveAsset(chapter.poster, assetBase),
     src: resolveAsset(chapter.src, assetBase),
     localSrc: chapter.localSrc || "",
-    externalUrl: chapter.externalUrl || ""
+    externalUrl,
+    youtubeId,
+    embedUrl: youtubeId ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(youtubeId)}` : ""
   };
+}
+
+function youtubeIdFromUrl(url) {
+  try {
+    const parsed = new URL(String(url || ""));
+    if (parsed.hostname.includes("youtu.be")) return parsed.pathname.replace(/^\//, "").split("/")[0];
+    if (parsed.hostname.includes("youtube.com")) return parsed.searchParams.get("v") || parsed.pathname.split("/").pop();
+  } catch {
+    // Ignore malformed URLs.
+  }
+  return "";
 }
 
 function knownCover(bookId) {
@@ -646,20 +663,11 @@ function visualBookMarkup(book) {
   const chapters = book.visual.chapters;
   const currentIndex = Math.min(state.currentVisualChapterIndex, chapters.length - 1);
   const current = chapters[currentIndex];
-  const source = visualSource(current);
+  const playable = visualPlayable(current);
   return `
     <section class="format-panel" data-format-panel="visual" ${state.bookFormat === "visual" ? "" : "hidden"}>
       <div class="visual-book-layout">
-        <div class="visual-player-shell${source ? "" : " unavailable"}">
-          <video id="visualPlayer" controls preload="metadata" playsinline poster="${escapeHtml(current.poster || book.cover)}" ${source ? `src="${escapeHtml(source)}"` : ""}></video>
-          ${source ? "" : `
-            <div class="visual-placeholder">
-              <span class="visual-play-mark" aria-hidden="true">▶</span>
-              <strong>Sách hình đang được chuẩn bị</strong>
-              <span>Video sẽ xuất hiện tại đây sau khi Studio hoàn tất xuất bản.</span>
-            </div>
-          `}
-        </div>
+        ${visualPlayerMarkup(current, book)}
         <div class="visual-chapter-column">
           <div class="visual-now">
             <span>Sách hình</span>
@@ -667,7 +675,7 @@ function visualBookMarkup(book) {
           </div>
           <div class="visual-chapter-list">
             ${chapters.map((chapter, index) => `
-              <button class="visual-chapter-row${index === currentIndex ? " active" : ""}" type="button" data-visual-chapter-index="${index}" ${visualSource(chapter) ? "" : "aria-disabled=\"true\""}>
+              <button class="visual-chapter-row${index === currentIndex ? " active" : ""}" type="button" data-visual-chapter-index="${index}" ${visualPlayable(chapter) ? "" : "aria-disabled=\"true\""}>
                 <img src="${escapeHtml(chapter.poster || book.cover)}" alt="">
                 <span class="visual-chapter-number">${index + 1}</span>
                 <span class="visual-chapter-copy"><strong>${escapeHtml(chapter.title)}</strong><small>${escapeHtml(chapter.duration || "Video")}</small></span>
@@ -682,6 +690,34 @@ function visualBookMarkup(book) {
   `;
 }
 
+function visualPlayerMarkup(chapter, book) {
+  const source = visualSource(chapter);
+  if (chapter?.embedUrl) {
+    return `
+      <div class="visual-player-shell youtube-ready">
+        <iframe
+          id="visualYouTubePlayer"
+          title="${escapeHtml(chapter.title || book.title)}"
+          src="${escapeHtml(chapter.embedUrl)}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    `;
+  }
+  return `
+    <div class="visual-player-shell${source ? "" : " unavailable"}">
+      <video id="visualPlayer" controls preload="metadata" playsinline poster="${escapeHtml(chapter.poster || book.cover)}" ${source ? `src="${escapeHtml(source)}"` : ""}></video>
+      ${source ? "" : `
+        <div class="visual-placeholder">
+          <span class="visual-play-mark" aria-hidden="true">▶</span>
+          <strong>Sách hình đang được chuẩn bị</strong>
+          <span>Video sẽ xuất hiện tại đây sau khi Studio hoàn tất xuất bản.</span>
+        </div>
+      `}
+    </div>
+  `;
+}
+
 function isLocalPreview() {
   return window.location.protocol === "file:" || /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
 }
@@ -689,6 +725,10 @@ function isLocalPreview() {
 function visualSource(chapter) {
   if (!chapter) return "";
   return chapter.src || (isLocalPreview() ? chapter.localSrc : "");
+}
+
+function visualPlayable(chapter) {
+  return Boolean(visualSource(chapter) || chapter?.embedUrl);
 }
 
 function setBookFormat(book, format) {
@@ -719,27 +759,27 @@ function activateVisualBook(book) {
 
 function loadVisualChapter(book, chapterIndex, autoplay = false) {
   const chapter = book.visual?.chapters?.[chapterIndex];
-  const player = els.bookDetail.querySelector("#visualPlayer");
-  if (!chapter || !player) return;
+  const shell = els.bookDetail.querySelector(".visual-player-shell");
+  if (!chapter || !shell) return;
   state.currentVisualChapterIndex = chapterIndex;
-  const source = visualSource(chapter);
-  if (!source) return;
-  if (player.getAttribute("src") !== source) {
-    player.src = source;
-    player.poster = chapter.poster || book.cover;
-    player.load();
+  if (!visualPlayable(chapter)) return;
+  shell.outerHTML = visualPlayerMarkup(chapter, book);
+  const player = els.bookDetail.querySelector("#visualPlayer");
+  if (player && autoplay) {
+    player.play().catch(() => {});
   }
   els.bookDetail.querySelectorAll("[data-visual-chapter-index]").forEach((button) => {
     button.classList.toggle("active", Number(button.dataset.visualChapterIndex) === chapterIndex);
   });
   const title = els.bookDetail.querySelector(".visual-now strong");
   if (title) title.textContent = chapter.title;
-  if (autoplay) player.play().catch(() => {});
 }
 
 function stopVisualPlayback() {
   const player = els.bookDetail.querySelector("#visualPlayer");
   if (player) player.pause();
+  const iframe = els.bookDetail.querySelector("#visualYouTubePlayer");
+  if (iframe) iframe.src = iframe.src;
   document.body.classList.remove("visual-mode");
 }
 
