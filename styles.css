@@ -234,6 +234,24 @@ body.book-route .header-library-link {
   padding: 44px clamp(30px, 3.3vw, 48px);
 }
 
+.slide-enter .featured-scene {
+  animation: featured-image-reveal 520ms ease both;
+}
+
+.slide-enter .hero-copy {
+  animation: featured-copy-reveal 420ms ease both;
+}
+
+@keyframes featured-image-reveal {
+  from { opacity: 0.58; transform: scale(1.012); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes featured-copy-reveal {
+  from { opacity: 0.35; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 h1,
 h2,
 h3,
@@ -281,6 +299,61 @@ h1 {
   justify-content: center;
   margin-top: 28px;
   text-decoration: none;
+}
+
+.featured-navigation {
+  display: grid;
+  grid-template-columns: 34px minmax(56px, auto) auto 34px;
+  align-items: center;
+  align-self: flex-start;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.featured-arrow {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.featured-arrow:hover,
+.featured-arrow:focus-visible {
+  border-color: var(--sage-dark);
+  background: var(--sage-dark);
+  color: var(--paper);
+}
+
+.featured-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.featured-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(52, 72, 59, 0.28);
+  cursor: pointer;
+  transition: width 180ms ease, background 180ms ease;
+}
+
+.featured-dot.active {
+  width: 22px;
+  background: var(--sage-dark);
+}
+
+.featured-status {
+  color: var(--muted);
+  font-size: 0.78rem;
+  white-space: nowrap;
 }
 
 .featured-panel .resume-panel {
@@ -1204,6 +1277,10 @@ body.mini-player .round-button {
     padding: 29px 24px 32px;
   }
 
+  .featured-navigation {
+    margin-top: 22px;
+  }
+
   .eyebrow {
     margin-bottom: 16px;
   }
@@ -1479,5 +1556,12 @@ body.mini-player .round-button {
     width: 54px;
     min-height: 54px;
     flex: 0 0 54px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-enter .featured-scene,
+  .slide-enter .hero-copy {
+    animation: none;
   }
 }

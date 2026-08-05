@@ -17,7 +17,8 @@ const knownCoverPaths = {
   "xu-xo-cua-cac-vi-than": "./assets/covers/xu-xo-cua-cac-vi-than-gnosis-v5.png?v=5"
 };
 const featuredImagePaths = {
-  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-flatlay-gnosis-v4.jpg",
+  "dayspring-of-youth": "./assets/hero/dayspring-of-youth-dawn-v1.jpg",
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-flatlay-gnosis-v5.jpg",
   "xu-xo-cua-cac-vi-than": "./assets/hero/xu-xo-cua-cac-vi-than-reading-v3.jpg?v=3"
 };
 const featuredDescriptionFallbacks = {
@@ -39,7 +40,9 @@ const state = {
   restoreTime: 0,
   pendingAutoplay: false,
   trackedListenKey: "",
-  isRefreshing: false
+  isRefreshing: false,
+  featuredIndex: 0,
+  featuredTimer: 0
 };
 
 const els = {
@@ -72,7 +75,11 @@ const els = {
   featuredTitle: document.querySelector("#featuredTitle"),
   featuredAuthor: document.querySelector("#featuredAuthor"),
   featuredDescription: document.querySelector("#featuredDescription"),
-  featuredLink: document.querySelector("#featuredLink")
+  featuredLink: document.querySelector("#featuredLink"),
+  featuredPrev: document.querySelector("#featuredPrev"),
+  featuredNext: document.querySelector("#featuredNext"),
+  featuredDots: document.querySelector("#featuredDots"),
+  featuredStatus: document.querySelector("#featuredStatus")
 };
 
 async function init() {
@@ -552,7 +559,7 @@ function renderLibrary() {
   });
 }
 
-function featuredBook() {
+function featuredBooks() {
   const visibleBooks = state.catalog.filter((book) => (
     !state.hiddenBookIds.has(book.id) && book.chapters.length
   ));
@@ -564,15 +571,18 @@ function featuredBook() {
     if (aDate !== bDate) return bDate - aDate;
     if (a.language !== b.language) return a.language === "vi" ? -1 : 1;
     return state.catalog.indexOf(b) - state.catalog.indexOf(a);
-  })[0] || null;
+  });
 }
 
-function renderFeatured() {
-  const book = featuredBook();
+function renderFeatured(index = state.featuredIndex, { restart = true } = {}) {
+  const books = featuredBooks();
+  if (!books.length) return;
+  state.featuredIndex = (index + books.length) % books.length;
+  const book = books[state.featuredIndex];
   if (!book || !els.featuredTitle) return;
 
   const featuredImage = featuredImagePaths[book.id];
-  els.featuredEyebrow.textContent = "Tác phẩm nổi bật";
+  els.featuredEyebrow.textContent = "Từ thư viện Gnosis";
   els.featuredTitle.textContent = book.title;
   els.featuredAuthor.textContent = book.author || book.narrator || "Gnosis Hà Nội";
   els.featuredDescription.textContent = book.description
@@ -585,6 +595,26 @@ function renderFeatured() {
     ? `${book.title} trong không gian đọc của Gnosis Hà Nội`
     : `Bìa sách ${book.title}`;
   els.featuredVisual.classList.toggle("cover-only", !featuredImage);
+  els.featuredStatus.textContent = `${state.featuredIndex + 1} / ${books.length}`;
+  els.featuredDots.innerHTML = books.map((item, dotIndex) => `
+    <button class="featured-dot${dotIndex === state.featuredIndex ? " active" : ""}" type="button" role="tab" aria-selected="${dotIndex === state.featuredIndex}" aria-label="Xem ${escapeHtml(item.title)}" data-featured-index="${dotIndex}"></button>
+  `).join("");
+  els.featuredDots.querySelectorAll("[data-featured-index]").forEach((button) => {
+    button.addEventListener("click", () => renderFeatured(Number(button.dataset.featuredIndex)));
+  });
+  els.libraryHero.classList.remove("slide-enter");
+  requestAnimationFrame(() => els.libraryHero.classList.add("slide-enter"));
+  if (restart) startFeaturedSlideshow();
+}
+
+function startFeaturedSlideshow() {
+  window.clearInterval(state.featuredTimer);
+  const books = featuredBooks();
+  if (books.length < 2) return;
+  state.featuredTimer = window.setInterval(() => {
+    if (document.hidden || els.libraryHero.hidden) return;
+    renderFeatured(state.featuredIndex + 1, { restart: false });
+  }, 5500);
 }
 
 function renderBook(book) {
@@ -1238,6 +1268,8 @@ els.audio.addEventListener("error", () => {
 });
 
 els.heroContinueBtn.addEventListener("click", () => continueListening(true));
+els.featuredPrev.addEventListener("click", () => renderFeatured(state.featuredIndex - 1));
+els.featuredNext.addEventListener("click", () => renderFeatured(state.featuredIndex + 1));
 
 els.hiddenToggleBtn.addEventListener("click", () => {
   state.showHiddenBooks = !state.showHiddenBooks;
