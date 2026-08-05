@@ -88,7 +88,20 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/001-ch-ng-1-c-p-t-m-linh.mp3",
           "duration": 462.158958,
           "words": 1496,
-          "order": 1
+          "order": 1,
+          "video": {
+            "provider": "youtube",
+            "videoId": "HkyHScN1Gps",
+            "url": "https://youtu.be/HkyHScN1Gps",
+            "youtubeUrl": "https://youtu.be/HkyHScN1Gps",
+            "duration": 462.158958,
+            "title": "Tâm lý học cho sự thay đổi triệt để",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 1 – Cấp độ Tâm linh\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1785900301.918588
+          }
         },
         {
           "id": "ch-002-ms6ca3fl",
