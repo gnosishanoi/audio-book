@@ -6,22 +6,23 @@ const catalogPath = path.join(siteRoot, "data", "catalog.json");
 const booksRoot = path.join(siteRoot, "books");
 const siteUrl = "https://audio.gnosishanoi.org/";
 const siteName = "Sách nói Gnosis Hà Nội";
-const appVersion = "gnosis-editorial-41";
+const appVersion = "gnosis-editorial-42";
 
 const canonicalBookSlugs = {
-  "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de"
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de",
+  "xu-xo-cua-cac-vi-than": "xu-so-cua-cac-vi-than"
 };
 
 const knownCoverPaths = {
   "dayspring-of-youth": "assets/covers/dayspring-of-youth-gnosis-v2.png?v=2",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v2.jpg?v=2",
-  "xu-xo-cua-cac-vi-than": "assets/covers/xu-xo-cua-cac-vi-than-gnosis-v4.png?v=4"
+  "xu-xo-cua-cac-vi-than": "assets/covers/xu-xo-cua-cac-vi-than-gnosis-v5.png?v=5"
 };
 
 const knownSocialImagePaths = {
   "dayspring-of-youth": "assets/social/dayspring-of-youth-gnosis-v3.jpg",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/social/gnosis-hanoi-library-v3.jpg",
-  "xu-xo-cua-cac-vi-than": "assets/social/xu-xo-cua-cac-vi-than-gnosis-v4.jpg"
+  "xu-xo-cua-cac-vi-than": "assets/social/xu-xo-cua-cac-vi-than-gnosis-v5.jpg"
 };
 
 const descriptionFallbacks = {
