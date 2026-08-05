@@ -91,16 +91,16 @@
           "order": 1,
           "video": {
             "provider": "youtube",
-            "videoId": "HkyHScN1Gps",
-            "url": "https://youtu.be/HkyHScN1Gps",
-            "youtubeUrl": "https://youtu.be/HkyHScN1Gps",
+            "videoId": "Rqi_cIy_onc",
+            "url": "https://youtu.be/Rqi_cIy_onc",
+            "youtubeUrl": "https://youtu.be/Rqi_cIy_onc",
             "duration": 462.158958,
-            "title": "Tâm lý học cho sự thay đổi triệt để",
+            "title": "Tâm lý học cho sự thay đổi triệt để — Chương 1: Cấp độ Tâm linh",
             "description": "Tâm lý học cho sự thay đổi triệt để\nChương 1 – Cấp độ Tâm linh\n\nAudiobook produced by Gnosis Hà Nội.",
             "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
             "channelTitle": "Gnosis Hà Nội",
             "privacy": "public",
-            "publishedAt": 1785900301.918588
+            "publishedAt": 1785957908.254645
           }
         },
         {
@@ -109,7 +109,20 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/002-ch-ng-2-chi-c-thang-k-di-u.mp3",
           "duration": 223.871667,
           "words": 705,
-          "order": 2
+          "order": 2,
+          "video": {
+            "provider": "youtube",
+            "videoId": "dTEJDK8z0d0",
+            "url": "https://youtu.be/dTEJDK8z0d0",
+            "youtubeUrl": "https://youtu.be/dTEJDK8z0d0",
+            "duration": 223.871667,
+            "title": "Tâm lý học cho sự thay đổi triệt để — Chương 2: Chiếc Thang Kỳ Diệu",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 2 – Chiếc Thang Kỳ Diệu\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1785957881.8144262
+          }
         },
         {
           "id": "ch-003-ms6chpc5",
@@ -117,7 +130,20 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/003-ch-ng-3-cu-c-n-i-d-y-t-m-l.mp3",
           "duration": 254.113958,
           "words": 819,
-          "order": 3
+          "order": 3,
+          "video": {
+            "provider": "youtube",
+            "videoId": "-EG3fEEqLgM",
+            "url": "https://youtu.be/-EG3fEEqLgM",
+            "youtubeUrl": "https://youtu.be/-EG3fEEqLgM",
+            "duration": 254.113958,
+            "title": "Tâm lý học cho sự thay đổi triệt để — Chương 3: Cuộc Nổi Dậy Tâm Lý",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 3 – Cuộc Nổi Dậy Tâm Lý\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1785957857.5620742
+          }
         },
         {
           "id": "ch-004-ms6ktc5q",
