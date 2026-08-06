@@ -85,9 +85,9 @@
         {
           "id": "ch-001",
           "title": "Chương 1 – Cấp độ Tâm linh",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/001-ch-ng-1-c-p-t-m-linh.mp3",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/001-ch-ng-1-c-p-t-m-linh.mp3?v=0374f49a9c55",
           "duration": 462.158958,
-          "words": 1496,
+          "words": 1498,
           "order": 1,
           "video": {
             "provider": "youtube",
@@ -106,7 +106,7 @@
         {
           "id": "ch-002-ms6ca3fl",
           "title": "Chương 2 – Chiếc Thang Kỳ Diệu",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/002-ch-ng-2-chi-c-thang-k-di-u.mp3",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/002-ch-ng-2-chi-c-thang-k-di-u.mp3?v=1e5d7a995517",
           "duration": 223.871667,
           "words": 705,
           "order": 2,
@@ -127,7 +127,7 @@
         {
           "id": "ch-003-ms6chpc5",
           "title": "Chương 3 – Cuộc Nổi Dậy Tâm Lý",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/003-ch-ng-3-cu-c-n-i-d-y-t-m-l.mp3",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/003-ch-ng-3-cu-c-n-i-d-y-t-m-l.mp3?v=0b6d91ca3de3",
           "duration": 254.113958,
           "words": 819,
           "order": 3,
@@ -148,7 +148,7 @@
         {
           "id": "ch-004-ms6ktc5q",
           "title": "Chương 4 – Phật tính",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/004-ch-ng-4-ph-t-t-nh.mp3",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/004-ch-ng-4-ph-t-t-nh.mp3?v=62f85db28f35",
           "duration": 215.943667,
           "words": 704,
           "order": 4,
@@ -169,7 +169,7 @@
         {
           "id": "ch-005-ms6kyedy",
           "title": "Chương 5 – Buộc tội bản thân",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/005-ch-ng-5-bu-c-t-i-b-n-th-n.mp3",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/005-ch-ng-5-bu-c-t-i-b-n-th-n.mp3?v=f92694ec8716",
           "duration": 253.261583,
           "words": 805,
           "order": 5,
@@ -190,15 +190,15 @@
         {
           "id": "ch-006-ms6lnnyc",
           "title": "Chương 6 - Cuộc sống",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/006-ch-ng-6-cu-c-s-ng.mp3",
-          "duration": 184.9835,
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/006-ch-ng-6-cu-c-s-ng.mp3?v=d5f6efd0f8d8",
+          "duration": 205.067542,
           "words": 566,
           "order": 6
         },
         {
           "id": "ch-007-ms6magvu",
           "title": "Chương 7 – Trạng thái nội tâm",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/007-ch-ng-7-tr-ng-th-i-n-i-t-m.mp3",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/007-ch-ng-7-tr-ng-th-i-n-i-t-m.mp3?v=7346fdd43130",
           "duration": 238.894333,
           "words": 781,
           "order": 7
@@ -206,7 +206,7 @@
         {
           "id": "ch-008-ms6p2wlp",
           "title": "Chương 8 – Trạng thái sai lầm",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/008-ch-ng-8-tr-ng-th-i-sai-l-m.mp3",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/008-ch-ng-8-tr-ng-th-i-sai-l-m.mp3?v=e4149fcfa36c",
           "duration": 283.22075,
           "words": 888,
           "order": 8
@@ -214,7 +214,7 @@
         {
           "id": "ch-009-ms6vhiw3",
           "title": "Chương 9 – Sự kiện cá nhân",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/009-ch-ng-9-s-ki-n-c-nh-n.mp3",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/009-ch-ng-9-s-ki-n-c-nh-n.mp3?v=9ab13ae760df",
           "duration": 205.935583,
           "words": 687,
           "order": 9
@@ -222,10 +222,18 @@
         {
           "id": "ch-010-msg5nt71",
           "title": "Chương 10 – Các cái tôi",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/010-ch-ng-10-c-c-c-i-t-i.mp3",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/010-ch-ng-10-c-c-c-i-t-i.mp3?v=71e58d14e09c",
           "duration": 188.122625,
           "words": 614,
           "order": 10
+        },
+        {
+          "id": "ch-011-msga4jzb",
+          "title": "Chương 11 – Cái tôi yêu quý",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/011-ch-ng-11-c-i-t-i-y-u-qu.mp3?v=a1ab4f5684e5",
+          "duration": 262.210583,
+          "words": 683,
+          "order": 11
         }
       ],
       "visual": {
@@ -248,7 +256,7 @@
       "narrator": "Thảo Nguyên",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-07-29T21:12:27",
+      "updatedAt": "2026-08-06T16:51:13",
       "language": "vi",
       "publishedAt": "2026-07-29"
     },
