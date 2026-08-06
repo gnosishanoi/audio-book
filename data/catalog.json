@@ -172,7 +172,20 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/005-ch-ng-5-bu-c-t-i-b-n-th-n.mp3",
           "duration": 253.261583,
           "words": 805,
-          "order": 5
+          "order": 5,
+          "video": {
+            "provider": "youtube",
+            "videoId": "urpJU_-rDXw",
+            "url": "https://youtu.be/urpJU_-rDXw",
+            "youtubeUrl": "https://youtu.be/urpJU_-rDXw",
+            "duration": 253.261583,
+            "title": "Tâm lý học cho sự thay đổi triệt để — Chương 5: Buộc tội bản thân",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 5 – Buộc tội bản thân\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1786025653.4094248
+          }
         },
         {
           "id": "ch-006-ms6lnnyc",
