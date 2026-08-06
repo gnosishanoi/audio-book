@@ -974,6 +974,23 @@ h2 {
 
 .visual-chapter-list {
   display: grid;
+  max-height: 272px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: rgba(52, 72, 59, 0.42) transparent;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+.visual-chapter-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.visual-chapter-list::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(52, 72, 59, 0.42);
+  background-clip: padding-box;
 }
 
 .visual-chapter-row {
