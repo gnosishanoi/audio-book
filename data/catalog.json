@@ -295,17 +295,17 @@
         {
           "id": "ch-004",
           "title": "Chương 3 - Những Mặc khải Bất ngờ",
-          "src": "audio/xu-xo-cua-cac-vi-than/004-ch-ng-3-nh-ng-m-c-kh-i-b-t-ng.mp3?v=b22635c030c6",
-          "duration": 2624.493,
+          "src": "audio/xu-xo-cua-cac-vi-than/004-ch-ng-3-nh-ng-m-c-kh-i-b-t-ng.mp3?v=d340ae8873ec",
+          "duration": 2355.444833,
           "words": 8081,
           "order": 4
         },
         {
           "id": "ch-005",
-          "title": "Chương 4 --- Sức mạnh của trí tưởng tượng",
+          "title": "Chương 4 - Sức mạnh của trí tưởng tượng",
           "src": "audio/xu-xo-cua-cac-vi-than/005-ch-ng-4-s-c-m-nh-c-a-tr-t-ng-t-ng.mp3?v=8bef1332d850",
           "duration": 1582.58225,
-          "words": 4724,
+          "words": 4726,
           "order": 5
         }
       ],
@@ -315,7 +315,7 @@
       "narrator": "Kim Phượng",
       "description": "Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala.",
       "cover": "",
-      "updatedAt": "2026-08-06T22:17:08",
+      "updatedAt": "2026-08-06T22:39:32",
       "language": "vi",
       "publishedAt": "2026-07-30"
     }
