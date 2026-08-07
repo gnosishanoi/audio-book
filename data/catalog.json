@@ -211,8 +211,8 @@
         {
           "id": "ch-007-ms6magvu",
           "title": "Chương 7 – Trạng thái nội tâm",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/007-ch-ng-7-tr-ng-th-i-n-i-t-m.mp3?v=7346fdd43130",
-          "duration": 238.894333,
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/007-ch-ng-7-tr-ng-th-i-n-i-t-m.mp3?v=965eb4f91a3f",
+          "duration": 276.404083,
           "words": 781,
           "order": 7
         },
@@ -247,6 +247,38 @@
           "duration": 262.210583,
           "words": 683,
           "order": 11
+        },
+        {
+          "id": "ch-012-msi133sb",
+          "title": "Chương 12 – Sự thay đổi triệt để",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/012-ch-ng-12-s-thay-i-tri-t.mp3?v=49b3dcb44955",
+          "duration": 294.811708,
+          "words": 1017,
+          "order": 12
+        },
+        {
+          "id": "ch-013-msiazcq8",
+          "title": "Chương 13 – Người quan sát và người bị quan sát",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/013-ch-ng-13-ng-i-quan-s-t-v-ng-i-b-quan-s-t.mp3?v=6476811fe449",
+          "duration": 239.501833,
+          "words": 770,
+          "order": 13
+        },
+        {
+          "id": "ch-014-msidbhco",
+          "title": "Chương 14 – Tư duy tiêu cực",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/014-ch-ng-14-t-duy-ti-u-c-c.mp3?v=0a2b93e99274",
+          "duration": 354.54,
+          "words": 1206,
+          "order": 14
+        },
+        {
+          "id": "ch-015-msiwdmol",
+          "title": "Chương 15 – Tính nhất thể",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/015-ch-ng-15-t-nh-nh-t-th.mp3?v=af62e008beaa",
+          "duration": 439.887,
+          "words": 1506,
+          "order": 15
         }
       ],
       "visual": {
@@ -269,7 +301,7 @@
       "narrator": "Thảo Nguyên",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-06T20:41:15",
+      "updatedAt": "2026-08-07T13:06:33",
       "language": "vi",
       "publishedAt": "2026-07-29"
     },
