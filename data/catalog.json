@@ -311,9 +311,9 @@
         {
           "id": "ch-002",
           "title": "Chương 1 - Cảnh đẹp núi non",
-          "src": "audio/xu-xo-cua-cac-vi-than/002-ch-ng-1-c-nh-p-n-i-non.mp3?v=97a81d2a9753",
-          "duration": 1678.483667,
-          "words": 5574,
+          "src": "audio/xu-xo-cua-cac-vi-than/002-ch-ng-1-c-nh-p-n-i-non.mp3?v=5cffda8bafed",
+          "duration": 1679.402042,
+          "words": 5573,
           "order": 2
         },
         {
@@ -347,7 +347,7 @@
       "narrator": "Kim Phượng",
       "description": "Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala.",
       "cover": "",
-      "updatedAt": "2026-08-07T11:04:21",
+      "updatedAt": "2026-08-07T13:28:47",
       "language": "vi",
       "publishedAt": "2026-07-30"
     }
