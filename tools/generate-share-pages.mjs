@@ -17,14 +17,14 @@ const knownCoverPaths = {
   "dayspring-of-youth": "assets/covers/dayspring-of-youth-gnosis-v2.png?v=2",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v2.jpg?v=2",
   "xu-xo-cua-cac-vi-than": "assets/covers/xu-xo-cua-cac-vi-than-gnosis-v5.png?v=5",
-  "bien-chung-tam-thuc": "assets/covers/bien-chung-tam-thuc-gnosis-v1.png?v=1"
+  "bien-chung-tam-thuc": "assets/covers/bien-chung-tam-thuc-gnosis-v2.png?v=2"
 };
 
 const knownSocialImagePaths = {
   "dayspring-of-youth": "assets/social/dayspring-of-youth-gnosis-v3.jpg",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/social/gnosis-hanoi-library-v3.jpg",
   "xu-xo-cua-cac-vi-than": "assets/social/xu-xo-cua-cac-vi-than-gnosis-v5.jpg",
-  "bien-chung-tam-thuc": "assets/social/bien-chung-tam-thuc-gnosis-v1.jpg"
+  "bien-chung-tam-thuc": "assets/social/bien-chung-tam-thuc-gnosis-v2.jpg"
 };
 
 const descriptionFallbacks = {
