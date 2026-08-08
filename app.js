@@ -14,17 +14,20 @@ const canonicalBookSlugs = {
 const knownCoverPaths = {
   "dayspring-of-youth": "./assets/covers/dayspring-of-youth-gnosis-v2.png?v=2",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v2.jpg?v=2",
-  "xu-xo-cua-cac-vi-than": "./assets/covers/xu-xo-cua-cac-vi-than-gnosis-v5.png?v=5"
+  "xu-xo-cua-cac-vi-than": "./assets/covers/xu-xo-cua-cac-vi-than-gnosis-v5.png?v=5",
+  "bien-chung-tam-thuc": "./assets/covers/bien-chung-tam-thuc-gnosis-v1.png?v=1"
 };
 const featuredImagePaths = {
   "dayspring-of-youth": "./assets/hero/dayspring-of-youth-dawn-v1.jpg",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-flatlay-gnosis-v5.jpg",
-  "xu-xo-cua-cac-vi-than": "./assets/hero/xu-xo-cua-cac-vi-than-reading-v3.jpg?v=3"
+  "xu-xo-cua-cac-vi-than": "./assets/hero/xu-xo-cua-cac-vi-than-reading-v3.jpg?v=3",
+  "bien-chung-tam-thuc": "./assets/hero/bien-chung-tam-thuc-study-v1.png?v=1"
 };
 const featuredDescriptionFallbacks = {
   "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "Những bài giảng về quan sát bản thân, chuyển hóa tâm lý và đánh thức ý thức.",
-  "xu-xo-cua-cac-vi-than": "Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala."
+  "xu-xo-cua-cac-vi-than": "Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala.",
+  "bien-chung-tam-thuc": "Ba bài giảng về tự quan sát, làm tan rã cái tôi và vượt qua các đối cực của tâm thức trên con đường chuyển hóa nội tâm."
 };
 
 const state = {
