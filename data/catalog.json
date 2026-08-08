@@ -359,13 +359,13 @@
       "narrator": "",
       "description": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
       "cover": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-      "updatedAt": "2026-08-07T22:46:25",
+      "updatedAt": "2026-08-08T13:41:15",
       "language": "vi",
       "publishedAt": "2026-08-07",
       "chapters": [
         {
           "id": "ch-001",
-          "title": "Chương 1 - Phần 1. PHƯƠNG PHÁP LÀM TAN RÃ CÁI TÔI",
+          "title": "Chương 1.1 - Phương pháp làm tan rã cái tôi",
           "src": "audio/bien-chung-tam-thuc/001-ch-ng-1-ph-n-1-ph-ng-ph-p-l-m-tan-r-c-i-t-i.mp3?v=f3caefbc0bd7",
           "duration": 262.901958,
           "words": 855,
@@ -373,7 +373,7 @@
         },
         {
           "id": "ch-002-msjphf8j",
-          "title": "Chương 1 - Phần 2. TRẬN CHIẾN CỦA CÁC KHÁI NIỆM ĐỐI NGHỊCH",
+          "title": "Chương 1.2 - Trận chiến của các khái niệm đối nghịch",
           "src": "audio/bien-chung-tam-thuc/002-ch-ng-1-ph-n-2-tr-n-chi-n-c-a-c-c-kh-i-ni-m-i-ngh-ch.mp3?v=fe77d7293d9f",
           "duration": 482.545958,
           "words": 1612,
@@ -381,7 +381,7 @@
         },
         {
           "id": "ch-003-msjpqjb7",
-          "title": "Chương 1 - Phần 3. KOSMOS-NGƯỜI: K-N",
+          "title": "Chương 1.3 - Kosmos-Người: K-N",
           "src": "audio/bien-chung-tam-thuc/003-ch-ng-1-ph-n-3-kosmos-ng-i-k-n.mp3?v=202797904e46",
           "duration": 120.699958,
           "words": 333,
