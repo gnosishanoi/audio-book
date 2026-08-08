@@ -17,7 +17,7 @@ const knownCoverPaths = {
   "dayspring-of-youth": "assets/covers/dayspring-of-youth-gnosis-v2.png?v=2",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v2.jpg?v=2",
   "xu-xo-cua-cac-vi-than": "assets/covers/xu-xo-cua-cac-vi-than-gnosis-v5.png?v=5",
-  "bien-chung-tam-thuc": "assets/covers/bien-chung-tam-thuc-gnosis-v2.png?v=2"
+  "bien-chung-tam-thuc": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3"
 };
 
 const knownSocialImagePaths = {
