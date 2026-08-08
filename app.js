@@ -27,7 +27,7 @@ const featuredDescriptionFallbacks = {
   "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "Những bài giảng về quan sát bản thân, chuyển hóa tâm lý và đánh thức ý thức.",
   "xu-xo-cua-cac-vi-than": "Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala.",
-  "bien-chung-tam-thuc": "Ba bài giảng về tự quan sát, làm tan rã cái tôi và vượt qua các đối cực của tâm thức trên con đường chuyển hóa nội tâm."
+  "bien-chung-tam-thuc": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức."
 };
 
 const state = {
