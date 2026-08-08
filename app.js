@@ -50,6 +50,8 @@ const els = {
   bookCount: document.querySelector("#bookCount"),
   hiddenToggleBtn: document.querySelector("#hiddenToggleBtn"),
   hiddenBooksPanel: document.querySelector("#hiddenBooksPanel"),
+  brandLink: document.querySelector(".site-header .brand"),
+  headerLibraryLink: document.querySelector(".header-library-link"),
   libraryHero: document.querySelector("#libraryHero"),
   libraryView: document.querySelector("#libraryView"),
   bookView: document.querySelector("#bookView"),
@@ -1201,10 +1203,15 @@ function escapeHtml(value) {
   }[char]));
 }
 
-els.backBtn.addEventListener("click", () => {
+function navigateToLibrary(event) {
+  event?.preventDefault();
   history.pushState("", document.title, location.pathname + location.search);
   route();
-});
+}
+
+els.brandLink?.addEventListener("click", navigateToLibrary);
+els.headerLibraryLink?.addEventListener("click", navigateToLibrary);
+els.backBtn.addEventListener("click", navigateToLibrary);
 
 els.playPauseBtn.addEventListener("click", () => {
   if (!ensurePlayableSelection()) return;
