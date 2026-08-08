@@ -21,7 +21,7 @@ const featuredImagePaths = {
   "dayspring-of-youth": "./assets/hero/dayspring-of-youth-dawn-v1.jpg",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-flatlay-gnosis-v5.jpg",
   "xu-xo-cua-cac-vi-than": "./assets/hero/xu-xo-cua-cac-vi-than-reading-v3.jpg?v=3",
-  "bien-chung-tam-thuc": "./assets/hero/bien-chung-tam-thuc-study-v1.png?v=1"
+  "bien-chung-tam-thuc": "./assets/hero/bien-chung-tam-thuc-study-v2.png?v=2"
 };
 const featuredDescriptionFallbacks = {
   "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
