@@ -219,9 +219,9 @@
         {
           "id": "ch-008-ms6p2wlp",
           "title": "Chương 8 – Trạng thái sai lầm",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/008-ch-ng-8-tr-ng-th-i-sai-l-m.mp3?v=e4149fcfa36c",
-          "duration": 283.22075,
-          "words": 888,
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/008-ch-ng-8-tr-ng-th-i-sai-l-m.mp3?v=829ff495962d",
+          "duration": 282.813958,
+          "words": 889,
           "order": 8
         },
         {
@@ -243,8 +243,8 @@
         {
           "id": "ch-011-msga4jzb",
           "title": "Chương 11 – Cái tôi yêu quý",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/011-ch-ng-11-c-i-t-i-y-u-qu.mp3?v=a1ab4f5684e5",
-          "duration": 262.210583,
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/011-ch-ng-11-c-i-t-i-y-u-qu.mp3?v=81560afa80ce",
+          "duration": 212.864208,
           "words": 683,
           "order": 11
         },
@@ -279,6 +279,22 @@
           "duration": 439.887,
           "words": 1506,
           "order": 15
+        },
+        {
+          "id": "ch-016-msjae5ld",
+          "title": "Chương 16 – Sách Sự Sống",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/016-ch-ng-16-s-ch-s-s-ng.mp3?v=97bceddf26fc",
+          "duration": 208.855,
+          "words": 679,
+          "order": 16
+        },
+        {
+          "id": "ch-017-msjp12by",
+          "title": "Chương 17 – Sinh Vật Máy Móc",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/017-ch-ng-17-sinh-v-t-m-y-m-c.mp3?v=32cc76dc2fa1",
+          "duration": 258.596375,
+          "words": 847,
+          "order": 17
         }
       ],
       "visual": {
@@ -301,7 +317,7 @@
       "narrator": "Thảo Nguyên",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-07T13:06:33",
+      "updatedAt": "2026-08-08T22:05:05",
       "language": "vi",
       "publishedAt": "2026-07-29"
     },
