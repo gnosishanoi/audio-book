@@ -71,8 +71,8 @@
         {
           "id": "ch-009-ms8wuuvh",
           "title": "Chapter 8: Health In Yoga",
-          "src": "audio/dayspring-of-youth/009-chapter-8-health-in-yoga.mp3?v=c09a12b8d7cf",
-          "duration": 2398.691083,
+          "src": "audio/dayspring-of-youth/009-chapter-8-health-in-yoga.mp3?v=3b027fd4bc99",
+          "duration": 2398.150917,
           "words": 4389,
           "order": 9
         },
@@ -83,6 +83,14 @@
           "duration": 540.332625,
           "words": 924,
           "order": 10
+        },
+        {
+          "id": "ch-011-ms8wuxk4",
+          "title": "Chapter 10: Finer Forces",
+          "src": "audio/dayspring-of-youth/011-chapter-10-finer-forces.mp3?v=c8fb58297d02",
+          "duration": 1681.886583,
+          "words": 3504,
+          "order": 11
         }
       ],
       "title": "Dayspring of Youth",
@@ -90,7 +98,7 @@
       "narrator": "Brian M",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-10T14:24:47",
+      "updatedAt": "2026-08-10T17:50:56",
       "subtitle": "",
       "language": "en",
       "publishedAt": "2026-07-29"
