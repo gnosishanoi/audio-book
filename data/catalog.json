@@ -401,7 +401,20 @@
           "src": "audio/bien-chung-tam-thuc/001-ch-ng-1-ph-n-1-ph-ng-ph-p-l-m-tan-r-c-i-t-i.mp3?v=f3caefbc0bd7",
           "duration": 262.901958,
           "words": 855,
-          "order": 1
+          "order": 1,
+          "video": {
+            "provider": "youtube",
+            "videoId": "5F3jIjbdyv0",
+            "url": "https://youtu.be/5F3jIjbdyv0",
+            "youtubeUrl": "https://youtu.be/5F3jIjbdyv0",
+            "duration": 264.632,
+            "title": "Chương 1.1 - Phương pháp làm tan rã cái tôi",
+            "description": "Biện chứng tâm thức\nChương 1.1 - Phương pháp làm tan rã cái tôi\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1786402192.562149
+          }
         },
         {
           "id": "ch-002-msjphf8j",
