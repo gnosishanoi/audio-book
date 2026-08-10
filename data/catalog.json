@@ -7,15 +7,15 @@
         {
           "id": "ch-001",
           "title": "Introduction",
-          "src": "audio/dayspring-of-youth/001-introduction.mp3",
-          "duration": 377.892208,
+          "src": "audio/dayspring-of-youth/001-introduction.mp3?v=27330249fac1",
+          "duration": 380.28825,
           "words": 620,
           "order": 1
         },
         {
           "id": "ch-002-ms5iaeoy",
           "title": "Chapter 1: Atoms",
-          "src": "audio/dayspring-of-youth/002-chapter-1-atoms.mp3",
+          "src": "audio/dayspring-of-youth/002-chapter-1-atoms.mp3?v=fccb9ab3267b",
           "duration": 1758.786875,
           "words": 3191,
           "order": 2
@@ -23,7 +23,7 @@
         {
           "id": "ch-003-ms5lcf5x",
           "title": "Chapter 2: The Nous Atom",
-          "src": "audio/dayspring-of-youth/003-chapter-2-the-nous-atom.mp3",
+          "src": "audio/dayspring-of-youth/003-chapter-2-the-nous-atom.mp3?v=368d1a2cb1d9",
           "duration": 1126.828125,
           "words": 1957,
           "order": 3
@@ -31,7 +31,7 @@
         {
           "id": "ch-004-ms5lqlz6",
           "title": "Chapter 3: Destructive Atoms",
-          "src": "audio/dayspring-of-youth/004-chapter-3-destructive-atoms.mp3",
+          "src": "audio/dayspring-of-youth/004-chapter-3-destructive-atoms.mp3?v=1b3ed1d2f47a",
           "duration": 1921.744958,
           "words": 3402,
           "order": 4
@@ -39,7 +39,7 @@
         {
           "id": "ch-005-ms5m6fer",
           "title": "Chapter 4: The Astral",
-          "src": "audio/dayspring-of-youth/005-chapter-4-the-astral.mp3",
+          "src": "audio/dayspring-of-youth/005-chapter-4-the-astral.mp3?v=ecd81276b06a",
           "duration": 1675.507958,
           "words": 2969,
           "order": 5
@@ -47,7 +47,7 @@
         {
           "id": "ch-006-ms5m7qdi",
           "title": "Chapter 5: Elemental Nature",
-          "src": "audio/dayspring-of-youth/006-chapter-5-elemental-nature.mp3",
+          "src": "audio/dayspring-of-youth/006-chapter-5-elemental-nature.mp3?v=8b3c3581060d",
           "duration": 3242.679583,
           "words": 5832,
           "order": 6
@@ -55,7 +55,7 @@
         {
           "id": "ch-007-ms8c2vj3",
           "title": "Chapter 6: The Eternal Lover",
-          "src": "audio/dayspring-of-youth/007-chapter-6-the-eternal-lover.mp3",
+          "src": "audio/dayspring-of-youth/007-chapter-6-the-eternal-lover.mp3?v=4a7b39e51961",
           "duration": 1280.866,
           "words": 2545,
           "order": 7
@@ -63,10 +63,18 @@
         {
           "id": "ch-008-ms8wb2ig",
           "title": "Chapter 7: Nature",
-          "src": "audio/dayspring-of-youth/008-chapter-7-nature.mp3",
+          "src": "audio/dayspring-of-youth/008-chapter-7-nature.mp3?v=d9fac3a5cdb5",
           "duration": 840.963167,
           "words": 1501,
           "order": 8
+        },
+        {
+          "id": "ch-009-ms8wuuvh",
+          "title": "Chapter 8: Health In Yoga",
+          "src": "audio/dayspring-of-youth/009-chapter-8-health-in-yoga.mp3?v=c09a12b8d7cf",
+          "duration": 2398.691083,
+          "words": 4389,
+          "order": 9
         }
       ],
       "title": "Dayspring of Youth",
@@ -74,7 +82,7 @@
       "narrator": "Brian M",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-07-31T07:19:37",
+      "updatedAt": "2026-08-10T14:16:34",
       "subtitle": "",
       "language": "en",
       "publishedAt": "2026-07-29"
