@@ -75,6 +75,14 @@
           "duration": 2398.691083,
           "words": 4389,
           "order": 9
+        },
+        {
+          "id": "ch-010-ms8wuwgr",
+          "title": "Chapter 9: Advocate And Dweller On Threshold",
+          "src": "audio/dayspring-of-youth/010-chapter-9-advocate-and-dweller-on-threshold.mp3?v=8577c61e24d9",
+          "duration": 540.332625,
+          "words": 924,
+          "order": 10
         }
       ],
       "title": "Dayspring of Youth",
@@ -82,7 +90,7 @@
       "narrator": "Brian M",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-10T14:16:34",
+      "updatedAt": "2026-08-10T14:23:39",
       "subtitle": "",
       "language": "en",
       "publishedAt": "2026-07-29"
