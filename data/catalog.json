@@ -251,8 +251,8 @@
         {
           "id": "ch-009-ms6vhiw3",
           "title": "Chương 9 – Sự kiện cá nhân",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/009-ch-ng-9-s-ki-n-c-nh-n.mp3?v=416edd8bb695",
-          "duration": 211.819125,
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/009-ch-ng-9-s-ki-n-c-nh-n.mp3?v=a7dbfce09139",
+          "duration": 212.567167,
           "words": 687,
           "order": 9
         },
@@ -327,6 +327,14 @@
           "duration": 299.871792,
           "words": 1016,
           "order": 18
+        },
+        {
+          "id": "ch-019-msjplm0r",
+          "title": "Chương 19 – Người chủ tốt của gia đình",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/019-ch-ng-19-ng-i-ch-t-t-c-a-gia-nh.mp3?v=c08c25020593",
+          "duration": 229.713,
+          "words": 757,
+          "order": 19
         }
       ],
       "visual": {
@@ -349,7 +357,7 @@
       "narrator": "Thảo Nguyên",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-11T08:36:31",
+      "updatedAt": "2026-08-11T13:25:28",
       "language": "vi",
       "publishedAt": "2026-07-29"
     },
