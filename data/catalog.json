@@ -536,7 +536,7 @@
       "narrator": "",
       "description": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
       "cover": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-      "updatedAt": "2026-08-10T18:02:12",
+      "updatedAt": "2026-08-12T08:02:17",
       "language": "vi",
       "publishedAt": "2026-08-07",
       "chapters": [
@@ -576,6 +576,38 @@
           "duration": 119.121542,
           "words": 333,
           "order": 3
+        },
+        {
+          "id": "ch-004-mspfsz0i",
+          "title": "Chương 1 - Phần 4. LỰC KHÁNG CỰ",
+          "src": "audio/bien-chung-tam-thuc/004-ch-ng-1-ph-n-4-l-c-kh-ng-c.mp3?v=e8e95e27a704",
+          "duration": 103.097042,
+          "words": 276,
+          "order": 4
+        },
+        {
+          "id": "ch-005-mspfw7bf",
+          "title": "Chương 1 - Phần 5. THỰC HÀNH",
+          "src": "audio/bien-chung-tam-thuc/005-ch-ng-1-ph-n-5-th-c-h-nh.mp3?v=08fd12280f3d",
+          "duration": 152.714125,
+          "words": 490,
+          "order": 5
+        },
+        {
+          "id": "ch-006-mspivez2",
+          "title": "Chương 1 - Phần 6. YÊU CẦU",
+          "src": "audio/bien-chung-tam-thuc/006-ch-ng-1-ph-n-6-y-u-c-u.mp3?v=0a62f427801a",
+          "duration": 93.837333,
+          "words": 257,
+          "order": 6
+        },
+        {
+          "id": "ch-007-mspiwuq8",
+          "title": "Chương 1 - Phần 7. TƯ TƯỞNG CHỦ BẠI",
+          "src": "audio/bien-chung-tam-thuc/007-ch-ng-1-ph-n-7-t-t-ng-ch-b-i.mp3?v=74ea4a3296b9",
+          "duration": 208.6655,
+          "words": 691,
+          "order": 7
         }
       ]
     }
