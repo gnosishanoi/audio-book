@@ -554,11 +554,12 @@
             "youtubeUrl": "https://youtu.be/5F3jIjbdyv0",
             "duration": 264.632,
             "title": "Chương 1.1 - Phương pháp làm tan rã cái tôi",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1: .1 - Phương pháp làm tan rã cái tôi",
             "description": "Biện chứng tâm thức\nChương 1.1 - Phương pháp làm tan rã cái tôi\n\nAudiobook produced by Gnosis Hà Nội.",
             "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
             "channelTitle": "Gnosis Hà Nội",
             "privacy": "public",
-            "publishedAt": 1786402192.562149
+            "publishedAt": 1786547500.0779278
           }
         },
         {
@@ -567,7 +568,21 @@
           "src": "audio/bien-chung-tam-thuc/002-ch-ng-1-ph-n-2-tr-n-chi-n-c-a-c-c-kh-i-ni-m-i-ngh-ch.mp3?v=fe77d7293d9f",
           "duration": 482.545958,
           "words": 1612,
-          "order": 2
+          "order": 2,
+          "video": {
+            "provider": "youtube",
+            "videoId": "_hV8sj67iFo",
+            "url": "https://youtu.be/_hV8sj67iFo",
+            "youtubeUrl": "https://youtu.be/_hV8sj67iFo",
+            "duration": 482.546,
+            "title": "Chương 1.2 - Trận chiến của các khái niệm đối nghịch",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1: .2 - Trận chiến của các khái niệm đối nghịch",
+            "description": "Biện chứng tâm thức\nChương 1.2 - Trận chiến của các khái niệm đối nghịch\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1786547496.8860002
+          }
         },
         {
           "id": "ch-003-msjpqjb7",
