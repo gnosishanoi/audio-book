@@ -91,6 +91,14 @@
           "duration": 1681.886583,
           "words": 3504,
           "order": 11
+        },
+        {
+          "id": "ch-012-mspkmhs6",
+          "title": "Chapter 11: Breathing And Blood-Stream",
+          "src": "audio/dayspring-of-youth/012-chapter-11-breathing-and-blood-stream.mp3?v=18d8f0a05d3c",
+          "duration": 569.327,
+          "words": 1155,
+          "order": 12
         }
       ],
       "title": "Dayspring of Youth",
@@ -98,7 +106,7 @@
       "narrator": "Brian M",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-10T17:50:56",
+      "updatedAt": "2026-08-11T23:26:22",
       "subtitle": "",
       "language": "en",
       "publishedAt": "2026-07-29"
