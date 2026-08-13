@@ -456,6 +456,14 @@
           "duration": 239.289167,
           "words": 765,
           "order": 22
+        },
+        {
+          "id": "ch-023-msquj85n",
+          "title": "Chương 23 – Thế giới quan hệ",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/023-ch-ng-23-th-gi-i-quan-h.mp3?v=ce8879218fae",
+          "duration": 242.300875,
+          "words": 790,
+          "order": 23
         }
       ],
       "visual": {
@@ -478,7 +486,7 @@
       "narrator": "Thảo Nguyên",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-11T23:13:28",
+      "updatedAt": "2026-08-13T09:17:11",
       "language": "vi",
       "publishedAt": "2026-07-29"
     },
