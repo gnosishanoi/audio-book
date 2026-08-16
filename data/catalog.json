@@ -99,6 +99,62 @@
           "duration": 569.327,
           "words": 1155,
           "order": 12
+        },
+        {
+          "id": "ch-013-mss7m0ko",
+          "title": "Chapter 12: Animal Food",
+          "src": "audio/dayspring-of-youth/013-chapter-12-animal-food.mp3?v=7240cdc4ad1d",
+          "duration": 339.656083,
+          "words": 719,
+          "order": 13
+        },
+        {
+          "id": "ch-014-mss7padx",
+          "title": "Chapter 13: Reincarnation And Karma",
+          "src": "audio/dayspring-of-youth/014-chapter-13-reincarnation-and-karma.mp3?v=8213ff15f865",
+          "duration": 429.895167,
+          "words": 954,
+          "order": 14
+        },
+        {
+          "id": "ch-015-mss84pwx",
+          "title": "Chapter 14: Atmospheric Screen And Breathing",
+          "src": "audio/dayspring-of-youth/015-chapter-14-atmospheric-screen-and-breathing.mp3?v=098c0b554a89",
+          "duration": 970.397,
+          "words": 1986,
+          "order": 15
+        },
+        {
+          "id": "ch-016-mss871bp",
+          "title": "Chapter 15: Mental Travelling",
+          "src": "audio/dayspring-of-youth/016-chapter-15-mental-travelling.mp3?v=0b284088f958",
+          "duration": 442.00575,
+          "words": 1004,
+          "order": 16
+        },
+        {
+          "id": "ch-017-mssb9rcw",
+          "title": "Chapter 16: Masters",
+          "src": "audio/dayspring-of-youth/017-chapter-16-masters.mp3?v=2762eec81566",
+          "duration": 1621.033958,
+          "words": 3645,
+          "order": 17
+        },
+        {
+          "id": "ch-019-mssbnr0d",
+          "title": "Chapter 18: The Silver Shield",
+          "src": "audio/dayspring-of-youth/019-chapter-18-the-silver-shield.mp3?v=bcd9049c5acd",
+          "duration": 1108.514083,
+          "words": 2466,
+          "order": 19
+        },
+        {
+          "id": "ch-021-mssbtcbw",
+          "title": "Chapter 20: Healing",
+          "src": "audio/dayspring-of-youth/021-chapter-20-healing.mp3?v=b0aa55c7be48",
+          "duration": 641.39,
+          "words": 1400,
+          "order": 21
         }
       ],
       "title": "Dayspring of Youth",
@@ -106,7 +162,7 @@
       "narrator": "Brian M",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-11T23:26:22",
+      "updatedAt": "2026-08-17T05:54:45",
       "subtitle": "",
       "language": "en",
       "publishedAt": "2026-07-29"
