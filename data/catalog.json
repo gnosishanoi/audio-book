@@ -676,7 +676,21 @@
           "src": "audio/bien-chung-tam-thuc/004-ch-ng-1-ph-n-4-l-c-kh-ng-c.mp3?v=e8e95e27a704",
           "duration": 103.097042,
           "words": 276,
-          "order": 4
+          "order": 4,
+          "video": {
+            "provider": "youtube",
+            "videoId": "oHWEf28CoaE",
+            "url": "https://youtu.be/oHWEf28CoaE",
+            "youtubeUrl": "https://youtu.be/oHWEf28CoaE",
+            "duration": 102.267,
+            "title": "Chương 1 - Phần 4. LỰC KHÁNG CỰ",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1: Phần 4. LỰC KHÁNG CỰ",
+            "description": "Biện chứng tâm thức\nChương 1 - Phần 4. LỰC KHÁNG CỰ\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787066256.575414
+          }
         },
         {
           "id": "ch-005-mspfw7bf",
