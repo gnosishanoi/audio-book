@@ -6,6 +6,8 @@ const legacyResumeStorageKey = "audiobookSanctuary.resume.v1";
 const resumeStorageKey = "stillword.resumeByBook.v2";
 const hiddenBooksStorageKey = "stillword.hiddenBooks.v1";
 const listenStatsStorageKey = "stillword.listenStats.v1";
+const offlineAudioCacheName = "gnosis-hanoi-offline-audio-v1";
+const offlineAssetCacheName = "gnosis-hanoi-shell-v1";
 const excludedBookIds = new Set(["binh-minh-tuoi-tre"]);
 const canonicalBookSlugs = {
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de",
@@ -45,7 +47,9 @@ const state = {
   trackedListenKey: "",
   isRefreshing: false,
   featuredIndex: 0,
-  featuredTimer: 0
+  featuredTimer: 0,
+  offlineUrls: new Set(),
+  offlineBusy: new Set()
 };
 
 const els = {
@@ -84,11 +88,13 @@ const els = {
   featuredPrev: document.querySelector("#featuredPrev"),
   featuredNext: document.querySelector("#featuredNext"),
   featuredDots: document.querySelector("#featuredDots"),
-  featuredStatus: document.querySelector("#featuredStatus")
+  featuredStatus: document.querySelector("#featuredStatus"),
+  offlineNotice: document.querySelector("#offlineNotice")
 };
 
 async function init() {
   try {
+    registerServiceWorker();
     await refreshCatalog();
     renderLibrary();
     updateResumeUi();
@@ -658,15 +664,28 @@ function renderBook(book) {
       </div>
     </div>
     <section class="format-panel" data-format-panel="audio" ${state.bookFormat === "audio" ? "" : "hidden"}>
+      <div class="offline-book-tools" data-offline-tools>
+        <div>
+          <strong>Nghe offline</strong>
+          <span data-offline-summary>Kiểm tra các chương đã tải…</span>
+        </div>
+        <button class="offline-book-button" type="button" data-offline-book>Tải cả sách</button>
+      </div>
       <div class="chapter-list">
         ${book.chapters.map((chapter, index) => `
-          <button class="chapter-row" type="button" data-chapter-index="${index}">
-            <span class="chapter-number">${index + 1}</span>
-            <div>
-              <h3>${escapeHtml(chapter.title)}</h3>
-              <span class="chapter-meta">${escapeHtml(chapter.duration || copy(book, "audioChapter"))}${chapterListenCount(book, index) ? ` · ${escapeHtml(listenCountLabel(book, chapterListenCount(book, index)))}` : ""}</span>
-            </div>
-          </button>
+          <div class="chapter-row" data-offline-row="${index}">
+            <button class="chapter-play" type="button" data-chapter-index="${index}">
+              <span class="chapter-number">${index + 1}</span>
+              <span class="chapter-copy">
+                <h3>${escapeHtml(chapter.title)}</h3>
+                <span class="chapter-meta">${escapeHtml(chapter.duration || copy(book, "audioChapter"))}${chapterListenCount(book, index) ? ` · ${escapeHtml(listenCountLabel(book, chapterListenCount(book, index)))}` : ""}</span>
+              </span>
+            </button>
+            <button class="offline-chapter-button" type="button" data-offline-chapter="${index}" aria-label="Tải ${escapeHtml(chapter.title)} để nghe offline">
+              <span class="offline-icon" aria-hidden="true">↓</span>
+              <span data-offline-label>Tải</span>
+            </button>
+          </div>
         `).join("")}
       </div>
     </section>
@@ -678,6 +697,12 @@ function renderBook(book) {
       loadChapter(book, Number(button.dataset.chapterIndex), { playMode: "book", autoplay: true, startTime: 0 });
     });
   });
+
+  els.bookDetail.querySelectorAll("[data-offline-chapter]").forEach((button) => {
+    button.addEventListener("click", () => toggleChapterOffline(book, Number(button.dataset.offlineChapter)));
+  });
+
+  els.bookDetail.querySelector("[data-offline-book]")?.addEventListener("click", () => toggleBookOffline(book));
 
   els.bookDetail.querySelector("[data-action='share-book']")?.addEventListener("click", (event) => {
     shareBook(book, event.currentTarget);
@@ -692,6 +717,189 @@ function renderBook(book) {
   });
 
   if (state.bookFormat === "visual") activateVisualBook(book);
+  syncOfflineUi(book);
+}
+
+function offlineSupported() {
+  return "caches" in window && window.isSecureContext;
+}
+
+function offlineUrl(chapter) {
+  return new URL(chapter.src, window.location.href).href;
+}
+
+function showOfflineNotice(message, stateName = "ok") {
+  if (!els.offlineNotice) return;
+  els.offlineNotice.textContent = message;
+  els.offlineNotice.dataset.state = stateName;
+  els.offlineNotice.hidden = false;
+  window.clearTimeout(showOfflineNotice.timer);
+  showOfflineNotice.timer = window.setTimeout(() => {
+    els.offlineNotice.hidden = true;
+  }, 4200);
+}
+
+async function refreshOfflineUrls(book) {
+  state.offlineUrls.clear();
+  if (!offlineSupported()) return;
+  const cache = await caches.open(offlineAudioCacheName);
+  await Promise.all(book.chapters.map(async (chapter) => {
+    const url = offlineUrl(chapter);
+    if (await cache.match(url)) state.offlineUrls.add(url);
+  }));
+}
+
+function updateOfflineUi(book) {
+  const supported = offlineSupported();
+  const storedCount = book.chapters.filter((chapter) => state.offlineUrls.has(offlineUrl(chapter))).length;
+  const tools = els.bookDetail.querySelector("[data-offline-tools]");
+  if (tools) tools.hidden = !supported;
+
+  els.bookDetail.querySelectorAll("[data-offline-chapter]").forEach((button) => {
+    const index = Number(button.dataset.offlineChapter);
+    const chapter = book.chapters[index];
+    const url = chapter ? offlineUrl(chapter) : "";
+    const saved = state.offlineUrls.has(url);
+    const busy = state.offlineBusy.has(url);
+    button.disabled = busy;
+    button.classList.toggle("saved", saved);
+    button.querySelector(".offline-icon").textContent = busy ? "…" : saved ? "✓" : "↓";
+    button.querySelector("[data-offline-label]").textContent = busy ? "Đang tải" : saved ? "Đã tải" : "Tải";
+    button.setAttribute("aria-label", saved
+      ? `Xóa bản tải offline của ${chapter.title}`
+      : `Tải ${chapter.title} để nghe offline`);
+  });
+
+  const summary = els.bookDetail.querySelector("[data-offline-summary]");
+  if (summary) summary.textContent = `${storedCount}/${book.chapters.length} chương đã lưu trên thiết bị này`;
+  const bookButton = els.bookDetail.querySelector("[data-offline-book]");
+  if (bookButton) {
+    bookButton.textContent = storedCount === book.chapters.length ? "Xóa bản tải" : "Tải cả sách";
+    bookButton.disabled = state.offlineBusy.has(`book:${book.id}`);
+  }
+}
+
+async function syncOfflineUi(book) {
+  try {
+    await refreshOfflineUrls(book);
+    if (state.routeBook?.id === book.id) updateOfflineUi(book);
+  } catch (error) {
+    console.error("Could not inspect offline audio", error);
+  }
+}
+
+async function requestPersistentStorage() {
+  try {
+    if (navigator.storage?.persist) await navigator.storage.persist();
+  } catch (_) {
+    // Browsers may decline persistent storage; downloads can still use the normal cache quota.
+  }
+}
+
+async function removeOlderOfflineVersions(cache, targetUrl) {
+  const target = new URL(targetUrl);
+  const keys = await cache.keys();
+  await Promise.all(keys.map((request) => {
+    const cached = new URL(request.url);
+    return cached.origin === target.origin && cached.pathname === target.pathname && request.url !== targetUrl
+      ? cache.delete(request)
+      : Promise.resolve(false);
+  }));
+}
+
+async function cacheBookAssets(book) {
+  if (!book?.cover) return;
+  const url = new URL(book.cover, window.location.href).href;
+  const cache = await caches.open(offlineAssetCacheName);
+  if (await cache.match(url)) return;
+  const response = await fetch(url, { cache: "reload" });
+  if (response.ok) await cache.put(url, response);
+}
+
+async function saveChapterOffline(book, chapter) {
+  const url = offlineUrl(chapter);
+  const cache = await caches.open(offlineAudioCacheName);
+  await removeOlderOfflineVersions(cache, url);
+  const response = await fetch(url, { cache: "reload" });
+  if (!response.ok) throw new Error(`Audio returned ${response.status}`);
+  await cache.put(url, response);
+  await cacheBookAssets(book);
+  state.offlineUrls.add(url);
+}
+
+async function toggleChapterOffline(book, index) {
+  const chapter = book.chapters[index];
+  if (!chapter || !offlineSupported()) return;
+  const url = offlineUrl(chapter);
+  if (state.offlineBusy.has(url)) return;
+  state.offlineBusy.add(url);
+  updateOfflineUi(book);
+  try {
+    const cache = await caches.open(offlineAudioCacheName);
+    if (state.offlineUrls.has(url)) {
+      await cache.delete(url);
+      state.offlineUrls.delete(url);
+      showOfflineNotice(`Đã xóa “${chapter.title}” khỏi thiết bị.`);
+    } else {
+      await requestPersistentStorage();
+      await saveChapterOffline(book, chapter);
+      showOfflineNotice(`Đã tải “${chapter.title}”. Bạn có thể nghe khi mất mạng.`);
+    }
+  } catch (error) {
+    console.error("Offline download failed", error);
+    showOfflineNotice("Không thể tải chương này. Hãy kiểm tra kết nối hoặc dung lượng thiết bị.", "error");
+  } finally {
+    state.offlineBusy.delete(url);
+    updateOfflineUi(book);
+  }
+}
+
+async function toggleBookOffline(book) {
+  if (!offlineSupported()) return;
+  const busyKey = `book:${book.id}`;
+  if (state.offlineBusy.has(busyKey)) return;
+  state.offlineBusy.add(busyKey);
+  updateOfflineUi(book);
+  try {
+    await requestPersistentStorage();
+    const cache = await caches.open(offlineAudioCacheName);
+    const allSaved = book.chapters.every((chapter) => state.offlineUrls.has(offlineUrl(chapter)));
+    if (allSaved) {
+      await Promise.all(book.chapters.map(async (chapter) => {
+        const url = offlineUrl(chapter);
+        await cache.delete(url);
+        state.offlineUrls.delete(url);
+      }));
+      showOfflineNotice(`Đã xóa bản tải offline của “${book.title}”.`);
+    } else {
+      const missing = book.chapters.filter((chapter) => !state.offlineUrls.has(offlineUrl(chapter)));
+      for (let index = 0; index < missing.length; index += 1) {
+        const chapter = missing[index];
+        const url = offlineUrl(chapter);
+        state.offlineBusy.add(url);
+        const summary = els.bookDetail.querySelector("[data-offline-summary]");
+        if (summary) summary.textContent = `Đang tải ${index + 1}/${missing.length}: ${chapter.title}`;
+        await saveChapterOffline(book, chapter);
+        state.offlineBusy.delete(url);
+        updateOfflineUi(book);
+      }
+      showOfflineNotice(`Đã tải “${book.title}” để nghe offline.`);
+    }
+  } catch (error) {
+    console.error("Offline book download failed", error);
+    showOfflineNotice("Quá trình tải bị gián đoạn. Các chương đã tải vẫn được giữ lại.", "error");
+  } finally {
+    state.offlineBusy.delete(busyKey);
+    book.chapters.forEach((chapter) => state.offlineBusy.delete(offlineUrl(chapter)));
+    updateOfflineUi(book);
+  }
+}
+
+function registerServiceWorker() {
+  if (!("serviceWorker" in navigator) || !window.isSecureContext) return;
+  navigator.serviceWorker.register("./sw.js").catch((error) => {
+    console.error("Service worker registration failed", error);
+  });
 }
 
 function visualBookMarkup(book) {
