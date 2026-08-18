@@ -600,7 +600,7 @@
       "narrator": "",
       "description": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
       "cover": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-      "updatedAt": "2026-08-12T10:10:44",
+      "updatedAt": "2026-08-18T22:17:26",
       "language": "vi",
       "publishedAt": "2026-08-07",
       "chapters": [
@@ -651,8 +651,8 @@
         {
           "id": "ch-003-msjpqjb7",
           "title": "Chương 1.3 - Kosmos-Người: K-N",
-          "src": "audio/bien-chung-tam-thuc/003-ch-ng-1-ph-n-3-kosmos-ng-i.mp3?v=c40047c58d69",
-          "duration": 119.121542,
+          "src": "audio/bien-chung-tam-thuc/003-ch-ng-1-ph-n-3-kosmos-ng-i.mp3?v=f1f5b5b4dd5a",
+          "duration": 120.821458,
           "words": 333,
           "order": 3,
           "video": {
@@ -673,8 +673,8 @@
         {
           "id": "ch-004-mspfsz0i",
           "title": "Chương 1 - Phần 4. LỰC KHÁNG CỰ",
-          "src": "audio/bien-chung-tam-thuc/004-ch-ng-1-ph-n-4-l-c-kh-ng-c.mp3?v=e8e95e27a704",
-          "duration": 103.097042,
+          "src": "audio/bien-chung-tam-thuc/004-ch-ng-1-ph-n-4-l-c-kh-ng-c.mp3?v=134af1e3f945",
+          "duration": 102.266833,
           "words": 276,
           "order": 4,
           "video": {
@@ -715,6 +715,14 @@
           "duration": 208.6655,
           "words": 691,
           "order": 7
+        },
+        {
+          "id": "ch-008-mspj0bgj",
+          "title": "Chương 1 - Phần 8. CHIÊM TINH TÂM LÝ HỌC",
+          "src": "audio/bien-chung-tam-thuc/008-ch-ng-1-ph-n-8-chi-m-tinh-t-m-l-h-c.mp3?v=b290eb41b035",
+          "duration": 166.306917,
+          "words": 535,
+          "order": 8
         }
       ]
     }
