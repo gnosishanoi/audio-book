@@ -698,7 +698,21 @@
           "src": "audio/bien-chung-tam-thuc/005-ch-ng-1-ph-n-5-th-c-h-nh.mp3?v=08fd12280f3d",
           "duration": 152.714125,
           "words": 490,
-          "order": 5
+          "order": 5,
+          "video": {
+            "provider": "youtube",
+            "videoId": "WYvqQMKiFi0",
+            "url": "https://youtu.be/WYvqQMKiFi0",
+            "youtubeUrl": "https://youtu.be/WYvqQMKiFi0",
+            "duration": 151.793,
+            "title": "Chương 1 - Phần 5. THỰC HÀNH",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1: Phần 5. THỰC HÀNH",
+            "description": "Biện chứng tâm thức\nChương 1 - Phần 5. THỰC HÀNH\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787124383.0252721
+          }
         },
         {
           "id": "ch-006-mspivez2",
