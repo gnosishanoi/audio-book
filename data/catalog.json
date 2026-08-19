@@ -439,7 +439,21 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/013-ch-ng-13-ng-i-quan-s-t-v-ng-i-b-quan-s-t.mp3?v=6476811fe449",
           "duration": 239.501833,
           "words": 770,
-          "order": 13
+          "order": 13,
+          "video": {
+            "provider": "youtube",
+            "videoId": "uq7vGF1gdpU",
+            "url": "https://youtu.be/uq7vGF1gdpU",
+            "youtubeUrl": "https://youtu.be/uq7vGF1gdpU",
+            "duration": 240.334,
+            "title": "Chương 13 – Người quan sát và người bị quan sát",
+            "youtubeTitle": "Tâm lý học cho sự thay đổi triệt để — Chương 13: Người quan sát và người bị quan sát",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 13 – Người quan sát và người bị quan sát\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787128261.132628
+          }
         },
         {
           "id": "ch-014-msidbhco",
