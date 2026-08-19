@@ -600,7 +600,7 @@
       "narrator": "",
       "description": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
       "cover": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-      "updatedAt": "2026-08-19T07:20:17",
+      "updatedAt": "2026-08-19T14:50:09",
       "language": "vi",
       "publishedAt": "2026-08-07",
       "chapters": [
@@ -672,7 +672,7 @@
         },
         {
           "id": "ch-004-mspfsz0i",
-          "title": "Chương 1 - Phần 4. LỰC KHÁNG CỰ",
+          "title": "Chương 1.4 - LỰC KHÁNG CỰ",
           "src": "audio/bien-chung-tam-thuc/004-ch-ng-1-ph-n-4-l-c-kh-ng-c.mp3?v=134af1e3f945",
           "duration": 102.266833,
           "words": 276,
@@ -694,9 +694,9 @@
         },
         {
           "id": "ch-005-mspfw7bf",
-          "title": "Chương 1 - Phần 5. THỰC HÀNH",
-          "src": "audio/bien-chung-tam-thuc/005-ch-ng-1-ph-n-5-th-c-h-nh.mp3?v=08fd12280f3d",
-          "duration": 152.714125,
+          "title": "Chương 1.5 - THỰC HÀNH",
+          "src": "audio/bien-chung-tam-thuc/005-ch-ng-1-ph-n-5-th-c-h-nh.mp3?v=068af11f296e",
+          "duration": 151.7935,
           "words": 490,
           "order": 5,
           "video": {
