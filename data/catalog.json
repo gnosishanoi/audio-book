@@ -683,13 +683,13 @@
             "url": "https://youtu.be/oHWEf28CoaE",
             "youtubeUrl": "https://youtu.be/oHWEf28CoaE",
             "duration": 102.267,
-            "title": "Chương 1 - Phần 4. LỰC KHÁNG CỰ",
-            "youtubeTitle": "Biện chứng tâm thức — Chương 1: Phần 4. LỰC KHÁNG CỰ",
-            "description": "Biện chứng tâm thức\nChương 1 - Phần 4. LỰC KHÁNG CỰ\n\nAudiobook produced by Gnosis Hà Nội.",
+            "title": "Chương 1.4 - LỰC KHÁNG CỰ",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1: .4 - LỰC KHÁNG CỰ",
+            "description": "Biện chứng tâm thức\nChương 1.4 - LỰC KHÁNG CỰ\n\nAudiobook produced by Gnosis Hà Nội.",
             "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
             "channelTitle": "Gnosis Hà Nội",
             "privacy": "public",
-            "publishedAt": 1787066256.575414
+            "publishedAt": 1787127324.532054
           }
         },
         {
@@ -705,22 +705,36 @@
             "url": "https://youtu.be/WYvqQMKiFi0",
             "youtubeUrl": "https://youtu.be/WYvqQMKiFi0",
             "duration": 151.793,
-            "title": "Chương 1 - Phần 5. THỰC HÀNH",
-            "youtubeTitle": "Biện chứng tâm thức — Chương 1: Phần 5. THỰC HÀNH",
-            "description": "Biện chứng tâm thức\nChương 1 - Phần 5. THỰC HÀNH\n\nAudiobook produced by Gnosis Hà Nội.",
+            "title": "Chương 1.5 - THỰC HÀNH",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1: .5 - THỰC HÀNH",
+            "description": "Biện chứng tâm thức\nChương 1.5 - THỰC HÀNH\n\nAudiobook produced by Gnosis Hà Nội.",
             "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
             "channelTitle": "Gnosis Hà Nội",
             "privacy": "public",
-            "publishedAt": 1787124383.0252721
+            "publishedAt": 1787127319.3375518
           }
         },
         {
           "id": "ch-006-mspivez2",
-          "title": "Chương 1 - Phần 6. YÊU CẦU",
+          "title": "Chương 1.6 - YÊU CẦU",
           "src": "audio/bien-chung-tam-thuc/006-ch-ng-1-ph-n-6-y-u-c-u.mp3?v=0a62f427801a",
           "duration": 93.837333,
           "words": 257,
-          "order": 6
+          "order": 6,
+          "video": {
+            "provider": "youtube",
+            "videoId": "KtE8O8_h4o4",
+            "url": "https://youtu.be/KtE8O8_h4o4",
+            "youtubeUrl": "https://youtu.be/KtE8O8_h4o4",
+            "duration": 93.837,
+            "title": "Chương 1.6 - YÊU CẦU",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1: .6 - YÊU CẦU",
+            "description": "Biện chứng tâm thức\nChương 1.6 - YÊU CẦU\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787127310.649898
+          }
         },
         {
           "id": "ch-007-mspiwuq8",
