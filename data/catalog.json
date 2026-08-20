@@ -628,7 +628,7 @@
       "narrator": "",
       "description": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
       "cover": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-      "updatedAt": "2026-08-20T14:32:35",
+      "updatedAt": "2026-08-20T21:28:49",
       "language": "vi",
       "publishedAt": "2026-08-07",
       "chapters": [
@@ -789,8 +789,8 @@
         {
           "id": "ch-008-mspj0bgj",
           "title": "Chương 1.8 - CHIÊM TINH TÂM LÝ HỌC",
-          "src": "audio/bien-chung-tam-thuc/008-ch-ng-1-ph-n-8-chi-m-tinh-t-m-l-h-c.mp3?v=b290eb41b035",
-          "duration": 166.306917,
+          "src": "audio/bien-chung-tam-thuc/008-ch-ng-1-ph-n-8-chi-m-tinh-t-m-l-h-c.mp3?v=3d19d1d3d1a3",
+          "duration": 167.278125,
           "words": 535,
           "order": 8,
           "video": {
