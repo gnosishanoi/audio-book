@@ -766,7 +766,7 @@
         },
         {
           "id": "ch-007-mspiwuq8",
-          "title": "Chương 1 - Phần 7. TƯ TƯỞNG CHỦ BẠI",
+          "title": "Chương 1.7 - TƯ TƯỞNG CHỦ BẠI",
           "src": "audio/bien-chung-tam-thuc/007-ch-ng-1-ph-n-7-t-t-ng-ch-b-i.mp3?v=d77729be1fcf",
           "duration": 209.139417,
           "words": 691,
@@ -777,22 +777,36 @@
             "url": "https://youtu.be/w2prqQZTeoI",
             "youtubeUrl": "https://youtu.be/w2prqQZTeoI",
             "duration": 209.139,
-            "title": "Chương 1 - Phần 7. TƯ TƯỞNG CHỦ BẠI",
-            "youtubeTitle": "Biện chứng tâm thức — Chương 1 - Phần 7. TƯ TƯỞNG CHỦ BẠI",
-            "description": "Biện chứng tâm thức\nChương 1 - Phần 7. TƯ TƯỞNG CHỦ BẠI\n\nAudiobook produced by Gnosis Hà Nội.",
+            "title": "Chương 1.7 - TƯ TƯỞNG CHỦ BẠI",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1.7 - TƯ TƯỞNG CHỦ BẠI",
+            "description": "Biện chứng tâm thức\nChương 1.7 - TƯ TƯỞNG CHỦ BẠI\n\nAudiobook produced by Gnosis Hà Nội.",
             "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
             "channelTitle": "Gnosis Hà Nội",
             "privacy": "public",
-            "publishedAt": 1787211166.654658
+            "publishedAt": 1787236145.754376
           }
         },
         {
           "id": "ch-008-mspj0bgj",
-          "title": "Chương 1 - Phần 8. CHIÊM TINH TÂM LÝ HỌC",
+          "title": "Chương 1.8 - CHIÊM TINH TÂM LÝ HỌC",
           "src": "audio/bien-chung-tam-thuc/008-ch-ng-1-ph-n-8-chi-m-tinh-t-m-l-h-c.mp3?v=b290eb41b035",
           "duration": 166.306917,
           "words": 535,
-          "order": 8
+          "order": 8,
+          "video": {
+            "provider": "youtube",
+            "videoId": "OwXRBx8AfmY",
+            "url": "https://youtu.be/OwXRBx8AfmY",
+            "youtubeUrl": "https://youtu.be/OwXRBx8AfmY",
+            "duration": 167.278,
+            "title": "Chương 1.8 - CHIÊM TINH TÂM LÝ HỌC",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1.8 - CHIÊM TINH TÂM LÝ HỌC",
+            "description": "Biện chứng tâm thức\nChương 1.8 - CHIÊM TINH TÂM LÝ HỌC\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787236140.051633
+          }
         },
         {
           "id": "ch-009-mspj16fc",
