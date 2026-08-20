@@ -119,8 +119,8 @@
         {
           "id": "ch-015-mss84pwx",
           "title": "Chapter 14: Atmospheric Screen And Breathing",
-          "src": "audio/dayspring-of-youth/015-chapter-14-atmospheric-screen-and-breathing.mp3?v=098c0b554a89",
-          "duration": 970.397,
+          "src": "audio/dayspring-of-youth/015-chapter-14-atmospheric-screen-and-breathing.mp3?v=c2f61edad565",
+          "duration": 913.330708,
           "words": 1986,
           "order": 15
         },
@@ -141,12 +141,28 @@
           "order": 17
         },
         {
+          "id": "ch-018-mssbcbeb",
+          "title": "Chapter 17: Submerged Worlds",
+          "src": "audio/dayspring-of-youth/018-chapter-17-submerged-worlds.mp3?v=0bd0252a0cea",
+          "duration": 2819.537958,
+          "words": 6396,
+          "order": 18
+        },
+        {
           "id": "ch-019-mssbnr0d",
           "title": "Chapter 18: The Silver Shield",
           "src": "audio/dayspring-of-youth/019-chapter-18-the-silver-shield.mp3?v=bcd9049c5acd",
           "duration": 1108.514083,
           "words": 2466,
           "order": 19
+        },
+        {
+          "id": "ch-020-mssbqs7c",
+          "title": "Chapter 19: The Elemental Advocate",
+          "src": "audio/dayspring-of-youth/020-chapter-19-the-elemental-advocate.mp3?v=ebe587b7629f",
+          "duration": 1509.572,
+          "words": 3353,
+          "order": 20
         },
         {
           "id": "ch-021-mssbtcbw",
@@ -162,7 +178,7 @@
       "narrator": "Brian M",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-17T06:03:37",
+      "updatedAt": "2026-08-20T21:34:47",
       "subtitle": "",
       "language": "en",
       "publishedAt": "2026-07-29"
