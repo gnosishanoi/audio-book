@@ -7,7 +7,7 @@ const resumeStorageKey = "stillword.resumeByBook.v2";
 const hiddenBooksStorageKey = "stillword.hiddenBooks.v1";
 const listenStatsStorageKey = "stillword.listenStats.v1";
 const offlineAudioCacheName = "gnosis-hanoi-offline-audio-v1";
-const offlineAssetCacheName = "gnosis-hanoi-shell-v5";
+const offlineAssetCacheName = "gnosis-hanoi-shell-v6";
 const excludedBookIds = new Set(["binh-minh-tuoi-tre"]);
 const canonicalBookSlugs = {
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de",
@@ -31,9 +31,11 @@ const featuredDescriptionFallbacks = {
   "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "Những bài giảng về quan sát bản thân, chuyển hóa tâm lý và đánh thức ý thức.",
   "xu-xo-cua-cac-vi-than": "Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala.",
-  "bien-chung-tam-thuc": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
-  "thien-gnosis": "Tuyển tập các bài thiền thực hành trong truyền thống Gnosis, hướng người nghe trở về với sự tĩnh lặng, quan sát nội tâm và đánh thức tâm thức."
+  "bien-chung-tam-thuc": "Thực hành làm tan rã cái tôi, vượt qua tư tưởng đối nghịch và rèn luyện tâm thức.",
+  "thien-gnosis": "Những bài thiền thực hành giúp người nghe trở về tĩnh lặng, quan sát nội tâm và đánh thức tâm thức."
 };
+
+const featuredImageCache = new Map();
 
 const state = {
   catalog: [],
@@ -51,6 +53,7 @@ const state = {
   isRefreshing: false,
   featuredIndex: 0,
   featuredTimer: 0,
+  featuredRenderToken: 0,
   offlineUrls: new Set(),
   offlineBusy: new Set()
 };
@@ -133,6 +136,7 @@ async function refreshCatalog() {
   try {
     const { books } = await loadCatalog();
     state.catalog = books;
+    preloadFeaturedImages(books);
     renderLibrary();
     renderFeatured();
     updateResumeUi();
@@ -183,6 +187,7 @@ function normalizeCatalog(books, assetBase) {
       author: book.author || "",
       narrator: book.narrator || "",
       cover: resolveAsset(book.cover, assetBase) || knownCover(book.id) || placeholderCover(book),
+      featuredImage: resolveAsset(book.featuredImage, assetBase),
       description: book.description || book.subtitle || "",
       language: normalizeLanguage(book.language, book.title),
       featureDate: book.publishedAt || book.publishedDate || book.updatedAt || "",
@@ -588,27 +593,67 @@ function featuredBooks() {
   });
 }
 
-function renderFeatured(index = state.featuredIndex, { restart = true } = {}) {
+function featuredImageFor(book) {
+  const editorialImage = book.featuredImage || featuredImagePaths[book.id] || "";
+  return {
+    editorialImage,
+    src: editorialImage || book.cover
+  };
+}
+
+function preloadFeaturedImage(src) {
+  if (!src) return Promise.resolve();
+  if (featuredImageCache.has(src)) return featuredImageCache.get(src);
+
+  const pending = new Promise((resolve) => {
+    const image = new Image();
+    const finish = () => resolve();
+    image.addEventListener("load", finish, { once: true });
+    image.addEventListener("error", finish, { once: true });
+    image.src = src;
+    if (image.complete) resolve();
+  });
+  featuredImageCache.set(src, pending);
+  return pending;
+}
+
+function preloadFeaturedImages(books) {
+  books.forEach((book) => preloadFeaturedImage(featuredImageFor(book).src));
+}
+
+function compactFeaturedDescription(book) {
+  const preferred = featuredDescriptionFallbacks[book.id];
+  if (preferred) return preferred;
+  const source = String(book.description || book.subtitle || "").trim();
+  if (!source) return "Một tác phẩm dành cho học hỏi và chiêm nghiệm nội tâm.";
+  const firstSentence = source.match(/^.*?[.!?](?:\s|$)/)?.[0]?.trim() || source;
+  if (firstSentence.length <= 150) return firstSentence;
+  return `${firstSentence.slice(0, 147).replace(/\s+\S*$/, "")}…`;
+}
+
+async function renderFeatured(index = state.featuredIndex, { restart = true } = {}) {
   const books = featuredBooks();
   if (!books.length) return;
   state.featuredIndex = (index + books.length) % books.length;
   const book = books[state.featuredIndex];
   if (!book || !els.featuredTitle) return;
 
-  const featuredImage = book.featuredImage || featuredImagePaths[book.id];
+  const renderToken = ++state.featuredRenderToken;
+  const { editorialImage, src } = featuredImageFor(book);
+  await preloadFeaturedImage(src);
+  if (renderToken !== state.featuredRenderToken) return;
+
   els.featuredEyebrow.textContent = "Từ thư viện Gnosis";
   els.featuredTitle.textContent = book.title;
   els.featuredAuthor.textContent = book.author || book.narrator || "Gnosis Hà Nội";
-  els.featuredDescription.textContent = book.description
-    || featuredDescriptionFallbacks[book.id]
-    || "Một tác phẩm dành cho học hỏi và chiêm nghiệm nội tâm.";
+  els.featuredDescription.textContent = compactFeaturedDescription(book);
   els.featuredLink.href = `#book/${encodeURIComponent(bookRouteSlug(book))}`;
   els.featuredLink.textContent = "Khám phá";
-  els.featuredImage.src = featuredImage || book.cover;
-  els.featuredImage.alt = featuredImage
+  els.featuredImage.src = src;
+  els.featuredImage.alt = editorialImage
     ? `${book.title} trong không gian đọc của Gnosis Hà Nội`
     : `Bìa sách ${book.title}`;
-  els.featuredVisual.classList.toggle("cover-only", !featuredImage);
+  els.featuredVisual.classList.toggle("cover-only", !editorialImage);
   els.featuredStatus.textContent = `${state.featuredIndex + 1} / ${books.length}`;
   els.featuredDots.innerHTML = books.map((item, dotIndex) => `
     <button class="featured-dot${dotIndex === state.featuredIndex ? " active" : ""}" type="button" role="tab" aria-selected="${dotIndex === state.featuredIndex}" aria-label="Xem ${escapeHtml(item.title)}" data-featured-index="${dotIndex}"></button>

@@ -183,7 +183,8 @@ body.book-route .header-library-link {
   grid-template-columns: minmax(0, 1.65fr) minmax(320px, 0.85fr);
   align-items: stretch;
   gap: 26px;
-  min-height: 440px;
+  height: 520px;
+  min-height: 520px;
   padding: 0;
 }
 
@@ -198,7 +199,8 @@ body.book-route .header-library-link {
 .featured-visual {
   position: relative;
   display: grid;
-  min-height: 440px;
+  min-height: 0;
+  height: 100%;
   overflow: hidden;
   place-items: center;
   background: #d8d1c2;
@@ -231,7 +233,8 @@ body.book-route .header-library-link {
   justify-content: center;
   border: 1px solid rgba(52, 72, 59, 0.38);
   background: rgba(251, 248, 240, 0.72);
-  padding: 44px clamp(30px, 3.3vw, 48px);
+  min-height: 0;
+  padding: 32px clamp(30px, 3.3vw, 48px);
 }
 
 .slide-enter .featured-scene {
@@ -285,11 +288,16 @@ h1 {
 
 .hero-description {
   max-width: 310px;
-  margin: 26px 0 0;
+  min-height: 2.9em;
+  margin: 18px 0 0;
   color: var(--muted);
   font-family: "Crimson Pro", Georgia, "Times New Roman", serif;
   font-size: 1.02rem;
-  line-height: 1.62;
+  line-height: 1.45;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .featured-button {
@@ -297,7 +305,7 @@ h1 {
   align-self: flex-start;
   align-items: center;
   justify-content: center;
-  margin-top: 28px;
+  margin-top: 20px;
   text-decoration: none;
 }
 
@@ -307,7 +315,7 @@ h1 {
   align-items: center;
   align-self: flex-start;
   gap: 10px;
-  margin-top: 26px;
+  margin-top: 18px;
 }
 
 .featured-arrow {
@@ -357,13 +365,52 @@ h1 {
 }
 
 .featured-panel .resume-panel {
-  margin-top: 24px;
-  padding: 17px 0 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "label action"
+    "title action"
+    "meta action";
+  align-items: center;
+  column-gap: 14px;
+  margin-top: 16px;
+  padding: 12px 0 0;
   border: 0;
   border-top: 1px solid var(--line);
   border-radius: 0;
   background: transparent;
   box-shadow: none;
+}
+
+.featured-panel .resume-panel .panel-label {
+  grid-area: label;
+}
+
+.featured-panel #resumeTitle {
+  grid-area: title;
+  min-width: 0;
+  margin: 3px 0 0;
+  overflow: hidden;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.featured-panel #resumeMeta {
+  grid-area: meta;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 0.82rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.featured-panel #heroContinueBtn {
+  grid-area: action;
+  min-height: 38px;
+  margin: 0;
+  padding: 0 14px;
+  white-space: nowrap;
 }
 
 h2 {
@@ -1395,6 +1442,7 @@ body.mini-player .round-button {
   }
 
   .library-hero {
+    height: auto;
     min-height: 0;
     gap: 0;
     padding: 0;
