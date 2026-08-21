@@ -7,7 +7,7 @@ const resumeStorageKey = "stillword.resumeByBook.v2";
 const hiddenBooksStorageKey = "stillword.hiddenBooks.v1";
 const listenStatsStorageKey = "stillword.listenStats.v1";
 const offlineAudioCacheName = "gnosis-hanoi-offline-audio-v1";
-const offlineAssetCacheName = "gnosis-hanoi-shell-v4";
+const offlineAssetCacheName = "gnosis-hanoi-shell-v5";
 const excludedBookIds = new Set(["binh-minh-tuoi-tre"]);
 const canonicalBookSlugs = {
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de",
@@ -595,7 +595,7 @@ function renderFeatured(index = state.featuredIndex, { restart = true } = {}) {
   const book = books[state.featuredIndex];
   if (!book || !els.featuredTitle) return;
 
-  const featuredImage = featuredImagePaths[book.id];
+  const featuredImage = book.featuredImage || featuredImagePaths[book.id];
   els.featuredEyebrow.textContent = "Từ thư viện Gnosis";
   els.featuredTitle.textContent = book.title;
   els.featuredAuthor.textContent = book.author || book.narrator || "Gnosis Hà Nội";
