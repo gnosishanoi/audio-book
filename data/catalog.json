@@ -499,7 +499,21 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/015-ch-ng-15-t-nh-nh-t-th.mp3?v=af62e008beaa",
           "duration": 439.887,
           "words": 1506,
-          "order": 15
+          "order": 15,
+          "video": {
+            "provider": "youtube",
+            "videoId": "KqEmwpKi184",
+            "url": "https://youtu.be/KqEmwpKi184",
+            "youtubeUrl": "https://youtu.be/KqEmwpKi184",
+            "duration": 441.974,
+            "title": "Chương 15 – Tính nhất thể",
+            "youtubeTitle": "Tâm lý học cho sự thay đổi triệt để — Chương 15 – Tính nhất thể",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 15 – Tính nhất thể\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787312816.9797068
+          }
         },
         {
           "id": "ch-016-msjae5ld",
