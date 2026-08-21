@@ -580,6 +580,14 @@
           "order": 23
         },
         {
+          "id": "ch-024-mt30hxwz",
+          "title": "Chương 24 – Bài ca tâm lý",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/024-ch-ng-24-b-i-ca-t-m-l.mp3?v=98e589925b18",
+          "duration": 490.927875,
+          "words": 1678,
+          "order": 24
+        },
+        {
           "id": "ch-025-mt30lqar",
           "title": "Chương 25 – Luật quay trở lại và tái diễn",
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/025-ch-ng-25-lu-t-quay-tr-l-i-v-t-i-di-n.mp3?v=4a9f04bb3fd7",
@@ -608,7 +616,7 @@
       "narrator": "Thảo Nguyên",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-21T21:27:10",
+      "updatedAt": "2026-08-21T21:34:46",
       "language": "vi",
       "publishedAt": "2026-07-29"
     },
