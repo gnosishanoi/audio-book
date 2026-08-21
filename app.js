@@ -7,7 +7,7 @@ const resumeStorageKey = "stillword.resumeByBook.v2";
 const hiddenBooksStorageKey = "stillword.hiddenBooks.v1";
 const listenStatsStorageKey = "stillword.listenStats.v1";
 const offlineAudioCacheName = "gnosis-hanoi-offline-audio-v1";
-const offlineAssetCacheName = "gnosis-hanoi-shell-v3";
+const offlineAssetCacheName = "gnosis-hanoi-shell-v4";
 const excludedBookIds = new Set(["binh-minh-tuoi-tre"]);
 const canonicalBookSlugs = {
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de",
@@ -17,19 +17,22 @@ const knownCoverPaths = {
   "dayspring-of-youth": "./assets/covers/dayspring-of-youth-gnosis-v2.png?v=2",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v4.png?v=4",
   "xu-xo-cua-cac-vi-than": "./assets/covers/xu-xo-cua-cac-vi-than-gnosis-v5.png?v=5",
-  "bien-chung-tam-thuc": "./assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3"
+  "bien-chung-tam-thuc": "./assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
+  "thien-gnosis": "./assets/covers/thien-gnosis-v2.png?v=2"
 };
 const featuredImagePaths = {
   "dayspring-of-youth": "./assets/hero/dayspring-of-youth-dawn-v1.jpg",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-flatlay-gnosis-v6.png?v=6",
   "xu-xo-cua-cac-vi-than": "./assets/hero/xu-xo-cua-cac-vi-than-reading-v3.jpg?v=3",
-  "bien-chung-tam-thuc": "./assets/hero/bien-chung-tam-thuc-study-v2.png?v=2"
+  "bien-chung-tam-thuc": "./assets/hero/bien-chung-tam-thuc-study-v2.png?v=2",
+  "thien-gnosis": "./assets/hero/thien-gnosis-meditation-v1.png?v=1"
 };
 const featuredDescriptionFallbacks = {
   "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "Những bài giảng về quan sát bản thân, chuyển hóa tâm lý và đánh thức ý thức.",
   "xu-xo-cua-cac-vi-than": "Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala.",
-  "bien-chung-tam-thuc": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức."
+  "bien-chung-tam-thuc": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
+  "thien-gnosis": "Tuyển tập các bài thiền thực hành trong truyền thống Gnosis, hướng người nghe trở về với sự tĩnh lặng, quan sát nội tâm và đánh thức tâm thức."
 };
 
 const state = {
