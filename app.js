@@ -7,7 +7,7 @@ const resumeStorageKey = "stillword.resumeByBook.v2";
 const hiddenBooksStorageKey = "stillword.hiddenBooks.v1";
 const listenStatsStorageKey = "stillword.listenStats.v1";
 const offlineAudioCacheName = "gnosis-hanoi-offline-audio-v1";
-const offlineAssetCacheName = "gnosis-hanoi-shell-v1";
+const offlineAssetCacheName = "gnosis-hanoi-shell-v2";
 const excludedBookIds = new Set(["binh-minh-tuoi-tre"]);
 const canonicalBookSlugs = {
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de",
@@ -15,13 +15,13 @@ const canonicalBookSlugs = {
 };
 const knownCoverPaths = {
   "dayspring-of-youth": "./assets/covers/dayspring-of-youth-gnosis-v2.png?v=2",
-  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v2.jpg?v=2",
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v3.png?v=3",
   "xu-xo-cua-cac-vi-than": "./assets/covers/xu-xo-cua-cac-vi-than-gnosis-v5.png?v=5",
   "bien-chung-tam-thuc": "./assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3"
 };
 const featuredImagePaths = {
   "dayspring-of-youth": "./assets/hero/dayspring-of-youth-dawn-v1.jpg",
-  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-flatlay-gnosis-v5.jpg",
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-flatlay-gnosis-v6.png?v=6",
   "xu-xo-cua-cac-vi-than": "./assets/hero/xu-xo-cua-cac-vi-than-reading-v3.jpg?v=3",
   "bien-chung-tam-thuc": "./assets/hero/bien-chung-tam-thuc-study-v2.png?v=2"
 };
