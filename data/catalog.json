@@ -238,17 +238,17 @@
           "order": 3,
           "video": {
             "provider": "youtube",
-            "videoId": "-EG3fEEqLgM",
-            "url": "https://youtu.be/-EG3fEEqLgM",
-            "youtubeUrl": "https://youtu.be/-EG3fEEqLgM",
-            "duration": 254.113958,
+            "videoId": "YKbaaoU8mCM",
+            "url": "https://youtu.be/YKbaaoU8mCM",
+            "youtubeUrl": "https://youtu.be/YKbaaoU8mCM",
+            "duration": 248.884,
             "title": "Chương 3 – Cuộc Nổi Dậy Tâm Lý",
             "youtubeTitle": "Tâm lý học cho sự thay đổi triệt để — Chương 3 – Cuộc Nổi Dậy Tâm Lý",
             "description": "Tâm lý học cho sự thay đổi triệt để\nChương 3 – Cuộc Nổi Dậy Tâm Lý\n\nAudiobook produced by Gnosis Hà Nội.",
             "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
             "channelTitle": "Gnosis Hà Nội",
             "privacy": "public",
-            "publishedAt": 1787209572.903744
+            "publishedAt": 1787304490.585166
           }
         },
         {
@@ -586,7 +586,7 @@
       "narrator": "Thảo Nguyên",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-21T16:40:09",
+      "updatedAt": "2026-08-21T16:49:04",
       "language": "vi",
       "publishedAt": "2026-07-29"
     },
