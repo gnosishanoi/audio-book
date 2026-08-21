@@ -666,7 +666,7 @@
       "narrator": "",
       "description": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
       "cover": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-      "updatedAt": "2026-08-20T21:28:49",
+      "updatedAt": "2026-08-21T21:31:02",
       "language": "vi",
       "publishedAt": "2026-08-07",
       "chapters": [
@@ -857,7 +857,7 @@
         {
           "id": "ch-010-msztt8os",
           "title": "Chương 1.10 - TRUNG TÂM Ý THỨC CỐ ĐỊNH",
-          "src": "audio/bien-chung-tam-thuc/010-ch-ng-10-ph-n-10-trung-t-m-th-c-c-nh.mp3?v=60d64630990e",
+          "src": "audio/bien-chung-tam-thuc/010-ch-ng-1-ph-n-10-trung-t-m-th-c-c-nh.mp3?v=60d64630990e",
           "duration": 198.805833,
           "words": 675,
           "order": 10
