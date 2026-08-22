@@ -543,7 +543,21 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/017-ch-ng-17-sinh-v-t-m-y-m-c.mp3?v=32cc76dc2fa1",
           "duration": 258.596375,
           "words": 847,
-          "order": 17
+          "order": 17,
+          "video": {
+            "provider": "youtube",
+            "videoId": "aweFEPpMGjo",
+            "url": "https://youtu.be/aweFEPpMGjo",
+            "youtubeUrl": "https://youtu.be/aweFEPpMGjo",
+            "duration": 258.596,
+            "title": "Chương 17 – Sinh Vật Máy Móc",
+            "youtubeTitle": "Tâm lý học cho sự thay đổi triệt để — Chương 17 – Sinh Vật Máy Móc",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 17 – Sinh Vật Máy Móc\n\nChương này chỉ ra rằng con người thường sống máy móc, lặp lại những sự kiện, thói quen và phản ứng hằng ngày dưới sự chi phối của nhiều cái tôi ẩn giấu mà không tự nhận biết. Sự thay đổi triệt để bắt đầu khi ta quan sát chân thật cách mình suy nghĩ, cảm xúc, nói năng và hành xử trong đời sống bình thường. Chỉ vài phút tỉnh thức, không làm theo phản ứng tự động, cũng có thể mở đầu cho việc thoát khỏi những đường ray quen thuộc và chuyển hóa hoàn cảnh sống.\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787386223.3854752
+          }
         },
         {
           "id": "ch-018-msjplko8",
