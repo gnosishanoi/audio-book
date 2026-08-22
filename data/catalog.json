@@ -932,7 +932,21 @@
           "src": "audio/bien-chung-tam-thuc/010-ch-ng-1-ph-n-10-trung-t-m-th-c-c-nh.mp3?v=60d64630990e",
           "duration": 198.805833,
           "words": 675,
-          "order": 10
+          "order": 10,
+          "video": {
+            "provider": "youtube",
+            "videoId": "IW6vmWQZfSE",
+            "url": "https://youtu.be/IW6vmWQZfSE",
+            "youtubeUrl": "https://youtu.be/IW6vmWQZfSE",
+            "duration": 198.806,
+            "title": "Chương 1.10 - TRUNG TÂM Ý THỨC CỐ ĐỊNH",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1.10 - TRUNG TÂM Ý THỨC CỐ ĐỊNH",
+            "description": "Biện chứng tâm thức\nChương 1.10 - TRUNG TÂM Ý THỨC CỐ ĐỊNH\n\nChương này lý giải vì sao con người không thể giữ vững một mục tiêu khi bị nhiều cái tôi và nhiều tâm trí luân phiên chi phối, đồng thời nhấn mạnh rằng cái chết thể xác không tự động giải quyết vấn đề ấy. Con đường thức tỉnh đòi hỏi một sự chuyển hóa nội tâm toàn vẹn để xây dựng trung tâm ý thức cố định, đánh thức Phật tính và tiến từ trạng thái nhất thể đến siêu nhất thể.\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787406875.982147
+          }
         },
         {
           "id": "ch-011-mt07ge2n",
