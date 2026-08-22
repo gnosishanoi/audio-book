@@ -610,8 +610,8 @@
         {
           "id": "ch-024-mt30hxwz",
           "title": "Chương 24 – Bài ca tâm lý",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/024-ch-ng-24-b-i-ca-t-m-l.mp3?v=98e589925b18",
-          "duration": 490.927875,
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/024-ch-ng-24-b-i-ca-t-m-l.mp3?v=65c91d1bde30",
+          "duration": 489.319208,
           "words": 1678,
           "order": 24
         },
@@ -622,6 +622,14 @@
           "duration": 304.919708,
           "words": 1039,
           "order": 25
+        },
+        {
+          "id": "ch-026-mt3223y7",
+          "title": "Chương 26 – Trạng thái tỉnh thức của trẻ sơ sinh",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/026-ch-ng-26-tr-ng-th-i-t-nh-th-c-c-a-tr-s-sinh.mp3?v=14b1a0bdd638",
+          "duration": 262.509167,
+          "words": 810,
+          "order": 26
         }
       ],
       "visual": {
@@ -644,7 +652,7 @@
       "narrator": "Thảo Nguyên",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-21T21:34:46",
+      "updatedAt": "2026-08-22T15:10:11",
       "language": "vi",
       "publishedAt": "2026-07-29"
     },
