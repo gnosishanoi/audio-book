@@ -565,7 +565,21 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/018-ch-ng-18-l-ng-th-c-si-u-vi-t.mp3?v=4778433610c6",
           "duration": 299.871792,
           "words": 1016,
-          "order": 18
+          "order": 18,
+          "video": {
+            "provider": "youtube",
+            "videoId": "q2UPt6tQwbo",
+            "url": "https://youtu.be/q2UPt6tQwbo",
+            "youtubeUrl": "https://youtu.be/q2UPt6tQwbo",
+            "duration": 299.801,
+            "title": "Chương 18 – Lương thực siêu việt",
+            "youtubeTitle": "Tâm lý học cho sự thay đổi triệt để — Chương 18 – Lương thực siêu việt",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 18 – Lương thực siêu việt\n\nChương này chỉ ra rằng thói quen máy móc khiến con người sống trong trạng thái mê ngủ, còn sự thay đổi đích thực bắt đầu từ việc quan sát từng tâm trạng, suy nghĩ và phản ứng ngay trong đời sống hằng ngày. Gnosis được trình bày như “lương thực của trí tuệ”, đem đến những ý tưởng và sức mạnh cao hơn để con người tiêu hủy các khiếm khuyết tâm lý và khai mở một đời sống nội tâm mới ngay tại đây và lúc này.\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787407048.0569909
+          }
         },
         {
           "id": "ch-019-msjplm0r",
