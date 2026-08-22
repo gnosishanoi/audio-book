@@ -710,7 +710,7 @@
       "narrator": "",
       "description": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
       "cover": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-      "updatedAt": "2026-08-22T15:50:25",
+      "updatedAt": "2026-08-22T17:10:29",
       "language": "vi",
       "publishedAt": "2026-08-07",
       "chapters": [
@@ -892,9 +892,9 @@
         },
         {
           "id": "ch-009-mspj16fc",
-          "title": "Chương 1 - Phần 9. THUẬT HÙNG BIỆN CỦA CÁI TÔI",
-          "src": "audio/bien-chung-tam-thuc/009-ch-ng-1-ph-n-9-thu-t-h-ng-bi-n-c-a-c-i-t-i.mp3?v=c80c9b482da6",
-          "duration": 244.292125,
+          "title": "Chương 1.9 - THUẬT HÙNG BIỆN CỦA CÁI TÔI",
+          "src": "audio/bien-chung-tam-thuc/009-ch-ng-1-ph-n-9-thu-t-h-ng-bi-n-c-a-c-i-t-i.mp3?v=36f2c2ec0457",
+          "duration": 245.602292,
           "words": 825,
           "order": 9
         },
