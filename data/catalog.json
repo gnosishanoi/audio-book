@@ -521,7 +521,21 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/016-ch-ng-16-s-ch-s-s-ng.mp3?v=97bceddf26fc",
           "duration": 208.855,
           "words": 679,
-          "order": 16
+          "order": 16,
+          "video": {
+            "provider": "youtube",
+            "videoId": "wGWyBBAJ0qY",
+            "url": "https://youtu.be/wGWyBBAJ0qY",
+            "youtubeUrl": "https://youtu.be/wGWyBBAJ0qY",
+            "duration": 208.855,
+            "title": "Chương 16 – Sách Sự Sống",
+            "youtubeTitle": "Tâm lý học cho sự thay đổi triệt để — Chương 16 – Sách Sự Sống",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 16 – Sách Sự Sống\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787362815.884917
+          }
         },
         {
           "id": "ch-017-msjp12by",
