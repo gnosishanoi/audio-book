@@ -710,7 +710,7 @@
       "narrator": "",
       "description": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
       "cover": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-      "updatedAt": "2026-08-21T21:58:42",
+      "updatedAt": "2026-08-22T15:50:25",
       "language": "vi",
       "publishedAt": "2026-08-07",
       "chapters": [
@@ -893,9 +893,9 @@
         {
           "id": "ch-009-mspj16fc",
           "title": "Chương 1 - Phần 9. THUẬT HÙNG BIỆN CỦA CÁI TÔI",
-          "src": "audio/bien-chung-tam-thuc/009-ch-ng-1-ph-n-9-thu-t-h-ng-bi-n-c-a-c-i-t-i.mp3?v=3b1f7fb07185",
-          "duration": 248.852208,
-          "words": 834,
+          "src": "audio/bien-chung-tam-thuc/009-ch-ng-1-ph-n-9-thu-t-h-ng-bi-n-c-a-c-i-t-i.mp3?v=c80c9b482da6",
+          "duration": 244.292125,
+          "words": 825,
           "order": 9
         },
         {
@@ -921,6 +921,38 @@
           "duration": 342.8465,
           "words": 1200,
           "order": 12
+        },
+        {
+          "id": "ch-013-mt43qxlg",
+          "title": "Chương 1 - Phần 13. HÀNH ĐỘNG SÚC TÍCH CỦA BẢN THỂ",
+          "src": "audio/bien-chung-tam-thuc/013-ch-ng-1-ph-n-13-h-nh-ng-s-c-t-ch-c-a-b-n-th.mp3?v=410ed489c44e",
+          "duration": 197.299042,
+          "words": 671,
+          "order": 13
+        },
+        {
+          "id": "ch-014-mt43tlkk",
+          "title": "Chương 1- Phần 14. LÒNG TỰ ÁI",
+          "src": "audio/bien-chung-tam-thuc/014-ch-ng-1-ph-n-14-l-ng-t-i.mp3?v=2592b498f81c",
+          "duration": 405.934125,
+          "words": 1431,
+          "order": 14
+        },
+        {
+          "id": "ch-015-mt43uivm",
+          "title": "Chương 1 - Phần 15. AHIMSA (Phi bạo lực)",
+          "src": "audio/bien-chung-tam-thuc/015-ch-ng-1-ph-n-15-ahimsa-phi-b-o-l-c.mp3?v=786ffb01e4f1",
+          "duration": 358.912542,
+          "words": 1203,
+          "order": 15
+        },
+        {
+          "id": "ch-016-mt43ujzf",
+          "title": "CHương 1- Phần 16. HÀNH VI BẦY ĐÀN",
+          "src": "audio/bien-chung-tam-thuc/016-ch-ng-1-ph-n-16-h-nh-vi-b-y-n.mp3?v=5ae97d1923da",
+          "duration": 197.248292,
+          "words": 661,
+          "order": 16
         }
       ]
     },
