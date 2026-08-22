@@ -896,7 +896,21 @@
           "src": "audio/bien-chung-tam-thuc/009-ch-ng-1-ph-n-9-thu-t-h-ng-bi-n-c-a-c-i-t-i.mp3?v=36f2c2ec0457",
           "duration": 245.602292,
           "words": 825,
-          "order": 9
+          "order": 9,
+          "video": {
+            "provider": "youtube",
+            "videoId": "5rq-9pyya8Y",
+            "url": "https://youtu.be/5rq-9pyya8Y",
+            "youtubeUrl": "https://youtu.be/5rq-9pyya8Y",
+            "duration": 245.602,
+            "title": "Chương 1.9 - THUẬT HÙNG BIỆN CỦA CÁI TÔI",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1.9 - THUẬT HÙNG BIỆN CỦA CÁI TÔI",
+            "description": "Biện chứng tâm thức\nChương 1.9 - THUẬT HÙNG BIỆN CỦA CÁI TÔI\n\nChương này phân tích con người như một tập hợp nhiều cái tôi thiếu trung tâm tâm thức ổn định, trong đó mỗi cái tôi dùng tài hùng biện tinh vi để che giấu sai lầm và duy trì trạng thái ngủ mê. Tác giả chỉ ra hậu quả xã hội của sự mê hoặc ấy qua chạy đua vũ trang, nạn đói Ethiopia, lối sống băng đảng và sự bắt chước bạo lực, đồng thời phê phán tâm lý học duy vật vì không giải quyết được khủng hoảng tinh thần. Con đường thoát khỏi thuật hùng biện của cái tôi là thực hành nghiêm túc những giáo lý về chuyển hóa tâm lý trong đời sống.\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787393437.619019
+          }
         },
         {
           "id": "ch-010-msztt8os",
