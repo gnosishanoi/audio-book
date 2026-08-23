@@ -1017,7 +1017,21 @@
           "src": "audio/thien-gnosis/001-lu-n-xa-tr-i-tim.mp3?v=56038b15b99b",
           "duration": 3483.558917,
           "words": 3111,
-          "order": 1
+          "order": 1,
+          "video": {
+            "provider": "youtube",
+            "videoId": "dTejwkog1Hw",
+            "url": "https://youtu.be/dTejwkog1Hw",
+            "youtubeUrl": "https://youtu.be/dTejwkog1Hw",
+            "duration": 3483.558917,
+            "title": "Luân xa trái tim",
+            "youtubeTitle": "Thiền Gnosis — Luân xa trái tim",
+            "description": "Thiền Gnosis\nLuân xa trái tim\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787468485.318113
+          }
         }
       ]
     }
