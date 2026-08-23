@@ -997,43 +997,6 @@
           "order": 16
         }
       ]
-    },
-    {
-      "id": "thien-gnosis",
-      "title": "Thiền Gnosis",
-      "author": "Gnosis Hà Nội",
-      "subtitle": "Một số phương pháp thực hành thiền trong truyền thống Gnosis",
-      "narrator": "",
-      "description": "Thiền Gnosis là tuyển tập những bài dẫn thiền được biên soạn từ các phương pháp thực hành trong truyền thống Gnosis do thầy Samael Aun Weor và các vị thầy khác truyền dạy. Mỗi bài thiền hướng người nghe trở về với sự tĩnh lặng, quan sát nội tâm, hiểu biết chính mình và từng bước đánh thức tâm thức.",
-      "cover": "assets/covers/thien-gnosis-v2.png?v=2",
-      "featuredImage": "assets/hero/thien-gnosis-meditation-v1.png?v=1",
-      "updatedAt": "2026-08-22T09:32:19",
-      "language": "vi",
-      "publishedAt": "2026-08-21",
-      "chapters": [
-        {
-          "id": "ch-001",
-          "title": "Luân xa trái tim",
-          "src": "audio/thien-gnosis/001-lu-n-xa-tr-i-tim.mp3?v=09c5d348e643",
-          "duration": 3482.224,
-          "words": 3111,
-          "order": 1,
-          "video": {
-            "provider": "youtube",
-            "videoId": "xZPCV8ej5io",
-            "url": "https://youtu.be/xZPCV8ej5io",
-            "youtubeUrl": "https://youtu.be/xZPCV8ej5io",
-            "duration": 3482.224,
-            "title": "Luân xa trái tim",
-            "youtubeTitle": "Thiền Gnosis — Luân xa trái tim",
-            "description": "Thiền Gnosis\nLuân xa trái tim\n\nAudiobook produced by Gnosis Hà Nội.",
-            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
-            "channelTitle": "Gnosis Hà Nội",
-            "privacy": "public",
-            "publishedAt": 1787365945.7630012
-          }
-        }
-      ]
     }
   ]
 }
