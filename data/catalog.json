@@ -584,9 +584,9 @@
         {
           "id": "ch-019-msjplm0r",
           "title": "Chương 19 – Người chủ tốt của gia đình",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/019-ch-ng-19-ng-i-ch-t-t-c-a-gia-nh.mp3?v=c08c25020593",
-          "duration": 229.713,
-          "words": 757,
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/019-ch-ng-19-ng-i-ch-t-t-c-a-gia-nh.mp3?v=8f51ee635a58",
+          "duration": 230.861917,
+          "words": 755,
           "order": 19,
           "video": {
             "provider": "youtube",
@@ -658,6 +658,54 @@
           "duration": 262.509167,
           "words": 810,
           "order": 26
+        },
+        {
+          "id": "ch-027-mt3273h6",
+          "title": "Chương 27 – Người Pha-ri-si và người thu thuế",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/027-ch-ng-27-ng-i-pha-ri-si-v-ng-i-thu-thu.mp3?v=3af6b7b18a27",
+          "duration": 577.088125,
+          "words": 1941,
+          "order": 27
+        },
+        {
+          "id": "ch-028-mt5k1vji",
+          "title": "Chương 28 – Ý Chí",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/028-ch-ng-28-ch.mp3?v=1a07015a05dc",
+          "duration": 469.112833,
+          "words": 1554,
+          "order": 28
+        },
+        {
+          "id": "ch-029-mt5k6nil",
+          "title": "Chương 29 – Chặt đầu",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/029-ch-ng-29-ch-t-u.mp3?v=e543362f213e",
+          "duration": 772.833458,
+          "words": 2758,
+          "order": 29
+        },
+        {
+          "id": "ch-030-mt5kcyxz",
+          "title": "Chương 30 – Trọng tâm cố định",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/030-ch-ng-30-tr-ng-t-m-c-nh.mp3?v=d92cbf07d96b",
+          "duration": 674.02125,
+          "words": 2413,
+          "order": 30
+        },
+        {
+          "id": "ch-031-mt5kkva7",
+          "title": "Chương 31 – Rèn luyện tâm linh trong Gnosis",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/031-ch-ng-31-r-n-luy-n-t-m-linh-trong-gnosis.mp3?v=1d84a8873eb8",
+          "duration": 257.851417,
+          "words": 834,
+          "order": 31
+        },
+        {
+          "id": "ch-032-mt5km9hx",
+          "title": "Chương 32 – Cầu nguyện trong quá trình rèn luyện",
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/032-ch-ng-32-c-u-nguy-n-trong-qu-tr-nh-r-n-luy-n.mp3?v=80bb67cb07d7",
+          "duration": 464.463833,
+          "words": 1631,
+          "order": 32
         }
       ],
       "visual": {
@@ -680,7 +728,7 @@
       "narrator": "Thảo Nguyên",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-22T20:57:11",
+      "updatedAt": "2026-08-24T08:58:12",
       "language": "vi",
       "publishedAt": "2026-07-29"
     },
