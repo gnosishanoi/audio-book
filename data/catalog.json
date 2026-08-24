@@ -786,7 +786,7 @@
       "narrator": "",
       "description": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
       "cover": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-      "updatedAt": "2026-08-24T10:13:44",
+      "updatedAt": "2026-08-24T11:50:28",
       "language": "vi",
       "publishedAt": "2026-08-07",
       "chapters": [
@@ -1012,7 +1012,7 @@
         },
         {
           "id": "ch-011-mt07ge2n",
-          "title": "Chương 1 - Phần 11. SIÊU NHẤT THỂ",
+          "title": "Chương 1.11 - SIÊU NHẤT THỂ",
           "src": "audio/bien-chung-tam-thuc/011-ch-ng-1-ph-n-11-si-u-nh-t-th.mp3?v=44703265e20a",
           "duration": 995.327667,
           "words": 3638,
@@ -1020,7 +1020,7 @@
         },
         {
           "id": "ch-012-mt30t43b",
-          "title": "CHương 1 - Phần 12. ĐỘNG LỰC TÂM LÝ",
+          "title": "Chương 1.12 - ĐỘNG LỰC TÂM LÝ",
           "src": "audio/bien-chung-tam-thuc/012-ch-ng-1-ph-n-12-ng-l-c-t-m-l.mp3?v=58d4c6b0614b",
           "duration": 352.479042,
           "words": 1200,
@@ -1028,7 +1028,7 @@
         },
         {
           "id": "ch-013-mt43qxlg",
-          "title": "Chương 1 - Phần 13. HÀNH ĐỘNG SÚC TÍCH CỦA BẢN THỂ",
+          "title": "Chương 1.13 - HÀNH ĐỘNG SÚC TÍCH CỦA BẢN THỂ",
           "src": "audio/bien-chung-tam-thuc/013-ch-ng-1-ph-n-13-h-nh-ng-s-c-t-ch-c-a-b-n-th.mp3?v=d85accee7b4a",
           "duration": 200.665958,
           "words": 671,
@@ -1036,7 +1036,7 @@
         },
         {
           "id": "ch-014-mt43tlkk",
-          "title": "Chương 1- Phần 14. LÒNG TỰ ÁI",
+          "title": "Chương 1.14 - LÒNG TỰ ÁI",
           "src": "audio/bien-chung-tam-thuc/014-ch-ng-1-ph-n-14-l-ng-t-i.mp3?v=2592b498f81c",
           "duration": 405.934125,
           "words": 1431,
@@ -1044,19 +1044,51 @@
         },
         {
           "id": "ch-015-mt43uivm",
-          "title": "Chương 1 - Phần 15. A-HIM-SA (Phi bạo lực)",
-          "src": "audio/bien-chung-tam-thuc/015-ch-ng-1-ph-n-15-a-him-sa-phi-b-o-l-c.mp3?v=786ffb01e4f1",
-          "duration": 358.912542,
+          "title": "Chương 1.15 - A-HIM-SA (Phi bạo lực)",
+          "src": "audio/bien-chung-tam-thuc/015-ch-ng-1-ph-n-15-a-him-sa-phi-b-o-l-c.mp3?v=b518a8a07bf9",
+          "duration": 368.282333,
           "words": 1203,
           "order": 15
         },
         {
           "id": "ch-016-mt43ujzf",
-          "title": "Chương 1- Phần 16. HÀNH VI BẦY ĐÀN",
-          "src": "audio/bien-chung-tam-thuc/016-ch-ng-1-ph-n-16-h-nh-vi-b-y-n.mp3?v=0323c7630b25",
-          "duration": 201.982958,
+          "title": "Chương 1.16 - HÀNH VI BẦY ĐÀN",
+          "src": "audio/bien-chung-tam-thuc/016-ch-ng-1-ph-n-16-h-nh-vi-b-y-n.mp3?v=a711c8f50572",
+          "duration": 201.98075,
           "words": 661,
           "order": 16
+        },
+        {
+          "id": "ch-017-mt6mxqm5",
+          "title": "Chương 1- Phần 17. SỰ BIẾN DẠNG CỦA NGÔN TỪ",
+          "src": "audio/bien-chung-tam-thuc/017-ch-ng-1-ph-n-17-s-bi-n-d-ng-c-a-ng-n-t.mp3?v=51fe3e2029c4",
+          "duration": 151.447708,
+          "words": 445,
+          "order": 17
+        },
+        {
+          "id": "ch-018-mt6o3l6y",
+          "title": "Chương 1- Phần 18. BIẾT CÁCH LẮNG NGHE",
+          "src": "audio/bien-chung-tam-thuc/018-ch-ng-1-ph-n-18-bi-t-c-ch-l-ng-nghe.mp3?v=6efd76851718",
+          "duration": 138.590333,
+          "words": 400,
+          "order": 18
+        },
+        {
+          "id": "ch-019-mt6o5jhy",
+          "title": "Chương 1 - Phần 19. TÍNH CHÍNH XÁC CỦA THUẬT NGỮ",
+          "src": "audio/bien-chung-tam-thuc/019-ch-ng-1-ph-n-19-t-nh-ch-nh-x-c-c-a-thu-t-ng.mp3?v=5fe57798cb09",
+          "duration": 125.931333,
+          "words": 378,
+          "order": 19
+        },
+        {
+          "id": "ch-020-mt6odr3t",
+          "title": "Chương 1 - Phần 20. rô-bốt TÂM LÝ",
+          "src": "audio/bien-chung-tam-thuc/020-ch-ng-1-ph-n-20-r-b-t-t-m-l.mp3?v=e47bcbf9463d",
+          "duration": 217.923625,
+          "words": 673,
+          "order": 20
         }
       ]
     },
