@@ -786,7 +786,7 @@
       "narrator": "",
       "description": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
       "cover": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-      "updatedAt": "2026-08-24T11:50:28",
+      "updatedAt": "2026-08-25T11:54:38",
       "language": "vi",
       "publishedAt": "2026-08-07",
       "chapters": [
@@ -1013,9 +1013,9 @@
         {
           "id": "ch-011-mt07ge2n",
           "title": "Chương 1.11 - SIÊU NHẤT THỂ",
-          "src": "audio/bien-chung-tam-thuc/011-ch-ng-1-ph-n-11-si-u-nh-t-th.mp3?v=44703265e20a",
-          "duration": 995.327667,
-          "words": 3638,
+          "src": "audio/bien-chung-tam-thuc/011-ch-ng-1-ph-n-11-si-u-nh-t-th.mp3?v=1a7dc60c6707",
+          "duration": 1024.744625,
+          "words": 3634,
           "order": 11
         },
         {
