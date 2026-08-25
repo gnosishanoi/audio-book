@@ -1,4 +1,4 @@
-const SHELL_CACHE = "gnosis-hanoi-shell-v6";
+const SHELL_CACHE = "gnosis-hanoi-shell-v7";
 const AUDIO_CACHE = "gnosis-hanoi-offline-audio-v1";
 const CATALOG_PATH = new URL("./data/catalog.json", self.registration.scope).pathname;
 const SHELL_ASSETS = [
@@ -10,8 +10,9 @@ const SHELL_ASSETS = [
   "./data/catalog.json",
   "./assets/branding/gnosis-hanoi-logo-transparent.png",
   "./assets/icons/gnosis-favicon.svg?v=2",
-  "./assets/icons/icon-192.png",
-  "./assets/icons/icon-512.png"
+  "./assets/icons/apple-touch-icon-v3.png",
+  "./assets/icons/app-icon-192-v3.png",
+  "./assets/icons/app-icon-512-v3.png"
 ];
 
 self.addEventListener("install", (event) => {
