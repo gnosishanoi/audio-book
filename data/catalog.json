@@ -766,17 +766,17 @@
         {
           "id": "ch-002",
           "title": "Chương 1 - Cảnh đẹp núi non",
-          "src": "audio/xu-xo-cua-cac-vi-than/002-ch-ng-1-c-nh-p-n-i-non.mp3?v=5cffda8bafed",
-          "duration": 1679.402042,
-          "words": 5573,
+          "src": "audio/xu-xo-cua-cac-vi-than/002-ch-ng-1-c-nh-p-n-i-non.mp3?v=d9029bf62fcb",
+          "duration": 1657.689625,
+          "words": 5561,
           "order": 2
         },
         {
           "id": "ch-003",
           "title": "Chương 2 - Diện kiến Chúa tể Sam-ba-la",
-          "src": "audio/xu-xo-cua-cac-vi-than/003-ch-ng-2-di-n-ki-n-ch-a-t-sam-ba-la.mp3?v=0575b7fa363e",
-          "duration": 2558.550208,
-          "words": 8279,
+          "src": "audio/xu-xo-cua-cac-vi-than/003-ch-ng-2-di-n-ki-n-ch-a-t-sam-ba-la.mp3?v=b6360db55a1f",
+          "duration": 2270.214083,
+          "words": 7713,
           "order": 3
         },
         {
@@ -784,7 +784,7 @@
           "title": "Chương 3 - Những Mặc khải Bất ngờ",
           "src": "audio/xu-xo-cua-cac-vi-than/004-ch-ng-3-nh-ng-m-c-kh-i-b-t-ng.mp3?v=d340ae8873ec",
           "duration": 2355.444833,
-          "words": 8081,
+          "words": 7921,
           "order": 4
         },
         {
@@ -792,7 +792,7 @@
           "title": "Chương 4 - Sức mạnh của trí tưởng tượng",
           "src": "audio/xu-xo-cua-cac-vi-than/005-ch-ng-4-s-c-m-nh-c-a-tr-t-ng-t-ng.mp3?v=d6fa83ac3c12",
           "duration": 1402.949,
-          "words": 4726,
+          "words": 4725,
           "order": 5
         }
       ],
@@ -802,7 +802,7 @@
       "narrator": "Kim Phượng",
       "description": "Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala.",
       "cover": "",
-      "updatedAt": "2026-08-10T18:04:33",
+      "updatedAt": "2026-08-26T21:42:41",
       "language": "vi",
       "publishedAt": "2026-07-30"
     },
