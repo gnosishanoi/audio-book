@@ -490,7 +490,7 @@
             "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
             "channelTitle": "Gnosis Hà Nội",
             "privacy": "public",
-            "publishedAt": 1787477017.965119
+            "publishedAt": 1787636185.016546
           }
         },
         {
@@ -609,7 +609,21 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/020-ch-ng-20-hai-th-gi-i.mp3?v=d7f4952e9125",
           "duration": 310.835167,
           "words": 1026,
-          "order": 20
+          "order": 20,
+          "video": {
+            "provider": "youtube",
+            "videoId": "sYiL65ebeN4",
+            "url": "https://youtu.be/sYiL65ebeN4",
+            "youtubeUrl": "https://youtu.be/sYiL65ebeN4",
+            "duration": 316.447,
+            "title": "Chương 20 – Hai thế giới",
+            "youtubeTitle": "Tâm lý học cho sự thay đổi triệt để — Chương 20 – Hai thế giới",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 20 – Hai thế giới\n\nChương này phân biệt việc quan sát thế giới bên ngoài bằng các giác quan với việc tự quan sát đời sống tâm lý bên trong, nền tảng của sự thay đổi triệt để. Thông qua hình ảnh hai thế giới, trung tâm từ tính và lời dạy “hãy biết chính mình”, tác giả khẳng định rằng kiên trì tự quan sát sẽ dần khôi phục nội quan và mở đường đến hiểu biết chân thật về bản thân.\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787636179.4085708
+          }
         },
         {
           "id": "ch-021-msozonh9",
@@ -617,7 +631,21 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/021-ch-ng-21-quan-s-t-b-n-th-n.mp3?v=5e98fe16211f",
           "duration": 230.558,
           "words": 751,
-          "order": 21
+          "order": 21,
+          "video": {
+            "provider": "youtube",
+            "videoId": "WpsDcOFtK2E",
+            "url": "https://youtu.be/WpsDcOFtK2E",
+            "youtubeUrl": "https://youtu.be/WpsDcOFtK2E",
+            "duration": 240.578,
+            "title": "Chương 21 – Quan sát bản thân",
+            "youtubeTitle": "Tâm lý học cho sự thay đổi triệt để — Chương 21 – Quan sát bản thân",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 21 – Quan sát bản thân\n\nChương này phân biệt việc chỉ biết hay suy nghĩ về bản thân với sự tự quan sát tâm lý chủ động, qua đó con người có thể nhận ra ác cảm, cảm xúc và những tiếng nói hỗn loạn đang vận hành bên trong. Bằng cách tách người quan sát khỏi các suy nghĩ và cảm xúc được quan sát, ta dần khám phá nhiều cái tôi, chất vấn dục vọng và giận dữ, đồng thời nhận biết hoạt động của chúng ngay cả ở ranh giới giữa thức và ngủ.\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787730923.452672
+          }
         },
         {
           "id": "ch-022-mspiq1ws",
