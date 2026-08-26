@@ -1038,7 +1038,21 @@
           "src": "audio/bien-chung-tam-thuc/012-ch-ng-1-ph-n-12-ng-l-c-t-m-l.mp3?v=58d4c6b0614b",
           "duration": 352.479042,
           "words": 1200,
-          "order": 12
+          "order": 12,
+          "video": {
+            "provider": "youtube",
+            "videoId": "2Ka0JzPbHfo",
+            "url": "https://youtu.be/2Ka0JzPbHfo",
+            "youtubeUrl": "https://youtu.be/2Ka0JzPbHfo",
+            "duration": 359.884,
+            "title": "Chương 1.12 - ĐỘNG LỰC TÂM LÝ",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1.12 - ĐỘNG LỰC TÂM LÝ",
+            "description": "Biện chứng tâm thức\nChương 1.12 - ĐỘNG LỰC TÂM LÝ\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787712839.6710029
+          }
         },
         {
           "id": "ch-013-mt43qxlg",
