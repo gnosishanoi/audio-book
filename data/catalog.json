@@ -786,7 +786,7 @@
       "narrator": "",
       "description": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
       "cover": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-      "updatedAt": "2026-08-25T13:37:14",
+      "updatedAt": "2026-08-26T09:53:45",
       "language": "vi",
       "publishedAt": "2026-08-07",
       "chapters": [
@@ -1035,9 +1035,9 @@
         {
           "id": "ch-012-mt30t43b",
           "title": "Chương 1.12 - ĐỘNG LỰC TÂM LÝ",
-          "src": "audio/bien-chung-tam-thuc/012-ch-ng-1-ph-n-12-ng-l-c-t-m-l.mp3?v=58d4c6b0614b",
-          "duration": 352.479042,
-          "words": 1200,
+          "src": "audio/bien-chung-tam-thuc/012-ch-ng-1-ph-n-12-ng-l-c-t-m-l.mp3?v=949863e377d8",
+          "duration": 359.88425,
+          "words": 1201,
           "order": 12,
           "video": {
             "provider": "youtube",
