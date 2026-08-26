@@ -606,9 +606,9 @@
         {
           "id": "ch-020-msozlnut",
           "title": "Chương 20 – Hai thế giới",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/020-ch-ng-20-hai-th-gi-i.mp3?v=d7f4952e9125",
-          "duration": 310.835167,
-          "words": 1026,
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/020-ch-ng-20-hai-th-gi-i.mp3?v=a0bc900e3556",
+          "duration": 316.446542,
+          "words": 1024,
           "order": 20,
           "video": {
             "provider": "youtube",
@@ -628,8 +628,8 @@
         {
           "id": "ch-021-msozonh9",
           "title": "Chương 21 – Quan sát bản thân",
-          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/021-ch-ng-21-quan-s-t-b-n-th-n.mp3?v=5e98fe16211f",
-          "duration": 230.558,
+          "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/021-ch-ng-21-quan-s-t-b-n-th-n.mp3?v=7e40d8ecf145",
+          "duration": 240.577958,
           "words": 751,
           "order": 21,
           "video": {
@@ -756,7 +756,7 @@
       "narrator": "Thảo Nguyên",
       "description": "",
       "cover": "",
-      "updatedAt": "2026-08-24T08:58:12",
+      "updatedAt": "2026-08-26T14:55:08",
       "language": "vi",
       "publishedAt": "2026-07-29"
     },
