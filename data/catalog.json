@@ -1088,7 +1088,21 @@
           "src": "audio/bien-chung-tam-thuc/013-ch-ng-1-ph-n-13-h-nh-ng-s-c-t-ch-c-a-b-n-th.mp3?v=d85accee7b4a",
           "duration": 200.665958,
           "words": 671,
-          "order": 13
+          "order": 13,
+          "video": {
+            "provider": "youtube",
+            "videoId": "RxTHFilNGIY",
+            "url": "https://youtu.be/RxTHFilNGIY",
+            "youtubeUrl": "https://youtu.be/RxTHFilNGIY",
+            "duration": 210.974,
+            "title": "Chương 1.13 - HÀNH ĐỘNG SÚC TÍCH CỦA BẢN THỂ",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1.13 - HÀNH ĐỘNG SÚC TÍCH CỦA BẢN THỂ",
+            "description": "Biện chứng tâm thức\nChương 1.13 - HÀNH ĐỘNG SÚC TÍCH CỦA BẢN THỂ\n\nChương này giải thích rằng hành động súc tích của Bản thể luôn chính xác như một công thức, và chỉ có thể biểu hiện qua con người đã chuyển hóa hình ảnh, giá trị cùng danh tính của mình. Con đường ấy đòi hỏi phụng sự nhân loại bằng tình yêu, không mong phần thưởng, làm tan rã cái tôi và để Ngôi lời của Bản thể tự biểu hiện một cách khách quan, hoàn hảo.\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787820238.960763
+          }
         },
         {
           "id": "ch-014-mt43tlkk",
