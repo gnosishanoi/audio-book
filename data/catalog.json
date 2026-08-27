@@ -814,7 +814,7 @@
       "narrator": "",
       "description": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
       "cover": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-      "updatedAt": "2026-08-26T09:53:45",
+      "updatedAt": "2026-08-27T15:43:45",
       "language": "vi",
       "publishedAt": "2026-08-07",
       "chapters": [
@@ -1085,9 +1085,9 @@
         {
           "id": "ch-013-mt43qxlg",
           "title": "Chương 1.13 - HÀNH ĐỘNG SÚC TÍCH CỦA BẢN THỂ",
-          "src": "audio/bien-chung-tam-thuc/013-ch-ng-1-ph-n-13-h-nh-ng-s-c-t-ch-c-a-b-n-th.mp3?v=d85accee7b4a",
-          "duration": 200.665958,
-          "words": 671,
+          "src": "audio/bien-chung-tam-thuc/013-ch-ng-1-ph-n-13-h-nh-ng-s-c-t-ch-c-a-b-n-th.mp3?v=dbcfcf266bcc",
+          "duration": 210.974042,
+          "words": 673,
           "order": 13,
           "video": {
             "provider": "youtube",
@@ -1107,25 +1107,25 @@
         {
           "id": "ch-014-mt43tlkk",
           "title": "Chương 1.14 - LÒNG TỰ ÁI",
-          "src": "audio/bien-chung-tam-thuc/014-ch-ng-1-ph-n-14-l-ng-t-i.mp3?v=2592b498f81c",
-          "duration": 405.934125,
-          "words": 1431,
+          "src": "audio/bien-chung-tam-thuc/014-ch-ng-1-ph-n-14-l-ng-t-i.mp3?v=16c06eedcf75",
+          "duration": 439.594667,
+          "words": 1441,
           "order": 14
         },
         {
           "id": "ch-015-mt43uivm",
           "title": "Chương 1.15 - A-HIM-SA (Phi bạo lực)",
-          "src": "audio/bien-chung-tam-thuc/015-ch-ng-1-ph-n-15-a-him-sa-phi-b-o-l-c.mp3?v=b518a8a07bf9",
-          "duration": 368.282333,
-          "words": 1203,
+          "src": "audio/bien-chung-tam-thuc/015-ch-ng-1-ph-n-15-a-him-sa-phi-b-o-l-c.mp3?v=cd2322fc9ac0",
+          "duration": 373.546875,
+          "words": 1209,
           "order": 15
         },
         {
           "id": "ch-016-mt43ujzf",
           "title": "Chương 1.16 - HÀNH VI BẦY ĐÀN",
-          "src": "audio/bien-chung-tam-thuc/016-ch-ng-1-ph-n-16-h-nh-vi-b-y-n.mp3?v=a711c8f50572",
-          "duration": 201.98075,
-          "words": 661,
+          "src": "audio/bien-chung-tam-thuc/016-ch-ng-1-ph-n-16-h-nh-vi-b-y-n.mp3?v=f205fb218e44",
+          "duration": 218.908833,
+          "words": 671,
           "order": 16
         },
         {
