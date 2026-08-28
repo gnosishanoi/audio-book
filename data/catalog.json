@@ -653,7 +653,21 @@
           "src": "audio/tam-ly-hoc-cho-su-thay-oi-triet-e/022-ch-ng-22-l-i-n-i-huy-n-thuy-n.mp3?v=45dff88d8e3a",
           "duration": 239.289167,
           "words": 765,
-          "order": 22
+          "order": 22,
+          "video": {
+            "provider": "youtube",
+            "videoId": "XpMd-o7zR2s",
+            "url": "https://youtu.be/XpMd-o7zR2s",
+            "youtubeUrl": "https://youtu.be/XpMd-o7zR2s",
+            "duration": 244.25,
+            "title": "Chương 22 – Lời nói huyên thuyên",
+            "youtubeTitle": "Tâm lý học cho sự thay đổi triệt để — Chương 22 – Lời nói huyên thuyên",
+            "description": "Tâm lý học cho sự thay đổi triệt để\nChương 22 – Lời nói huyên thuyên\n\nChương 22 chỉ ra rằng lời huyên thuyên và cách đối thoại độc địa trong tâm là nguồn gốc của nhiều bất hòa, đồng thời phân biệt sự tĩnh lặng nội tại với việc đơn thuần làm trống tâm trí. Bằng cách quan sát những nửa sự thật, lòng tự thương hại và thói ái kỷ, con người có thể học cách im lặng trong nội tâm và nhìn sự việc từ vị trí của người khác. Tinh thần của Quy tắc Vàng vì thế phải được thực hành không chỉ trong lời nói, mà cả trong cách ta âm thầm đối xử với nhau.\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787895811.110421
+          }
         },
         {
           "id": "ch-023-msquj85n",
