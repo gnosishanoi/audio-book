@@ -1124,7 +1124,21 @@
           "src": "audio/bien-chung-tam-thuc/014-ch-ng-1-ph-n-14-l-ng-t-i.mp3?v=16c06eedcf75",
           "duration": 439.594667,
           "words": 1441,
-          "order": 14
+          "order": 14,
+          "video": {
+            "provider": "youtube",
+            "videoId": "S6p0c7vvEI0",
+            "url": "https://youtu.be/S6p0c7vvEI0",
+            "youtubeUrl": "https://youtu.be/S6p0c7vvEI0",
+            "duration": 439.595,
+            "title": "Chương 1.14 - LÒNG TỰ ÁI",
+            "youtubeTitle": "Biện chứng tâm thức — Chương 1.14 - LÒNG TỰ ÁI",
+            "description": "Biện chứng tâm thức\nChương 1.14 - LÒNG TỰ ÁI\n\nChương này vạch rõ lòng tự ái khiến con người mê đắm hình ảnh của chính mình, áp đặt định kiến lên vũ trụ, nhầm sự say mê với tình yêu và khinh miệt người khác vì những khuyết điểm bị che giấu bên trong. Chỉ khi cái tôi cùng mọi giả định chấm dứt, tâm trí mới có thể mở ra với điều mới mẻ, trải nghiệm sự thật và vượt khỏi vòng lặp của đau khổ, ganh tị và sự hoàn hảo giả tạo.\n\nAudiobook produced by Gnosis Hà Nội.",
+            "channelId": "UCZxHot4cvWEB1f9yEY3MthA",
+            "channelTitle": "Gnosis Hà Nội",
+            "privacy": "public",
+            "publishedAt": 1787902531.600505
+          }
         },
         {
           "id": "ch-015-mt43uivm",
