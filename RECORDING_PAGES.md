@@ -30,3 +30,5 @@ This file owns shared header, logo, navigation, and typography metrics; update i
 instead of styling the recording and audiobook headers independently.
 
 Publishing note: keep Audiobooks as the default home for the shared three-section library.
+
+Header alignment release: all three sections share desktop and mobile typography.
