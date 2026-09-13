@@ -25,4 +25,8 @@ opens the listener's email application addressed to gnosishanoi@gmail.com.
 
 Preserve all three relative navigation links when publishing or redesigning audiobooks.
 
+All three HTML entrypoints load `shared-library.css` after their section styles.
+This file owns shared header, logo, navigation, and typography metrics; update it
+instead of styling the recording and audiobook headers independently.
+
 Publishing note: keep Audiobooks as the default home for the shared three-section library.

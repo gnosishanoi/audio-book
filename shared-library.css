@@ -1,0 +1,58 @@
+/* Shared by all three listener sections. Keep header metrics in one place. */
+:root { --library-font: "Crimson Pro", Georgia, "Times New Roman", serif; }
+html body { font-family: var(--library-font); font-size: 1rem; }
+:root .app-shell, :root .library-shell {
+  width: min(1160px, calc(100% - 36px)); max-width: none;
+  margin: 0 auto; padding: 0;
+}
+:root .site-header, :root .brand-header {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  min-height: 112px; padding: 22px 0; text-align: left;
+  border-bottom: 1px solid rgba(52,72,59,.18); line-height: 1.2;
+}
+:root .site-header .brand, :root .brand-header .brand {
+  display: inline-flex; flex-direction: row; align-items: center;
+  gap: 24px; color: #233027; text-decoration: none;
+}
+:root .site-header .brand img, :root .brand-header .brand img {
+  display: block; width: min(244px,44vw); height: auto; object-fit: contain;
+}
+:root .site-header .brand-copy, :root .brand-header .brand > span {
+  display: block; padding-left: 24px; border-left: 1px solid rgba(52,72,59,.28);
+}
+:root .brand-name, :root .brand-header strong {
+  display: block; font-family: var(--library-font); font-size: 1.16rem;
+  font-weight: 600; letter-spacing: -.015em; line-height: 1.2;
+}
+:root .brand-subtitle, :root .brand-header small {
+  display: block; margin-top: 2px; font-family: var(--library-font);
+  color: #667068; font-size: .9rem; font-weight: 400;
+  line-height: 1.2; letter-spacing: 0; text-transform: none;
+}
+:root .shared-library-menu, :root .library-menu {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 18px 36px;
+  margin: 0 0 32px; padding: 16px 8px; border-block: 1px solid #c6cbbf;
+}
+:root .shared-library-menu a, :root .library-menu a {
+  color: #344f3e; font-family: var(--library-font); font-size: 1rem;
+  font-weight: 400; line-height: 1.5; text-decoration: none;
+}
+:root .shared-library-menu a[aria-current], :root .library-menu a[aria-current] {
+  font-weight: 700; border-bottom: 2px solid currentColor;
+}
+:root .shared-library-menu a:hover, :root .library-menu a:hover { text-decoration: underline; }
+.library-shell .page-heading { padding: 16px 0 28px; }
+.library-shell h1 { font-size: clamp(2.05rem,3.15vw,3.15rem); }
+.library-shell h2 { font-size: 1.45rem; }
+.library-shell .speaker { font-size: 1.18rem; }
+.library-shell .description, .library-shell .page-heading > p:last-child { font-size: 1.02rem; }
+@media (max-width:760px) {
+  :root .app-shell, :root .library-shell { width: min(calc(100% - 22px),1120px); }
+  :root .site-header, :root .brand-header { min-height: 86px; padding: 14px 0; }
+  :root .site-header .brand, :root .brand-header .brand { gap: 12px; }
+  :root .site-header .brand img, :root .brand-header .brand img { width: min(184px,48vw); }
+  :root .site-header .brand-copy, :root .brand-header .brand > span { padding-left: 12px; }
+  :root .brand-name, :root .brand-header strong { font-size: .98rem; }
+  :root .brand-subtitle, :root .brand-header small { max-width:126px; font-size:.74rem; line-height:1.18; }
+  .library-shell h1 { font-size: clamp(1.9rem,9vw,2.8rem); }
+}
