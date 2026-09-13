@@ -24,3 +24,5 @@ when access expires. Requests are stored in the Media Studio inbox; the email ac
 opens the listener's email application addressed to gnosishanoi@gmail.com.
 
 Preserve all three relative navigation links when publishing or redesigning audiobooks.
+
+Publishing note: keep Audiobooks as the default home for the shared three-section library.
