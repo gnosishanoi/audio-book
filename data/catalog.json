@@ -1237,10 +1237,19 @@
       "description": "Tác phẩm trình bày những nguyên lý Gnosis về tình yêu, hôn nhân và sự chuyển hóa năng lượng sáng tạo trên con đường thức tỉnh tâm thức.",
       "cover": "assets/covers/hon-nhan-hoan-hao-v2-smooth.png?v=1",
       "featuredImage": "assets/hero/hon-nhan-hoan-hao-flatlay-v1.png?v=1",
-      "updatedAt": "2026-09-14T11:02:59+07:00",
+      "updatedAt": "2026-09-14T14:58:30",
       "language": "vi",
       "publishedAt": "2026-09-14",
-      "chapters": []
+      "chapters": [
+        {
+          "id": "ch-001",
+          "title": "Chương 7 - Bảy thánh đường",
+          "src": "audio/hon-nhan-hoan-hao/001-ch-ng-7-b-y-th-nh-ng.mp3?v=e2ffb8d4063f",
+          "duration": 2723.358625,
+          "words": 9539,
+          "order": 1
+        }
+      ]
     }
   ]
 }
