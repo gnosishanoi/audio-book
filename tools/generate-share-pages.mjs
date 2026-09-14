@@ -17,7 +17,8 @@ const knownCoverPaths = {
   "dayspring-of-youth": "assets/covers/dayspring-of-youth-gnosis-v2.png?v=2",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v2.jpg?v=2",
   "xu-xo-cua-cac-vi-than": "assets/covers/xu-xo-cua-cac-vi-than-gnosis-v5.png?v=5",
-  "bien-chung-tam-thuc": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3"
+  "bien-chung-tam-thuc": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
+  "hon-nhan-hoan-hao": "assets/covers/hon-nhan-hoan-hao-v2-smooth.png?v=1"
 };
 
 const knownSocialImagePaths = {
@@ -31,7 +32,8 @@ const descriptionFallbacks = {
   "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "Những bài giảng về quan sát bản thân, chuyển hóa tâm lý và đánh thức ý thức.",
   "xu-xo-cua-cac-vi-than": "Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala.",
-  "bien-chung-tam-thuc": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức."
+  "bien-chung-tam-thuc": "Tác phẩm về thiền, tâm lý học và huyền học, trình bày phương pháp làm tan rã cái tôi, vượt qua những đối nghịch của tư tưởng và rèn luyện tâm thức.",
+  "hon-nhan-hoan-hao": "Những nguyên lý Gnosis về tình yêu, hôn nhân và sự chuyển hóa năng lượng sáng tạo."
 };
 
 function escapeHtml(value) {
@@ -69,6 +71,10 @@ function bookDescription(book) {
 function htmlForBook(book) {
   const title = `${book.title} | ${siteName}`;
   const description = bookDescription(book);
+  const credits = [
+    book.author ? `<p>${escapeHtml(book.author)}</p>` : "",
+    book.publisher ? `<p>Nhà xuất bản: ${escapeHtml(book.publisher)}</p>` : ""
+  ].filter(Boolean).join("\n      ");
   const coverPath = normalizeAsset(book.cover, book.id);
   const socialImagePath = knownSocialImagePaths[book.id] || cleanAssetUrl(coverPath);
   const socialImage = absoluteSiteUrl(socialImagePath);
@@ -109,7 +115,7 @@ function htmlForBook(book) {
     <main class="share-landing">
       <img src="../../${escapeHtml(coverPath)}" alt="">
       <h1>${escapeHtml(book.title)}</h1>
-      ${book.author ? `<p>${escapeHtml(book.author)}</p>` : ""}
+      ${credits}
       <a class="primary-button" href="${escapeHtml(appUrl)}">Nghe trên Sách nói Gnosis Hà Nội</a>
     </main>
   </body>

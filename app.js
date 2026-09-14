@@ -7,7 +7,7 @@ const resumeStorageKey = "stillword.resumeByBook.v2";
 const hiddenBooksStorageKey = "stillword.hiddenBooks.v1";
 const listenStatsStorageKey = "stillword.listenStats.v1";
 const offlineAudioCacheName = "gnosis-hanoi-offline-audio-v1";
-const offlineAssetCacheName = "gnosis-hanoi-shell-v6";
+const offlineAssetCacheName = "gnosis-hanoi-shell-v11";
 const excludedBookIds = new Set(["binh-minh-tuoi-tre"]);
 const canonicalBookSlugs = {
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de",
@@ -18,21 +18,24 @@ const knownCoverPaths = {
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v4.png?v=4",
   "xu-xo-cua-cac-vi-than": "./assets/covers/xu-xo-cua-cac-vi-than-gnosis-v5.png?v=5",
   "bien-chung-tam-thuc": "./assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
-  "thien-gnosis": "./assets/covers/thien-gnosis-v2.png?v=2"
+  "thien-gnosis": "./assets/covers/thien-gnosis-v2.png?v=2",
+  "hon-nhan-hoan-hao": "./assets/covers/hon-nhan-hoan-hao-v2-smooth.png?v=1"
 };
 const featuredImagePaths = {
   "dayspring-of-youth": "./assets/hero/dayspring-of-youth-dawn-v1.jpg",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "./assets/hero/tam-ly-hoc-flatlay-gnosis-v6.png?v=6",
   "xu-xo-cua-cac-vi-than": "./assets/hero/xu-xo-cua-cac-vi-than-reading-v3.jpg?v=3",
   "bien-chung-tam-thuc": "./assets/hero/bien-chung-tam-thuc-study-v2.png?v=2",
-  "thien-gnosis": "./assets/hero/thien-gnosis-meditation-v1.png?v=1"
+  "thien-gnosis": "./assets/hero/thien-gnosis-meditation-v1.png?v=1",
+  "hon-nhan-hoan-hao": "./assets/hero/hon-nhan-hoan-hao-flatlay-v1.png?v=1"
 };
 const featuredDescriptionFallbacks = {
   "dayspring-of-youth": "A contemplative study of subtle nature, inner life, and the awakening of human consciousness.",
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "Những bài giảng về quan sát bản thân, chuyển hóa tâm lý và đánh thức ý thức.",
   "xu-xo-cua-cac-vi-than": "Tác phẩm của Franz Hartmann về cuộc diện kiến các Chân sư Minh triết ở Shambhala.",
   "bien-chung-tam-thuc": "Thực hành làm tan rã cái tôi, vượt qua tư tưởng đối nghịch và rèn luyện tâm thức.",
-  "thien-gnosis": "Những bài thiền thực hành giúp người nghe trở về tĩnh lặng, quan sát nội tâm và đánh thức tâm thức."
+  "thien-gnosis": "Những bài thiền thực hành giúp người nghe trở về tĩnh lặng, quan sát nội tâm và đánh thức tâm thức.",
+  "hon-nhan-hoan-hao": "Những nguyên lý Gnosis về tình yêu, hôn nhân và sự chuyển hóa năng lượng sáng tạo."
 };
 
 const featuredImageCache = new Map();
@@ -186,6 +189,7 @@ function normalizeCatalog(books, assetBase) {
       ...book,
       author: book.author || "",
       narrator: book.narrator || "",
+      publisher: book.publisher || "",
       cover: resolveAsset(book.cover, assetBase) || knownCover(book.id) || placeholderCover(book),
       featuredImage: resolveAsset(book.featuredImage, assetBase),
       description: book.description || book.subtitle || "",
@@ -250,6 +254,7 @@ function copy(book, key) {
       published: "Published",
       author: "Author",
       narrator: "Read by",
+      publisher: "Publisher",
       listenCount: "listen on this device",
       listenCountPlural: "listens on this device",
       more: "More",
@@ -265,6 +270,7 @@ function copy(book, key) {
       published: "Xuất bản",
       author: "Tác giả",
       narrator: "Đọc bởi",
+      publisher: "Nhà xuất bản",
       listenCount: "lượt nghe trên máy này",
       listenCountPlural: "lượt nghe trên máy này",
       more: "Thông tin",
@@ -285,7 +291,7 @@ function copy(book, key) {
 
 function chapterCountLabel(book) {
   const count = book.chapters.length;
-  return `${count} chương`;
+  return count ? `${count} chương` : "Nội dung đang cập nhật";
 }
 
 function hasAudio(book) {
@@ -329,6 +335,10 @@ function narratorLabel(book) {
   return book.narrator ? `${copy(book, "narrator")} ${book.narrator}` : "";
 }
 
+function publisherLabel(book) {
+  return book.publisher ? `${copy(book, "publisher")}: ${book.publisher}` : "";
+}
+
 function listenCountLabel(book, count) {
   const key = count === 1 ? "listenCount" : "listenCountPlural";
   return `${count} ${copy(book, key)}`;
@@ -338,6 +348,7 @@ function compactBookMeta(book) {
   const items = [];
   if (book.subtitle || book.description) items.push(book.subtitle || book.description);
   if (book.narrator) items.push(narratorLabel(book));
+  if (book.publisher) items.push(publisherLabel(book));
   items.push(chapterCountLabel(book));
   items.push(languageLabel(book));
   if (book.publishedAt) items.push(publishedLabel(book));
@@ -534,7 +545,7 @@ function renderLibrary() {
           </div>
         </details>
         <div class="card-actions">
-          <button class="primary-button small-button" type="button" data-action="open-book">${escapeHtml(hasVisual(book) ? "Mở sách" : copy(book, "listen"))}</button>
+          <button class="primary-button small-button" type="button" data-action="open-book">${escapeHtml(hasVisual(book) || !hasAudio(book) ? "Xem sách" : copy(book, "listen"))}</button>
         </div>
       </div>
       <button class="hide-book-button" type="button" data-action="hide-book" aria-label="${escapeHtml(copy(book, "hide"))} ${escapeHtml(book.title)}">
@@ -580,9 +591,11 @@ function renderLibrary() {
 
 function featuredBooks() {
   const visibleBooks = state.catalog.filter((book) => (
-    !state.hiddenBookIds.has(book.id) && book.chapters.length
+    !state.hiddenBookIds.has(book.id) && (book.chapters.length || book.featuredImage)
   ));
-  const candidates = visibleBooks.length ? visibleBooks : state.catalog.filter((book) => book.chapters.length);
+  const candidates = visibleBooks.length
+    ? visibleBooks
+    : state.catalog.filter((book) => book.chapters.length || book.featuredImage);
 
   return [...candidates].sort((a, b) => {
     const aDate = Date.parse(a.featureDate) || 0;
@@ -712,15 +725,15 @@ function renderBook(book) {
       </div>
     </div>
     <section class="format-panel" data-format-panel="audio" ${state.bookFormat === "audio" ? "" : "hidden"}>
-      <div class="offline-book-tools" data-offline-tools>
+      ${book.chapters.length ? `<div class="offline-book-tools" data-offline-tools>
         <div>
           <strong>Nghe offline</strong>
           <span data-offline-summary>Kiểm tra các chương đã tải…</span>
         </div>
         <button class="offline-book-button" type="button" data-offline-book>Tải cả sách</button>
-      </div>
+      </div>` : ""}
       <div class="chapter-list">
-        ${book.chapters.map((chapter, index) => `
+        ${book.chapters.length ? book.chapters.map((chapter, index) => `
           <div class="chapter-row" data-offline-row="${index}">
             <button class="chapter-play" type="button" data-chapter-index="${index}">
               <span class="chapter-number">${index + 1}</span>
@@ -734,7 +747,7 @@ function renderBook(book) {
               <span data-offline-label>Tải</span>
             </button>
           </div>
-        `).join("")}
+        `).join("") : `<p class="empty-state">Nội dung sách nói đang được Gnosis Hà Nội cập nhật.</p>`}
       </div>
     </section>
     ${hasVisual(book) ? visualBookMarkup(book) : ""}
@@ -1097,6 +1110,15 @@ async function route() {
 }
 
 function showPlayerForBook(book) {
+  if (!hasAudio(book)) {
+    els.audio.pause();
+    els.audio.removeAttribute("src");
+    els.audio.load();
+    state.currentBook = null;
+    document.body.classList.remove("has-player", "mini-player");
+    els.playerBar.hidden = true;
+    return;
+  }
   document.body.classList.add("has-player");
   document.body.classList.remove("mini-player");
   els.playerBar.hidden = false;

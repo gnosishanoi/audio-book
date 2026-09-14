@@ -1226,6 +1226,21 @@
           }
         }
       ]
+    },
+    {
+      "id": "hon-nhan-hoan-hao",
+      "title": "Hôn nhân hoàn hảo",
+      "author": "Samael Aun Weor",
+      "publisher": "Gnosis Hà Nội",
+      "subtitle": "Tình yêu, hôn nhân và sự chuyển hóa nội tâm",
+      "narrator": "",
+      "description": "Tác phẩm trình bày những nguyên lý Gnosis về tình yêu, hôn nhân và sự chuyển hóa năng lượng sáng tạo trên con đường thức tỉnh tâm thức.",
+      "cover": "assets/covers/hon-nhan-hoan-hao-v2-smooth.png?v=1",
+      "featuredImage": "assets/hero/hon-nhan-hoan-hao-flatlay-v1.png?v=1",
+      "updatedAt": "2026-09-14T11:02:59+07:00",
+      "language": "vi",
+      "publishedAt": "2026-09-14",
+      "chapters": []
     }
   ]
 }
