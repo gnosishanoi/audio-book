@@ -10136,7 +10136,7 @@ function Ut({ section: e, apiBase: t = "" }) {
 					}),
 					/* @__PURE__ */ (0, L.jsx)("a", {
 						href: "/slides/",
-						children: "Slides"
+						children: "Gallery"
 					})
 				]
 			}),

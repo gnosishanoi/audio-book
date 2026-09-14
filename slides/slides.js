@@ -40,7 +40,7 @@ function card(deck){
  const description=document.createElement('p');description.textContent=deck.description;
  const meta=document.createElement('div');meta.className='deck-meta';
  const author=document.createElement('span');author.textContent=deck.author;
- const count=document.createElement('span');count.textContent=`${deck.slides.length} slides`;
+ const count=document.createElement('span');count.textContent=`${deck.slides.length} trang`;
  meta.append(author,count);copy.append(title,description,meta);cover.append(image,play);button.append(cover,copy);button.onclick=()=>openDeck(deck);return button;
 }
 async function loadGallery(){
