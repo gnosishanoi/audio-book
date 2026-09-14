@@ -7,7 +7,7 @@ const resumeStorageKey = "stillword.resumeByBook.v2";
 const hiddenBooksStorageKey = "stillword.hiddenBooks.v1";
 const listenStatsStorageKey = "stillword.listenStats.v1";
 const offlineAudioCacheName = "gnosis-hanoi-offline-audio-v1";
-const offlineAssetCacheName = "gnosis-hanoi-shell-v11";
+const offlineAssetCacheName = "gnosis-hanoi-shell-v12";
 const excludedBookIds = new Set(["binh-minh-tuoi-tre"]);
 const canonicalBookSlugs = {
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de",

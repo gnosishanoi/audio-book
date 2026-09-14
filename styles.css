@@ -527,6 +527,11 @@ h2 {
   border-radius: 6px;
 }
 
+.book-card[data-book-id="hon-nhan-hoan-hao"] img {
+  object-fit: contain;
+  background: #17130f;
+}
+
 .book-card h3 {
   margin: 0 0 6px;
   font-size: 1.1rem;
