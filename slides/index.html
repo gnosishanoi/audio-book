@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f0e3">
+  <title>Slides · Thư viện Gnosis Hà Nội</title>
+  <meta name="description" content="Thư viện slide trình bày của Gnosis Hà Nội.">
+  <link rel="icon" href="../assets/icons/gnosis-favicon.svg?v=2" type="image/svg+xml">
+  <link rel="stylesheet" href="../shared-library.css?v=2">
+  <link rel="stylesheet" href="./slides.css?v=1">
+</head>
+<body>
+  <div class="library-shell">
+    <header class="brand-header">
+      <a class="brand" href="../" aria-label="Trang chủ Thư viện Gnosis Hà Nội">
+        <img src="../assets/branding/gnosis-hanoi-logo-transparent.png" alt="Gnosis Hà Nội">
+        <span><strong>Thư viện</strong><small>Tri thức cho hành trình nội tâm</small></span>
+      </a>
+    </header>
+    <nav class="library-menu" aria-label="Các mục thư viện">
+      <a href="../">Audiobooks</a>
+      <a href="../talks-meditation/">Talks &amp; Meditation</a>
+      <a href="../private-audios/">Private Audios</a>
+      <a href="./" aria-current="page">Slides</a>
+    </nav>
+    <main>
+      <header class="slides-heading">
+        <p>THƯ VIỆN GNOSIS HÀ NỘI</p>
+        <h1>Slides</h1>
+        <div><span id="deckCount">Đang tải…</span><span>Chọn một bộ slide để bắt đầu trình chiếu</span></div>
+      </header>
+      <section id="slideGallery" class="slide-gallery" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <dialog id="slidePlayer" class="slide-player" aria-label="Trình chiếu slide">
+    <div class="player-stage" id="playerStage">
+      <img id="playerImage" alt="">
+      <button class="stage-zone stage-prev" id="stagePrev" type="button" aria-label="Slide trước"></button>
+      <button class="stage-zone stage-next" id="stageNext" type="button" aria-label="Slide tiếp theo"></button>
+    </div>
+    <div class="player-bar">
+      <button id="closePlayer" type="button" aria-label="Đóng trình chiếu">✕</button>
+      <div class="player-title"><strong id="playerTitle"></strong><span id="playerCount"></span></div>
+      <button id="prevSlide" type="button" aria-label="Slide trước">←</button>
+      <button id="togglePlay" type="button" aria-label="Tự động trình chiếu">▶</button>
+      <button id="nextSlide" type="button" aria-label="Slide tiếp theo">→</button>
+      <button id="fullScreen" type="button">Toàn màn hình</button>
+    </div>
+  </dialog>
+  <script src="./slides.js?v=1"></script>
+</body>
+</html>

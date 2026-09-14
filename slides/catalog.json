@@ -1,0 +1,173 @@
+{
+  "decks": [
+    {
+      "id": "bay-thanh-duong",
+      "title": "Bảy thánh đường",
+      "author": "Gnosis Hà Nội",
+      "description": "Bộ slide trình bày về bảy thánh đường, các luân xa và biểu tượng trong truyền thống Gnosis.",
+      "cover": "./bay-thanh-duong/slide-01.webp",
+      "slides": [
+        {
+          "src": "./bay-thanh-duong/slide-01.webp",
+          "alt": "Bảy luân xa theo C. W. Leadbeater 1927"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-02.webp",
+          "alt": "Hành Trình Năng Lượng Kundalini Tại Đền Lukhang"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-03.webp",
+          "alt": "Patanjali và Kundalini Pancha Kosha"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-04.webp",
+          "alt": "Con rắn lửa thiêng Kundalini và Triveni"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-05.webp",
+          "alt": "Rắn lửa thiêng và sự thức tỉnh Kundalini"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-06.webp",
+          "alt": "Luân xa gốc và thánh đường Ê-phê-sô qua thấu thị"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-07.webp",
+          "alt": "Luân xa lá lách trong sách The Chakras"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-08.webp",
+          "alt": "Ý nghĩa Luân Xa Rốn Manipūra"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-09.webp",
+          "alt": "Thánh đường Thi-a-ti-rơ và Luân xa trái tim"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-10.webp",
+          "alt": "Bốn Thánh Đường Cấp Thấp Trong Cơ Thể"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-11.webp",
+          "alt": "Luân xa cổ họng và thánh đường Sạt-đe"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-12.webp",
+          "alt": "Luân Xa Con Mắt Thứ Ba"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-13.webp",
+          "alt": "Thánh đường Lao-đi-xê và Luân xa Vương miện"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-14.webp",
+          "alt": "Trung tâm xương cụt và thanh gươm rực lửa"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-15.webp",
+          "alt": "A-đam và Ê-va bị đuổi khỏi Ê-đen"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-16.webp",
+          "alt": "Biểu tượng con rắn và sự cứu rỗi"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-17.webp",
+          "alt": "Môi-se và biểu tượng rắn Nehushtan trong Kundalini"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-18.webp",
+          "alt": "Biểu Tượng Lingam–Yoni Cổ Đại"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-19.webp",
+          "alt": "Thần Thoth trong Tín Ngưỡng Ai Cập Cổ"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-20.webp",
+          "alt": "Biểu tượng Rắn Thần Thánh Ai Cập"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-21.webp",
+          "alt": "Tranh Bữa tiệc Ly và Ý nghĩa Tâm Linh"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-22.webp",
+          "alt": "Khi chúng ta kiềm chế xung lực tình dục bên trong, chất lỏng kỳ diệu này sẽ trở về cơ thể cảm xúc và khiến cơ thể này càng thêm huy hoàng khôn tả. Đây là cách chúng ta tạo ra Đấng Kitô bên trong mình. Như vậy, với năng lượng sinh dục, chúng ta có thể tạo ra Đấng Kitô hoặc là quỷ dữ."
+        },
+        {
+          "src": "./bay-thanh-duong/slide-23.webp",
+          "alt": "Sự Thức Tỉnh Kundalini Qua Hệ Thống Sinh Tinh"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-24.webp",
+          "alt": "Hình Ảnh Cây Đèn Vàng và Hai Cây Ô-Liu"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-25.webp",
+          "alt": "Cây Thánh Giá và Bảy Hoa Hồng trong Năng Lượng Kundalini"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-26.webp",
+          "alt": "Liên hệ giữa 7 luân xa và thánh đường"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-27.webp",
+          "alt": "Mô hình cột sống với ống trung tâm"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-28.webp",
+          "alt": "Sự kiện vĩ đại của Hôn nhân hoàn hảo"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-29.webp",
+          "alt": "Luân xa tuyến tiền liệt và sức mạnh năng lượng"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-30.webp",
+          "alt": "Thánh đường Pẹc-găm và bộ não cảm xúc"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-31.webp",
+          "alt": "Thánh đường Thi-a-ti-ra và Trung tâm Tim"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-32.webp",
+          "alt": "Bảy Hành Tinh Cổ Điển và Bí Mật Hôn Nhân"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-33.webp",
+          "alt": "Thánh đường Sạt-đe và Thiên nhĩ thông"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-34.webp",
+          "alt": "Luân xa trán"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-35.webp",
+          "alt": "Những ai không có các cơ thể nội tại đã được Kitô-hóa thì không thể tránh khỏi sai lầm"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-36.webp",
+          "alt": "Bông Sen Thánh Đường Lao-đi-xê"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-37.webp",
+          "alt": "Tượng Phật với bảy con rắn biểu tượng Kundalini"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-38.webp",
+          "alt": "Con rắn thứ hai thuộc về cơ thể khí lực, con rắn thứ ba thuộc về cơ thể cảm xúc, con rắn thứ tư thuộc về cơ thể lý trí, và con rắn thứ năm thuộc về cơ thể căn nguyên. Con rắn thứ sáu và thứ bảy thuộc về hồn tỉnh thức và thần hồn."
+        },
+        {
+          "src": "./bay-thanh-duong/slide-39.webp",
+          "alt": "Thánh Phanxicô và Dấu Thương Thánh"
+        },
+        {
+          "src": "./bay-thanh-duong/slide-40.webp",
+          "alt": "Chúa Giêsu và Thánh Phêrô trên nước"
+        }
+      ]
+    }
+  ]
+}

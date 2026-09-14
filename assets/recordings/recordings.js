@@ -10133,6 +10133,10 @@ function Ut({ section: e, apiBase: t = "" }) {
 						href: "/private-audios/",
 						"aria-current": e === "private" ? "page" : void 0,
 						children: "Private Audios"
+					}),
+					/* @__PURE__ */ (0, L.jsx)("a", {
+						href: "/slides/",
+						children: "Slides"
 					})
 				]
 			}),

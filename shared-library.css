@@ -1,4 +1,4 @@
-/* Shared by all three listener sections. Keep header metrics in one place. */
+/* Shared by all four library sections. Keep header metrics in one place. */
 :root { --library-font: "Crimson Pro", Georgia, "Times New Roman", serif; }
 html body { font-family: var(--library-font); font-size: 1rem; }
 :root .app-shell, :root .library-shell {
@@ -55,12 +55,12 @@ html body { font-family: var(--library-font); font-size: 1rem; }
   :root .brand-name, :root .brand-header strong { font-size: .98rem; }
   :root .brand-subtitle, :root .brand-header small { max-width:126px; font-size:.74rem; line-height:1.18; }
   :root .shared-library-menu, :root .library-menu {
-    display: grid; grid-template-columns: repeat(3,minmax(0,1fr));
+    display: grid; grid-template-columns: repeat(4,minmax(0,1fr));
     gap: 4px; margin-bottom: 22px; padding: 10px 0;
   }
   :root .shared-library-menu a, :root .library-menu a {
     min-width: 0; padding: 7px 2px; text-align: center; white-space: nowrap;
-    font-size: clamp(.68rem,3.15vw,.86rem); line-height: 1.18;
+    font-size: clamp(.62rem,2.7vw,.84rem); line-height: 1.18;
   }
   .library-shell h1 { font-size: clamp(1.9rem,9vw,2.8rem); }
 }
