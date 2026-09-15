@@ -10024,23 +10024,23 @@ var Ut = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) 
 //#endregion
 //#region app/library.tsx
 function tn({ section: e, apiBase: t = "" }) {
-	let [n, r] = (0, _.useState)(""), [i, a] = (0, _.useState)(/* @__PURE__ */ new Set()), [o, s] = (0, _.useState)([]), [c, l] = (0, _.useState)(!0), [u, d] = (0, _.useState)(!1), [f, p] = (0, _.useState)(""), [m, h] = (0, _.useState)(""), [g, v] = (0, _.useState)(null), [y, b] = (0, _.useState)(null), [x, ee] = (0, _.useState)(!1), [S, C] = (0, _.useState)(""), [w, te] = (0, _.useState)(!1), [ne, T] = (0, _.useState)(""), re = (0, _.useRef)({}), ie = (0, _.useRef)(0), ae = (0, _.useRef)(""), E = (0, _.useRef)(null), oe = "gnosis-private-playlist-access-v1", se = `gnosis-recording-catalog-v2:${e}`, ce = (e) => e.playlist ? "playlist:" + e.playlist : "audio:" + e.id;
-	function D() {
+	let [n, r] = (0, _.useState)(""), [i, a] = (0, _.useState)(/* @__PURE__ */ new Set()), [o, s] = (0, _.useState)([]), [c, l] = (0, _.useState)(!0), [u, d] = (0, _.useState)(!1), [f, p] = (0, _.useState)(""), [m, h] = (0, _.useState)(""), [g, v] = (0, _.useState)(null), [y, b] = (0, _.useState)(null), [x, ee] = (0, _.useState)(!1), [S, C] = (0, _.useState)(""), [w, te] = (0, _.useState)(!1), [ne, T] = (0, _.useState)(""), re = (0, _.useRef)({}), ie = (0, _.useRef)(0), ae = (0, _.useRef)(""), E = (0, _.useRef)(null), oe = "gnosis-private-playlist-access-v1", se = `gnosis-recording-catalog-v2:${e}`, ce = (e) => e.playlist ? "playlist:" + e.playlist : "audio:" + e.id, D = () => window.requestAnimationFrame(() => window.scrollTo({ top: 0 }));
+	function O() {
 		try {
 			localStorage.setItem(oe, JSON.stringify(re.current));
 		} catch {
 			C("Access is open for this visit, but this browser could not remember it.");
 		}
 	}
-	function O(e, t) {
+	function le(e, t) {
 		let n = [e.scope, t].filter((e) => !!e);
 		for (let t of n) re.current[t] = {
 			grant: e.grant,
 			expiresAt: e.grantExpiresAt
 		};
-		D(), a((e) => new Set([...e, ...n]));
+		O(), a((e) => new Set([...e, ...n]));
 	}
-	async function le(e) {
+	async function ue(e) {
 		let n = ce(e), r = re.current[n];
 		if (!r) return null;
 		let i = await fetch(`${t}/api/library/audio/${e.id}/access`, {
@@ -10048,19 +10048,19 @@ function tn({ section: e, apiBase: t = "" }) {
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ grant: r.grant })
 		}), o = await i.json();
-		if (i.status === 403) return delete re.current[n], D(), a((e) => {
+		if (i.status === 403) return delete re.current[n], O(), a((e) => {
 			let t = new Set(e);
 			return t.delete(n), t;
 		}), null;
 		if (!i.ok) throw Error(o.error || "Unable to check playlist access.");
-		return O(o, n), o;
+		return le(o, n), o;
 	}
-	async function ue(t) {
+	async function de(t) {
 		let n = ++ie.current;
-		if (v(t.playlist || "Other recordings"), b(t), ee(!1), r(""), C(""), e === "private") {
+		if (v(t.playlist || "Other recordings"), b(t), ee(!1), r(""), C(""), D(), e === "private") {
 			te(!0);
 			try {
-				let e = await le(t);
+				let e = await ue(t);
 				n === ie.current && e && (r(e.streamUrl), ee(!0));
 			} catch (e) {
 				n === ie.current && C(e instanceof Error ? e.message : "Unable to load playlist.");
@@ -10069,7 +10069,7 @@ function tn({ section: e, apiBase: t = "" }) {
 			}
 		}
 	}
-	async function de(n = !1) {
+	async function k(n = !1) {
 		n ? d(!0) : l(!0), p(""), h("");
 		try {
 			let n = await fetch(t + "/api/library/catalog?section=" + e), r = await n.json();
@@ -10080,7 +10080,7 @@ function tn({ section: e, apiBase: t = "" }) {
 			} catch {}
 			if (e === "private") {
 				let e = [...new Map(r.items.map((e) => [ce(e), e])).values()];
-				Promise.all(e.map((e) => le(e).catch(() => null)));
+				Promise.all(e.map((e) => ue(e).catch(() => null)));
 			}
 		} catch (e) {
 			let t = e instanceof Error ? e.message : "Unable to load recordings.";
@@ -10101,7 +10101,7 @@ function tn({ section: e, apiBase: t = "" }) {
 			Array.isArray(n) && n.length && (t = n, e = !0);
 		} catch {}
 		let n = t, r = e, i = new Set(Object.keys(re.current)), o = window.setTimeout(() => {
-			a(i), r && (s(n), l(!1)), de(r);
+			a(i), r && (s(n), l(!1)), k(r);
 		}, 0);
 		return () => window.clearTimeout(o);
 	}, [e]), (0, _.useEffect)(() => {
@@ -10110,7 +10110,7 @@ function tn({ section: e, apiBase: t = "" }) {
 			let t = o.find((t) => t.id === e);
 			if (t) {
 				ae.current = e;
-				let n = window.setTimeout(() => void ue(t), 0);
+				let n = window.setTimeout(() => void de(t), 0);
 				return () => window.clearTimeout(n);
 			}
 		}
@@ -10131,7 +10131,7 @@ function tn({ section: e, apiBase: t = "" }) {
 			execute: ({ id: t }) => {
 				let n = o.find((e) => e.id === t);
 				if (!n) throw Error("Recording not found in this section.");
-				return ue(n), {
+				return de(n), {
 					id: n.id,
 					requiresPassword: e === "private" && !i.has(ce(n))
 				};
@@ -10142,7 +10142,7 @@ function tn({ section: e, apiBase: t = "" }) {
 		e,
 		i
 	]);
-	let k = (0, _.useMemo)(() => {
+	let A = (0, _.useMemo)(() => {
 		let e = /* @__PURE__ */ new Map();
 		for (let t of o) {
 			let n = t.playlist || "Other recordings";
@@ -10153,13 +10153,13 @@ function tn({ section: e, apiBase: t = "" }) {
 			recordings: t,
 			total: t.reduce((e, t) => e + t.duration, 0)
 		}));
-	}, [o]), A = k.find((e) => e.name === g), j = (e) => `${Math.floor(e / 60)}:${String(Math.floor(e % 60)).padStart(2, "0")}`, fe = (e) => {
+	}, [o]), j = A.find((e) => e.name === g), fe = (e) => `${Math.floor(e / 60)}:${String(Math.floor(e % 60)).padStart(2, "0")}`, M = (e) => {
 		let t = Math.round(e / 60);
 		return t >= 60 ? `${Math.floor(t / 60)} hr ${t % 60 ? t % 60 + " min" : ""}`.trim() : `${t} min`;
-	}, M = (e) => i.has(ce(e)), pe = (e) => {
+	}, pe = (e) => i.has(ce(e)), me = (e) => {
 		T(e), E.current && window.clearTimeout(E.current), E.current = window.setTimeout(() => T(""), 1800);
 	};
-	async function me(e) {
+	async function he(e) {
 		let t = new URL(window.location.href);
 		t.search = "", t.hash = "", t.searchParams.set("audio", e.id);
 		let n = {
@@ -10169,18 +10169,18 @@ function tn({ section: e, apiBase: t = "" }) {
 		};
 		try {
 			if (navigator.share) {
-				await navigator.share(n), pe(e.id);
+				await navigator.share(n), me(e.id);
 				return;
 			}
-			await navigator.clipboard.writeText(n.url), pe(e.id);
+			await navigator.clipboard.writeText(n.url), me(e.id);
 		} catch (t) {
 			if (t instanceof DOMException && t.name === "AbortError") return;
 			try {
-				await navigator.clipboard.writeText(n.url), pe(e.id);
+				await navigator.clipboard.writeText(n.url), me(e.id);
 			} catch {}
 		}
 	}
-	async function he(e, n) {
+	async function ge(e, n) {
 		if (e.preventDefault(), !y) return;
 		te(!0), C("");
 		let i = new FormData(e.currentTarget);
@@ -10193,7 +10193,7 @@ function tn({ section: e, apiBase: t = "" }) {
 			if (!e.ok) throw Error(a.error);
 			if (n === "unlock") {
 				if (!a.streamUrl) throw Error("Playback link was not returned. Please try again.");
-				O(a, ce(y)), r(a.streamUrl), ee(!0), C("");
+				le(a, ce(y)), r(a.streamUrl), ee(!0), C("");
 			} else C("Your request has been saved for the library owner.");
 		} catch (e) {
 			C(e instanceof Error ? e.message : "Please try again.");
@@ -10201,6 +10201,13 @@ function tn({ section: e, apiBase: t = "" }) {
 			te(!1);
 		}
 	}
+	let _e = () => {
+		ie.current++, b(null), r(""), ee(!1), C(""), D();
+	}, ve = () => {
+		v(null), D();
+	}, ye = (e) => {
+		v(e), D();
+	};
 	return /* @__PURE__ */ (0, L.jsxs)("div", {
 		className: "library-shell",
 		children: [
@@ -10232,6 +10239,10 @@ function tn({ section: e, apiBase: t = "" }) {
 						href: "/private-audios/",
 						"aria-current": e === "private" ? "page" : void 0,
 						children: "Private Audios"
+					}),
+					/* @__PURE__ */ (0, L.jsx)("a", {
+						href: "/slides/",
+						children: "Gallery"
 					})
 				]
 			}),
@@ -10262,9 +10273,7 @@ function tn({ section: e, apiBase: t = "" }) {
 					children: [
 						/* @__PURE__ */ (0, L.jsxs)(Bt, {
 							variant: "ghost",
-							onClick: () => {
-								ie.current++, b(null), r(""), ee(!1), C("");
-							},
+							onClick: _e,
 							children: ["← Back to ", y.playlist || "playlist"]
 						}),
 						/* @__PURE__ */ (0, L.jsx)("p", {
@@ -10281,7 +10290,7 @@ function tn({ section: e, apiBase: t = "" }) {
 							children: [
 								y.recorded_at?.replace("T", " "),
 								y.location,
-								j(y.duration)
+								fe(y.duration)
 							].filter(Boolean).join(" · ")
 						}),
 						/* @__PURE__ */ (0, L.jsx)("p", {
@@ -10300,7 +10309,7 @@ function tn({ section: e, apiBase: t = "" }) {
 						}, y.id) : /* @__PURE__ */ (0, L.jsxs)("div", {
 							className: "access-grid",
 							children: [/* @__PURE__ */ (0, L.jsxs)("form", {
-								onSubmit: (e) => he(e, "unlock"),
+								onSubmit: (e) => ge(e, "unlock"),
 								children: [
 									/* @__PURE__ */ (0, L.jsx)("span", {
 										className: "lock-label",
@@ -10321,7 +10330,7 @@ function tn({ section: e, apiBase: t = "" }) {
 									})
 								]
 							}), /* @__PURE__ */ (0, L.jsxs)("form", {
-								onSubmit: (e) => he(e, "request"),
+								onSubmit: (e) => ge(e, "request"),
 								children: [
 									/* @__PURE__ */ (0, L.jsx)("h3", { children: "Request access" }),
 									/* @__PURE__ */ (0, L.jsxs)("label", { children: ["Your email", /* @__PURE__ */ (0, L.jsx)(Vt, {
@@ -10355,12 +10364,12 @@ function tn({ section: e, apiBase: t = "" }) {
 							children: S
 						})
 					]
-				}) : A ? /* @__PURE__ */ (0, L.jsxs)("section", {
+				}) : j ? /* @__PURE__ */ (0, L.jsxs)("section", {
 					className: "playlist-detail",
 					children: [
 						/* @__PURE__ */ (0, L.jsx)(Bt, {
 							variant: "ghost",
-							onClick: () => v(null),
+							onClick: ve,
 							children: "← All playlists"
 						}),
 						/* @__PURE__ */ (0, L.jsxs)("div", {
@@ -10370,11 +10379,11 @@ function tn({ section: e, apiBase: t = "" }) {
 								"aria-hidden": "true",
 								children: [
 									/* @__PURE__ */ (0, L.jsx)("span", { children: "GNOSIS HÀ NỘI" }),
-									/* @__PURE__ */ (0, L.jsx)("strong", { children: A.name }),
+									/* @__PURE__ */ (0, L.jsx)("strong", { children: j.name }),
 									/* @__PURE__ */ (0, L.jsxs)("small", { children: [
-										A.recordings.length,
+										j.recordings.length,
 										" ",
-										A.recordings.length === 1 ? "recording" : "recordings"
+										j.recordings.length === 1 ? "recording" : "recordings"
 									] })
 								]
 							}), /* @__PURE__ */ (0, L.jsxs)("div", { children: [
@@ -10382,13 +10391,13 @@ function tn({ section: e, apiBase: t = "" }) {
 									className: "eyebrow",
 									children: "Audio playlist"
 								}),
-								/* @__PURE__ */ (0, L.jsx)("h2", { children: A.name }),
+								/* @__PURE__ */ (0, L.jsx)("h2", { children: j.name }),
 								/* @__PURE__ */ (0, L.jsxs)("p", { children: [
-									A.recordings.length,
+									j.recordings.length,
 									" ",
-									A.recordings.length === 1 ? "recording" : "recordings",
+									j.recordings.length === 1 ? "recording" : "recordings",
 									" · ",
-									fe(A.total)
+									M(j.total)
 								] }),
 								/* @__PURE__ */ (0, L.jsx)("p", {
 									className: "meta",
@@ -10398,11 +10407,11 @@ function tn({ section: e, apiBase: t = "" }) {
 						}),
 						/* @__PURE__ */ (0, L.jsx)("div", {
 							className: "track-list",
-							children: A.recordings.map((t, n) => /* @__PURE__ */ (0, L.jsxs)("div", {
+							children: j.recordings.map((t, n) => /* @__PURE__ */ (0, L.jsxs)("div", {
 								className: "track-row",
 								children: [/* @__PURE__ */ (0, L.jsxs)("button", {
 									className: "track-open",
-									onClick: () => void ue(t),
+									onClick: () => void de(t),
 									children: [/* @__PURE__ */ (0, L.jsx)("span", {
 										className: "track-number",
 										children: n + 1
@@ -10412,18 +10421,18 @@ function tn({ section: e, apiBase: t = "" }) {
 									})]
 								}), /* @__PURE__ */ (0, L.jsxs)("span", {
 									className: "track-action",
-									children: [/* @__PURE__ */ (0, L.jsx)("small", { children: j(t.duration) }), /* @__PURE__ */ (0, L.jsxs)("span", {
+									children: [/* @__PURE__ */ (0, L.jsx)("small", { children: fe(t.duration) }), /* @__PURE__ */ (0, L.jsxs)("span", {
 										className: "track-controls",
 										children: [/* @__PURE__ */ (0, L.jsx)("button", {
 											className: "track-play",
-											onClick: () => void ue(t),
-											children: e === "private" && !M(t) ? "Unlock & play" : "Play"
+											onClick: () => void de(t),
+											children: e === "private" && !pe(t) ? "Unlock & play" : "Play"
 										}), /* @__PURE__ */ (0, L.jsx)("button", {
 											className: "track-share",
 											type: "button",
 											"aria-label": `Share ${t.title}`,
 											title: "Share audio",
-											onClick: () => void me(t),
+											onClick: () => void he(t),
 											children: ne === t.id ? /* @__PURE__ */ (0, L.jsx)($t, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(en, { "aria-hidden": "true" })
 										})]
 									})]
@@ -10434,9 +10443,9 @@ function tn({ section: e, apiBase: t = "" }) {
 				}) : /* @__PURE__ */ (0, L.jsxs)(L.Fragment, { children: [/* @__PURE__ */ (0, L.jsx)("div", {
 					className: "list-toolbar",
 					children: /* @__PURE__ */ (0, L.jsxs)("span", { children: [
-						k.length,
+						A.length,
 						" ",
-						k.length === 1 ? "playlist" : "playlists",
+						A.length === 1 ? "playlist" : "playlists",
 						" · ",
 						o.length,
 						" recordings"
@@ -10449,7 +10458,7 @@ function tn({ section: e, apiBase: t = "" }) {
 					className: "notice",
 					role: "alert",
 					children: [/* @__PURE__ */ (0, L.jsx)("p", { children: f }), /* @__PURE__ */ (0, L.jsx)(Bt, {
-						onClick: () => void de(!1),
+						onClick: () => void k(!1),
 						children: "Try again"
 					})]
 				}) : o.length === 0 ? /* @__PURE__ */ (0, L.jsxs)("div", {
@@ -10461,9 +10470,9 @@ function tn({ section: e, apiBase: t = "" }) {
 					]
 				}) : /* @__PURE__ */ (0, L.jsx)("div", {
 					className: "shelf-grid",
-					children: k.map((e, t) => /* @__PURE__ */ (0, L.jsxs)("button", {
+					children: A.map((e, t) => /* @__PURE__ */ (0, L.jsxs)("button", {
 						className: `shelf-card shelf-tone-${t % 4}`,
-						onClick: () => v(e.name),
+						onClick: () => ye(e.name),
 						children: [
 							/* @__PURE__ */ (0, L.jsx)("span", {
 								className: "shelf-kicker",
@@ -10476,7 +10485,7 @@ function tn({ section: e, apiBase: t = "" }) {
 								" ",
 								e.recordings.length === 1 ? "recording" : "recordings",
 								" · ",
-								fe(e.total)
+								M(e.total)
 							] }),
 							/* @__PURE__ */ (0, L.jsx)("span", {
 								className: "shelf-open",

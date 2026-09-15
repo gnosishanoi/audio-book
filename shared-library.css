@@ -47,6 +47,7 @@ html body { font-family: var(--library-font); font-size: 1rem; }
 .library-shell .speaker { font-size: 1.18rem; }
 .library-shell .description, .library-shell .page-heading > p:last-child { font-size: 1.02rem; }
 @media (max-width:760px) {
+  html body { font-size: 1.08rem; }
   :root .app-shell, :root .library-shell { width: min(calc(100% - 22px),1120px); }
   :root .site-header, :root .brand-header { min-height: 86px; padding: 14px 0; }
   :root .site-header .brand, :root .brand-header .brand { gap: 12px; }
@@ -55,12 +56,12 @@ html body { font-family: var(--library-font); font-size: 1rem; }
   :root .brand-name, :root .brand-header strong { font-size: .98rem; }
   :root .brand-subtitle, :root .brand-header small { max-width:126px; font-size:.74rem; line-height:1.18; }
   :root .shared-library-menu, :root .library-menu {
-    display: grid; grid-template-columns: repeat(4,minmax(0,1fr));
-    gap: 4px; margin-bottom: 22px; padding: 10px 0;
+    display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 6px; margin-bottom: 22px; padding: 10px 0;
   }
   :root .shared-library-menu a, :root .library-menu a {
-    min-width: 0; padding: 7px 2px; text-align: center; white-space: nowrap;
-    font-size: clamp(.62rem,2.7vw,.84rem); line-height: 1.18;
+    min-width: 0; padding: 9px 4px; text-align: center; white-space: nowrap;
+    font-size: clamp(.9rem,4vw,1.05rem); line-height: 1.2;
   }
   .library-shell h1 { font-size: clamp(1.9rem,9vw,2.8rem); }
 }
