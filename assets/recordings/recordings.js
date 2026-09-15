@@ -1,3 +1,4 @@
+import {recordingByline, recordingId, recordingShareData, playlistShareData, linkedPlaylist} from './recording-links.js?v=1';
 //#region \0rolldown/runtime.js
 var e = Object.create, t = Object.defineProperty, n = Object.getOwnPropertyDescriptor, r = Object.getOwnPropertyNames, i = Object.getPrototypeOf, a = Object.prototype.hasOwnProperty, o = (e, t) => () => (t || (e((t = { exports: {} }).exports, t), e = null), t.exports), s = (e, i, o, s) => {
 	if (i && typeof i == "object" || typeof i == "function") for (var c = r(i), l = 0, u = c.length, d; l < u; l++) d = c[l], !a.call(e, d) && d !== o && t(e, d, {
@@ -10105,7 +10106,13 @@ function tn({ section: e, apiBase: t = "" }) {
 		}, 0);
 		return () => window.clearTimeout(o);
 	}, [e]), (0, _.useEffect)(() => {
-		let e = new URLSearchParams(window.location.search).get("audio");
+		let e = recordingId(new URLSearchParams(window.location.search).get("audio"));
+		let playlist = linkedPlaylist(window.location.href, o);
+		if (playlist && ae.current !== "playlist:" + playlist) {
+			ae.current = "playlist:" + playlist;
+			let timer = window.setTimeout(() => { v(playlist); b(null); D(); }, 0);
+			return () => window.clearTimeout(timer);
+		}
 		if (e && o.length && ae.current !== e) {
 			let t = o.find((t) => t.id === e);
 			if (t) {
@@ -10160,24 +10167,23 @@ function tn({ section: e, apiBase: t = "" }) {
 		T(e), E.current && window.clearTimeout(E.current), E.current = window.setTimeout(() => T(""), 1800);
 	};
 	async function he(e) {
-		let t = new URL(window.location.href);
-		t.search = "", t.hash = "", t.searchParams.set("audio", e.id);
-		let n = {
-			title: e.title,
-			text: [e.title, e.author].filter(Boolean).join(" — "),
-			url: t.toString()
-		};
+		return shareLibraryLink(recordingShareData(e, window.location.href), e.id);
+	}
+	async function sharePlaylist(name) {
+		return shareLibraryLink(playlistShareData(name, window.location.href), "playlist:" + name);
+	}
+	async function shareLibraryLink(n, key) {
 		try {
 			if (navigator.share) {
-				await navigator.share(n), me(e.id);
+				await navigator.share(n), me(key);
 				return;
 			}
-			await navigator.clipboard.writeText(n.url), me(e.id);
+			await navigator.clipboard.writeText(n.url), me(key);
 		} catch (t) {
 			if (t instanceof DOMException && t.name === "AbortError") return;
 			try {
-				await navigator.clipboard.writeText(n.url), me(e.id);
-			} catch {}
+				await navigator.clipboard.writeText(n.url), me(key);
+			} catch { window.prompt("Copy this link:", n.url); }
 		}
 	}
 	async function ge(e, n) {
@@ -10392,6 +10398,12 @@ function tn({ section: e, apiBase: t = "" }) {
 									children: "Audio playlist"
 								}),
 								/* @__PURE__ */ (0, L.jsx)("h2", { children: j.name }),
+								(0, L.jsx)(Bt, {
+									variant: "ghost", type: "button",
+									"aria-label": `Share playlist ${j.name}`,
+									onClick: () => void sharePlaylist(j.name),
+									children: ne === "playlist:" + j.name ? "Shared ✓" : "Share playlist ↗"
+								}),
 								/* @__PURE__ */ (0, L.jsxs)("p", { children: [
 									j.recordings.length,
 									" ",
@@ -10417,7 +10429,7 @@ function tn({ section: e, apiBase: t = "" }) {
 										children: n + 1
 									}), /* @__PURE__ */ (0, L.jsxs)("span", {
 										className: "track-copy",
-										children: [/* @__PURE__ */ (0, L.jsx)("strong", { children: t.title }), /* @__PURE__ */ (0, L.jsx)("small", { children: t.recorded_at?.replace("T", " ") || t.author })]
+										children: [/* @__PURE__ */ (0, L.jsx)("strong", { children: t.title }), /* @__PURE__ */ (0, L.jsx)("small", { children: recordingByline(t) })]
 									})]
 								}), /* @__PURE__ */ (0, L.jsxs)("span", {
 									className: "track-action",
@@ -10470,8 +10482,11 @@ function tn({ section: e, apiBase: t = "" }) {
 					]
 				}) : /* @__PURE__ */ (0, L.jsx)("div", {
 					className: "shelf-grid",
-					children: A.map((e, t) => /* @__PURE__ */ (0, L.jsxs)("button", {
+					children: A.map((e, t) => (0, L.jsxs)("div", {
+						style: {position: "relative", minWidth: 0},
+						children: [(0, L.jsxs)("button", {
 						className: `shelf-card shelf-tone-${t % 4}`,
+						style: {width: "100%", height: "100%"},
 						onClick: () => ye(e.name),
 						children: [
 							/* @__PURE__ */ (0, L.jsx)("span", {
@@ -10492,6 +10507,13 @@ function tn({ section: e, apiBase: t = "" }) {
 								children: "Open playlist →"
 							})
 						]
+					}), (0, L.jsx)("button", {
+						type: "button", className: "track-share",
+						style: {position: "absolute", top: "1rem", right: "1rem", zIndex: 1, background: "#f8f6ed", color: "#263d32", width: "44px", height: "44px"},
+						"aria-label": `Share playlist ${e.name}`, title: "Share playlist",
+						onClick: () => void sharePlaylist(e.name),
+						children: (0, L.jsx)(ne === "playlist:" + e.name ? $t : en, {"aria-hidden": "true"})
+					})]
 					}, e.name))
 				})] })
 			] }),
