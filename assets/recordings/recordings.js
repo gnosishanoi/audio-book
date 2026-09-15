@@ -9946,65 +9946,141 @@ function Ht({ className: e, ...t }) {
 	});
 }
 //#endregion
+//#region node_modules/lucide-react/dist/esm/shared/src/utils/mergeClasses.mjs
+var Ut = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) === t).join(" ").trim(), Wt = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), Gt = (e) => e.replace(/^([A-Z])|[\s-_]+(\w)/g, (e, t, n) => n ? n.toUpperCase() : t.toLowerCase()), Kt = (e) => {
+	let t = Gt(e);
+	return t.charAt(0).toUpperCase() + t.slice(1);
+}, qt = {
+	xmlns: "http://www.w3.org/2000/svg",
+	width: 24,
+	height: 24,
+	viewBox: "0 0 24 24",
+	fill: "none",
+	stroke: "currentColor",
+	strokeWidth: 2,
+	strokeLinecap: "round",
+	strokeLinejoin: "round"
+}, Jt = (e) => {
+	for (let t in e) if (t.startsWith("aria-") || t === "role" || t === "title") return !0;
+	return !1;
+}, Yt = (0, _.createContext)({}), Xt = () => (0, _.useContext)(Yt), Zt = (0, _.forwardRef)(({ color: e, size: t, strokeWidth: n, absoluteStrokeWidth: r, className: i = "", children: a, iconNode: o, ...s }, c) => {
+	let { size: l = 24, strokeWidth: u = 2, absoluteStrokeWidth: d = !1, color: f = "currentColor", className: p = "" } = Xt() ?? {}, m = r ?? d ? Number(n ?? u) * 24 / Number(t ?? l) : n ?? u;
+	return (0, _.createElement)("svg", {
+		ref: c,
+		...qt,
+		width: t ?? l ?? qt.width,
+		height: t ?? l ?? qt.height,
+		stroke: e ?? f,
+		strokeWidth: m,
+		className: Ut("lucide", p, i),
+		...!a && !Jt(s) && { "aria-hidden": "true" },
+		...s
+	}, [...o.map(([e, t]) => (0, _.createElement)(e, t)), ...Array.isArray(a) ? a : [a]]);
+}), Qt = (e, t) => {
+	let n = (0, _.forwardRef)(({ className: n, ...r }, i) => (0, _.createElement)(Zt, {
+		ref: i,
+		iconNode: t,
+		className: Ut(`lucide-${Wt(Kt(e))}`, `lucide-${e}`, n),
+		...r
+	}));
+	return n.displayName = Kt(e), n;
+}, $t = Qt("check", [["path", {
+	d: "M20 6 9 17l-5-5",
+	key: "1gmf2c"
+}]]), en = Qt("share-2", [
+	["circle", {
+		cx: "18",
+		cy: "5",
+		r: "3",
+		key: "gq8acd"
+	}],
+	["circle", {
+		cx: "6",
+		cy: "12",
+		r: "3",
+		key: "w7nqdw"
+	}],
+	["circle", {
+		cx: "18",
+		cy: "19",
+		r: "3",
+		key: "1xt0gg"
+	}],
+	["line", {
+		x1: "8.59",
+		x2: "15.42",
+		y1: "13.51",
+		y2: "17.49",
+		key: "47mynk"
+	}],
+	["line", {
+		x1: "15.41",
+		x2: "8.59",
+		y1: "6.51",
+		y2: "10.49",
+		key: "1n3mei"
+	}]
+]);
+//#endregion
 //#region app/library.tsx
-function Ut({ section: e, apiBase: t = "" }) {
-	let [n, r] = (0, _.useState)(""), [i, a] = (0, _.useState)(/* @__PURE__ */ new Set()), [o, s] = (0, _.useState)([]), [c, l] = (0, _.useState)(!0), [u, d] = (0, _.useState)(!1), [f, p] = (0, _.useState)(""), [m, h] = (0, _.useState)(""), [g, v] = (0, _.useState)(null), [y, b] = (0, _.useState)(null), [x, ee] = (0, _.useState)(!1), [S, C] = (0, _.useState)(""), [w, te] = (0, _.useState)(!1), ne = (0, _.useRef)({}), T = (0, _.useRef)(0), re = (0, _.useRef)(""), ie = "gnosis-private-playlist-access-v1", ae = `gnosis-recording-catalog-v2:${e}`, E = (e) => e.playlist ? "playlist:" + e.playlist : "audio:" + e.id;
-	function oe() {
+function tn({ section: e, apiBase: t = "" }) {
+	let [n, r] = (0, _.useState)(""), [i, a] = (0, _.useState)(/* @__PURE__ */ new Set()), [o, s] = (0, _.useState)([]), [c, l] = (0, _.useState)(!0), [u, d] = (0, _.useState)(!1), [f, p] = (0, _.useState)(""), [m, h] = (0, _.useState)(""), [g, v] = (0, _.useState)(null), [y, b] = (0, _.useState)(null), [x, ee] = (0, _.useState)(!1), [S, C] = (0, _.useState)(""), [w, te] = (0, _.useState)(!1), [ne, T] = (0, _.useState)(""), re = (0, _.useRef)({}), ie = (0, _.useRef)(0), ae = (0, _.useRef)(""), E = (0, _.useRef)(null), oe = "gnosis-private-playlist-access-v1", se = `gnosis-recording-catalog-v2:${e}`, ce = (e) => e.playlist ? "playlist:" + e.playlist : "audio:" + e.id;
+	function D() {
 		try {
-			localStorage.setItem(ie, JSON.stringify(ne.current));
+			localStorage.setItem(oe, JSON.stringify(re.current));
 		} catch {
 			C("Access is open for this visit, but this browser could not remember it.");
 		}
 	}
-	function se(e, t) {
+	function O(e, t) {
 		let n = [e.scope, t].filter((e) => !!e);
-		for (let t of n) ne.current[t] = {
+		for (let t of n) re.current[t] = {
 			grant: e.grant,
 			expiresAt: e.grantExpiresAt
 		};
-		oe(), a((e) => new Set([...e, ...n]));
+		D(), a((e) => new Set([...e, ...n]));
 	}
-	async function ce(e) {
-		let n = E(e), r = ne.current[n];
+	async function le(e) {
+		let n = ce(e), r = re.current[n];
 		if (!r) return null;
 		let i = await fetch(`${t}/api/library/audio/${e.id}/access`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ grant: r.grant })
 		}), o = await i.json();
-		if (i.status === 403) return delete ne.current[n], oe(), a((e) => {
+		if (i.status === 403) return delete re.current[n], D(), a((e) => {
 			let t = new Set(e);
 			return t.delete(n), t;
 		}), null;
 		if (!i.ok) throw Error(o.error || "Unable to check playlist access.");
-		return se(o, n), o;
+		return O(o, n), o;
 	}
-	async function D(t) {
-		let n = ++T.current;
+	async function ue(t) {
+		let n = ++ie.current;
 		if (v(t.playlist || "Other recordings"), b(t), ee(!1), r(""), C(""), e === "private") {
 			te(!0);
 			try {
-				let e = await ce(t);
-				n === T.current && e && (r(e.streamUrl), ee(!0));
+				let e = await le(t);
+				n === ie.current && e && (r(e.streamUrl), ee(!0));
 			} catch (e) {
-				n === T.current && C(e instanceof Error ? e.message : "Unable to load playlist.");
+				n === ie.current && C(e instanceof Error ? e.message : "Unable to load playlist.");
 			} finally {
-				n === T.current && te(!1);
+				n === ie.current && te(!1);
 			}
 		}
 	}
-	async function O(n = !1) {
+	async function de(n = !1) {
 		n ? d(!0) : l(!0), p(""), h("");
 		try {
 			let n = await fetch(t + "/api/library/catalog?section=" + e), r = await n.json();
 			if (!n.ok) throw Error(r.error || "Unable to load recordings.");
 			s(r.items);
 			try {
-				localStorage.setItem(ae, JSON.stringify(r.items));
+				localStorage.setItem(se, JSON.stringify(r.items));
 			} catch {}
 			if (e === "private") {
-				let e = [...new Map(r.items.map((e) => [E(e), e])).values()];
-				Promise.all(e.map((e) => ce(e).catch(() => null)));
+				let e = [...new Map(r.items.map((e) => [ce(e), e])).values()];
+				Promise.all(e.map((e) => le(e).catch(() => null)));
 			}
 		} catch (e) {
 			let t = e instanceof Error ? e.message : "Unable to load recordings.";
@@ -10015,26 +10091,26 @@ function Ut({ section: e, apiBase: t = "" }) {
 	}
 	(0, _.useEffect)(() => {
 		try {
-			ne.current = JSON.parse(localStorage.getItem(ie) || "{}");
+			re.current = JSON.parse(localStorage.getItem(oe) || "{}");
 		} catch {
-			ne.current = {};
+			re.current = {};
 		}
 		let e = !1, t = [];
 		try {
-			let n = JSON.parse(localStorage.getItem(ae) || "[]");
+			let n = JSON.parse(localStorage.getItem(se) || "[]");
 			Array.isArray(n) && n.length && (t = n, e = !0);
 		} catch {}
-		let n = t, r = e, i = new Set(Object.keys(ne.current)), o = window.setTimeout(() => {
-			a(i), r && (s(n), l(!1)), O(r);
+		let n = t, r = e, i = new Set(Object.keys(re.current)), o = window.setTimeout(() => {
+			a(i), r && (s(n), l(!1)), de(r);
 		}, 0);
 		return () => window.clearTimeout(o);
 	}, [e]), (0, _.useEffect)(() => {
 		let e = new URLSearchParams(window.location.search).get("audio");
-		if (e && o.length && re.current !== e) {
+		if (e && o.length && ae.current !== e) {
 			let t = o.find((t) => t.id === e);
 			if (t) {
-				re.current = e;
-				let n = window.setTimeout(() => void D(t), 0);
+				ae.current = e;
+				let n = window.setTimeout(() => void ue(t), 0);
 				return () => window.clearTimeout(n);
 			}
 		}
@@ -10055,9 +10131,9 @@ function Ut({ section: e, apiBase: t = "" }) {
 			execute: ({ id: t }) => {
 				let n = o.find((e) => e.id === t);
 				if (!n) throw Error("Recording not found in this section.");
-				return D(n), {
+				return ue(n), {
 					id: n.id,
-					requiresPassword: e === "private" && !i.has(E(n))
+					requiresPassword: e === "private" && !i.has(ce(n))
 				};
 			}
 		}, { signal: n.signal })).catch(() => {}), () => n.abort();
@@ -10066,7 +10142,7 @@ function Ut({ section: e, apiBase: t = "" }) {
 		e,
 		i
 	]);
-	let le = (0, _.useMemo)(() => {
+	let k = (0, _.useMemo)(() => {
 		let e = /* @__PURE__ */ new Map();
 		for (let t of o) {
 			let n = t.playlist || "Other recordings";
@@ -10077,11 +10153,34 @@ function Ut({ section: e, apiBase: t = "" }) {
 			recordings: t,
 			total: t.reduce((e, t) => e + t.duration, 0)
 		}));
-	}, [o]), ue = le.find((e) => e.name === g), de = (e) => `${Math.floor(e / 60)}:${String(Math.floor(e % 60)).padStart(2, "0")}`, k = (e) => {
+	}, [o]), A = k.find((e) => e.name === g), j = (e) => `${Math.floor(e / 60)}:${String(Math.floor(e % 60)).padStart(2, "0")}`, fe = (e) => {
 		let t = Math.round(e / 60);
 		return t >= 60 ? `${Math.floor(t / 60)} hr ${t % 60 ? t % 60 + " min" : ""}`.trim() : `${t} min`;
-	}, A = (e) => i.has(E(e));
-	async function j(e, n) {
+	}, M = (e) => i.has(ce(e)), pe = (e) => {
+		T(e), E.current && window.clearTimeout(E.current), E.current = window.setTimeout(() => T(""), 1800);
+	};
+	async function me(e) {
+		let t = new URL(window.location.href);
+		t.search = "", t.hash = "", t.searchParams.set("audio", e.id);
+		let n = {
+			title: e.title,
+			text: [e.title, e.author].filter(Boolean).join(" — "),
+			url: t.toString()
+		};
+		try {
+			if (navigator.share) {
+				await navigator.share(n), pe(e.id);
+				return;
+			}
+			await navigator.clipboard.writeText(n.url), pe(e.id);
+		} catch (t) {
+			if (t instanceof DOMException && t.name === "AbortError") return;
+			try {
+				await navigator.clipboard.writeText(n.url), pe(e.id);
+			} catch {}
+		}
+	}
+	async function he(e, n) {
 		if (e.preventDefault(), !y) return;
 		te(!0), C("");
 		let i = new FormData(e.currentTarget);
@@ -10094,7 +10193,7 @@ function Ut({ section: e, apiBase: t = "" }) {
 			if (!e.ok) throw Error(a.error);
 			if (n === "unlock") {
 				if (!a.streamUrl) throw Error("Playback link was not returned. Please try again.");
-				se(a, E(y)), r(a.streamUrl), ee(!0), C("");
+				O(a, ce(y)), r(a.streamUrl), ee(!0), C("");
 			} else C("Your request has been saved for the library owner.");
 		} catch (e) {
 			C(e instanceof Error ? e.message : "Please try again.");
@@ -10133,10 +10232,6 @@ function Ut({ section: e, apiBase: t = "" }) {
 						href: "/private-audios/",
 						"aria-current": e === "private" ? "page" : void 0,
 						children: "Private Audios"
-					}),
-					/* @__PURE__ */ (0, L.jsx)("a", {
-						href: "/slides/",
-						children: "Gallery"
 					})
 				]
 			}),
@@ -10168,7 +10263,7 @@ function Ut({ section: e, apiBase: t = "" }) {
 						/* @__PURE__ */ (0, L.jsxs)(Bt, {
 							variant: "ghost",
 							onClick: () => {
-								T.current++, b(null), r(""), ee(!1), C("");
+								ie.current++, b(null), r(""), ee(!1), C("");
 							},
 							children: ["← Back to ", y.playlist || "playlist"]
 						}),
@@ -10186,7 +10281,7 @@ function Ut({ section: e, apiBase: t = "" }) {
 							children: [
 								y.recorded_at?.replace("T", " "),
 								y.location,
-								de(y.duration)
+								j(y.duration)
 							].filter(Boolean).join(" · ")
 						}),
 						/* @__PURE__ */ (0, L.jsx)("p", {
@@ -10205,7 +10300,7 @@ function Ut({ section: e, apiBase: t = "" }) {
 						}, y.id) : /* @__PURE__ */ (0, L.jsxs)("div", {
 							className: "access-grid",
 							children: [/* @__PURE__ */ (0, L.jsxs)("form", {
-								onSubmit: (e) => j(e, "unlock"),
+								onSubmit: (e) => he(e, "unlock"),
 								children: [
 									/* @__PURE__ */ (0, L.jsx)("span", {
 										className: "lock-label",
@@ -10226,7 +10321,7 @@ function Ut({ section: e, apiBase: t = "" }) {
 									})
 								]
 							}), /* @__PURE__ */ (0, L.jsxs)("form", {
-								onSubmit: (e) => j(e, "request"),
+								onSubmit: (e) => he(e, "request"),
 								children: [
 									/* @__PURE__ */ (0, L.jsx)("h3", { children: "Request access" }),
 									/* @__PURE__ */ (0, L.jsxs)("label", { children: ["Your email", /* @__PURE__ */ (0, L.jsx)(Vt, {
@@ -10260,7 +10355,7 @@ function Ut({ section: e, apiBase: t = "" }) {
 							children: S
 						})
 					]
-				}) : ue ? /* @__PURE__ */ (0, L.jsxs)("section", {
+				}) : A ? /* @__PURE__ */ (0, L.jsxs)("section", {
 					className: "playlist-detail",
 					children: [
 						/* @__PURE__ */ (0, L.jsx)(Bt, {
@@ -10275,11 +10370,11 @@ function Ut({ section: e, apiBase: t = "" }) {
 								"aria-hidden": "true",
 								children: [
 									/* @__PURE__ */ (0, L.jsx)("span", { children: "GNOSIS HÀ NỘI" }),
-									/* @__PURE__ */ (0, L.jsx)("strong", { children: ue.name }),
+									/* @__PURE__ */ (0, L.jsx)("strong", { children: A.name }),
 									/* @__PURE__ */ (0, L.jsxs)("small", { children: [
-										ue.recordings.length,
+										A.recordings.length,
 										" ",
-										ue.recordings.length === 1 ? "recording" : "recordings"
+										A.recordings.length === 1 ? "recording" : "recordings"
 									] })
 								]
 							}), /* @__PURE__ */ (0, L.jsxs)("div", { children: [
@@ -10287,13 +10382,13 @@ function Ut({ section: e, apiBase: t = "" }) {
 									className: "eyebrow",
 									children: "Audio playlist"
 								}),
-								/* @__PURE__ */ (0, L.jsx)("h2", { children: ue.name }),
+								/* @__PURE__ */ (0, L.jsx)("h2", { children: A.name }),
 								/* @__PURE__ */ (0, L.jsxs)("p", { children: [
-									ue.recordings.length,
+									A.recordings.length,
 									" ",
-									ue.recordings.length === 1 ? "recording" : "recordings",
+									A.recordings.length === 1 ? "recording" : "recordings",
 									" · ",
-									k(ue.total)
+									fe(A.total)
 								] }),
 								/* @__PURE__ */ (0, L.jsx)("p", {
 									className: "meta",
@@ -10303,32 +10398,45 @@ function Ut({ section: e, apiBase: t = "" }) {
 						}),
 						/* @__PURE__ */ (0, L.jsx)("div", {
 							className: "track-list",
-							children: ue.recordings.map((t, n) => /* @__PURE__ */ (0, L.jsxs)("button", {
+							children: A.recordings.map((t, n) => /* @__PURE__ */ (0, L.jsxs)("div", {
 								className: "track-row",
-								onClick: () => void D(t),
-								children: [
-									/* @__PURE__ */ (0, L.jsx)("span", {
+								children: [/* @__PURE__ */ (0, L.jsxs)("button", {
+									className: "track-open",
+									onClick: () => void ue(t),
+									children: [/* @__PURE__ */ (0, L.jsx)("span", {
 										className: "track-number",
 										children: n + 1
-									}),
-									/* @__PURE__ */ (0, L.jsxs)("span", {
+									}), /* @__PURE__ */ (0, L.jsxs)("span", {
 										className: "track-copy",
 										children: [/* @__PURE__ */ (0, L.jsx)("strong", { children: t.title }), /* @__PURE__ */ (0, L.jsx)("small", { children: [t.author, t.location].filter(Boolean).join(" · ") })]
-									}),
-									/* @__PURE__ */ (0, L.jsxs)("span", {
-										className: "track-action",
-										children: [/* @__PURE__ */ (0, L.jsx)("small", { children: de(t.duration) }), /* @__PURE__ */ (0, L.jsx)("strong", { children: e === "private" && !A(t) ? "Unlock & play" : "Play" })]
-									})
-								]
+									})]
+								}), /* @__PURE__ */ (0, L.jsxs)("span", {
+									className: "track-action",
+									children: [/* @__PURE__ */ (0, L.jsx)("small", { children: j(t.duration) }), /* @__PURE__ */ (0, L.jsxs)("span", {
+										className: "track-controls",
+										children: [/* @__PURE__ */ (0, L.jsx)("button", {
+											className: "track-play",
+											onClick: () => void ue(t),
+											children: e === "private" && !M(t) ? "Unlock & play" : "Play"
+										}), /* @__PURE__ */ (0, L.jsx)("button", {
+											className: "track-share",
+											type: "button",
+											"aria-label": `Share ${t.title}`,
+											title: "Share audio",
+											onClick: () => void me(t),
+											children: ne === t.id ? /* @__PURE__ */ (0, L.jsx)($t, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(en, { "aria-hidden": "true" })
+										})]
+									})]
+								})]
 							}, t.id))
 						})
 					]
 				}) : /* @__PURE__ */ (0, L.jsxs)(L.Fragment, { children: [/* @__PURE__ */ (0, L.jsx)("div", {
 					className: "list-toolbar",
 					children: /* @__PURE__ */ (0, L.jsxs)("span", { children: [
-						le.length,
+						k.length,
 						" ",
-						le.length === 1 ? "playlist" : "playlists",
+						k.length === 1 ? "playlist" : "playlists",
 						" · ",
 						o.length,
 						" recordings"
@@ -10341,7 +10449,7 @@ function Ut({ section: e, apiBase: t = "" }) {
 					className: "notice",
 					role: "alert",
 					children: [/* @__PURE__ */ (0, L.jsx)("p", { children: f }), /* @__PURE__ */ (0, L.jsx)(Bt, {
-						onClick: () => void O(!1),
+						onClick: () => void de(!1),
 						children: "Try again"
 					})]
 				}) : o.length === 0 ? /* @__PURE__ */ (0, L.jsxs)("div", {
@@ -10353,7 +10461,7 @@ function Ut({ section: e, apiBase: t = "" }) {
 					]
 				}) : /* @__PURE__ */ (0, L.jsx)("div", {
 					className: "shelf-grid",
-					children: le.map((e, t) => /* @__PURE__ */ (0, L.jsxs)("button", {
+					children: k.map((e, t) => /* @__PURE__ */ (0, L.jsxs)("button", {
 						className: `shelf-card shelf-tone-${t % 4}`,
 						onClick: () => v(e.name),
 						children: [
@@ -10368,7 +10476,7 @@ function Ut({ section: e, apiBase: t = "" }) {
 								" ",
 								e.recordings.length === 1 ? "recording" : "recordings",
 								" · ",
-								k(e.total)
+								fe(e.total)
 							] }),
 							/* @__PURE__ */ (0, L.jsx)("span", {
 								className: "shelf-open",
@@ -10387,8 +10495,8 @@ function Ut({ section: e, apiBase: t = "" }) {
 }
 //#endregion
 //#region listener-client.tsx
-var Wt = document.getElementById("recording-library");
-Wt && (0, v.createRoot)(Wt).render(/* @__PURE__ */ (0, L.jsx)(Ut, {
+var nn = document.getElementById("recording-library");
+nn && (0, v.createRoot)(nn).render(/* @__PURE__ */ (0, L.jsx)(tn, {
 	section: location.pathname.startsWith("/private-audios") ? "private" : "talks",
 	apiBase: "https://gnosis-audio.cristalngo.chatgpt.site"
 }));
