@@ -56,8 +56,10 @@ html body { font-family: var(--library-font); font-size: 1rem; }
   :root .brand-name, :root .brand-header strong { font-size: .98rem; }
   :root .brand-subtitle, :root .brand-header small { max-width:126px; font-size:.74rem; line-height:1.18; }
   :root .shared-library-menu, :root .library-menu {
+    position: sticky; top: 0; z-index: 30;
     display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
     gap: 6px; margin-bottom: 22px; padding: 10px 0;
+    background: rgba(248,246,237,.96); backdrop-filter: blur(10px);
   }
   :root .shared-library-menu a, :root .library-menu a {
     min-width: 0; padding: 9px 4px; text-align: center; white-space: nowrap;
