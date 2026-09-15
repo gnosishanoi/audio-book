@@ -10408,7 +10408,7 @@ function tn({ section: e, apiBase: t = "" }) {
 										children: n + 1
 									}), /* @__PURE__ */ (0, L.jsxs)("span", {
 										className: "track-copy",
-										children: [/* @__PURE__ */ (0, L.jsx)("strong", { children: t.title }), /* @__PURE__ */ (0, L.jsx)("small", { children: [t.author, t.location].filter(Boolean).join(" · ") })]
+										children: [/* @__PURE__ */ (0, L.jsx)("strong", { children: t.title }), /* @__PURE__ */ (0, L.jsx)("small", { children: t.recorded_at?.replace("T", " ") || t.author })]
 									})]
 								}), /* @__PURE__ */ (0, L.jsxs)("span", {
 									className: "track-action",
