@@ -10085,7 +10085,7 @@ var dn = (e) => {
 		e.description
 	].filter(Boolean).join(" ");
 	return /[ăâđêôơư]/i.test(t) || /[\u0300-\u036f]/.test(t.normalize("NFD")) ? "vi" : "en";
-}, fn = (e) => e === "vi" ? "Tiếng Việt" : "English", pn = (e) => ({
+}, fn = (e) => e === "vi" ? "Tiếng Việt" : "English", pn = (e) => e === "Koradi Radio" ? "Một số bài giảng chọn lọc" : "", mn = (e) => ({
 	"Cross-site requests are not allowed.": "Không cho phép yêu cầu từ trang web khác.",
 	"The audio library is temporarily unavailable. Please try again later.": "Thư viện audio đang tạm thời không khả dụng. Vui lòng thử lại sau.",
 	"The audio library is temporarily unavailable. Please try again.": "Thư viện audio đang tạm thời không khả dụng. Vui lòng thử lại.",
@@ -10101,7 +10101,7 @@ var dn = (e) => {
 	"Enter a valid email address.": "Vui lòng nhập địa chỉ email hợp lệ.",
 	"This recording is already public.": "Bản ghi này đã được công khai.",
 	"Not found.": "Không tìm thấy nội dung."
-})[e] || e, mn = (e) => e.versions?.length ? e.versions : [{
+})[e] || e, hn = (e) => e.versions?.length ? e.versions : [{
 	id: e.audio_id || e.id,
 	title: e.title,
 	author: e.author,
@@ -10110,8 +10110,8 @@ var dn = (e) => {
 	description: e.description,
 	duration: e.duration,
 	language: dn(e)
-}], hn = (e, t) => {
-	let n = mn(e), r = n.find((e) => e.language === t) || n.find((e) => e.language === "vi") || n.find((e) => e.language === "en") || n[0];
+}], gn = (e, t) => {
+	let n = hn(e), r = n.find((e) => e.language === t) || n.find((e) => e.language === "vi") || n.find((e) => e.language === "en") || n[0];
 	return {
 		...e,
 		...r,
@@ -10119,8 +10119,8 @@ var dn = (e) => {
 		audio_id: r.id,
 		versions: n
 	};
-}, gn = (e) => e.audio_id || mn(e)[0].id;
-function _n({ section: e, apiBase: t = "" }) {
+}, _n = (e) => e.audio_id || hn(e)[0].id;
+function vn({ section: e, apiBase: t = "" }) {
 	let [n, r] = (0, _.useState)(""), [i, a] = (0, _.useState)(/* @__PURE__ */ new Set()), [o, s] = (0, _.useState)([]), [c, l] = (0, _.useState)(!0), [u, d] = (0, _.useState)(!1), [f, p] = (0, _.useState)(""), [m, h] = (0, _.useState)(""), [g, v] = (0, _.useState)(null), [y, b] = (0, _.useState)(null), [x, ee] = (0, _.useState)(!1), [S, C] = (0, _.useState)(""), [w, te] = (0, _.useState)(!1), [ne, T] = (0, _.useState)(""), re = (0, _.useRef)({}), ie = (0, _.useRef)(0), ae = (0, _.useRef)(""), E = (0, _.useRef)(null), oe = "gnosis-private-playlist-access-v1", se = `gnosis-recording-catalog-v4:${e}`, ce = (e) => e.playlist ? "playlist:" + e.playlist : "audio:" + e.id, D = () => window.requestAnimationFrame(() => window.scrollTo({ top: 0 }));
 	function O() {
 		try {
@@ -10140,7 +10140,7 @@ function _n({ section: e, apiBase: t = "" }) {
 	async function ue(e) {
 		let n = ce(e), r = re.current[n];
 		if (!r) return null;
-		let i = await fetch(`${t}/api/library/audio/${gn(e)}/access`, {
+		let i = await fetch(`${t}/api/library/audio/${_n(e)}/access`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ grant: r.grant })
@@ -10149,18 +10149,18 @@ function _n({ section: e, apiBase: t = "" }) {
 			let t = new Set(e);
 			return t.delete(n), t;
 		}), null;
-		if (!i.ok) throw Error(pn(o.error || "Không thể kiểm tra quyền truy cập danh sách phát."));
+		if (!i.ok) throw Error(mn(o.error || "Không thể kiểm tra quyền truy cập danh sách phát."));
 		return le(o, n), o;
 	}
 	async function de(t, n) {
-		let i = hn(t, n), a = ++ie.current;
+		let i = gn(t, n), a = ++ie.current;
 		if (v(i.playlist || "Các bản ghi khác"), b(i), ee(!1), r(""), C(""), D(), e === "private") {
 			te(!0);
 			try {
 				let e = await ue(i);
 				a === ie.current && e && (r(e.streamUrl), ee(!0));
 			} catch (e) {
-				a === ie.current && C(e instanceof Error ? pn(e.message) : "Không thể tải danh sách phát.");
+				a === ie.current && C(e instanceof Error ? mn(e.message) : "Không thể tải danh sách phát.");
 			} finally {
 				a === ie.current && te(!1);
 			}
@@ -10170,7 +10170,7 @@ function _n({ section: e, apiBase: t = "" }) {
 		n ? d(!0) : l(!0), p(""), h("");
 		try {
 			let n = await fetch(t + "/api/library/catalog?section=" + e), r = await n.json();
-			if (!n.ok) throw Error(pn(r.error || "Không thể tải các bản ghi."));
+			if (!n.ok) throw Error(mn(r.error || "Không thể tải các bản ghi."));
 			s(r.items);
 			try {
 				localStorage.setItem(se, JSON.stringify(r.items));
@@ -10180,7 +10180,7 @@ function _n({ section: e, apiBase: t = "" }) {
 				Promise.all(e.map((e) => ue(e).catch(() => null)));
 			}
 		} catch (e) {
-			let t = e instanceof Error ? pn(e.message) : "Không thể tải các bản ghi.";
+			let t = e instanceof Error ? mn(e.message) : "Không thể tải các bản ghi.";
 			n ? h("Đang hiển thị thư viện đã lưu vì chưa thể tải bản cập nhật mới nhất.") : p(t);
 		} finally {
 			l(!1), d(!1);
@@ -10286,18 +10286,18 @@ function _n({ section: e, apiBase: t = "" }) {
 		te(!0), C("");
 		let i = new FormData(e.currentTarget);
 		try {
-			let e = await fetch(`${t}/api/library/audio/${gn(y)}/${n}`, {
+			let e = await fetch(`${t}/api/library/audio/${_n(y)}/${n}`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(Object.fromEntries(i))
 			}), a = await e.json();
-			if (!e.ok) throw Error(pn(a.error || "Vui lòng thử lại."));
+			if (!e.ok) throw Error(mn(a.error || "Vui lòng thử lại."));
 			if (n === "unlock") {
 				if (!a.streamUrl) throw Error("Không nhận được liên kết phát. Vui lòng thử lại.");
 				le(a, ce(y)), r(a.streamUrl), ee(!0), C("");
 			} else C("Yêu cầu của bạn đã được gửi đến người quản lý thư viện.");
 		} catch (e) {
-			C(e instanceof Error ? pn(e.message) : "Vui lòng thử lại.");
+			C(e instanceof Error ? mn(e.message) : "Vui lòng thử lại.");
 		} finally {
 			te(!1);
 		}
@@ -10390,9 +10390,9 @@ function _n({ section: e, apiBase: t = "" }) {
 							}), /* @__PURE__ */ (0, L.jsx)("div", {
 								className: "language-switch",
 								"aria-label": "Ngôn ngữ bản ghi",
-								children: mn(y).map((e) => /* @__PURE__ */ (0, L.jsx)("button", {
+								children: hn(y).map((e) => /* @__PURE__ */ (0, L.jsx)("button", {
 									type: "button",
-									"aria-pressed": gn(y) === e.id,
+									"aria-pressed": _n(y) === e.id,
 									onClick: () => void de(y, e.language),
 									children: fn(e.language)
 								}, e.id))
@@ -10418,9 +10418,9 @@ function _n({ section: e, apiBase: t = "" }) {
 							controls: !0,
 							autoPlay: !0,
 							preload: "metadata",
-							src: e === "private" ? n : `${t}/api/library/audio/${gn(y)}/stream`,
+							src: e === "private" ? n : `${t}/api/library/audio/${_n(y)}/stream`,
 							onError: () => C("Hiện không thể phát audio. Hãy mở lại bản ghi để thử lại; quyền truy cập của bạn vẫn được ghi nhớ.")
-						}, gn(y)) : /* @__PURE__ */ (0, L.jsxs)("div", {
+						}, _n(y)) : /* @__PURE__ */ (0, L.jsxs)("div", {
 							className: "access-grid",
 							children: [/* @__PURE__ */ (0, L.jsxs)("form", {
 								onSubmit: (e) => ve(e, "unlock"),
@@ -10551,7 +10551,7 @@ function _n({ section: e, apiBase: t = "" }) {
 													/* @__PURE__ */ (0, L.jsx)("small", { children: on(t) }),
 													/* @__PURE__ */ (0, L.jsxs)("span", {
 														className: "track-meta",
-														children: [/* @__PURE__ */ (0, L.jsxs)("span", { children: [fn(dn(t)), mn(t).length > 1 ? ` · ${mn(t).length} ngôn ngữ` : ""] }), /* @__PURE__ */ (0, L.jsx)("span", { children: fe(t.duration) })]
+														children: [/* @__PURE__ */ (0, L.jsxs)("span", { children: [fn(dn(t)), hn(t).length > 1 ? ` · ${hn(t).length} ngôn ngữ` : ""] }), /* @__PURE__ */ (0, L.jsx)("span", { children: fe(t.duration) })]
 													})
 												]
 											})
@@ -10620,7 +10620,14 @@ function _n({ section: e, apiBase: t = "" }) {
 									className: "shelf-kicker",
 									children: "DANH SÁCH AUDIO"
 								}),
-								/* @__PURE__ */ (0, L.jsx)("strong", { children: e.name }),
+								/* @__PURE__ */ (0, L.jsx)("strong", {
+									className: pn(e.name) ? "has-subtitle" : void 0,
+									children: e.name
+								}),
+								pn(e.name) && /* @__PURE__ */ (0, L.jsx)("span", {
+									className: "shelf-subtitle",
+									children: pn(e.name)
+								}),
 								/* @__PURE__ */ (0, L.jsx)("span", { className: "shelf-rule" }),
 								/* @__PURE__ */ (0, L.jsxs)("small", { children: [
 									e.recordings.length,
@@ -10652,8 +10659,8 @@ function _n({ section: e, apiBase: t = "" }) {
 }
 //#endregion
 //#region listener-client.tsx
-var vn = document.getElementById("recording-library");
-vn && (0, v.createRoot)(vn).render(/* @__PURE__ */ (0, L.jsx)(_n, {
+var yn = document.getElementById("recording-library");
+yn && (0, v.createRoot)(yn).render(/* @__PURE__ */ (0, L.jsx)(vn, {
 	section: location.pathname.startsWith("/private-audios") ? "private" : "talks",
 	apiBase: "https://gnosis-audio.cristalngo.chatgpt.site"
 }));
