@@ -10085,7 +10085,7 @@ var dn = (e) => {
 		e.description
 	].filter(Boolean).join(" ");
 	return /[ăâđêôơư]/i.test(t) || /[\u0300-\u036f]/.test(t.normalize("NFD")) ? "vi" : "en";
-}, fn = (e) => e === "vi" ? "Tiếng Việt" : "Tiếng Anh", pn = (e) => ({
+}, fn = (e) => e === "vi" ? "Tiếng Việt" : "English", pn = (e) => ({
 	"Cross-site requests are not allowed.": "Không cho phép yêu cầu từ trang web khác.",
 	"The audio library is temporarily unavailable. Please try again later.": "Thư viện audio đang tạm thời không khả dụng. Vui lòng thử lại sau.",
 	"The audio library is temporarily unavailable. Please try again.": "Thư viện audio đang tạm thời không khả dụng. Vui lòng thử lại.",
