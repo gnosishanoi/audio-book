@@ -10532,18 +10532,19 @@ function gn({ section: e, apiBase: t = "" }) {
 											onClick: () => void de(t),
 											children: /* @__PURE__ */ (0, L.jsxs)("span", {
 												className: "track-copy",
-												children: [/* @__PURE__ */ (0, L.jsx)("strong", { children: t.title }), /* @__PURE__ */ (0, L.jsx)("small", { children: on(t) })]
+												children: [
+													/* @__PURE__ */ (0, L.jsx)("strong", { children: t.title }),
+													/* @__PURE__ */ (0, L.jsx)("small", { children: on(t) }),
+													/* @__PURE__ */ (0, L.jsxs)("span", {
+														className: "track-meta",
+														children: [/* @__PURE__ */ (0, L.jsxs)("span", { children: [fn(dn(t)), pn(t).length > 1 ? ` · ${pn(t).length} languages` : ""] }), /* @__PURE__ */ (0, L.jsx)("span", { children: fe(t.duration) })]
+													})
+												]
 											})
 										}),
-										/* @__PURE__ */ (0, L.jsxs)("span", {
+										/* @__PURE__ */ (0, L.jsx)("span", {
 											className: "track-action",
-											children: [/* @__PURE__ */ (0, L.jsxs)("span", {
-												className: "track-facts",
-												children: [/* @__PURE__ */ (0, L.jsxs)("span", {
-													className: "language-badge",
-													children: [fn(dn(t)), pn(t).length > 1 ? ` · ${pn(t).length} languages` : ""]
-												}), /* @__PURE__ */ (0, L.jsx)("small", { children: fe(t.duration) })]
-											}), /* @__PURE__ */ (0, L.jsxs)("span", {
+											children: /* @__PURE__ */ (0, L.jsxs)("span", {
 												className: "track-controls",
 												children: [/* @__PURE__ */ (0, L.jsx)("button", {
 													className: "track-play",
@@ -10560,7 +10561,7 @@ function gn({ section: e, apiBase: t = "" }) {
 													onClick: () => void ge(t),
 													children: ne === t.id ? /* @__PURE__ */ (0, L.jsx)($t, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(rn, { "aria-hidden": "true" })
 												})]
-											})]
+											})
 										})
 									]
 								}, t.id);
