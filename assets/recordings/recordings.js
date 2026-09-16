@@ -10334,7 +10334,7 @@ function _n({ section: e, apiBase: t = "" }) {
 					/* @__PURE__ */ (0, L.jsx)("a", {
 						href: "/talks-meditation/",
 						"aria-current": e === "talks" ? "page" : void 0,
-						children: "Bài giảng & Thiền định"
+						children: "Bài giảng & Thiền"
 					}),
 					/* @__PURE__ */ (0, L.jsx)("a", {
 						href: "/private-audios/",
@@ -10355,7 +10355,7 @@ function _n({ section: e, apiBase: t = "" }) {
 							className: "eyebrow",
 							children: "THƯ VIỆN GNOSIS HÀ NỘI"
 						}),
-						/* @__PURE__ */ (0, L.jsx)("h1", { children: e === "talks" ? "Bài giảng & Thiền định" : "Audio riêng tư" }),
+						/* @__PURE__ */ (0, L.jsx)("h1", { children: e === "talks" ? "Bài giảng & Thiền" : "Audio riêng tư" }),
 						/* @__PURE__ */ (0, L.jsx)("p", { children: e === "talks" ? "Các bài giảng, chia sẻ và hướng dẫn thực hành thiền." : "Các bản ghi cần được cấp quyền trước khi nghe." })
 					]
 				}),
@@ -10604,7 +10604,7 @@ function _n({ section: e, apiBase: t = "" }) {
 				}) : o.length === 0 ? /* @__PURE__ */ (0, L.jsxs)("div", {
 					className: "empty-library",
 					children: [
-						/* @__PURE__ */ (0, L.jsx)("span", { children: e === "private" ? "Bộ sưu tập riêng tư" : "Bài giảng & Thiền định" }),
+						/* @__PURE__ */ (0, L.jsx)("span", { children: e === "private" ? "Bộ sưu tập riêng tư" : "Bài giảng & Thiền" }),
 						/* @__PURE__ */ (0, L.jsx)("h2", { children: "Chưa có bản ghi nào được xuất bản" }),
 						/* @__PURE__ */ (0, L.jsx)("p", { children: "Các bản ghi mới sẽ xuất hiện tại đây sau khi được xuất bản." })
 					]
