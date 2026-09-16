@@ -10121,7 +10121,7 @@ var dn = (e) => {
 	};
 }, gn = (e) => e.audio_id || mn(e)[0].id;
 function _n({ section: e, apiBase: t = "" }) {
-	let [n, r] = (0, _.useState)(""), [i, a] = (0, _.useState)(/* @__PURE__ */ new Set()), [o, s] = (0, _.useState)([]), [c, l] = (0, _.useState)(!0), [u, d] = (0, _.useState)(!1), [f, p] = (0, _.useState)(""), [m, h] = (0, _.useState)(""), [g, v] = (0, _.useState)(null), [y, b] = (0, _.useState)(null), [x, ee] = (0, _.useState)(!1), [S, C] = (0, _.useState)(""), [w, te] = (0, _.useState)(!1), [ne, T] = (0, _.useState)(""), re = (0, _.useRef)({}), ie = (0, _.useRef)(0), ae = (0, _.useRef)(""), E = (0, _.useRef)(null), oe = "gnosis-private-playlist-access-v1", se = `gnosis-recording-catalog-v3:${e}`, ce = (e) => e.playlist ? "playlist:" + e.playlist : "audio:" + e.id, D = () => window.requestAnimationFrame(() => window.scrollTo({ top: 0 }));
+	let [n, r] = (0, _.useState)(""), [i, a] = (0, _.useState)(/* @__PURE__ */ new Set()), [o, s] = (0, _.useState)([]), [c, l] = (0, _.useState)(!0), [u, d] = (0, _.useState)(!1), [f, p] = (0, _.useState)(""), [m, h] = (0, _.useState)(""), [g, v] = (0, _.useState)(null), [y, b] = (0, _.useState)(null), [x, ee] = (0, _.useState)(!1), [S, C] = (0, _.useState)(""), [w, te] = (0, _.useState)(!1), [ne, T] = (0, _.useState)(""), re = (0, _.useRef)({}), ie = (0, _.useRef)(0), ae = (0, _.useRef)(""), E = (0, _.useRef)(null), oe = "gnosis-private-playlist-access-v1", se = `gnosis-recording-catalog-v4:${e}`, ce = (e) => e.playlist ? "playlist:" + e.playlist : "audio:" + e.id, D = () => window.requestAnimationFrame(() => window.scrollTo({ top: 0 }));
 	function O() {
 		try {
 			localStorage.setItem(oe, JSON.stringify(re.current));
