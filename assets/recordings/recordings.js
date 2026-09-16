@@ -1,4 +1,3 @@
-import {recordingByline, recordingId, recordingShareData, playlistShareData, linkedPlaylist} from './recording-links.js?v=1';
 //#region \0rolldown/runtime.js
 var e = Object.create, t = Object.defineProperty, n = Object.getOwnPropertyDescriptor, r = Object.getOwnPropertyNames, i = Object.getPrototypeOf, a = Object.prototype.hasOwnProperty, o = (e, t) => () => (t || (e((t = { exports: {} }).exports, t), e = null), t.exports), s = (e, i, o, s) => {
 	if (i && typeof i == "object" || typeof i == "function") for (var c = r(i), l = 0, u = c.length, d; l < u; l++) d = c[l], !a.call(e, d) && d !== o && t(e, d, {
@@ -9988,7 +9987,32 @@ var Ut = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) 
 }, $t = Qt("check", [["path", {
 	d: "M20 6 9 17l-5-5",
 	key: "1gmf2c"
-}]]), en = Qt("share-2", [
+}]]), en = Qt("headphones", [["path", {
+	d: "M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3",
+	key: "1xhozi"
+}]]), tn = Qt("lock-keyhole", [
+	["circle", {
+		cx: "12",
+		cy: "16",
+		r: "1",
+		key: "1au0dj"
+	}],
+	["rect", {
+		x: "3",
+		y: "10",
+		width: "18",
+		height: "12",
+		rx: "2",
+		key: "6s8ecr"
+	}],
+	["path", {
+		d: "M7 10V7a5 5 0 0 1 10 0v3",
+		key: "1pqi11"
+	}]
+]), nn = Qt("play", [["path", {
+	d: "M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z",
+	key: "10ikf1"
+}]]), rn = Qt("share-2", [
 	["circle", {
 		cx: "18",
 		cy: "5",
@@ -10023,9 +10047,65 @@ var Ut = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) 
 	}]
 ]);
 //#endregion
+//#region app/recording-links.ts
+function an(e) {
+	let t = String(e || "").trim(), n = t.match(/^(\d{4})-(\d{2})-(\d{2})(?:$|[T ])/);
+	if (n) return `${n[3]}/${n[2]}/${n[1]}`;
+	let r = t.match(/^(\d{4})-(\d{2})$/);
+	return r ? `${r[2]}/${r[1]}` : t;
+}
+function on(e) {
+	return [an(e.recorded_at), String(e.author || "").trim()].filter(Boolean).join(" | ");
+}
+function sn(e) {
+	let t = String(e || "").trim().match(/^([a-f0-9]{32})(?:\s.*)?$/i);
+	return t ? t[1].toLowerCase() : "";
+}
+function cn(e, t) {
+	let n = new URL(t);
+	return n.search = "", n.hash = "", n.searchParams.set("audio", e.id), { url: n.toString() };
+}
+function ln(e, t) {
+	let n = new URL(t);
+	return n.search = "", n.hash = "", n.searchParams.set("playlist", e), { url: n.toString() };
+}
+function un(e, t) {
+	let n = new URL(e).searchParams;
+	if (sn(n.get("audio"))) return "";
+	let r = n.get("playlist");
+	return r && t.some((e) => (e.playlist || "Other recordings") === r) ? r : "";
+}
+//#endregion
 //#region app/library.tsx
-function tn({ section: e, apiBase: t = "" }) {
-	let [n, r] = (0, _.useState)(""), [i, a] = (0, _.useState)(/* @__PURE__ */ new Set()), [o, s] = (0, _.useState)([]), [c, l] = (0, _.useState)(!0), [u, d] = (0, _.useState)(!1), [f, p] = (0, _.useState)(""), [m, h] = (0, _.useState)(""), [g, v] = (0, _.useState)(null), [y, b] = (0, _.useState)(null), [x, ee] = (0, _.useState)(!1), [S, C] = (0, _.useState)(""), [w, te] = (0, _.useState)(!1), [ne, T] = (0, _.useState)(""), re = (0, _.useRef)({}), ie = (0, _.useRef)(0), ae = (0, _.useRef)(""), E = (0, _.useRef)(null), oe = "gnosis-private-playlist-access-v1", se = `gnosis-recording-catalog-v2:${e}`, ce = (e) => e.playlist ? "playlist:" + e.playlist : "audio:" + e.id, D = () => window.requestAnimationFrame(() => window.scrollTo({ top: 0 }));
+var dn = (e) => {
+	if (["en", "vi"].includes(e.language || "")) return e.language;
+	let t = [
+		e.title,
+		e.playlist,
+		e.description
+	].filter(Boolean).join(" ");
+	return /[ăâđêôơư]/i.test(t) || /[\u0300-\u036f]/.test(t.normalize("NFD")) ? "vi" : "en";
+}, fn = (e) => e === "vi" ? "Tiếng Việt" : "English", pn = (e) => e.versions?.length ? e.versions : [{
+	id: e.audio_id || e.id,
+	title: e.title,
+	author: e.author,
+	recorded_at: e.recorded_at,
+	location: e.location,
+	description: e.description,
+	duration: e.duration,
+	language: dn(e)
+}], mn = (e, t) => {
+	let n = pn(e), r = n.find((e) => e.language === t) || n.find((e) => e.language === "vi") || n.find((e) => e.language === "en") || n[0];
+	return {
+		...e,
+		...r,
+		id: e.id,
+		audio_id: r.id,
+		versions: n
+	};
+}, hn = (e) => e.audio_id || pn(e)[0].id;
+function gn({ section: e, apiBase: t = "" }) {
+	let [n, r] = (0, _.useState)(""), [i, a] = (0, _.useState)(/* @__PURE__ */ new Set()), [o, s] = (0, _.useState)([]), [c, l] = (0, _.useState)(!0), [u, d] = (0, _.useState)(!1), [f, p] = (0, _.useState)(""), [m, h] = (0, _.useState)(""), [g, v] = (0, _.useState)(null), [y, b] = (0, _.useState)(null), [x, ee] = (0, _.useState)(!1), [S, C] = (0, _.useState)(""), [w, te] = (0, _.useState)(!1), [ne, T] = (0, _.useState)(""), re = (0, _.useRef)({}), ie = (0, _.useRef)(0), ae = (0, _.useRef)(""), E = (0, _.useRef)(null), oe = "gnosis-private-playlist-access-v1", se = `gnosis-recording-catalog-v3:${e}`, ce = (e) => e.playlist ? "playlist:" + e.playlist : "audio:" + e.id, D = () => window.requestAnimationFrame(() => window.scrollTo({ top: 0 }));
 	function O() {
 		try {
 			localStorage.setItem(oe, JSON.stringify(re.current));
@@ -10044,7 +10124,7 @@ function tn({ section: e, apiBase: t = "" }) {
 	async function ue(e) {
 		let n = ce(e), r = re.current[n];
 		if (!r) return null;
-		let i = await fetch(`${t}/api/library/audio/${e.id}/access`, {
+		let i = await fetch(`${t}/api/library/audio/${hn(e)}/access`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ grant: r.grant })
@@ -10056,17 +10136,17 @@ function tn({ section: e, apiBase: t = "" }) {
 		if (!i.ok) throw Error(o.error || "Unable to check playlist access.");
 		return le(o, n), o;
 	}
-	async function de(t) {
-		let n = ++ie.current;
-		if (v(t.playlist || "Other recordings"), b(t), ee(!1), r(""), C(""), D(), e === "private") {
+	async function de(t, n) {
+		let i = mn(t, n), a = ++ie.current;
+		if (v(i.playlist || "Other recordings"), b(i), ee(!1), r(""), C(""), D(), e === "private") {
 			te(!0);
 			try {
-				let e = await ue(t);
-				n === ie.current && e && (r(e.streamUrl), ee(!0));
+				let e = await ue(i);
+				a === ie.current && e && (r(e.streamUrl), ee(!0));
 			} catch (e) {
-				n === ie.current && C(e instanceof Error ? e.message : "Unable to load playlist.");
+				a === ie.current && C(e instanceof Error ? e.message : "Unable to load playlist.");
 			} finally {
-				n === ie.current && te(!1);
+				a === ie.current && te(!1);
 			}
 		}
 	}
@@ -10106,12 +10186,13 @@ function tn({ section: e, apiBase: t = "" }) {
 		}, 0);
 		return () => window.clearTimeout(o);
 	}, [e]), (0, _.useEffect)(() => {
-		let e = recordingId(new URLSearchParams(window.location.search).get("audio"));
-		let playlist = linkedPlaylist(window.location.href, o);
-		if (playlist && ae.current !== "playlist:" + playlist) {
-			ae.current = "playlist:" + playlist;
-			let timer = window.setTimeout(() => { v(playlist); b(null); D(); }, 0);
-			return () => window.clearTimeout(timer);
+		let e = sn(new URLSearchParams(window.location.search).get("audio")), t = un(window.location.href, o);
+		if (t && ae.current !== "playlist:" + t) {
+			ae.current = "playlist:" + t;
+			let e = window.setTimeout(() => {
+				v(t), b(null), D();
+			}, 0);
+			return () => window.clearTimeout(e);
 		}
 		if (e && o.length && ae.current !== e) {
 			let t = o.find((t) => t.id === e);
@@ -10163,35 +10244,33 @@ function tn({ section: e, apiBase: t = "" }) {
 	}, [o]), j = A.find((e) => e.name === g), fe = (e) => `${Math.floor(e / 60)}:${String(Math.floor(e % 60)).padStart(2, "0")}`, M = (e) => {
 		let t = Math.round(e / 60);
 		return t >= 60 ? `${Math.floor(t / 60)} hr ${t % 60 ? t % 60 + " min" : ""}`.trim() : `${t} min`;
-	}, pe = (e) => i.has(ce(e)), me = (e) => {
+	}, pe = (e) => i.has(ce(e));
+	function me(e) {
 		T(e), E.current && window.clearTimeout(E.current), E.current = window.setTimeout(() => T(""), 1800);
-	};
-	async function he(e) {
-		return shareLibraryLink(recordingShareData(e, window.location.href), e.id);
 	}
-	async function sharePlaylist(name) {
-		return shareLibraryLink(playlistShareData(name, window.location.href), "playlist:" + name);
-	}
-	async function shareLibraryLink(n, key) {
+	async function he(e, t) {
 		try {
 			if (navigator.share) {
-				await navigator.share(n), me(key);
+				await navigator.share(e), me(t);
 				return;
 			}
-			await navigator.clipboard.writeText(n.url), me(key);
-		} catch (t) {
-			if (t instanceof DOMException && t.name === "AbortError") return;
+			await navigator.clipboard.writeText(e.url), me(t);
+		} catch (n) {
+			if (n instanceof DOMException && n.name === "AbortError") return;
 			try {
-				await navigator.clipboard.writeText(n.url), me(key);
-			} catch { window.prompt("Copy this link:", n.url); }
+				await navigator.clipboard.writeText(e.url), me(t);
+			} catch {
+				window.prompt("Copy this link:", e.url);
+			}
 		}
 	}
-	async function ge(e, n) {
+	let ge = (e) => he(cn(e, window.location.href), e.id), _e = (e) => he(ln(e, window.location.href), "playlist:" + e);
+	async function ve(e, n) {
 		if (e.preventDefault(), !y) return;
 		te(!0), C("");
 		let i = new FormData(e.currentTarget);
 		try {
-			let e = await fetch(`${t}/api/library/audio/${y.id}/${n}`, {
+			let e = await fetch(`${t}/api/library/audio/${hn(y)}/${n}`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(Object.fromEntries(i))
@@ -10207,11 +10286,11 @@ function tn({ section: e, apiBase: t = "" }) {
 			te(!1);
 		}
 	}
-	let _e = () => {
+	let ye = () => {
 		ie.current++, b(null), r(""), ee(!1), C(""), D();
-	}, ve = () => {
+	}, be = () => {
 		v(null), D();
-	}, ye = (e) => {
+	}, xe = (e) => {
 		v(e), D();
 	};
 	return /* @__PURE__ */ (0, L.jsxs)("div", {
@@ -10279,7 +10358,7 @@ function tn({ section: e, apiBase: t = "" }) {
 					children: [
 						/* @__PURE__ */ (0, L.jsxs)(Bt, {
 							variant: "ghost",
-							onClick: _e,
+							onClick: ye,
 							children: ["← Back to ", y.playlist || "playlist"]
 						}),
 						/* @__PURE__ */ (0, L.jsx)("p", {
@@ -10287,13 +10366,26 @@ function tn({ section: e, apiBase: t = "" }) {
 							children: y.playlist
 						}),
 						/* @__PURE__ */ (0, L.jsx)("h2", { children: y.title }),
-						/* @__PURE__ */ (0, L.jsx)("p", {
-							className: "speaker",
-							children: y.author
+						/* @__PURE__ */ (0, L.jsxs)("div", {
+							className: "speaker-line",
+							children: [/* @__PURE__ */ (0, L.jsx)("p", {
+								className: "speaker",
+								children: y.author
+							}), /* @__PURE__ */ (0, L.jsx)("div", {
+								className: "language-switch",
+								"aria-label": "Recording language",
+								children: pn(y).map((e) => /* @__PURE__ */ (0, L.jsx)("button", {
+									type: "button",
+									"aria-pressed": hn(y) === e.id,
+									onClick: () => void de(y, e.language),
+									children: fn(e.language)
+								}, e.id))
+							})]
 						}),
 						/* @__PURE__ */ (0, L.jsx)("p", {
 							className: "meta",
 							children: [
+								fn(y.language),
 								y.recorded_at?.replace("T", " "),
 								y.location,
 								fe(y.duration)
@@ -10310,12 +10402,12 @@ function tn({ section: e, apiBase: t = "" }) {
 							controls: !0,
 							autoPlay: !0,
 							preload: "metadata",
-							src: e === "private" ? n : `${t}/api/library/audio/${y.id}/stream`,
+							src: e === "private" ? n : `${t}/api/library/audio/${hn(y)}/stream`,
 							onError: () => C("Playback unavailable. Reopen this recording to retry; your playlist access is still remembered.")
-						}, y.id) : /* @__PURE__ */ (0, L.jsxs)("div", {
+						}, hn(y)) : /* @__PURE__ */ (0, L.jsxs)("div", {
 							className: "access-grid",
 							children: [/* @__PURE__ */ (0, L.jsxs)("form", {
-								onSubmit: (e) => ge(e, "unlock"),
+								onSubmit: (e) => ve(e, "unlock"),
 								children: [
 									/* @__PURE__ */ (0, L.jsx)("span", {
 										className: "lock-label",
@@ -10336,7 +10428,7 @@ function tn({ section: e, apiBase: t = "" }) {
 									})
 								]
 							}), /* @__PURE__ */ (0, L.jsxs)("form", {
-								onSubmit: (e) => ge(e, "request"),
+								onSubmit: (e) => ve(e, "request"),
 								children: [
 									/* @__PURE__ */ (0, L.jsx)("h3", { children: "Request access" }),
 									/* @__PURE__ */ (0, L.jsxs)("label", { children: ["Your email", /* @__PURE__ */ (0, L.jsx)(Vt, {
@@ -10374,8 +10466,9 @@ function tn({ section: e, apiBase: t = "" }) {
 					className: "playlist-detail",
 					children: [
 						/* @__PURE__ */ (0, L.jsx)(Bt, {
+							className: "playlist-back",
 							variant: "ghost",
-							onClick: ve,
+							onClick: be,
 							children: "← All playlists"
 						}),
 						/* @__PURE__ */ (0, L.jsxs)("div", {
@@ -10384,72 +10477,94 @@ function tn({ section: e, apiBase: t = "" }) {
 								className: "playlist-cover",
 								"aria-hidden": "true",
 								children: [
+									/* @__PURE__ */ (0, L.jsx)(en, {}),
 									/* @__PURE__ */ (0, L.jsx)("span", { children: "GNOSIS HÀ NỘI" }),
-									/* @__PURE__ */ (0, L.jsx)("strong", { children: j.name }),
-									/* @__PURE__ */ (0, L.jsxs)("small", { children: [
-										j.recordings.length,
-										" ",
-										j.recordings.length === 1 ? "recording" : "recordings"
-									] })
+									/* @__PURE__ */ (0, L.jsxs)("small", { children: [j.recordings.length, " AUDIO"] })
 								]
-							}), /* @__PURE__ */ (0, L.jsxs)("div", { children: [
-								/* @__PURE__ */ (0, L.jsx)("p", {
-									className: "eyebrow",
-									children: "Audio playlist"
-								}),
-								/* @__PURE__ */ (0, L.jsx)("h2", { children: j.name }),
-								(0, L.jsx)(Bt, {
-									variant: "ghost", type: "button",
-									"aria-label": `Share playlist ${j.name}`,
-									onClick: () => void sharePlaylist(j.name),
-									children: ne === "playlist:" + j.name ? "Shared ✓" : "Share playlist ↗"
-								}),
-								/* @__PURE__ */ (0, L.jsxs)("p", { children: [
-									j.recordings.length,
-									" ",
-									j.recordings.length === 1 ? "recording" : "recordings",
-									" · ",
-									M(j.total)
-								] }),
-								/* @__PURE__ */ (0, L.jsx)("p", {
-									className: "meta",
-									children: "Choose a recording below to listen."
-								})
-							] })]
+							}), /* @__PURE__ */ (0, L.jsxs)("div", {
+								className: "playlist-summary",
+								children: [
+									/* @__PURE__ */ (0, L.jsx)("p", {
+										className: "eyebrow",
+										children: "Audio playlist"
+									}),
+									/* @__PURE__ */ (0, L.jsxs)("div", {
+										className: "playlist-title-row",
+										children: [/* @__PURE__ */ (0, L.jsx)("h2", { children: j.name }), /* @__PURE__ */ (0, L.jsx)("button", {
+											className: "playlist-share",
+											type: "button",
+											"aria-label": `Share playlist ${j.name}`,
+											title: "Share playlist",
+											onClick: () => void _e(j.name),
+											children: ne === "playlist:" + j.name ? /* @__PURE__ */ (0, L.jsx)($t, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(rn, { "aria-hidden": "true" })
+										})]
+									}),
+									/* @__PURE__ */ (0, L.jsxs)("p", {
+										className: "playlist-stats",
+										children: [
+											j.recordings.length,
+											" ",
+											j.recordings.length === 1 ? "recording" : "recordings",
+											" · ",
+											M(j.total)
+										]
+									}),
+									/* @__PURE__ */ (0, L.jsx)("p", {
+										className: "meta",
+										children: "Choose a recording below to listen."
+									})
+								]
+							})]
 						}),
 						/* @__PURE__ */ (0, L.jsx)("div", {
 							className: "track-list",
-							children: j.recordings.map((t, n) => /* @__PURE__ */ (0, L.jsxs)("div", {
-								className: "track-row",
-								children: [/* @__PURE__ */ (0, L.jsxs)("button", {
-									className: "track-open",
-									onClick: () => void de(t),
-									children: [/* @__PURE__ */ (0, L.jsx)("span", {
-										className: "track-number",
-										children: n + 1
-									}), /* @__PURE__ */ (0, L.jsxs)("span", {
-										className: "track-copy",
-										children: [/* @__PURE__ */ (0, L.jsx)("strong", { children: t.title }), /* @__PURE__ */ (0, L.jsx)("small", { children: recordingByline(t) })]
-									})]
-								}), /* @__PURE__ */ (0, L.jsxs)("span", {
-									className: "track-action",
-									children: [/* @__PURE__ */ (0, L.jsx)("small", { children: fe(t.duration) }), /* @__PURE__ */ (0, L.jsxs)("span", {
-										className: "track-controls",
-										children: [/* @__PURE__ */ (0, L.jsx)("button", {
-											className: "track-play",
+							children: j.recordings.map((t, n) => {
+								let r = e === "private" && !pe(t);
+								return /* @__PURE__ */ (0, L.jsxs)("article", {
+									className: "track-row",
+									children: [
+										/* @__PURE__ */ (0, L.jsx)("span", {
+											className: "track-number",
+											children: n + 1
+										}),
+										/* @__PURE__ */ (0, L.jsx)("button", {
+											className: "track-open",
 											onClick: () => void de(t),
-											children: e === "private" && !pe(t) ? "Unlock & play" : "Play"
-										}), /* @__PURE__ */ (0, L.jsx)("button", {
-											className: "track-share",
-											type: "button",
-											"aria-label": `Share ${t.title}`,
-											title: "Share audio",
-											onClick: () => void he(t),
-											children: ne === t.id ? /* @__PURE__ */ (0, L.jsx)($t, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(en, { "aria-hidden": "true" })
-										})]
-									})]
-								})]
-							}, t.id))
+											children: /* @__PURE__ */ (0, L.jsxs)("span", {
+												className: "track-copy",
+												children: [/* @__PURE__ */ (0, L.jsx)("strong", { children: t.title }), /* @__PURE__ */ (0, L.jsx)("small", { children: on(t) })]
+											})
+										}),
+										/* @__PURE__ */ (0, L.jsxs)("span", {
+											className: "track-action",
+											children: [/* @__PURE__ */ (0, L.jsxs)("span", {
+												className: "track-facts",
+												children: [/* @__PURE__ */ (0, L.jsxs)("span", {
+													className: "language-badge",
+													children: [fn(dn(t)), pn(t).length > 1 ? ` · ${pn(t).length} languages` : ""]
+												}), /* @__PURE__ */ (0, L.jsx)("small", { children: fe(t.duration) })]
+											}), /* @__PURE__ */ (0, L.jsxs)("span", {
+												className: "track-controls",
+												children: [/* @__PURE__ */ (0, L.jsx)("button", {
+													className: "track-play",
+													type: "button",
+													"aria-label": `${r ? "Unlock and play" : "Play"} ${t.title}`,
+													title: r ? "Unlock and play" : "Play",
+													onClick: () => void de(t),
+													children: r ? /* @__PURE__ */ (0, L.jsx)(tn, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(nn, { "aria-hidden": "true" })
+												}), /* @__PURE__ */ (0, L.jsx)("button", {
+													className: "track-share",
+													type: "button",
+													"aria-label": `Share ${t.title}`,
+													title: "Share audio",
+													onClick: () => void ge(t),
+													children: ne === t.id ? /* @__PURE__ */ (0, L.jsx)($t, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(rn, { "aria-hidden": "true" })
+												})]
+											})]
+										})
+									]
+								}, t.id);
+							})
 						})
 					]
 				}) : /* @__PURE__ */ (0, L.jsxs)(L.Fragment, { children: [/* @__PURE__ */ (0, L.jsx)("div", {
@@ -10482,38 +10597,38 @@ function tn({ section: e, apiBase: t = "" }) {
 					]
 				}) : /* @__PURE__ */ (0, L.jsx)("div", {
 					className: "shelf-grid",
-					children: A.map((e, t) => (0, L.jsxs)("div", {
-						style: {position: "relative", minWidth: 0},
-						children: [(0, L.jsxs)("button", {
-						className: `shelf-card shelf-tone-${t % 4}`,
-						style: {width: "100%", height: "100%"},
-						onClick: () => ye(e.name),
-						children: [
-							/* @__PURE__ */ (0, L.jsx)("span", {
-								className: "shelf-kicker",
-								children: "AUDIO PLAYLIST"
-							}),
-							/* @__PURE__ */ (0, L.jsx)("strong", { children: e.name }),
-							/* @__PURE__ */ (0, L.jsx)("span", { className: "shelf-rule" }),
-							/* @__PURE__ */ (0, L.jsxs)("small", { children: [
-								e.recordings.length,
-								" ",
-								e.recordings.length === 1 ? "recording" : "recordings",
-								" · ",
-								M(e.total)
-							] }),
-							/* @__PURE__ */ (0, L.jsx)("span", {
-								className: "shelf-open",
-								children: "Open playlist →"
-							})
-						]
-					}), (0, L.jsx)("button", {
-						type: "button", className: "track-share",
-						style: {position: "absolute", top: "1rem", right: "1rem", zIndex: 1, background: "#f8f6ed", color: "#263d32", width: "44px", height: "44px"},
-						"aria-label": `Share playlist ${e.name}`, title: "Share playlist",
-						onClick: () => void sharePlaylist(e.name),
-						children: (0, L.jsx)(ne === "playlist:" + e.name ? $t : en, {"aria-hidden": "true"})
-					})]
+					children: A.map((e, t) => /* @__PURE__ */ (0, L.jsxs)("div", {
+						className: "shelf-wrap",
+						children: [/* @__PURE__ */ (0, L.jsxs)("button", {
+							className: `shelf-card shelf-tone-${t % 4}`,
+							onClick: () => xe(e.name),
+							children: [
+								/* @__PURE__ */ (0, L.jsx)("span", {
+									className: "shelf-kicker",
+									children: "AUDIO PLAYLIST"
+								}),
+								/* @__PURE__ */ (0, L.jsx)("strong", { children: e.name }),
+								/* @__PURE__ */ (0, L.jsx)("span", { className: "shelf-rule" }),
+								/* @__PURE__ */ (0, L.jsxs)("small", { children: [
+									e.recordings.length,
+									" ",
+									e.recordings.length === 1 ? "recording" : "recordings",
+									" · ",
+									M(e.total)
+								] }),
+								/* @__PURE__ */ (0, L.jsx)("span", {
+									className: "shelf-open",
+									children: "Open playlist →"
+								})
+							]
+						}), /* @__PURE__ */ (0, L.jsx)("button", {
+							type: "button",
+							className: "track-share shelf-share",
+							"aria-label": `Share playlist ${e.name}`,
+							title: "Share playlist",
+							onClick: () => void _e(e.name),
+							children: ne === "playlist:" + e.name ? /* @__PURE__ */ (0, L.jsx)($t, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(rn, { "aria-hidden": "true" })
+						})]
 					}, e.name))
 				})] })
 			] }),
@@ -10526,8 +10641,8 @@ function tn({ section: e, apiBase: t = "" }) {
 }
 //#endregion
 //#region listener-client.tsx
-var nn = document.getElementById("recording-library");
-nn && (0, v.createRoot)(nn).render(/* @__PURE__ */ (0, L.jsx)(tn, {
+var _n = document.getElementById("recording-library");
+_n && (0, v.createRoot)(_n).render(/* @__PURE__ */ (0, L.jsx)(gn, {
 	section: location.pathname.startsWith("/private-audios") ? "private" : "talks",
 	apiBase: "https://gnosis-audio.cristalngo.chatgpt.site"
 }));
