@@ -40,5 +40,5 @@ export function linkedPlaylist(currentUrl, recordings) {
   const params = new URL(currentUrl).searchParams;
   if (recordingId(params.get('audio'))) return '';
   const name = params.get('playlist');
-  return name && recordings.some(item => (item.playlist || 'Other recordings') === name) ? name : '';
+  return name && recordings.some(item => (item.playlist || 'Các bản ghi khác') === name) ? name : '';
 }

@@ -17,8 +17,8 @@ for (const section of ['private-audios', 'talks-meditation']) {
 }
 console.log('PASS: date bylines, missing/partial dates, clean share payloads, pasted-caption links');
 for (const section of ['private-audios', 'talks-meditation']) {
-  for (const name of ['Thực hành - Học viện thiền', 'Rafael Arape Retreat', 'A & B / #1? 100%', 'Other recordings']) {
-    const records = [{playlist: name === 'Other recordings' ? '' : name}];
+  for (const name of ['Thực hành - Học viện thiền', 'Rafael Arape Retreat', 'A & B / #1? 100%', 'Các bản ghi khác']) {
+    const records = [{playlist: name === 'Các bản ghi khác' ? '' : name}];
     const data = playlistShareData(name, `https://audio.gnosishanoi.org/${section}/?audio=${id}&old=1#ignored`);
     assert.deepEqual(Object.keys(data), ['url']);
     const url = new URL(data.url);

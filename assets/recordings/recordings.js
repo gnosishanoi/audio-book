@@ -10073,7 +10073,7 @@ function un(e, t) {
 	let n = new URL(e).searchParams;
 	if (sn(n.get("audio"))) return "";
 	let r = n.get("playlist");
-	return r && t.some((e) => (e.playlist || "Other recordings") === r) ? r : "";
+	return r && t.some((e) => (e.playlist || "Các bản ghi khác") === r) ? r : "";
 }
 //#endregion
 //#region app/library.tsx
@@ -10085,7 +10085,23 @@ var dn = (e) => {
 		e.description
 	].filter(Boolean).join(" ");
 	return /[ăâđêôơư]/i.test(t) || /[\u0300-\u036f]/.test(t.normalize("NFD")) ? "vi" : "en";
-}, fn = (e) => e === "vi" ? "Tiếng Việt" : "English", pn = (e) => e.versions?.length ? e.versions : [{
+}, fn = (e) => e === "vi" ? "Tiếng Việt" : "Tiếng Anh", pn = (e) => ({
+	"Cross-site requests are not allowed.": "Không cho phép yêu cầu từ trang web khác.",
+	"The audio library is temporarily unavailable. Please try again later.": "Thư viện audio đang tạm thời không khả dụng. Vui lòng thử lại sau.",
+	"The audio library is temporarily unavailable. Please try again.": "Thư viện audio đang tạm thời không khả dụng. Vui lòng thử lại.",
+	"Too many attempts. Please wait 15 minutes and try again.": "Bạn đã thử quá nhiều lần. Vui lòng chờ 15 phút rồi thử lại.",
+	"Recording not found.": "Không tìm thấy bản ghi.",
+	"Recording is not published.": "Bản ghi chưa được xuất bản.",
+	"Recording not published.": "Bản ghi chưa được xuất bản.",
+	"Permission required. Enter the audio password first.": "Cần quyền truy cập. Vui lòng nhập mật khẩu audio trước.",
+	"Audio file unavailable.": "Tệp audio hiện không khả dụng.",
+	"Incorrect playlist password.": "Mật khẩu danh sách phát không đúng.",
+	"Playlist access required.": "Cần quyền truy cập danh sách phát.",
+	"Playlist access expired. Enter the password again.": "Quyền truy cập đã hết hạn. Vui lòng nhập lại mật khẩu.",
+	"Enter a valid email address.": "Vui lòng nhập địa chỉ email hợp lệ.",
+	"This recording is already public.": "Bản ghi này đã được công khai.",
+	"Not found.": "Không tìm thấy nội dung."
+})[e] || e, mn = (e) => e.versions?.length ? e.versions : [{
 	id: e.audio_id || e.id,
 	title: e.title,
 	author: e.author,
@@ -10094,8 +10110,8 @@ var dn = (e) => {
 	description: e.description,
 	duration: e.duration,
 	language: dn(e)
-}], mn = (e, t) => {
-	let n = pn(e), r = n.find((e) => e.language === t) || n.find((e) => e.language === "vi") || n.find((e) => e.language === "en") || n[0];
+}], hn = (e, t) => {
+	let n = mn(e), r = n.find((e) => e.language === t) || n.find((e) => e.language === "vi") || n.find((e) => e.language === "en") || n[0];
 	return {
 		...e,
 		...r,
@@ -10103,14 +10119,14 @@ var dn = (e) => {
 		audio_id: r.id,
 		versions: n
 	};
-}, hn = (e) => e.audio_id || pn(e)[0].id;
-function gn({ section: e, apiBase: t = "" }) {
+}, gn = (e) => e.audio_id || mn(e)[0].id;
+function _n({ section: e, apiBase: t = "" }) {
 	let [n, r] = (0, _.useState)(""), [i, a] = (0, _.useState)(/* @__PURE__ */ new Set()), [o, s] = (0, _.useState)([]), [c, l] = (0, _.useState)(!0), [u, d] = (0, _.useState)(!1), [f, p] = (0, _.useState)(""), [m, h] = (0, _.useState)(""), [g, v] = (0, _.useState)(null), [y, b] = (0, _.useState)(null), [x, ee] = (0, _.useState)(!1), [S, C] = (0, _.useState)(""), [w, te] = (0, _.useState)(!1), [ne, T] = (0, _.useState)(""), re = (0, _.useRef)({}), ie = (0, _.useRef)(0), ae = (0, _.useRef)(""), E = (0, _.useRef)(null), oe = "gnosis-private-playlist-access-v1", se = `gnosis-recording-catalog-v3:${e}`, ce = (e) => e.playlist ? "playlist:" + e.playlist : "audio:" + e.id, D = () => window.requestAnimationFrame(() => window.scrollTo({ top: 0 }));
 	function O() {
 		try {
 			localStorage.setItem(oe, JSON.stringify(re.current));
 		} catch {
-			C("Access is open for this visit, but this browser could not remember it.");
+			C("Quyền truy cập đang mở trong lần này, nhưng trình duyệt không thể ghi nhớ.");
 		}
 	}
 	function le(e, t) {
@@ -10124,7 +10140,7 @@ function gn({ section: e, apiBase: t = "" }) {
 	async function ue(e) {
 		let n = ce(e), r = re.current[n];
 		if (!r) return null;
-		let i = await fetch(`${t}/api/library/audio/${hn(e)}/access`, {
+		let i = await fetch(`${t}/api/library/audio/${gn(e)}/access`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ grant: r.grant })
@@ -10133,18 +10149,18 @@ function gn({ section: e, apiBase: t = "" }) {
 			let t = new Set(e);
 			return t.delete(n), t;
 		}), null;
-		if (!i.ok) throw Error(o.error || "Unable to check playlist access.");
+		if (!i.ok) throw Error(pn(o.error || "Không thể kiểm tra quyền truy cập danh sách phát."));
 		return le(o, n), o;
 	}
 	async function de(t, n) {
-		let i = mn(t, n), a = ++ie.current;
-		if (v(i.playlist || "Other recordings"), b(i), ee(!1), r(""), C(""), D(), e === "private") {
+		let i = hn(t, n), a = ++ie.current;
+		if (v(i.playlist || "Các bản ghi khác"), b(i), ee(!1), r(""), C(""), D(), e === "private") {
 			te(!0);
 			try {
 				let e = await ue(i);
 				a === ie.current && e && (r(e.streamUrl), ee(!0));
 			} catch (e) {
-				a === ie.current && C(e instanceof Error ? e.message : "Unable to load playlist.");
+				a === ie.current && C(e instanceof Error ? pn(e.message) : "Không thể tải danh sách phát.");
 			} finally {
 				a === ie.current && te(!1);
 			}
@@ -10154,7 +10170,7 @@ function gn({ section: e, apiBase: t = "" }) {
 		n ? d(!0) : l(!0), p(""), h("");
 		try {
 			let n = await fetch(t + "/api/library/catalog?section=" + e), r = await n.json();
-			if (!n.ok) throw Error(r.error || "Unable to load recordings.");
+			if (!n.ok) throw Error(pn(r.error || "Không thể tải các bản ghi."));
 			s(r.items);
 			try {
 				localStorage.setItem(se, JSON.stringify(r.items));
@@ -10164,8 +10180,8 @@ function gn({ section: e, apiBase: t = "" }) {
 				Promise.all(e.map((e) => ue(e).catch(() => null)));
 			}
 		} catch (e) {
-			let t = e instanceof Error ? e.message : "Unable to load recordings.";
-			n ? h("Showing the saved library while the latest update is unavailable.") : p(t);
+			let t = e instanceof Error ? pn(e.message) : "Không thể tải các bản ghi.";
+			n ? h("Đang hiển thị thư viện đã lưu vì chưa thể tải bản cập nhật mới nhất.") : p(t);
 		} finally {
 			l(!1), d(!1);
 		}
@@ -10208,7 +10224,7 @@ function gn({ section: e, apiBase: t = "" }) {
 		let n = new AbortController();
 		return Promise.resolve(t.registerTool({
 			name: "open_recording",
-			description: "Open a library recording. Public audio starts playing; private audio opens the password and request-access form.",
+			description: "Mở một bản ghi trong thư viện. Audio công khai sẽ phát ngay; audio riêng tư sẽ mở biểu mẫu mật khẩu và xin quyền truy cập.",
 			inputSchema: {
 				type: "object",
 				properties: { id: { type: "string" } },
@@ -10218,7 +10234,7 @@ function gn({ section: e, apiBase: t = "" }) {
 			annotations: { readOnlyHint: !1 },
 			execute: ({ id: t }) => {
 				let n = o.find((e) => e.id === t);
-				if (!n) throw Error("Recording not found in this section.");
+				if (!n) throw Error("Không tìm thấy bản ghi trong mục này.");
 				return de(n), {
 					id: n.id,
 					requiresPassword: e === "private" && !i.has(ce(n))
@@ -10233,7 +10249,7 @@ function gn({ section: e, apiBase: t = "" }) {
 	let A = (0, _.useMemo)(() => {
 		let e = /* @__PURE__ */ new Map();
 		for (let t of o) {
-			let n = t.playlist || "Other recordings";
+			let n = t.playlist || "Các bản ghi khác";
 			e.set(n, [...e.get(n) || [], t]);
 		}
 		return [...e.entries()].map(([e, t]) => ({
@@ -10243,7 +10259,7 @@ function gn({ section: e, apiBase: t = "" }) {
 		}));
 	}, [o]), j = A.find((e) => e.name === g), fe = (e) => `${Math.floor(e / 60)}:${String(Math.floor(e % 60)).padStart(2, "0")}`, M = (e) => {
 		let t = Math.round(e / 60);
-		return t >= 60 ? `${Math.floor(t / 60)} hr ${t % 60 ? t % 60 + " min" : ""}`.trim() : `${t} min`;
+		return t >= 60 ? `${Math.floor(t / 60)} giờ${t % 60 ? " " + t % 60 + " phút" : ""}` : `${t} phút`;
 	}, pe = (e) => i.has(ce(e));
 	function me(e) {
 		T(e), E.current && window.clearTimeout(E.current), E.current = window.setTimeout(() => T(""), 1800);
@@ -10260,7 +10276,7 @@ function gn({ section: e, apiBase: t = "" }) {
 			try {
 				await navigator.clipboard.writeText(e.url), me(t);
 			} catch {
-				window.prompt("Copy this link:", e.url);
+				window.prompt("Sao chép liên kết này:", e.url);
 			}
 		}
 	}
@@ -10270,18 +10286,18 @@ function gn({ section: e, apiBase: t = "" }) {
 		te(!0), C("");
 		let i = new FormData(e.currentTarget);
 		try {
-			let e = await fetch(`${t}/api/library/audio/${hn(y)}/${n}`, {
+			let e = await fetch(`${t}/api/library/audio/${gn(y)}/${n}`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(Object.fromEntries(i))
 			}), a = await e.json();
-			if (!e.ok) throw Error(a.error);
+			if (!e.ok) throw Error(pn(a.error || "Vui lòng thử lại."));
 			if (n === "unlock") {
-				if (!a.streamUrl) throw Error("Playback link was not returned. Please try again.");
+				if (!a.streamUrl) throw Error("Không nhận được liên kết phát. Vui lòng thử lại.");
 				le(a, ce(y)), r(a.streamUrl), ee(!0), C("");
-			} else C("Your request has been saved for the library owner.");
+			} else C("Yêu cầu của bạn đã được gửi đến người quản lý thư viện.");
 		} catch (e) {
-			C(e instanceof Error ? e.message : "Please try again.");
+			C(e instanceof Error ? pn(e.message) : "Vui lòng thử lại.");
 		} finally {
 			te(!1);
 		}
@@ -10308,26 +10324,26 @@ function gn({ section: e, apiBase: t = "" }) {
 				})
 			}),
 			/* @__PURE__ */ (0, L.jsxs)("nav", {
-				"aria-label": "Library sections",
+				"aria-label": "Các mục trong thư viện",
 				className: "library-menu",
 				children: [
 					/* @__PURE__ */ (0, L.jsx)("a", {
 						href: "https://audio.gnosishanoi.org/",
-						children: "Audiobooks"
+						children: "Sách nói"
 					}),
 					/* @__PURE__ */ (0, L.jsx)("a", {
 						href: "/talks-meditation/",
 						"aria-current": e === "talks" ? "page" : void 0,
-						children: "Talks & Meditation"
+						children: "Bài giảng & Thiền định"
 					}),
 					/* @__PURE__ */ (0, L.jsx)("a", {
 						href: "/private-audios/",
 						"aria-current": e === "private" ? "page" : void 0,
-						children: "Private Audios"
+						children: "Audio riêng tư"
 					}),
 					/* @__PURE__ */ (0, L.jsx)("a", {
 						href: "/slides/",
-						children: "Gallery"
+						children: "Hình ảnh"
 					})
 				]
 			}),
@@ -10339,14 +10355,14 @@ function gn({ section: e, apiBase: t = "" }) {
 							className: "eyebrow",
 							children: "THƯ VIỆN GNOSIS HÀ NỘI"
 						}),
-						/* @__PURE__ */ (0, L.jsx)("h1", { children: e === "talks" ? "Talks & Meditation" : "Private Audios" }),
-						/* @__PURE__ */ (0, L.jsx)("p", { children: e === "talks" ? "Những bài nói chuyện và thực hành thiền." : "Các bản thu cần được cấp quyền trước khi nghe." })
+						/* @__PURE__ */ (0, L.jsx)("h1", { children: e === "talks" ? "Bài giảng & Thiền định" : "Audio riêng tư" }),
+						/* @__PURE__ */ (0, L.jsx)("p", { children: e === "talks" ? "Các bài giảng, chia sẻ và hướng dẫn thực hành thiền." : "Các bản ghi cần được cấp quyền trước khi nghe." })
 					]
 				}),
 				u && o.length > 0 && /* @__PURE__ */ (0, L.jsx)("span", {
 					className: "background-refresh",
 					role: "status",
-					children: "Updating library…"
+					children: "Đang cập nhật thư viện…"
 				}),
 				m && /* @__PURE__ */ (0, L.jsx)("p", {
 					className: "refresh-warning",
@@ -10359,7 +10375,7 @@ function gn({ section: e, apiBase: t = "" }) {
 						/* @__PURE__ */ (0, L.jsxs)(Bt, {
 							variant: "ghost",
 							onClick: ye,
-							children: ["← Back to ", y.playlist || "playlist"]
+							children: ["← Quay lại ", y.playlist || "danh sách phát"]
 						}),
 						/* @__PURE__ */ (0, L.jsx)("p", {
 							className: "eyebrow",
@@ -10373,10 +10389,10 @@ function gn({ section: e, apiBase: t = "" }) {
 								children: y.author
 							}), /* @__PURE__ */ (0, L.jsx)("div", {
 								className: "language-switch",
-								"aria-label": "Recording language",
-								children: pn(y).map((e) => /* @__PURE__ */ (0, L.jsx)("button", {
+								"aria-label": "Ngôn ngữ bản ghi",
+								children: mn(y).map((e) => /* @__PURE__ */ (0, L.jsx)("button", {
 									type: "button",
-									"aria-pressed": hn(y) === e.id,
+									"aria-pressed": gn(y) === e.id,
 									onClick: () => void de(y, e.language),
 									children: fn(e.language)
 								}, e.id))
@@ -10397,25 +10413,25 @@ function gn({ section: e, apiBase: t = "" }) {
 						}),
 						w && e === "private" ? /* @__PURE__ */ (0, L.jsx)("p", {
 							role: "status",
-							children: "Checking playlist access…"
+							children: "Đang kiểm tra quyền truy cập…"
 						}) : e === "talks" || x ? /* @__PURE__ */ (0, L.jsx)("audio", {
 							controls: !0,
 							autoPlay: !0,
 							preload: "metadata",
-							src: e === "private" ? n : `${t}/api/library/audio/${hn(y)}/stream`,
-							onError: () => C("Playback unavailable. Reopen this recording to retry; your playlist access is still remembered.")
-						}, hn(y)) : /* @__PURE__ */ (0, L.jsxs)("div", {
+							src: e === "private" ? n : `${t}/api/library/audio/${gn(y)}/stream`,
+							onError: () => C("Hiện không thể phát audio. Hãy mở lại bản ghi để thử lại; quyền truy cập của bạn vẫn được ghi nhớ.")
+						}, gn(y)) : /* @__PURE__ */ (0, L.jsxs)("div", {
 							className: "access-grid",
 							children: [/* @__PURE__ */ (0, L.jsxs)("form", {
 								onSubmit: (e) => ve(e, "unlock"),
 								children: [
 									/* @__PURE__ */ (0, L.jsx)("span", {
 										className: "lock-label",
-										children: "Permission required"
+										children: "Cần quyền truy cập"
 									}),
-									/* @__PURE__ */ (0, L.jsxs)("h3", { children: ["Unlock ", y.playlist || "this recording"] }),
-									/* @__PURE__ */ (0, L.jsx)("p", { children: "One password opens this playlist. Access is remembered on this browser." }),
-									/* @__PURE__ */ (0, L.jsxs)("label", { children: ["Playlist password", /* @__PURE__ */ (0, L.jsx)(Vt, {
+									/* @__PURE__ */ (0, L.jsxs)("h3", { children: ["Mở khóa ", y.playlist || "bản ghi này"] }),
+									/* @__PURE__ */ (0, L.jsx)("p", { children: "Một mật khẩu sẽ mở toàn bộ danh sách phát. Trình duyệt này sẽ ghi nhớ quyền truy cập." }),
+									/* @__PURE__ */ (0, L.jsxs)("label", { children: ["Mật khẩu danh sách phát", /* @__PURE__ */ (0, L.jsx)(Vt, {
 										name: "password",
 										type: "password",
 										required: !0,
@@ -10424,34 +10440,34 @@ function gn({ section: e, apiBase: t = "" }) {
 									})] }),
 									/* @__PURE__ */ (0, L.jsx)(Bt, {
 										disabled: w,
-										children: "Unlock playlist"
+										children: "Mở khóa danh sách phát"
 									})
 								]
 							}), /* @__PURE__ */ (0, L.jsxs)("form", {
 								onSubmit: (e) => ve(e, "request"),
 								children: [
-									/* @__PURE__ */ (0, L.jsx)("h3", { children: "Request access" }),
-									/* @__PURE__ */ (0, L.jsxs)("label", { children: ["Your email", /* @__PURE__ */ (0, L.jsx)(Vt, {
+									/* @__PURE__ */ (0, L.jsx)("h3", { children: "Xin quyền truy cập" }),
+									/* @__PURE__ */ (0, L.jsxs)("label", { children: ["Email của bạn", /* @__PURE__ */ (0, L.jsx)(Vt, {
 										name: "email",
 										type: "email",
 										required: !0,
 										maxLength: 254,
 										autoComplete: "email"
 									})] }),
-									/* @__PURE__ */ (0, L.jsxs)("label", { children: ["Message", /* @__PURE__ */ (0, L.jsx)(Ht, {
+									/* @__PURE__ */ (0, L.jsxs)("label", { children: ["Lời nhắn", /* @__PURE__ */ (0, L.jsx)(Ht, {
 										name: "message",
 										maxLength: 2e3,
-										placeholder: "Tell us which playlist you would like to hear."
+										placeholder: "Cho chúng tôi biết bạn muốn nghe danh sách phát nào."
 									})] }),
 									/* @__PURE__ */ (0, L.jsx)(Bt, {
 										disabled: w,
 										variant: "outline",
-										children: "Request access"
+										children: "Gửi yêu cầu"
 									}),
 									y.contact_email && /* @__PURE__ */ (0, L.jsx)("a", {
 										className: "email-link",
-										href: `mailto:${y.contact_email}?subject=${encodeURIComponent("Access request: " + (y.playlist || y.title))}&body=${encodeURIComponent("Hello, I would like permission to listen to " + (y.playlist || y.title) + ".\n\nMy email: \nMessage: ")}`,
-										children: "Send request by email"
+										href: `mailto:${y.contact_email}?subject=${encodeURIComponent("Yêu cầu quyền truy cập: " + (y.playlist || y.title))}&body=${encodeURIComponent("Xin chào, tôi muốn xin quyền nghe " + (y.playlist || y.title) + ".\n\nEmail của tôi: \nLời nhắn: ")}`,
+										children: "Gửi yêu cầu qua email"
 									})
 								]
 							})]
@@ -10469,7 +10485,7 @@ function gn({ section: e, apiBase: t = "" }) {
 							className: "playlist-back",
 							variant: "ghost",
 							onClick: be,
-							children: "← All playlists"
+							children: "← Tất cả danh sách phát"
 						}),
 						/* @__PURE__ */ (0, L.jsxs)("div", {
 							className: "playlist-hero",
@@ -10479,22 +10495,22 @@ function gn({ section: e, apiBase: t = "" }) {
 								children: [
 									/* @__PURE__ */ (0, L.jsx)(en, {}),
 									/* @__PURE__ */ (0, L.jsx)("span", { children: "GNOSIS HÀ NỘI" }),
-									/* @__PURE__ */ (0, L.jsxs)("small", { children: [j.recordings.length, " AUDIO"] })
+									/* @__PURE__ */ (0, L.jsxs)("small", { children: [j.recordings.length, " BẢN GHI"] })
 								]
 							}), /* @__PURE__ */ (0, L.jsxs)("div", {
 								className: "playlist-summary",
 								children: [
 									/* @__PURE__ */ (0, L.jsx)("p", {
 										className: "eyebrow",
-										children: "Audio playlist"
+										children: "Danh sách audio"
 									}),
 									/* @__PURE__ */ (0, L.jsxs)("div", {
 										className: "playlist-title-row",
 										children: [/* @__PURE__ */ (0, L.jsx)("h2", { children: j.name }), /* @__PURE__ */ (0, L.jsx)("button", {
 											className: "playlist-share",
 											type: "button",
-											"aria-label": `Share playlist ${j.name}`,
-											title: "Share playlist",
+											"aria-label": `Chia sẻ danh sách phát ${j.name}`,
+											title: "Chia sẻ danh sách phát",
 											onClick: () => void _e(j.name),
 											children: ne === "playlist:" + j.name ? /* @__PURE__ */ (0, L.jsx)($t, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(rn, { "aria-hidden": "true" })
 										})]
@@ -10503,15 +10519,13 @@ function gn({ section: e, apiBase: t = "" }) {
 										className: "playlist-stats",
 										children: [
 											j.recordings.length,
-											" ",
-											j.recordings.length === 1 ? "recording" : "recordings",
-											" · ",
+											" bản ghi · ",
 											M(j.total)
 										]
 									}),
 									/* @__PURE__ */ (0, L.jsx)("p", {
 										className: "meta",
-										children: "Choose a recording below to listen."
+										children: "Chọn một bản ghi bên dưới để nghe."
 									})
 								]
 							})]
@@ -10537,7 +10551,7 @@ function gn({ section: e, apiBase: t = "" }) {
 													/* @__PURE__ */ (0, L.jsx)("small", { children: on(t) }),
 													/* @__PURE__ */ (0, L.jsxs)("span", {
 														className: "track-meta",
-														children: [/* @__PURE__ */ (0, L.jsxs)("span", { children: [fn(dn(t)), pn(t).length > 1 ? ` · ${pn(t).length} languages` : ""] }), /* @__PURE__ */ (0, L.jsx)("span", { children: fe(t.duration) })]
+														children: [/* @__PURE__ */ (0, L.jsxs)("span", { children: [fn(dn(t)), mn(t).length > 1 ? ` · ${mn(t).length} ngôn ngữ` : ""] }), /* @__PURE__ */ (0, L.jsx)("span", { children: fe(t.duration) })]
 													})
 												]
 											})
@@ -10549,15 +10563,15 @@ function gn({ section: e, apiBase: t = "" }) {
 												children: [/* @__PURE__ */ (0, L.jsx)("button", {
 													className: "track-play",
 													type: "button",
-													"aria-label": `${r ? "Unlock and play" : "Play"} ${t.title}`,
-													title: r ? "Unlock and play" : "Play",
+													"aria-label": `${r ? "Mở khóa và nghe" : "Phát"} ${t.title}`,
+													title: r ? "Mở khóa và nghe" : "Phát",
 													onClick: () => void de(t),
 													children: r ? /* @__PURE__ */ (0, L.jsx)(tn, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(nn, { "aria-hidden": "true" })
 												}), /* @__PURE__ */ (0, L.jsx)("button", {
 													className: "track-share",
 													type: "button",
-													"aria-label": `Share ${t.title}`,
-													title: "Share audio",
+													"aria-label": `Chia sẻ ${t.title}`,
+													title: "Chia sẻ audio",
 													onClick: () => void ge(t),
 													children: ne === t.id ? /* @__PURE__ */ (0, L.jsx)($t, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(rn, { "aria-hidden": "true" })
 												})]
@@ -10572,29 +10586,27 @@ function gn({ section: e, apiBase: t = "" }) {
 					className: "list-toolbar",
 					children: /* @__PURE__ */ (0, L.jsxs)("span", { children: [
 						A.length,
-						" ",
-						A.length === 1 ? "playlist" : "playlists",
-						" · ",
+						" danh sách phát · ",
 						o.length,
-						" recordings"
+						" bản ghi"
 					] })
 				}), c && o.length === 0 ? /* @__PURE__ */ (0, L.jsxs)("div", {
 					className: "shelf-grid",
-					"aria-label": "Loading playlists",
+					"aria-label": "Đang tải danh sách phát",
 					children: [/* @__PURE__ */ (0, L.jsx)("div", { className: "shelf-card shelf-skeleton" }), /* @__PURE__ */ (0, L.jsx)("div", { className: "shelf-card shelf-skeleton" })]
 				}) : f && o.length === 0 ? /* @__PURE__ */ (0, L.jsxs)("div", {
 					className: "notice",
 					role: "alert",
 					children: [/* @__PURE__ */ (0, L.jsx)("p", { children: f }), /* @__PURE__ */ (0, L.jsx)(Bt, {
 						onClick: () => void k(!1),
-						children: "Try again"
+						children: "Thử lại"
 					})]
 				}) : o.length === 0 ? /* @__PURE__ */ (0, L.jsxs)("div", {
 					className: "empty-library",
 					children: [
-						/* @__PURE__ */ (0, L.jsx)("span", { children: e === "private" ? "Private collection" : "Talks & Meditation" }),
-						/* @__PURE__ */ (0, L.jsx)("h2", { children: "No recordings published yet" }),
-						/* @__PURE__ */ (0, L.jsx)("p", { children: "New recordings will appear here when they are published." })
+						/* @__PURE__ */ (0, L.jsx)("span", { children: e === "private" ? "Bộ sưu tập riêng tư" : "Bài giảng & Thiền định" }),
+						/* @__PURE__ */ (0, L.jsx)("h2", { children: "Chưa có bản ghi nào được xuất bản" }),
+						/* @__PURE__ */ (0, L.jsx)("p", { children: "Các bản ghi mới sẽ xuất hiện tại đây sau khi được xuất bản." })
 					]
 				}) : /* @__PURE__ */ (0, L.jsx)("div", {
 					className: "shelf-grid",
@@ -10606,27 +10618,25 @@ function gn({ section: e, apiBase: t = "" }) {
 							children: [
 								/* @__PURE__ */ (0, L.jsx)("span", {
 									className: "shelf-kicker",
-									children: "AUDIO PLAYLIST"
+									children: "DANH SÁCH AUDIO"
 								}),
 								/* @__PURE__ */ (0, L.jsx)("strong", { children: e.name }),
 								/* @__PURE__ */ (0, L.jsx)("span", { className: "shelf-rule" }),
 								/* @__PURE__ */ (0, L.jsxs)("small", { children: [
 									e.recordings.length,
-									" ",
-									e.recordings.length === 1 ? "recording" : "recordings",
-									" · ",
+									" bản ghi · ",
 									M(e.total)
 								] }),
 								/* @__PURE__ */ (0, L.jsx)("span", {
 									className: "shelf-open",
-									children: "Open playlist →"
+									children: "Mở danh sách →"
 								})
 							]
 						}), /* @__PURE__ */ (0, L.jsx)("button", {
 							type: "button",
 							className: "track-share shelf-share",
-							"aria-label": `Share playlist ${e.name}`,
-							title: "Share playlist",
+							"aria-label": `Chia sẻ danh sách phát ${e.name}`,
+							title: "Chia sẻ danh sách phát",
 							onClick: () => void _e(e.name),
 							children: ne === "playlist:" + e.name ? /* @__PURE__ */ (0, L.jsx)($t, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(rn, { "aria-hidden": "true" })
 						})]
@@ -10642,8 +10652,8 @@ function gn({ section: e, apiBase: t = "" }) {
 }
 //#endregion
 //#region listener-client.tsx
-var _n = document.getElementById("recording-library");
-_n && (0, v.createRoot)(_n).render(/* @__PURE__ */ (0, L.jsx)(gn, {
+var vn = document.getElementById("recording-library");
+vn && (0, v.createRoot)(vn).render(/* @__PURE__ */ (0, L.jsx)(_n, {
 	section: location.pathname.startsWith("/private-audios") ? "private" : "talks",
 	apiBase: "https://gnosis-audio.cristalngo.chatgpt.site"
 }));
