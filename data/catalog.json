@@ -1237,7 +1237,7 @@
       "description": "Tác phẩm trình bày những nguyên lý Gnosis về tình yêu, hôn nhân và sự chuyển hóa năng lượng sáng tạo trên con đường thức tỉnh tâm thức.",
       "cover": "assets/covers/hon-nhan-hoan-hao-v2-smooth.png?v=1",
       "featuredImage": "assets/hero/hon-nhan-hoan-hao-flatlay-v1.png?v=1",
-      "updatedAt": "2026-10-05T11:38:27",
+      "updatedAt": "2026-10-05T12:40:42",
       "language": "vi",
       "publishedAt": "2026-09-14",
       "chapters": [
@@ -1256,6 +1256,14 @@
           "duration": 430.609958,
           "words": 1361,
           "order": 2
+        },
+        {
+          "id": "ch-004-muured6e",
+          "title": "Chương 2 - Con người",
+          "src": "audio/hon-nhan-hoan-hao/003-ch-ng-2-con-ng-i.mp3?v=d214a0028095",
+          "duration": 601.673875,
+          "words": 1916,
+          "order": 3
         },
         {
           "id": "ch-001",
