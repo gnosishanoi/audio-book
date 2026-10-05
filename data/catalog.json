@@ -1237,17 +1237,25 @@
       "description": "Tác phẩm trình bày những nguyên lý Gnosis về tình yêu, hôn nhân và sự chuyển hóa năng lượng sáng tạo trên con đường thức tỉnh tâm thức.",
       "cover": "assets/covers/hon-nhan-hoan-hao-v2-smooth.png?v=1",
       "featuredImage": "assets/hero/hon-nhan-hoan-hao-flatlay-v1.png?v=1",
-      "updatedAt": "2026-10-04T21:33:22",
+      "updatedAt": "2026-10-05T11:17:58",
       "language": "vi",
       "publishedAt": "2026-09-14",
       "chapters": [
         {
+          "id": "ch-002-muuliz5h",
+          "title": "Lời giới thiệu",
+          "src": "audio/hon-nhan-hoan-hao/001-l-i-gi-i-thi-u.mp3?v=00394ec41626",
+          "duration": 1201.183125,
+          "words": 3979,
+          "order": 1
+        },
+        {
           "id": "ch-001",
           "title": "Chương 7 - Bảy thánh đường",
-          "src": "audio/hon-nhan-hoan-hao/001-ch-ng-7-b-y-th-nh-ng.mp3?v=26e2bd563b24",
-          "duration": 2719.590917,
-          "words": 9539,
-          "order": 1
+          "src": "audio/hon-nhan-hoan-hao/003-ch-ng-7-b-y-th-nh-ng.mp3?v=81ac22d8e4a6",
+          "duration": 2719.964458,
+          "words": 9541,
+          "order": 3
         }
       ]
     }
