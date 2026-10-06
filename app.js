@@ -495,8 +495,16 @@ function playPreviousChapter() {
   });
 }
 
+function usesNativeLockScreenPlayback() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent || "") ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+}
+
 function setupMediaSessionActions() {
   if (!("mediaSession" in navigator)) return;
+  // Keep WebKit's native audio controls: JavaScript can be suspended while locked.
+  // Registering custom actions replaces WebKit's native remote-command handlers.
+  if (usesNativeLockScreenPlayback()) return;
 
   const setAction = (action, handler) => {
     try {
@@ -507,7 +515,9 @@ function setupMediaSessionActions() {
   };
 
   setAction("play", () => {
-    if (ensurePlayableSelection()) els.audio.play();
+    if (ensurePlayableSelection()) {
+      els.audio.play().catch(() => setMediaPlaybackState("paused"));
+    }
   });
   setAction("pause", () => els.audio.pause());
   setAction("seekbackward", (details = {}) => seekRelative(-(details.seekOffset || 10)));
