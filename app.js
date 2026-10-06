@@ -1261,7 +1261,7 @@ async function shareContent(book, button, url, title, text) {
 
   if (navigator.share) {
     try {
-      await navigator.share({ title, text, url });
+      await navigator.share({ url });
       return;
     } catch (error) {
       if (error.name === "AbortError") return;
