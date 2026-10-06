@@ -742,6 +742,7 @@ function renderBook(book) {
                 <span class="chapter-meta">${escapeHtml(chapter.duration || copy(book, "audioChapter"))}${chapterListenCount(book, index) ? ` · ${escapeHtml(listenCountLabel(book, chapterListenCount(book, index)))}` : ""}</span>
               </span>
             </button>
+            <button class="ghost-button compact-action chapter-share" type="button" data-share-chapter="${index}" aria-label="Chia sẻ ${escapeHtml(chapter.title)}">${escapeHtml(copy(book, "share"))}</button>
             <button class="offline-chapter-button" type="button" data-offline-chapter="${index}" aria-label="Tải ${escapeHtml(chapter.title)} để nghe offline">
               <span class="offline-icon" aria-hidden="true">↓</span>
               <span data-offline-label>Tải</span>
@@ -764,6 +765,10 @@ function renderBook(book) {
   });
 
   els.bookDetail.querySelector("[data-offline-book]")?.addEventListener("click", () => toggleBookOffline(book));
+
+  els.bookDetail.querySelectorAll("[data-share-chapter]").forEach((button) => {
+    button.addEventListener("click", () => shareChapter(book, Number(button.dataset.shareChapter), button));
+  });
 
   els.bookDetail.querySelector("[data-action='share-book']")?.addEventListener("click", (event) => {
     shareBook(book, event.currentTarget);
@@ -1087,7 +1092,7 @@ function stopVisualPlayback() {
 }
 
 async function route() {
-  const match = location.hash.match(/^#book\/([^/]+)$/);
+  const match = location.hash.match(/^#book\/([^/?]+)(?:\?.*)?$/);
   const book = match ? findBook(decodeURIComponent(match[1])) : null;
   state.routeBook = book || null;
   document.body.classList.toggle("book-route", Boolean(book));
@@ -1103,6 +1108,8 @@ async function route() {
   if (book) {
     showPlayerForBook(book);
     renderBook(book);
+    const chapterIndex = linkedChapterIndex(book);
+    if (chapterIndex !== null) loadChapter(book, chapterIndex, { autoplay: false, startTime: 0 });
   } else {
     await refreshCatalog();
     showPlayerForLibrary();
@@ -1217,13 +1224,32 @@ function bookShareUrl(book) {
   return new URL(`books/${bookRouteSlug(book)}/`, siteBaseUrl()).href;
 }
 
+function linkedChapterIndex(book) {
+  const value = new URLSearchParams(location.hash.split("?")[1] || location.search).get("chapter");
+  if (!value || !/^[1-9]\d*$/.test(value)) return null;
+  const index = Number(value) - 1;
+  return book.chapters[index] ? index : null;
+}
+
+function chapterShareUrl(book, index) {
+  return new URL(`books/${bookRouteSlug(book)}/chapters/${index + 1}/`, siteBaseUrl()).href;
+}
+
+async function shareChapter(book, index, button) {
+  const chapter = book.chapters[index];
+  if (!chapter) return;
+  return shareContent(book, button, chapterShareUrl(book, index), `${chapter.title} · ${book.title}`, chapter.title);
+}
+
 async function shareBook(book, button) {
-  const url = bookShareUrl(book);
-  const text = book.description || book.subtitle || book.author || "Nghe trên Sách nói Gnosis Hà Nội";
+  return shareContent(book, button, bookShareUrl(book), book.title, book.description || book.subtitle || book.author || "Nghe sách nói Gnosis Hà Nội");
+}
+
+async function shareContent(book, button, url, title, text) {
 
   if (navigator.share) {
     try {
-      await navigator.share({ title: book.title, text, url });
+      await navigator.share({ title, text, url });
       return;
     } catch (error) {
       if (error.name === "AbortError") return;
@@ -1238,7 +1264,7 @@ async function shareBook(book, button) {
       button.textContent = originalText;
     }, 1600);
   } catch {
-    window.location.href = url;
+    window.prompt("Sao chép liên kết này:", url);
   }
 }
 

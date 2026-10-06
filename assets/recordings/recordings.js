@@ -10063,7 +10063,7 @@ function sn(e) {
 }
 function cn(e, t) {
 	let n = new URL(t);
-	return n.search = "", n.hash = "", n.searchParams.set("audio", e.id), { url: n.toString() };
+	return n.search = "", n.hash = "", n.searchParams.set("audio", e.id), e.language && n.searchParams.set("lang", e.language), { url: n.toString() };
 }
 function ln(e, t) {
 	let n = new URL(t);
@@ -10214,7 +10214,7 @@ function vn({ section: e, apiBase: t = "" }) {
 			let t = o.find((t) => t.id === e);
 			if (t) {
 				ae.current = e;
-				let n = window.setTimeout(() => void de(t), 0);
+				let n = window.setTimeout(() => void de(t, new URLSearchParams(window.location.search).get("lang") || void 0), 0);
 				return () => window.clearTimeout(n);
 			}
 		}
@@ -10381,7 +10381,20 @@ function vn({ section: e, apiBase: t = "" }) {
 							className: "eyebrow",
 							children: y.playlist
 						}),
-						/* @__PURE__ */ (0, L.jsx)("h2", { children: y.title }),
+						/* @__PURE__ */ (0, L.jsxs)("div", {
+							className: "recording-title-row",
+							children: [/* @__PURE__ */ (0, L.jsx)("h2", { children: y.title }), /* @__PURE__ */ (0, L.jsxs)(Bt, {
+								className: "recording-share",
+								variant: "outline",
+								type: "button",
+								"aria-label": `Chia sẻ bài ${y.title}`,
+								onClick: () => void ge(y),
+								children: [ne === y.id ? /* @__PURE__ */ (0, L.jsx)($t, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(rn, { "aria-hidden": "true" }), /* @__PURE__ */ (0, L.jsx)("span", {
+									"aria-live": "polite",
+									children: ne === y.id ? "Đã chia sẻ" : "Chia sẻ bài này"
+								})]
+							})]
+						}),
 						/* @__PURE__ */ (0, L.jsxs)("div", {
 							className: "speaker-line",
 							children: [/* @__PURE__ */ (0, L.jsx)("p", {
@@ -10533,7 +10546,7 @@ function vn({ section: e, apiBase: t = "" }) {
 						/* @__PURE__ */ (0, L.jsx)("div", {
 							className: "track-list",
 							children: j.recordings.map((t, n) => {
-								let r = e === "private" && !pe(t);
+								let r = e === "private" && !pe(t), i = hn(t), a = gn(t);
 								return /* @__PURE__ */ (0, L.jsxs)("article", {
 									className: "track-row",
 									children: [
@@ -10547,35 +10560,48 @@ function vn({ section: e, apiBase: t = "" }) {
 											children: /* @__PURE__ */ (0, L.jsxs)("span", {
 												className: "track-copy",
 												children: [
-													/* @__PURE__ */ (0, L.jsx)("strong", { children: t.title }),
-													/* @__PURE__ */ (0, L.jsx)("small", { children: on(t) }),
-													/* @__PURE__ */ (0, L.jsxs)("span", {
+													/* @__PURE__ */ (0, L.jsx)("strong", { children: a.title }),
+													/* @__PURE__ */ (0, L.jsx)("small", { children: on(a) }),
+													/* @__PURE__ */ (0, L.jsx)("span", {
 														className: "track-meta",
-														children: [/* @__PURE__ */ (0, L.jsxs)("span", { children: [fn(dn(t)), hn(t).length > 1 ? ` · ${hn(t).length} ngôn ngữ` : ""] }), /* @__PURE__ */ (0, L.jsx)("span", { children: fe(t.duration) })]
+														children: /* @__PURE__ */ (0, L.jsx)("span", { children: fe(a.duration) })
 													})
 												]
 											})
 										}),
-										/* @__PURE__ */ (0, L.jsx)("span", {
+										/* @__PURE__ */ (0, L.jsxs)("span", {
 											className: "track-action",
-											children: /* @__PURE__ */ (0, L.jsxs)("span", {
+											children: [i.length > 1 ? /* @__PURE__ */ (0, L.jsx)("span", {
+												className: "track-languages",
+												"aria-label": `Chọn ngôn ngữ cho ${a.title}`,
+												children: i.slice().sort((e, t) => e.language === "en" ? -1 : +(t.language === "en")).map((e) => /* @__PURE__ */ (0, L.jsx)("button", {
+													type: "button",
+													"aria-label": `Mở ${e.title} bằng ${fn(e.language)}`,
+													"aria-pressed": e.id === a.audio_id,
+													onClick: () => void de(t, e.language),
+													children: fn(e.language)
+												}, e.id))
+											}) : /* @__PURE__ */ (0, L.jsx)("span", {
+												className: "language-badge",
+												children: fn(a.language)
+											}), /* @__PURE__ */ (0, L.jsxs)("span", {
 												className: "track-controls",
 												children: [/* @__PURE__ */ (0, L.jsx)("button", {
 													className: "track-play",
 													type: "button",
-													"aria-label": `${r ? "Mở khóa và nghe" : "Phát"} ${t.title}`,
+													"aria-label": `${r ? "Mở khóa và nghe" : "Phát"} ${a.title}`,
 													title: r ? "Mở khóa và nghe" : "Phát",
 													onClick: () => void de(t),
 													children: r ? /* @__PURE__ */ (0, L.jsx)(tn, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(nn, { "aria-hidden": "true" })
 												}), /* @__PURE__ */ (0, L.jsx)("button", {
 													className: "track-share",
 													type: "button",
-													"aria-label": `Chia sẻ ${t.title}`,
+													"aria-label": `Chia sẻ ${a.title}`,
 													title: "Chia sẻ audio",
 													onClick: () => void ge(t),
 													children: ne === t.id ? /* @__PURE__ */ (0, L.jsx)($t, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, L.jsx)(rn, { "aria-hidden": "true" })
 												})]
-											})
+											})]
 										})
 									]
 								}, t.id);

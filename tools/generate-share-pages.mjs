@@ -6,7 +6,7 @@ const catalogPath = path.join(siteRoot, "data", "catalog.json");
 const booksRoot = path.join(siteRoot, "books");
 const siteUrl = "https://audio.gnosishanoi.org/";
 const siteName = "Sách nói Gnosis Hà Nội";
-const appVersion = "gnosis-editorial-42";
+const appVersion = "gnosis-chapter-share-49";
 
 const canonicalBookSlugs = {
   "tam-ly-hoc-cho-su-thay-oi-triet-e": "tam-ly-hoc-cho-su-thay-doi-triet-de",
@@ -15,17 +15,10 @@ const canonicalBookSlugs = {
 
 const knownCoverPaths = {
   "dayspring-of-youth": "assets/covers/dayspring-of-youth-gnosis-v2.png?v=2",
-  "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v2.jpg?v=2",
+  "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/covers/tam-ly-hoc-cho-su-thay-doi-triet-de-gnosis-v4.png?v=4",
   "xu-xo-cua-cac-vi-than": "assets/covers/xu-xo-cua-cac-vi-than-gnosis-v5.png?v=5",
   "bien-chung-tam-thuc": "assets/covers/bien-chung-tam-thuc-gnosis-v3.png?v=3",
   "hon-nhan-hoan-hao": "assets/covers/hon-nhan-hoan-hao-v2-smooth.png?v=1"
-};
-
-const knownSocialImagePaths = {
-  "dayspring-of-youth": "assets/social/dayspring-of-youth-gnosis-v3.jpg",
-  "tam-ly-hoc-cho-su-thay-oi-triet-e": "assets/social/gnosis-hanoi-library-v3.jpg",
-  "xu-xo-cua-cac-vi-than": "assets/social/xu-xo-cua-cac-vi-than-gnosis-v5.jpg",
-  "bien-chung-tam-thuc": "assets/social/bien-chung-tam-thuc-gnosis-v2.jpg"
 };
 
 const descriptionFallbacks = {
@@ -68,19 +61,30 @@ function bookDescription(book) {
   ].filter(Boolean).join(" · ");
 }
 
-function htmlForBook(book) {
-  const title = `${book.title} | ${siteName}`;
+function htmlForBook(book, chapterIndex = null) {
+  const chapter = chapterIndex === null ? null : book.chapters[chapterIndex];
+  const displayTitle = chapter ? `${chapter.title} · ${book.title}` : book.title;
+  const depth = chapter ? "../../../../" : "../../";
+  const title = `${displayTitle} | ${siteName}`;
   const description = bookDescription(book);
   const credits = [
     book.author ? `<p>${escapeHtml(book.author)}</p>` : "",
     book.publisher ? `<p>Nhà xuất bản: ${escapeHtml(book.publisher)}</p>` : ""
   ].filter(Boolean).join("\n      ");
   const coverPath = normalizeAsset(book.cover, book.id);
-  const socialImagePath = knownSocialImagePaths[book.id] || cleanAssetUrl(coverPath);
+  const socialImagePath = cleanAssetUrl(coverPath);
+  const mime = /\.png$/i.test(socialImagePath) ? "image/png" : /\.webp$/i.test(socialImagePath) ? "image/webp" : "image/jpeg";
+  let dimensions = "";
+  if (mime === "image/png" && !/^https?:/.test(socialImagePath)) {
+    const bytes = fs.readFileSync(path.join(siteRoot, socialImagePath));
+    if (bytes.length >= 24 && bytes.readUInt32BE(0) === 0x89504e47) {
+      dimensions = `<meta property="og:image:width" content="${bytes.readUInt32BE(16)}">\n    <meta property="og:image:height" content="${bytes.readUInt32BE(20)}">`;
+    }
+  }
   const socialImage = absoluteSiteUrl(socialImagePath);
   const pageSlug = canonicalBookSlugs[book.id] || book.id;
-  const pageUrl = absoluteSiteUrl(`books/${pageSlug}/`);
-  const appUrl = absoluteSiteUrl(`#book/${pageSlug}`);
+  const pageUrl = absoluteSiteUrl(`books/${pageSlug}/${chapter ? `chapters/${chapterIndex + 1}/` : ""}`);
+  const appUrl = absoluteSiteUrl(`#book/${pageSlug}${chapter ? `?chapter=${chapterIndex + 1}` : ""}`);
 
   return `<!doctype html>
 <html lang="${book.language || "en"}">
@@ -93,28 +97,27 @@ function htmlForBook(book) {
     <meta property="og:type" content="music.album">
     <meta property="og:locale" content="${book.language === "vi" ? "vi_VN" : "en_US"}">
     <meta property="og:site_name" content="${siteName}">
-    <meta property="og:title" content="${escapeHtml(book.title)}">
+    <meta property="og:title" content="${escapeHtml(displayTitle)}">
     <meta property="og:description" content="${escapeHtml(description)}">
     <meta property="og:url" content="${escapeHtml(pageUrl)}">
     <meta property="og:image" content="${escapeHtml(socialImage)}">
     <meta property="og:image:secure_url" content="${escapeHtml(socialImage)}">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="${mime}">
+    ${dimensions}
     <meta property="og:image:alt" content="${escapeHtml(`${book.title} cover`)}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="${escapeHtml(book.title)}">
+    <meta name="twitter:title" content="${escapeHtml(displayTitle)}">
     <meta name="twitter:description" content="${escapeHtml(description)}">
     <meta name="twitter:image" content="${escapeHtml(socialImage)}">
     <meta name="twitter:image:alt" content="${escapeHtml(`${book.title} cover`)}">
     <meta name="theme-color" content="#233027">
-    <link rel="icon" href="../../assets/icons/gnosis-favicon.svg?v=2" type="image/svg+xml">
-    <link rel="stylesheet" href="../../styles.css?v=${appVersion}">
+    <link rel="icon" href="${depth}assets/icons/gnosis-favicon.svg?v=2" type="image/svg+xml">
+    <link rel="stylesheet" href="${depth}styles.css?v=${appVersion}">
   </head>
   <body>
     <main class="share-landing">
-      <img src="../../${escapeHtml(coverPath)}" alt="">
-      <h1>${escapeHtml(book.title)}</h1>
+      <img src="${depth}${escapeHtml(coverPath)}" alt="${escapeHtml(book.title)}">
+      <h1>${escapeHtml(displayTitle)}</h1>
       ${credits}
       <a class="primary-button" href="${escapeHtml(appUrl)}">Nghe trên Sách nói Gnosis Hà Nội</a>
     </main>
@@ -131,6 +134,12 @@ for (const book of catalog.books || []) {
   const folder = path.join(booksRoot, pageSlug);
   fs.mkdirSync(folder, { recursive: true });
   fs.writeFileSync(path.join(folder, "index.html"), htmlForBook(book));
+
+  for (const [index] of (book.chapters || []).entries()) {
+    const chapterFolder = path.join(folder, "chapters", String(index + 1));
+    fs.mkdirSync(chapterFolder, {recursive: true});
+    fs.writeFileSync(path.join(chapterFolder, "index.html"), htmlForBook(book, index));
+  }
 
   if (pageSlug !== book.id) {
     const legacyFolder = path.join(booksRoot, book.id);
