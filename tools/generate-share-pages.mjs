@@ -93,7 +93,7 @@ function htmlForBook(book, chapterIndex = null) {
     <meta property="og:site_name" content="${siteName}">
     <meta property="og:title" content="${escapeHtml(displayTitle)}">
     <meta property="og:description" content="${escapeHtml(description)}">
-    <meta property="og:url" content="${escapeHtml(pageUrl)}?share=cover-v2">
+    <meta property="og:url" content="${escapeHtml(pageUrl)}?share=playlist-v3">
     <meta property="og:image" content="${escapeHtml(socialImage)}">
     <meta property="og:image:secure_url" content="${escapeHtml(socialImage)}">
     <meta property="og:image:type" content="${mime}">
