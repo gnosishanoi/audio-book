@@ -72,15 +72,9 @@ function htmlForBook(book, chapterIndex = null) {
     book.publisher ? `<p>Nhà xuất bản: ${escapeHtml(book.publisher)}</p>` : ""
   ].filter(Boolean).join("\n      ");
   const coverPath = normalizeAsset(book.cover, book.id);
-  const socialImagePath = cleanAssetUrl(coverPath);
-  const mime = /\.png$/i.test(socialImagePath) ? "image/png" : /\.webp$/i.test(socialImagePath) ? "image/webp" : "image/jpeg";
-  let dimensions = "";
-  if (mime === "image/png" && !/^https?:/.test(socialImagePath)) {
-    const bytes = fs.readFileSync(path.join(siteRoot, socialImagePath));
-    if (bytes.length >= 24 && bytes.readUInt32BE(0) === 0x89504e47) {
-      dimensions = `<meta property="og:image:width" content="${bytes.readUInt32BE(16)}">\n    <meta property="og:image:height" content="${bytes.readUInt32BE(20)}">`;
-    }
-  }
+  const socialImagePath = `assets/social/${book.id}-share-v2.jpg`;
+  const mime = "image/jpeg";
+  const dimensions = '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">';
   const socialImage = absoluteSiteUrl(socialImagePath);
   const pageSlug = canonicalBookSlugs[book.id] || book.id;
   const pageUrl = absoluteSiteUrl(`books/${pageSlug}/${chapter ? `chapters/${chapterIndex + 1}/` : ""}`);
@@ -99,7 +93,7 @@ function htmlForBook(book, chapterIndex = null) {
     <meta property="og:site_name" content="${siteName}">
     <meta property="og:title" content="${escapeHtml(displayTitle)}">
     <meta property="og:description" content="${escapeHtml(description)}">
-    <meta property="og:url" content="${escapeHtml(pageUrl)}">
+    <meta property="og:url" content="${escapeHtml(pageUrl)}?share=cover-v2">
     <meta property="og:image" content="${escapeHtml(socialImage)}">
     <meta property="og:image:secure_url" content="${escapeHtml(socialImage)}">
     <meta property="og:image:type" content="${mime}">

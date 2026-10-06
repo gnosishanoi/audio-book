@@ -1233,7 +1233,7 @@ function siteBaseUrl() {
 }
 
 function bookShareUrl(book) {
-  return new URL(`books/${bookRouteSlug(book)}/`, siteBaseUrl()).href;
+  return new URL(`books/${bookRouteSlug(book)}/?share=cover-v2`, siteBaseUrl()).href;
 }
 
 function linkedChapterIndex(book) {
@@ -1244,7 +1244,7 @@ function linkedChapterIndex(book) {
 }
 
 function chapterShareUrl(book, index) {
-  return new URL(`books/${bookRouteSlug(book)}/chapters/${index + 1}/`, siteBaseUrl()).href;
+  return new URL(`books/${bookRouteSlug(book)}/chapters/${index + 1}/?share=cover-v2`, siteBaseUrl()).href;
 }
 
 async function shareChapter(book, index, button) {
