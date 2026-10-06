@@ -1,3 +1,7 @@
+function shareIcon() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg>';
+}
+
 const catalogSources = [
   { url: "../listener-export/data/catalog.json", assetBase: "../listener-export/" },
   { url: "./data/catalog.json", assetBase: "./" }
@@ -534,6 +538,7 @@ function renderLibrary() {
       <button class="book-open" type="button" data-action="open-book" aria-label="${escapeHtml(copy(book, "open"))} ${escapeHtml(book.title)}">
         <img src="${escapeHtml(book.cover)}" alt="">
       </button>
+      <button class="share-icon-button cover-share" type="button" data-action="share-book" aria-label="Chia sẻ ${escapeHtml(book.title)}" title="Chia sẻ sách">${shareIcon()}</button>
       <div>
         <h3>${escapeHtml(book.title)}</h3>
         ${book.author ? `<p class="book-byline">${escapeHtml(authorLabel(book))}</p>` : ""}
@@ -571,6 +576,13 @@ function renderLibrary() {
       const card = button.closest("[data-book-id]");
       const book = findBook(card.dataset.bookId);
       if (book) location.hash = `book/${bookRouteSlug(book)}`;
+    });
+  });
+
+  els.bookGrid.querySelectorAll("[data-action='share-book']").forEach((button) => {
+    button.addEventListener("click", () => {
+      const book = findBook(button.closest("[data-book-id]").dataset.bookId);
+      if (book) shareBook(book, button);
     });
   });
 
@@ -713,8 +725,8 @@ function renderBook(book) {
             <div class="book-meta-list detail-meta">
               ${compactBookMeta(book).map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
             </div>
-            <button class="ghost-button compact-action" type="button" data-action="share-book">${escapeHtml(copy(book, "share"))}</button>
           </details>
+          <button class="share-icon-button" type="button" data-action="share-book" aria-label="Chia sẻ ${escapeHtml(book.title)}" title="Chia sẻ sách">${shareIcon()}</button>
           ${formats.length > 1 ? `
             <div class="format-tabs" role="tablist" aria-label="Chọn định dạng">
               <button class="format-tab${state.bookFormat === "audio" ? " active" : ""}" type="button" role="tab" aria-selected="${state.bookFormat === "audio"}" data-format="audio">Sách nói</button>
@@ -742,7 +754,7 @@ function renderBook(book) {
                 <span class="chapter-meta">${escapeHtml(chapter.duration || copy(book, "audioChapter"))}${chapterListenCount(book, index) ? ` · ${escapeHtml(listenCountLabel(book, chapterListenCount(book, index)))}` : ""}</span>
               </span>
             </button>
-            <button class="ghost-button compact-action chapter-share" type="button" data-share-chapter="${index}" aria-label="Chia sẻ ${escapeHtml(chapter.title)}">${escapeHtml(copy(book, "share"))}</button>
+            <button class="share-icon-button chapter-share" type="button" data-share-chapter="${index}" aria-label="Chia sẻ ${escapeHtml(chapter.title)}" title="Chia sẻ chương">${shareIcon()}</button>
             <button class="offline-chapter-button" type="button" data-offline-chapter="${index}" aria-label="Tải ${escapeHtml(chapter.title)} để nghe offline">
               <span class="offline-icon" aria-hidden="true">↓</span>
               <span data-offline-label>Tải</span>
@@ -1258,10 +1270,13 @@ async function shareContent(book, button, url, title, text) {
 
   try {
     await navigator.clipboard.writeText(url);
-    const originalText = button.textContent;
-    button.textContent = copy(book, "copied");
+    const originalHtml = button.innerHTML;
+    const originalLabel = button.getAttribute("aria-label");
+    button.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>';
+    button.setAttribute("aria-label", copy(book, "copied"));
     window.setTimeout(() => {
-      button.textContent = originalText;
+      button.innerHTML = originalHtml;
+      if (originalLabel) button.setAttribute("aria-label", originalLabel);
     }, 1600);
   } catch {
     window.prompt("Sao chép liên kết này:", url);
