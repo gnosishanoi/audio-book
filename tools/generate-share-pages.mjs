@@ -109,6 +109,7 @@ function htmlForBook(book, chapterIndex = null) {
     <link rel="stylesheet" href="${depth}styles.css?v=${appVersion}">
   </head>
   <body>
+    <script>window.location.replace(${JSON.stringify(appUrl).replace(/</g, "\\u003c")});</script>
     <main class="share-landing">
       <img src="${depth}${escapeHtml(coverPath)}" alt="${escapeHtml(book.title)}">
       <h1>${escapeHtml(displayTitle)}</h1>
