@@ -10476,7 +10476,7 @@ function vn({ section: e, apiBase: t = "" }) {
 							}), /* @__PURE__ */ (0, R.jsx)("div", {
 								className: "language-switch",
 								"aria-label": "Ngôn ngữ bản ghi",
-								children: hn(y).map((e) => /* @__PURE__ */ (0, R.jsx)("button", {
+								children: hn(y).slice().sort((e, t) => e.language === "vi" ? -1 : +(t.language === "vi")).map((e) => /* @__PURE__ */ (0, R.jsx)("button", {
 									type: "button",
 									"aria-pressed": _n(y) === e.id,
 									onClick: () => void k(y, e.language),
@@ -10649,7 +10649,7 @@ function vn({ section: e, apiBase: t = "" }) {
 											children: [i.length > 1 ? /* @__PURE__ */ (0, R.jsx)("span", {
 												className: "track-languages",
 												"aria-label": `Chọn ngôn ngữ cho ${a.title}`,
-												children: i.slice().sort((e, t) => e.language === "en" ? -1 : +(t.language === "en")).map((e) => /* @__PURE__ */ (0, R.jsx)("button", {
+												children: i.slice().sort((e, t) => e.language === "vi" ? -1 : +(t.language === "vi")).map((e) => /* @__PURE__ */ (0, R.jsx)("button", {
 													type: "button",
 													"aria-label": `Mở ${e.title} bằng ${fn(e.language)}`,
 													"aria-pressed": e.id === a.audio_id,
