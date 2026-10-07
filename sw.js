@@ -1,4 +1,4 @@
-const SHELL_CACHE = "gnosis-hanoi-shell-v21";
+const SHELL_CACHE = "gnosis-hanoi-shell-v22";
 const AUDIO_CACHE = "gnosis-hanoi-offline-audio-v1";
 const CATALOG_PATH = new URL("./data/catalog.json", self.registration.scope).pathname;
 const SHELL_ASSETS = [
@@ -6,7 +6,7 @@ const SHELL_ASSETS = [
   "./index.html",
   "./styles.css?v=gnosis-share-icons-50",
   "./shared-library.css?v=1",
-  "./app.js?v=gnosis-lockscreen-58",
+  "./app.js?v=gnosis-lockscreen-all-59",
   "./manifest.webmanifest",
   "./data/catalog.json",
   "./slides/index.html",

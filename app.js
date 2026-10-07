@@ -464,7 +464,15 @@ function updateMediaSession(book, chapter) {
 
 function setMediaPlaybackState(playbackState) {
   if (!("mediaSession" in navigator)) return;
-  navigator.mediaSession.playbackState = playbackState;
+  try { navigator.mediaSession.playbackState = playbackState; } catch {}
+  updateMediaPosition();
+}
+
+function updateMediaPosition() {
+  if (!("mediaSession" in navigator)) return;
+  const duration = els.audio.duration;
+  if (!Number.isFinite(duration) || duration <= 0) return;
+  try { navigator.mediaSession.setPositionState?.({ duration, playbackRate: els.audio.playbackRate, position: Math.min(duration, Math.max(0, els.audio.currentTime)) }); } catch {}
 }
 
 function seekRelative(offset) {
@@ -495,16 +503,10 @@ function playPreviousChapter() {
   });
 }
 
-function usesNativeLockScreenPlayback() {
-  return /iPad|iPhone|iPod/.test(navigator.userAgent || "") ||
-    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-}
-
 function setupMediaSessionActions() {
   if (!("mediaSession" in navigator)) return;
-  // Keep WebKit's native audio controls: JavaScript can be suspended while locked.
-  // Registering custom actions replaces WebKit's native remote-command handlers.
-  if (usesNativeLockScreenPlayback()) return;
+  // Keep the audio session eligible for remote resume after a lock-screen pause.
+  try { if (navigator.audioSession) navigator.audioSession.type = "playback"; } catch {}
 
   const setAction = (action, handler) => {
     try {
@@ -519,7 +521,7 @@ function setupMediaSessionActions() {
       els.audio.play().catch(() => setMediaPlaybackState("paused"));
     }
   });
-  setAction("pause", () => els.audio.pause());
+  setAction("pause", () => { els.audio.pause(); setMediaPlaybackState("paused"); });
   setAction("seekbackward", (details = {}) => seekRelative(-(details.seekOffset || 10)));
   setAction("seekforward", (details = {}) => seekRelative(details.seekOffset || 10));
   setAction("previoustrack", playPreviousChapter);
@@ -1586,6 +1588,7 @@ els.audio.addEventListener("timeupdate", () => {
   els.currentTime.textContent = formatTime(els.audio.currentTime);
   els.durationTime.textContent = formatTime(duration);
   els.seekBar.value = duration ? Math.round((els.audio.currentTime / duration) * 1000) : 0;
+  updateMediaPosition();
   saveResume();
   trackCurrentListen();
 });
